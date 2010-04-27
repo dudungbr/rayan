@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.logging.Logger;
-import com.siscomercio.frames.PropertiesManager;
+import com.siscomercio.managers.PropertiesManager;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
