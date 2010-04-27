@@ -51,7 +51,7 @@ public class DatabaseManager
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            BufferedReader d = new BufferedReader(new FileReader("src/sql/" + filename));
+            BufferedReader d = new BufferedReader(new FileReader("./sql/" + filename));
             sqlQuery = "";
             Statement st = null;
             //Now read line by line
