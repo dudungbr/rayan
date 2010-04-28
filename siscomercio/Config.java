@@ -28,6 +28,7 @@ public class Config {
      *
      */
     public static String SITE;
+     public static String LOGO;
     /**
      * 
      */
@@ -157,7 +158,7 @@ public class Config {
             OPERADOR_LVL = Integer.parseInt(arquivo.getProperty("OperadorLvl", "100"));
             GERENTE_LVL = Integer.parseInt(arquivo.getProperty("GerenteLvl", "250"));
             SITE = arquivo.getProperty("Site", "www.wcom.com.br");
-
+            LOGO= arquivo.getProperty("logo", "desktop.jpg");
             if (SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
                 SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n");
