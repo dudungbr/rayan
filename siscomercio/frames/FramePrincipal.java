@@ -32,6 +32,10 @@ import com.siscomercio.tables.UserTable;
 import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtils;
+import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *$Revision$
@@ -137,6 +141,7 @@ public class FramePrincipal extends JFrame {
     })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jDesktopPane3 = new javax.swing.JDesktopPane();
@@ -150,6 +155,7 @@ public class FramePrincipal extends JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         labelLogo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         dadosData = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -214,60 +220,136 @@ public class FramePrincipal extends JFrame {
         setTitle("Wcom - Sistema de Automacao Comercial");
 
         jPanel2.setBackground(java.awt.Color.white);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentResized(evt);
+            }
+        });
+        jPanel2.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                jPanel2AncestorResized(evt);
+            }
+        });
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
-        labelLogo.setFont(new java.awt.Font("Tahoma", 3, 36));
+        labelLogo.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         labelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelLogo.setText("nomeEmpresa");
-        jPanel2.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 270, 60));
+        labelLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ObjectProperty.create(), labelLogo, org.jdesktop.beansbinding.BeanProperty.create("verticalAlignment"));
+        bindingGroup.addBinding(binding);
+
+        labelLogo.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                labelLogoComponentResized(evt);
+            }
+        });
+        jPanel2.add(labelLogo, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
 
         jLabel3.setText("Data: ");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
         dadosData.setText("informacaoData");
-        jPanel2.add(dadosData, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
 
         jLabel2.setText("Horario:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
 
         dadosRelogio.setText("informacaoRelogio");
-        jPanel2.add(dadosRelogio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, 20));
 
         jLabel4.setText("Empresa:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
 
         dadosEmpresa.setText("informacaoEmpresa");
-        jPanel2.add(dadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
         dadosOperador.setText("informacaoOperador");
-        jPanel2.add(dadosOperador, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
 
         jLabel6.setText("Operador: ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 60, -1));
 
         terminalLabel.setText("Terminal: ");
-        jPanel2.add(terminalLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
 
         pcLabel.setText("nomePc");
-        jPanel2.add(pcLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
 
         statusInfo.setText("statusInfo");
-        jPanel2.add(statusInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
 
         jLabel1.setText("Status:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, -1, -1));
 
         jLabel7.setText("Versao: ");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, -1, -1));
 
         versionInfo.setText("versionInfo");
-        jPanel2.add(versionInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
 
         jLabel10.setText("Site:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, -1, -1));
 
         siteInfo.setText("siteInfo");
-        jPanel2.add(siteInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dadosData)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4)
+                        .addGap(15, 15, 15)
+                        .addComponent(dadosEmpresa)
+                        .addGap(26, 26, 26)
+                        .addComponent(terminalLabel)
+                        .addGap(13, 13, 13)
+                        .addComponent(pcLabel)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel7)
+                        .addGap(10, 10, 10)
+                        .addComponent(versionInfo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
+                        .addComponent(dadosRelogio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dadosOperador)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1)
+                        .addGap(15, 15, 15)
+                        .addComponent(statusInfo)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(siteInfo)))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(dadosData))
+                    .addComponent(jLabel4)
+                    .addComponent(dadosEmpresa)
+                    .addComponent(terminalLabel)
+                    .addComponent(pcLabel)
+                    .addComponent(jLabel7)
+                    .addComponent(versionInfo))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(dadosRelogio))
+                    .addComponent(jLabel6)
+                    .addComponent(dadosOperador)
+                    .addComponent(jLabel1)
+                    .addComponent(statusInfo)
+                    .addComponent(jLabel10)
+                    .addComponent(siteInfo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         menuSistema.setText("Arquivo");
 
@@ -465,12 +547,18 @@ public class FramePrincipal extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-747)/2, (screenSize.height-508)/2, 747, 508);
@@ -609,6 +697,23 @@ public class FramePrincipal extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem1StateChanged
 
+    private void labelLogoComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_labelLogoComponentResized
+    {//GEN-HEADEREND:event_labelLogoComponentResized
+
+     labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+
+    }//GEN-LAST:event_labelLogoComponentResized
+
+    private void jPanel2ComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_jPanel2ComponentResized
+    {//GEN-HEADEREND:event_jPanel2ComponentResized
+        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+    }//GEN-LAST:event_jPanel2ComponentResized
+
+    private void jPanel2AncestorResized(java.awt.event.HierarchyEvent evt)//GEN-FIRST:event_jPanel2AncestorResized
+    {//GEN-HEADEREND:event_jPanel2AncestorResized
+       labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+    }//GEN-LAST:event_jPanel2AncestorResized
+
     /**
      *
      * @param args
@@ -667,6 +772,7 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -683,5 +789,6 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JMenu subMenuInformacoes;
     private javax.swing.JLabel terminalLabel;
     private javax.swing.JLabel versionInfo;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
