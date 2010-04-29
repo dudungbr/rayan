@@ -149,6 +149,7 @@ public class FramePrincipal extends JFrame {
         jMenu7 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         dadosData = new javax.swing.JLabel();
@@ -158,7 +159,6 @@ public class FramePrincipal extends JFrame {
         dadosEmpresa = new javax.swing.JLabel();
         dadosOperador = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        terminalLabel = new javax.swing.JLabel();
         pcLabel = new javax.swing.JLabel();
         statusInfo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -166,7 +166,7 @@ public class FramePrincipal extends JFrame {
         versionInfo = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         siteInfo = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
         itemSair = new javax.swing.JMenuItem();
@@ -213,7 +213,9 @@ public class FramePrincipal extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Wcom - Sistema de Automacao Comercial");
-        getContentPane().setLayout(null);
+
+        ImageIcon img = new javax.swing.ImageIcon(getClass().getResource("/com/siscomecio/images/"+ Config.LOGO));
+        if(img!=null)
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações"));
@@ -234,9 +236,7 @@ public class FramePrincipal extends JFrame {
 
         jLabel6.setText("Operador: ");
 
-        terminalLabel.setText("Terminal: ");
-
-        pcLabel.setText("pInfo");
+        pcLabel.setText("pInforma");
 
         statusInfo.setText("sInfo");
 
@@ -250,94 +250,83 @@ public class FramePrincipal extends JFrame {
 
         siteInfo.setText("siteInfo");
 
+        jLabel8.setText("Terminal :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dadosData))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
+                        .addGap(6, 6, 6)
+                        .addComponent(dadosRelogio)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel6)
+                        .addGap(6, 6, 6)
+                        .addComponent(dadosOperador))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(dadosData)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dadosRelogio)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dadosEmpresa)
-                    .addComponent(dadosOperador))
+                        .addComponent(dadosEmpresa)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(terminalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pcLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(statusInfo)))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pcLabel)
+                    .addComponent(statusInfo))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(versionInfo))
-                    .addComponent(jLabel10)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addComponent(jLabel10)
+                        .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addGap(3, 3, 3))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(dadosData)
-                    .addComponent(jLabel4)
-                    .addComponent(dadosEmpresa)
-                    .addComponent(terminalLabel)
-                    .addComponent(jLabel7)
-                    .addComponent(versionInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pcLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(dadosData))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dadosEmpresa)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(versionInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pcLabel)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(dadosRelogio)
                     .addComponent(jLabel6)
                     .addComponent(dadosOperador)
                     .addComponent(jLabel1)
                     .addComponent(statusInfo)
-                    .addComponent(jLabel10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(siteInfo)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(siteInfo)
+                        .addComponent(jLabel10))))
         );
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 370, 810, 80);
-
-        ImageIcon img = new javax.swing.ImageIcon(getClass().getResource("/com/siscomecio/images/"+ Config.LOGO));
-        if(img!=null)
-        jLabel5.setIcon(img);
-        else
-        SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: "+ Config.LOGO);
-        jLabel5.setText("jLabel5");
-        jLabel5.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                jLabel5ComponentResized(evt);
-            }
-        });
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 810, 370);
 
         menuSistema.setText("Arquivo");
 
@@ -531,8 +520,23 @@ public class FramePrincipal extends JFrame {
 
         setJMenuBar(barraDeMenu);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-820)/2, (screenSize.height-508)/2, 820, 508);
+        setBounds((screenSize.width-816)/2, (screenSize.height-587)/2, 816, 587);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
@@ -717,6 +721,7 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
@@ -745,7 +750,6 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JLabel statusInfo;
     private javax.swing.JMenuItem subMenuDB;
     private javax.swing.JMenu subMenuInformacoes;
-    private javax.swing.JLabel terminalLabel;
     private javax.swing.JLabel versionInfo;
     // End of variables declaration//GEN-END:variables
 }
