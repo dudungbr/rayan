@@ -225,8 +225,13 @@ public class FramePrincipal extends JFrame {
 
         jLabel9.setText("jLabel9");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Wcom - Sistema de Automacao Comercial");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -304,7 +309,7 @@ public class FramePrincipal extends JFrame {
                         .addComponent(jLabel10)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,7 +558,7 @@ public class FramePrincipal extends JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -567,7 +572,7 @@ public class FramePrincipal extends JFrame {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-644)/2, (screenSize.height-498)/2, 644, 498);
+        setBounds((screenSize.width-556)/2, (screenSize.height-498)/2, 556, 498);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
@@ -701,6 +706,11 @@ public class FramePrincipal extends JFrame {
     {//GEN-HEADEREND:event_jCheckBoxMenuItem1StateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem1StateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        AppManager.getInstance().requestAppShutdown();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      *
