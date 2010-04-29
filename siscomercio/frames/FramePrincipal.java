@@ -33,6 +33,7 @@ import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtils;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  *$Revision$
@@ -53,6 +54,15 @@ public class FramePrincipal extends JFrame {
      */
     public static boolean created;
 
+    private void setDesktop(JLabel label)
+    {
+        ImageIcon img = new ImageIcon(getClass().getResource("/com/siscomecio/images/" + Config.LOGO));
+        if (img != null)
+            label.setIcon(img);
+        else
+            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+    }
+
     /** Creates new form FramePrincipal */
     public FramePrincipal()
     {
@@ -70,16 +80,18 @@ public class FramePrincipal extends JFrame {
         else
             jCheckBoxMenuItem1.setSelected(false);
         fillInfo();
+        setDesktop(jLabel5);
 
     }
 
     private void fillInfo()
     {
         // Coloca o Nome da Empresa no Programa
-     //   labelLogo.setText(Config.EMPRESA);
+        //   labelLogo.setText(Config.EMPRESA);
         pcLabel.setText(WindowsUtils.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
         dadosEmpresa.setText(Config.EMPRESA);
+        jLabel11.setText(Config.EMPRESA);
         dadosOperador.setText(UserTable.getInstance().getLastUser());
         siteInfo.setText(Config.SITE);
         versionInfo.setText(SystemUtil.getVersion());
@@ -149,7 +161,6 @@ public class FramePrincipal extends JFrame {
         jMenu7 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         dadosData = new javax.swing.JLabel();
@@ -167,6 +178,9 @@ public class FramePrincipal extends JFrame {
         jLabel10 = new javax.swing.JLabel();
         siteInfo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
         itemSair = new javax.swing.JMenuItem();
@@ -214,11 +228,8 @@ public class FramePrincipal extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Wcom - Sistema de Automacao Comercial");
 
-        ImageIcon img = new javax.swing.ImageIcon(getClass().getResource("/com/siscomecio/images/"+ Config.LOGO));
-        if(img!=null)
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel3.setText("Data: ");
 
@@ -257,7 +268,7 @@ public class FramePrincipal extends JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -293,7 +304,7 @@ public class FramePrincipal extends JFrame {
                         .addComponent(jLabel10)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addGap(3, 3, 3))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,8 +336,23 @@ public class FramePrincipal extends JFrame {
                     .addComponent(statusInfo)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(siteInfo)
-                        .addComponent(jLabel10))))
+                        .addComponent(jLabel10)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setAlignmentX(SwingConstants.CENTER);
+        jLabel5.setAlignmentY(SwingConstants.CENTER);
+        jLabel5.setAutoscrolls(true);
+        jLabel5.setDoubleBuffered(true);
+        jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("nomeEmpresa");
+        jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
 
         menuSistema.setText("Arquivo");
 
@@ -524,19 +550,24 @@ public class FramePrincipal extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-587)/2, 816, 587);
+        setBounds((screenSize.width-644)/2, (screenSize.height-498)/2, 644, 498);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
@@ -647,8 +678,7 @@ public class FramePrincipal extends JFrame {
         try
         {
             SystemUtil.printDbInfo();
-        }
-        catch(SQLException ex)
+        } catch (SQLException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -671,11 +701,6 @@ public class FramePrincipal extends JFrame {
     {//GEN-HEADEREND:event_jCheckBoxMenuItem1StateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem1StateChanged
-
-    private void jLabel5ComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_jLabel5ComponentResized
-    {//GEN-HEADEREND:event_jLabel5ComponentResized
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5ComponentResized
 
     /**
      *
@@ -715,6 +740,7 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -738,6 +764,7 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuAdministracao;
