@@ -20,12 +20,33 @@ import com.siscomercio.utilities.SystemUtil;
 public class Config {
 
     private static Logger _log = Logger.getLogger(Config.class.getName());
+    /**
+     *
+     */
     public static String EXIT_SOUND;
+    /**
+     * 
+     */
     public static String PRE_EXIT_SOUND;
+    /**
+     *
+     */
     public static String PRE_LOGIN_SOUND;
+    /**
+     *
+     */
     public static String LOGIN_SOUND;
+    /**
+     *
+     */
     public static String UNIPLEMENTED_SOUND;
+    /**
+     *
+     */
     public static String PRE_RESTART_SOUND;
+    /**
+     *
+     */
     public static String RESTART_SOUND;
     /**
      *
@@ -35,6 +56,9 @@ public class Config {
      *
      */
     public static String SITE;
+    /**
+     *
+     */
     public static String LOGO;
     /**
      * 
@@ -87,11 +111,11 @@ public class Config {
     /**
      *
      */
-    public static boolean DEBUG = true;
+    public static boolean DEBUG;
     /**
      * 
      */
-    public static boolean SOUND = false;
+    public static boolean SOUND;
     /**
      *
      */
@@ -173,11 +197,12 @@ public class Config {
             UNIPLEMENTED_SOUND = arquivo.getProperty("uniplemented", "implementar.wav");
             PRE_RESTART_SOUND = arquivo.getProperty("preRestart", "restart.wav");
             RESTART_SOUND = arquivo.getProperty("restartSound", "restartok.wav");
-
+            DEBUG = Boolean.valueOf(arquivo.getProperty("debug", "true"));
+            SOUND = Boolean.valueOf(arquivo.getProperty("sound", "true "));
             if (SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
                 SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n");
-                return;
+                System.exit(0);
             }
 
             _loaded = true;
