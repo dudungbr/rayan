@@ -10,8 +10,11 @@ package com.siscomercio.tables;
  * $Date$
  * @author Rayan
  */
-public class SqlQueryTable
+public class StringTable
 {
+
+  public static String SOUND_PATH = "src/com/siscomercio/sounds/";
+  public static String SQL_PATH = "./sql/";
     /**
      * Comandos SQL
      * executeQuery apenas para select os outros use o executeUpdate.

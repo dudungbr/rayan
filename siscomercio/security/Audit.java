@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.siscomercio.security;
 
 /**
@@ -12,5 +11,4 @@ package com.siscomercio.security;
  * @author Rayan
  */
 public class Audit {
-
 }

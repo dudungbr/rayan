@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.tables.SqlQueryTable;
+import com.siscomercio.tables.StringTable;
 
 /**
  * $Revision$
@@ -261,13 +261,13 @@ public class DatabaseFactory
             try
             {
                 con = _source.getConnection();
-                DatabaseManager.setConStatus(SqlQueryTable.STATUS_CONNECTED);
+                DatabaseManager.setConStatus(StringTable.STATUS_CONNECTED);
                 //if (Config.DEBUG)
                 //	ThreadPoolManager.getInstance().scheduleGeneral(new ConnectionCloser(con, new RuntimeException()), 40000);
             }
             catch(SQLException e)
             {
-                DatabaseManager.setConStatus(SqlQueryTable.STATUS_DISCONNECTED);
+                DatabaseManager.setConStatus(StringTable.STATUS_DISCONNECTED);
                 _log.warning("L2DatabaseFactory: getConnection() failed, trying again " + e);
             }
         }

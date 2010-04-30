@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.siscomercio.Config;
-import com.siscomercio.tables.SqlQueryTable;
+import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
@@ -27,7 +27,7 @@ public class DatabaseManager
 {
     private static Logger _log = Logger.getLogger(DatabaseManager.class.getName());
     // Status Atual do Banco
-    static String _status = SqlQueryTable.STATUS_DISCONNECTED;
+    static String _status = StringTable.STATUS_DISCONNECTED;
     /**
      * se o banco foi deletado
      */
@@ -51,7 +51,7 @@ public class DatabaseManager
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            BufferedReader d = new BufferedReader(new FileReader("./sql/" + filename));
+            BufferedReader d = new BufferedReader(new FileReader(StringTable.SQL_PATH + filename));
             sqlQuery = "";
             Statement st = null;
             //Now read line by line
@@ -128,7 +128,7 @@ public class DatabaseManager
             //jdbc:mysql://localhost:3306/wcom
             con = DriverManager.getConnection("jdbc:mysql://" + Config.DATABASE_HOST + ":" + Config.DATABASE_PORT + "/", Config.DATABASE_LOGIN, Config.DATABASE_PASSWORD);
             Statement st = con.createStatement();
-            st.executeUpdate(SqlQueryTable.CREATE_DB);
+            st.executeUpdate(StringTable.CREATE_DB);
             closeConnections(st, con);
 
         }
@@ -150,8 +150,8 @@ public class DatabaseManager
         executeDBScripts("users.sql");
         executeDBScripts("install.sql");
         executeDBScripts("auditoria.sql");
-        executeQuery(SqlQueryTable.INSTALL);
-        setConStatus(SqlQueryTable.STATUS_CONNECTED);
+        executeQuery(StringTable.INSTALL);
+        setConStatus(StringTable.STATUS_CONNECTED);
         _installed = true;
         SystemUtil.showMsg("banco instalado com sucesso!");
     }
@@ -164,7 +164,7 @@ public class DatabaseManager
         executeDBScripts("drop.sql");
         SystemUtil.showMsg("Banco de Dados Deletado!");
         _installed = false;
-        setConStatus(SqlQueryTable.STATUS_DISCONNECTED);
+        setConStatus(StringTable.STATUS_DISCONNECTED);
         isDbDeleted = true;
     }
 
@@ -192,7 +192,7 @@ public class DatabaseManager
     public static void insertUser(String name, String passwd)
     {
         Connection con = null;
-        String commandLine = SqlQueryTable.INSERT_USER;
+        String commandLine = StringTable.INSERT_USER;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -258,7 +258,7 @@ public class DatabaseManager
     public static void deleteUsuario(String user, String pass)
     {
         Connection con = null;
-        String commandLine = SqlQueryTable.DELETE_USER;
+        String commandLine = StringTable.DELETE_USER;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -320,7 +320,7 @@ public class DatabaseManager
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(SqlQueryTable.READ_INSTALL);
+            PreparedStatement ps = con.prepareStatement(StringTable.READ_INSTALL);
             ResultSet rset = ps.executeQuery();
             while(rset.next())
             {
@@ -348,7 +348,7 @@ public class DatabaseManager
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(SqlQueryTable.UPDATE_USER_ACCESS_LVL);
+            PreparedStatement ps = con.prepareStatement(StringTable.UPDATE_USER_ACCESS_LVL);
             ResultSet rset = ps.executeQuery();
             closeConnections(ps, rset, con);
 

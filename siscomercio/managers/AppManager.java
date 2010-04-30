@@ -40,7 +40,7 @@ public class AppManager extends JFrame
     public void requestAppShutdown()
     {
         if(Config.SOUND)
-            SoundManager.playSound("exit.wav");
+            SoundManager.playSound(Config.EXIT_SOUND);
 
         if(Config.DEBUG)
             _log.info("solicitacao de shutdown...\n");
@@ -54,14 +54,13 @@ public class AppManager extends JFrame
             if(Config.DEBUG)
                 _log.info("usuario finalizou o sistema.");
 
+            //finaliza a aplicacao
             System.exit(0);
         }
         else
         {
-            setEnabled(true);
             if(Config.DEBUG)
                 _log.info("usuario desiste de fechar o sistema.\n");
-            return;
         }
     }
 
@@ -71,7 +70,7 @@ public class AppManager extends JFrame
     public static void implementar()
     {
         if(Config.SOUND)
-        SoundManager.playSound("implementar.wav");
+        SoundManager.playSound(Config.UNIPLEMENTED_SOUND);
         SystemUtil.showMsg("Funcao Ainda nao Disponivel");
     }
 
