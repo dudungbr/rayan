@@ -20,6 +20,13 @@ import com.siscomercio.utilities.SystemUtil;
 public class Config {
 
     private static Logger _log = Logger.getLogger(Config.class.getName());
+    public static String EXIT_SOUND;
+    public static String PRE_EXIT_SOUND;
+    public static String PRE_LOGIN_SOUND;
+    public static String LOGIN_SOUND;
+    public static String UNIPLEMENTED_SOUND;
+    public static String PRE_RESTART_SOUND;
+    public static String RESTART_SOUND;
     /**
      *
      */
@@ -28,7 +35,7 @@ public class Config {
      *
      */
     public static String SITE;
-     public static String LOGO;
+    public static String LOGO;
     /**
      * 
      */
@@ -132,7 +139,7 @@ public class Config {
             _log.info("Carregando o Arquuivo de Configuração...\n");
         try
         {
-           
+
             File f = new File(path);
             if (!f.exists())
             {
@@ -158,7 +165,15 @@ public class Config {
             OPERADOR_LVL = Integer.parseInt(arquivo.getProperty("OperadorLvl", "100"));
             GERENTE_LVL = Integer.parseInt(arquivo.getProperty("GerenteLvl", "250"));
             SITE = arquivo.getProperty("Site", "www.wcom.com.br");
-            LOGO= arquivo.getProperty("logo", "desktop.jpg");
+            LOGO = arquivo.getProperty("logo", "desktop.jpg");
+            EXIT_SOUND = arquivo.getProperty("exit", "exitok.wav");
+            PRE_EXIT_SOUND = arquivo.getProperty("preExit", "exit.wav");
+            LOGIN_SOUND = arquivo.getProperty("login", "login.wav");
+            PRE_LOGIN_SOUND = arquivo.getProperty("login", "login.wav");
+            UNIPLEMENTED_SOUND = arquivo.getProperty("uniplemented", "implementar.wav");
+            PRE_RESTART_SOUND = arquivo.getProperty("preRestart", "restart.wav");
+            RESTART_SOUND = arquivo.getProperty("restartSound", "restartok.wav");
+
             if (SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
                 SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n");

@@ -81,7 +81,7 @@ public class Auth extends JFrame
             _log.info("Criando Janela de Autenticacao.... \n");
 
         if(Config.SOUND)
-            SoundManager.playSound("login.wav");
+            SoundManager.playSound(Config.PRE_LOGIN_SOUND);
 
         if(_autenticado)
         {
@@ -368,7 +368,7 @@ public class Auth extends JFrame
 
 
         if(Config.SOUND)
-            SoundManager.playSound("loginok.wav");
+            SoundManager.playSound(Config.LOGIN_SOUND);
 
 
         if(!LogonFrame._reAuth)
