@@ -13,7 +13,13 @@ package com.siscomercio.tables;
 public class StringTable
 {
 
-  public static String SOUND_PATH = "src/com/siscomercio/sounds/";
+    /**
+     * 
+     */
+    public static String SOUND_PATH = "src/com/siscomercio/sounds/";
+  /**
+   *
+   */
   public static String SQL_PATH = "./sql/";
     /**
      * Comandos SQL
