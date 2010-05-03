@@ -30,6 +30,7 @@ import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.security.Auth;
+import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtils;
 import javax.swing.ImageIcon;
@@ -56,7 +57,8 @@ public class FramePrincipal extends JFrame {
 
     private void setDesktop(JLabel label)
     {
-        ImageIcon img = new ImageIcon(getClass().getResource("/com/siscomecio/images/" + Config.LOGO));
+        _log.info("Localizando Imagem: "+ StringTable.IMAGE_PATH + Config.LOGO);
+        ImageIcon img = new ImageIcon(getClass().getResource(StringTable.IMAGE_PATH + Config.LOGO));
         if (img != null)
             label.setIcon(img);
         else
