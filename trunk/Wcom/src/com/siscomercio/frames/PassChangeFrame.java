@@ -59,6 +59,7 @@ public class PassChangeFrame extends javax.swing.JFrame
                 jButton1ActionPerformed(evt);
             }
         });
+        getRootPane().setDefaultButton(jButton1);
 
         jLabel1.setText("Nova Senha");
 
@@ -119,7 +120,7 @@ public class PassChangeFrame extends javax.swing.JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

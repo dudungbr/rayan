@@ -82,6 +82,7 @@ public class LogonFrame extends javax.swing.JFrame
                 botaoLoginActionPerformed(evt);
             }
         });
+        getRootPane().setDefaultButton(botaoLogin);
         jPanel1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         botaoCancelar.setText("Cancelar");
