@@ -135,7 +135,7 @@ public class DatabaseManager
         }
         catch(Exception ex)
         {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+             SystemUtil.showErrorMsg("Erro ao criar nova base de dados: " + ex);
         }
     }
 
@@ -226,7 +226,7 @@ public class DatabaseManager
         }
         catch(SQLException ex)
         {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+              SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex);
         }
     }
 
@@ -246,7 +246,7 @@ public class DatabaseManager
         }
         catch(SQLException ex)
         {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex);
         }
     }
 
@@ -268,33 +268,30 @@ public class DatabaseManager
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + e);
-
+            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: "+ user +" , "+ e);
         }
     }
 
     /**
      * Deleta Usuario do Banco
 
-     * @param oldPass
      * @param newPass
      */
     public static void changePassword(String newPass)
     {
+        //converte p versao criptografada
+        newPass = Criptografia.criptografe(newPass);
+
+        // pega o usuario na tabela.
+        String login = UserTable.getInstance().getLastUser();
+
         boolean ok = false;
         Connection con = null;
-        String commandLine = StringTable.CHANGE_USER_PASS;
         try
         {
-            //converte p versao criptografada
-            newPass = Criptografia.criptografe(newPass);
-
-            // pega o usuario na tabela.
-            String login = UserTable.getInstance().getLastUser();
-
             // Conexão SQL
             con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(commandLine);
+            PreparedStatement ps = con.prepareStatement(StringTable.CHANGE_USER_PASS);
             ps.setString(1, newPass);
             ps.setString(2, login);
             ps.execute();
@@ -304,11 +301,15 @@ public class DatabaseManager
         catch(SQLException e)
         {
             ok = false;
-            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + e);
+            SystemUtil.showErrorMsg("Erro ao Trocar Senha do Usuario: " +login +","+ e);
 
         }
         if(ok)
+        {
+            if(Config.DEBUG)
+                _log.info("trocando senha do usuario: " + login+ "\n");
             SystemUtil.showMsg("Senha Trocada com Sucesso!");
+        }
     }
 
     /**
@@ -330,25 +331,7 @@ public class DatabaseManager
     }
 
     /**
-     *
-     * @return
-     */
-    private static int getConnections()
-    {
-        int count = 0;
-        try
-        {
-            count = DatabaseFactory.getInstance().getBusyConnectionCount();
-        }
-        catch(SQLException ex)
-        {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return count;
-    }
-
-    /**
-     * 
+     * Le a Tabela de Instalacao Atual
      **/
     public static void readInstallTable()
     {
