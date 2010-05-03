@@ -272,12 +272,14 @@ public class DatabaseManager
 
         }
     }
-     /**
+
+    /**
      * Deleta Usuario do Banco
-     * @param user
-     * @param pass
+
+     * @param oldPass
+     * @param newPass
      */
-    public static void changePassword(String oldPass,String newPass)
+    public static void changePassword(String newPass)
     {
         boolean ok = false;
         Connection con = null;
@@ -285,16 +287,17 @@ public class DatabaseManager
         try
         {
             //converte p versao criptografada
-            oldPass = Criptografia.criptografe(oldPass);
             newPass = Criptografia.criptografe(newPass);
-            String login  = UserTable.getInstance().getLastUser();
-            _log.info("login: "+login);
+
+            // pega o usuario na tabela.
+            String login = UserTable.getInstance().getLastUser();
+
+            // Conexão SQL
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(commandLine);
-            ps.setString(0, oldPass);
             ps.setString(1, newPass);
-            ps.setString(2, login );
-            ps.executeUpdate();
+            ps.setString(2, login);
+            ps.execute();
             closeConnections(ps, con);
             ok = true;
         }
@@ -305,9 +308,7 @@ public class DatabaseManager
 
         }
         if(ok)
-        {
-            SystemUtil.showMsg("senha Trocada com Sucesso!");
-        }
+            SystemUtil.showMsg("Senha Trocada com Sucesso!");
     }
 
     /**

@@ -3,7 +3,6 @@
  *
  * Created on 03/05/2010, 12:01:48
  */
-
 package com.siscomercio.frames;
 
 import com.siscomercio.managers.DatabaseManager;
@@ -13,10 +12,12 @@ import com.siscomercio.utilities.SystemUtil;
  *
  * @author Administrador
  */
-public class PassChangeFrame extends javax.swing.JFrame {
-
+public class PassChangeFrame extends javax.swing.JFrame
+{
+    private static final long serialVersionUID = 1L;
     /** Creates new form PassChangeFrame */
-    public PassChangeFrame() {
+    public PassChangeFrame()
+    {
         initComponents();
     }
 
@@ -33,8 +34,6 @@ public class PassChangeFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField3 = new javax.swing.JPasswordField();
@@ -53,7 +52,6 @@ public class PassChangeFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Alterar Senha");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -61,74 +59,120 @@ public class PassChangeFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 147, -1, -1));
-        jPanel2.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 60, 69, -1));
-
-        jLabel2.setText("Senha Atual");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 32, -1, -1));
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 29, 69, -1));
 
         jLabel1.setText("Nova Senha");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 63, -1, -1));
 
         jLabel3.setText("Repetir Nova Senha");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 91, -1, -1));
-        jPanel2.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 91, 69, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(jLabel1)
+                            .addGap(42, 42, 42)
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPasswordField2, jPasswordField3});
+
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPasswordField2, jPasswordField3});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-318)/2, (screenSize.height-252)/2, 318, 252);
+        setBounds((screenSize.width-317)/2, (screenSize.height-178)/2, 317, 178);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
 
-       String senhaAtual = String.valueOf(jPasswordField1.getPassword());
-       String senhaNova =   String.valueOf(jPasswordField2.getPassword());
-       String confirma =   String.valueOf(jPasswordField3.getPassword());
+        String senhaNova = String.valueOf(jPasswordField2.getPassword());
+        String confirma = String.valueOf(jPasswordField3.getPassword());
 
-       if(!senhaNova.equalsIgnoreCase(confirma))
-       {
-           SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!");
-       }
-       else
-       {
-        DatabaseManager.changePassword(senhaAtual, senhaNova);
-       }
+        //nao permite campos em branco.
+        if((senhaNova.equalsIgnoreCase("") || confirma.equalsIgnoreCase("")))
+        {
+            SystemUtil.showErrorMsg("todos os campos devem ser preenchidos");
+            return;
+        }
+
+        if(!senhaNova.equalsIgnoreCase(confirma))
+        {
+            SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!");
+            return;
+        }
+        else
+            DatabaseManager.changePassword(senhaNova);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+     * @param args the command line arguments
+     */
+    public static void main(String args[])
+    {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 new PassChangeFrame().setVisible(true);
             }
+
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
     // End of variables declaration//GEN-END:variables
-
 }
