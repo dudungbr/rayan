@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.siscomercio.Config;
+import com.siscomercio.security.Criptografia;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
@@ -126,7 +127,6 @@ public class DatabaseManager
         try
         {
             Class.forName(Config.DATABASE_DRIVER).newInstance();
-            //jdbc:mysql://localhost:3306/wcom
             con = DriverManager.getConnection("jdbc:mysql://" + Config.DATABASE_HOST + ":" + Config.DATABASE_PORT + "/", Config.DATABASE_LOGIN, Config.DATABASE_PASSWORD);
             Statement st = con.createStatement();
             st.executeUpdate(StringTable.CREATE_DB);
@@ -135,8 +135,7 @@ public class DatabaseManager
         }
         catch(Exception ex)
         {
-            Logger.getLogger(DatabaseManager.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -285,13 +284,18 @@ public class DatabaseManager
         String commandLine = StringTable.CHANGE_USER_PASS;
         try
         {
+            //converte p versao criptografada
+            oldPass = Criptografia.criptografe(oldPass);
+            newPass = Criptografia.criptografe(newPass);
+            String login  = UserTable.getInstance().getLastUser();
+            _log.info("login: "+login);
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(commandLine);
-            ps.setString(1, oldPass);
-            ps.setString(2, newPass);
-            ps.setString(3, UserTable.getInstance().getLastUser());
-            ResultSet rset = ps.executeQuery();
-            closeConnections(ps, rset, con);
+            ps.setString(0, oldPass);
+            ps.setString(1, newPass);
+            ps.setString(2, login );
+            ps.executeUpdate();
+            closeConnections(ps, con);
             ok = true;
         }
         catch(SQLException e)
