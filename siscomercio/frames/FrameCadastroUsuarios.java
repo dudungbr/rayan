@@ -100,6 +100,7 @@ public class FrameCadastroUsuarios extends JFrame
                 jButton1ActionPerformed(evt);
             }
         });
+        getRootPane().setDefaultButton(jButton1);
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 216, -1, -1));
 
         jLabel2.setText("Nível de Acesso");

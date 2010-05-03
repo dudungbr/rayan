@@ -71,6 +71,7 @@ public class LicenseFrame extends JFrame
 
         jButton1.setText("Registrar Sistema");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 178, -1, -1));
+        getRootPane().setDefaultButton(jButton1);
 
         jLabel5.setText("Tipo de Licenca");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 108, 104, 20));
@@ -134,11 +135,11 @@ public class LicenseFrame extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
