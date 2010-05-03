@@ -35,16 +35,16 @@ public class DatabaseFactory
     static Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
 
     /**
-     *
+     * Tipo do Provedor
      */
     public static enum ProviderType
     {
         /**
-         *
+         * Provedor MySQL
          */
         MySql,
         /**
-         *
+         * Provedor MsSql
          */
         MsSql
     }
@@ -65,12 +65,6 @@ public class DatabaseFactory
     {
         try
         {
-            /*if (Config.DATABASE_MAX_CONNECTIONS < 2)
-            {
-            Config.DATABASE_MAX_CONNECTIONS = 2;
-            _log.warning("A minimum of " + Config.DATABASE_MAX_CONNECTIONS + " db connections are required.");
-            }*/
-
             _source = new ComboPooledDataSource();
             _source.setAutoCommitOnClose(true);
 
@@ -81,6 +75,7 @@ public class DatabaseFactory
             _source.setAcquireRetryAttempts(0); // try to obtain connections indefinitely (0 = never quit)
             _source.setAcquireRetryDelay(500); // 500 milliseconds wait before try to acquire connection again
             _source.setCheckoutTimeout(0); // 0 = wait indefinitely for new connection
+
             // if pool is exhausted
             _source.setAcquireIncrement(5); // if pool is exhausted, get 5 more connections at a time
             // cause there is a "long" delay on acquire connection
@@ -262,8 +257,6 @@ public class DatabaseFactory
             {
                 con = _source.getConnection();
                 DatabaseManager.setConStatus(StringTable.STATUS_CONNECTED);
-                //if (Config.DEBUG)
-                //	ThreadPoolManager.getInstance().scheduleGeneral(new ConnectionCloser(con, new RuntimeException()), 40000);
             }
             catch(SQLException e)
             {

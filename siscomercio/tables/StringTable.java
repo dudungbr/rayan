@@ -5,7 +5,7 @@
 package com.siscomercio.tables;
 
 /**
- *$Revision$
+ * $Revision$
  * $Author$
  * $Date$
  * @author Rayan
@@ -16,7 +16,12 @@ public class StringTable
     /**
      * 
      */
-    public static String SOUND_PATH = "src/com/siscomercio/sounds/";
+    public static String SOUND_PATH = "./sounds/";
+    
+    /**
+     * 
+     */
+    public static String IMAGE_PATH = "./imagens/";
   /**
    *
    */

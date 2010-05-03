@@ -36,6 +36,7 @@ public class AppManager extends JFrame {
 
     /**
      *
+     * @param janelaPai 
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
