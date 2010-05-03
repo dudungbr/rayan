@@ -31,10 +31,12 @@ public class StringTable
      * executeQuery apenas para select os outros use o executeUpdate.
      */
     public static final String INSERT_USER = "INSERT INTO `users`(codigo,login,passwd, accesslevel) VALUES (?,?,?,?)";
-    /**
-     *
-     */
+
     public static final String DELETE_USER = "DELETE FROM `users` WHERE codigo=? AND login =?";
+    /**
+     * Deleta Usuario da Database
+     */
+    public static final String CHANGE_USER_PASS = "UPDATE `users` SET passwd=? WHERE passwd= ? login =?";
     /**
      *
      */

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import com.siscomercio.Config;
 import com.siscomercio.tables.StringTable;
+import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
@@ -270,6 +271,38 @@ public class DatabaseManager
         {
             SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + e);
 
+        }
+    }
+     /**
+     * Deleta Usuario do Banco
+     * @param user
+     * @param pass
+     */
+    public static void changePassword(String oldPass,String newPass)
+    {
+        boolean ok = false;
+        Connection con = null;
+        String commandLine = StringTable.CHANGE_USER_PASS;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(commandLine);
+            ps.setString(1, oldPass);
+            ps.setString(2, newPass);
+            ps.setString(3, UserTable.getInstance().getLastUser());
+            ResultSet rset = ps.executeQuery();
+            closeConnections(ps, rset, con);
+            ok = true;
+        }
+        catch(SQLException e)
+        {
+            ok = false;
+            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + e);
+
+        }
+        if(ok)
+        {
+            SystemUtil.showMsg("senha Trocada com Sucesso!");
         }
     }
 

@@ -70,7 +70,7 @@
                   <KeyStroke key="Alt+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/6980_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/6980_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
@@ -84,7 +84,7 @@
                   <KeyStroke key="Alt+R"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/8437_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/8437_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reiniciar"/>
               </Properties>
@@ -98,7 +98,7 @@
                   <KeyStroke key="Alt+L"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/8271_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/8271_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro"/>
               </Properties>
@@ -118,7 +118,7 @@
             <Menu class="javax.swing.JMenu" name="menuHardware">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/10524_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/10524_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Hardware"/>
               </Properties>
@@ -126,7 +126,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemMemoria">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/10517_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/10517_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Mem&#xf3;ria"/>
                   </Properties>
@@ -137,7 +137,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemProcessador">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/985_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/985_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Processador"/>
                   </Properties>
@@ -150,7 +150,7 @@
             <Menu class="javax.swing.JMenu" name="jMenu2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/1080_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/9719_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Software"/>
               </Properties>
@@ -158,7 +158,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemDb">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/1023_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/1023_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Banco de Dados"/>
                   </Properties>
@@ -169,7 +169,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemJava">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/9400_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/9400_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Java"/>
                   </Properties>
@@ -180,7 +180,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemSistemaOperacional">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/server.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/1080_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Sistema Operacional"/>
                   </Properties>
@@ -193,7 +193,7 @@
             <Menu class="javax.swing.JMenu" name="jMenu1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/6957_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/6957_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sistema"/>
               </Properties>
@@ -204,7 +204,7 @@
                       <KeyStroke key="Alt+V"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/8246_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/8246_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Vers&#xe3;o"/>
                   </Properties>
@@ -227,7 +227,7 @@
             <Menu class="javax.swing.JMenu" name="jMenu9">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/6986_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/6986_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Financeiro"/>
               </Properties>
@@ -235,7 +235,7 @@
             <Menu class="javax.swing.JMenu" name="jMenu8">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/6475_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/6475_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastro de Usuarios"/>
               </Properties>
@@ -243,7 +243,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/6420_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/6420_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Adicionar"/>
                   </Properties>
@@ -251,7 +251,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/6439_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/6439_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Editar"/>
                   </Properties>
@@ -259,7 +259,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="itemExcluir">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/wcom/icones/6464_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/icones/6464_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Excluir"/>
                   </Properties>
@@ -269,7 +269,7 @@
             <Menu class="javax.swing.JMenu" name="jMenu10">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/4317_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/4317_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Auditoria"/>
               </Properties>
@@ -287,7 +287,7 @@
                   <KeyStroke key="Alt+B"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/9798_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/1023_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Banco de Dados"/>
               </Properties>
@@ -307,12 +307,23 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="       Habilitar Som"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/10521_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/10521_16x16.png"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jCheckBoxMenuItem1StateChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/siscomercio/icones/7298_16x16.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Trocar Senha"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -328,7 +339,7 @@
                   <KeyStroke key="Alt+T"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/8405_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/icones/8405_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Assist&#xea;ncia T&#xe9;cnica"/>
               </Properties>
@@ -626,5 +637,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel12"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel13"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

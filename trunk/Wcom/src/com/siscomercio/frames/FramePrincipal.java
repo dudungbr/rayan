@@ -33,6 +33,7 @@ import com.siscomercio.security.Auth;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtils;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
@@ -51,45 +52,68 @@ public class FramePrincipal extends JFrame {
     private Logger _log = Logger.getLogger(FramePrincipal.class.getName());
     Date date = new Date();
     /**
-     *
+     * if this frame was created of not.
      */
     public static boolean created;
 
+    /**
+     * seta  a Desktop do Label
+     * @param label
+     */
     private void setDesktop(JLabel label)
     {
-        _log.info("Localizando Imagem: "+ StringTable.IMAGE_PATH + Config.LOGO);
-        ImageIcon img = new ImageIcon(getClass().getResource(StringTable.IMAGE_PATH + Config.LOGO));
-        if (img != null)
-            label.setIcon(img);
+        _log.info("Localizando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO);
+        File file = new File("/imagens/splash.png");
+
+        if (file.exists())
+        {
+            ImageIcon img = new ImageIcon(getClass().getResource(file.toString()/*StringTable.IMAGE_PATH+Config.LOGO*/));
+            if (img != null)
+                label.setIcon(img);
+            else
+                 SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+        }
         else
-            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+        {
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+        }
     }
 
     /** Creates new form FramePrincipal */
     public FramePrincipal()
     {
-        initComponents();
-        disparaRelogio();
-        created = true;
-        if (Config.SOUND)
-            SoundManager.playSound("welcome.wav");
         if (Config.DEBUG)
             _log.info("montando janela principal do aplicativo. \n");
-
-        // Habilita ou Desabilita o Som de Acordo com a Config.
-        if (Config.SOUND)
-            jCheckBoxMenuItem1.setSelected(true);
-        else
-            jCheckBoxMenuItem1.setSelected(false);
-        fillInfo();
+        initComponents();
+        disparaRelogio();
+        setSoundProperties();
+        preenchaFrame();
         setDesktop(jLabel5);
+        created = true;
 
     }
 
-    private void fillInfo()
+    /**
+     * Atualiza as Opcoes do Som no Frame
+     */
+    private void setSoundProperties()
     {
-        // Coloca o Nome da Empresa no Programa
-        //   labelLogo.setText(Config.EMPRESA);
+        if (Config.SOUND)
+        {
+            SoundManager.playSound(Config.LOGIN_SOUND);
+            // Habilita ou Desabilita o Som de Acordo com a Config.
+            jCheckBoxMenuItem1.setSelected(true);
+        } else
+            jCheckBoxMenuItem1.setSelected(false);
+    }
+
+    /**
+     * Preenche o Frame com as Informacoes nos Labels
+     */
+    private void preenchaFrame()
+    {
+        if (Config.SOUND)
+            _log.info("preenchendo frame...\n");
         pcLabel.setText(WindowsUtils.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
         dadosEmpresa.setText(Config.EMPRESA);
@@ -99,8 +123,13 @@ public class FramePrincipal extends JFrame {
         versionInfo.setText(SystemUtil.getVersion());
     }
 
+    /**
+     * Dispara o Relogio
+     */
     private void disparaRelogio()
     {
+        if (Config.SOUND)
+            _log.info("inicializando relogio ...\n");
         // Dispara o Relogio
         Timer timer = new Timer(1000, new ClockListener());
         timer.start();
@@ -122,7 +151,6 @@ public class FramePrincipal extends JFrame {
             Calendar now = Calendar.getInstance();
             dadosRelogio.setText(String.format("%1$tH:%1$tM:%1$tS", now));
             dadosData.setText(dayInfo);
-
         }
     }
 
@@ -183,6 +211,8 @@ public class FramePrincipal extends JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
         itemSair = new javax.swing.JMenuItem();
@@ -210,6 +240,7 @@ public class FramePrincipal extends JFrame {
         subMenuDB = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuSuporte = new javax.swing.JMenu();
         itemAssistenciaTecnica = new javax.swing.JMenuItem();
 
@@ -361,10 +392,14 @@ public class FramePrincipal extends JFrame {
         jLabel11.setText("nomeEmpresa");
         jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
 
+        jLabel12.setText("jLabel12");
+
+        jLabel13.setText("jLabel13");
+
         menuSistema.setText("Sistema");
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
-        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6980_16x16.png"))); // NOI18N
+        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6980_16x16.png"))); // NOI18N
         itemSair.setText("Sair");
         itemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,7 +409,7 @@ public class FramePrincipal extends JFrame {
         menuSistema.add(itemSair);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
-        itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8437_16x16.png"))); // NOI18N
+        itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8437_16x16.png"))); // NOI18N
         itemReiniciar.setText("Reiniciar");
         itemReiniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,7 +419,7 @@ public class FramePrincipal extends JFrame {
         menuSistema.add(itemReiniciar);
 
         itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8271_16x16.png"))); // NOI18N
+        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
         itemRegistro.setText("Registro");
         itemRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -398,10 +433,10 @@ public class FramePrincipal extends JFrame {
         subMenuInformacoes.setText("Informações");
         subMenuInformacoes.add(jSeparator1);
 
-        menuHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/10524_16x16.png"))); // NOI18N
+        menuHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
         menuHardware.setText("Hardware");
 
-        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/10517_16x16.png"))); // NOI18N
+        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
         itemMemoria.setText("Memória");
         itemMemoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,7 +445,7 @@ public class FramePrincipal extends JFrame {
         });
         menuHardware.add(itemMemoria);
 
-        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/985_16x16.png"))); // NOI18N
+        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
         itemProcessador.setText("Processador");
         itemProcessador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -421,10 +456,10 @@ public class FramePrincipal extends JFrame {
 
         subMenuInformacoes.add(menuHardware);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/1080_16x16.png"))); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
         jMenu2.setText("Software");
 
-        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/1023_16x16.png"))); // NOI18N
+        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
         itemDb.setText("Banco de Dados");
         itemDb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,7 +468,7 @@ public class FramePrincipal extends JFrame {
         });
         jMenu2.add(itemDb);
 
-        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/9400_16x16.png"))); // NOI18N
+        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
         itemJava.setText("Java");
         itemJava.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,7 +477,7 @@ public class FramePrincipal extends JFrame {
         });
         jMenu2.add(itemJava);
 
-        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/server.png"))); // NOI18N
+        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
         itemSistemaOperacional.setText("Sistema Operacional");
         itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -453,11 +488,11 @@ public class FramePrincipal extends JFrame {
 
         subMenuInformacoes.add(jMenu2);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6957_16x16.png"))); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
         jMenu1.setText("Sistema");
 
         itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
-        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8246_16x16.png"))); // NOI18N
+        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
         itemVersao.setText("Versão");
         itemVersao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,28 +512,28 @@ public class FramePrincipal extends JFrame {
             }
         });
 
-        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6986_16x16.png"))); // NOI18N
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6986_16x16.png"))); // NOI18N
         jMenu9.setText("Financeiro");
         menuAdministracao.add(jMenu9);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6475_16x16.png"))); // NOI18N
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
         jMenu8.setText("Cadastro de Usuarios");
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6420_16x16.png"))); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
         jMenuItem5.setText("Adicionar");
         jMenu8.add(jMenuItem5);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6439_16x16.png"))); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
         jMenuItem1.setText("Editar");
         jMenu8.add(jMenuItem1);
 
-        itemExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6464_16x16.png"))); // NOI18N
+        itemExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
         itemExcluir.setText("Excluir");
         jMenu8.add(itemExcluir);
 
         menuAdministracao.add(jMenu8);
 
-        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/4317_16x16.png"))); // NOI18N
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/4317_16x16.png"))); // NOI18N
         jMenu10.setText("Auditoria");
         menuAdministracao.add(jMenu10);
 
@@ -507,7 +542,7 @@ public class FramePrincipal extends JFrame {
         menuDb.setText("Configurações");
 
         subMenuDB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
-        subMenuDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/9798_16x16.png"))); // NOI18N
+        subMenuDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
         subMenuDB.setText("Banco de Dados");
         subMenuDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +557,7 @@ public class FramePrincipal extends JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("       Habilitar Som");
-        jCheckBoxMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/10521_16x16.png"))); // NOI18N
+        jCheckBoxMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
         jCheckBoxMenuItem1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jCheckBoxMenuItem1StateChanged(evt);
@@ -535,12 +570,21 @@ public class FramePrincipal extends JFrame {
         });
         jMenu3.add(jCheckBoxMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7298_16x16.png"))); // NOI18N
+        jMenuItem2.setText("Trocar Senha");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         barraDeMenu.add(jMenu3);
 
         menuSuporte.setText("Suporte");
 
         itemAssistenciaTecnica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        itemAssistenciaTecnica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8405_16x16.png"))); // NOI18N
+        itemAssistenciaTecnica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
         itemAssistenciaTecnica.setText("Assistência Técnica");
         itemAssistenciaTecnica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -587,7 +631,7 @@ public class FramePrincipal extends JFrame {
     private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemReiniciarActionPerformed
     {//GEN-HEADEREND:event_itemReiniciarActionPerformed
         if (Config.SOUND)
-            SoundManager.playSound("restart.wav");
+            SoundManager.playSound(Config.PRE_RESTART_SOUND);
 
         if (Config.DEBUG)
             _log.info("solicitacao de restart.");
@@ -597,7 +641,7 @@ public class FramePrincipal extends JFrame {
         if (selectedOption == JOptionPane.OK_OPTION)
         {
             if (Config.SOUND)
-                SoundManager.playSound("restartok.wav");
+                SoundManager.playSound(Config.RESTART_SOUND);
 
             if (Config.DEBUG)
                 _log.info("usuario reiniciou o sistema.");
@@ -714,6 +758,18 @@ public class FramePrincipal extends JFrame {
         AppManager.getInstance().requestAppShutdown(FramePrincipal.this);
     }//GEN-LAST:event_formWindowClosing
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
+          EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run()
+            {
+                new PassChangeFrame().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      *
      * @param args
@@ -753,6 +809,8 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -774,6 +832,7 @@ public class FramePrincipal extends JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
