@@ -36,7 +36,7 @@ public class StringTable
     /**
      * Deleta Usuario da Database
      */
-    public static final String CHANGE_USER_PASS = "UPDATE `users` SET passwd=? WHERE passwd= ? login =?";
+    public static final String CHANGE_USER_PASS = "UPDATE `users` SET `password`='?' WHERE `password`='?' AND `login`='?'";
     /**
      *
      */
