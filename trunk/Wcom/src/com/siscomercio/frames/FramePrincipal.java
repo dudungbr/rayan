@@ -185,6 +185,7 @@ public class FramePrincipal extends JFrame {
         menuSistema = new javax.swing.JMenu();
         itemSair = new javax.swing.JMenuItem();
         itemReiniciar = new javax.swing.JMenuItem();
+        itemRegistro = new javax.swing.JMenuItem();
         subMenuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuHardware = new javax.swing.JMenu();
@@ -205,7 +206,6 @@ public class FramePrincipal extends JFrame {
         jMenu10 = new javax.swing.JMenu();
         menuDb = new javax.swing.JMenu();
         subMenuDB = new javax.swing.JMenuItem();
-        itemRegistro = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         menuSuporte = new javax.swing.JMenu();
@@ -225,7 +225,7 @@ public class FramePrincipal extends JFrame {
 
         jLabel9.setText("jLabel9");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Wcom - Sistema de Automacao Comercial");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -359,7 +359,7 @@ public class FramePrincipal extends JFrame {
         jLabel11.setText("nomeEmpresa");
         jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
 
-        menuSistema.setText("Arquivo");
+        menuSistema.setText("Sistema");
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/6980_16x16.png"))); // NOI18N
@@ -380,6 +380,16 @@ public class FramePrincipal extends JFrame {
             }
         });
         menuSistema.add(itemReiniciar);
+
+        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8271_16x16.png"))); // NOI18N
+        itemRegistro.setText("Registro");
+        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRegistroActionPerformed(evt);
+            }
+        });
+        menuSistema.add(itemRegistro);
 
         barraDeMenu.add(menuSistema);
 
@@ -504,16 +514,6 @@ public class FramePrincipal extends JFrame {
         });
         menuDb.add(subMenuDB);
 
-        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wcom/icones/8271_16x16.png"))); // NOI18N
-        itemRegistro.setText("Registrar Sistema");
-        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRegistroActionPerformed(evt);
-            }
-        });
-        menuDb.add(itemRegistro);
-
         barraDeMenu.add(menuDb);
 
         jMenu3.setText("Opções");
@@ -578,7 +578,7 @@ public class FramePrincipal extends JFrame {
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
     {//GEN-HEADEREND:event_itemSairActionPerformed
 
-        AppManager.getInstance().requestAppShutdown();
+        AppManager.getInstance().requestAppShutdown(FramePrincipal.this);
 
     }//GEN-LAST:event_itemSairActionPerformed
 
@@ -709,7 +709,7 @@ public class FramePrincipal extends JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
-        AppManager.getInstance().requestAppShutdown();
+        AppManager.getInstance().requestAppShutdown(FramePrincipal.this);
     }//GEN-LAST:event_formWindowClosing
 
     /**

@@ -61,7 +61,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuSistema">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Arquivo"/>
+            <Property name="text" type="java.lang.String" value="Sistema"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemSair">
@@ -90,6 +90,20 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemReiniciarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRegistro">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+L"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/wcom/icones/8271_16x16.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Registro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRegistroActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -281,20 +295,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMenuDBActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemRegistro">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+L"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/wcom/icones/8271_16x16.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Registrar Sistema"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRegistroActionPerformed"/>
-              </Events>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
@@ -342,7 +342,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="Wcom - Sistema de Automacao Comercial"/>
   </Properties>
   <SyntheticProperties>
