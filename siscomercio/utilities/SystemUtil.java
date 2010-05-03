@@ -20,8 +20,8 @@ import com.siscomercio.managers.DatabaseManager;
  * @author Rayan
  * 
  */
-public class SystemUtil {
-
+public class SystemUtil
+{
     private static final long serialVersionUID = 1L;
     private static Logger _log = Logger.getLogger(SystemUtil.class.getName());
 
@@ -31,21 +31,22 @@ public class SystemUtil {
     public static void printVersion()
     {
         SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "\n"
-                + Config.BUILD_NUM.substring(1, 14) + "\n"
-                + Config.BUILD_DATE.substring(1, 52) + "\n"
-                + Config.BUILD_URL.substring(1, 75) + "\n"
-                + "Versao do Sistema " + Config.SYSTEM_VERSION);
+                           + Config.BUILD_NUM.substring(1, 14) + "\n"
+                           + Config.BUILD_DATE.substring(1, 52) + "\n"
+                           + Config.BUILD_URL.substring(1, 75) + "\n"
+                           + "Versao do Sistema " + Config.SYSTEM_VERSION);
 
     }
 
-     /**
+    /**
      *
-      * @return the Site of Config File
-      */
+     * @return the Site of Config File
+     */
     public static String getSite()
     {
         return Config.SITE;
     }
+
     /**
      *
      * @return the System Version
@@ -61,10 +62,10 @@ public class SystemUtil {
      */
     public static void printDbInfo() throws SQLException
     {
-        showMsg("\n Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() +"\n" +
-                "Status do Banco: " + DatabaseManager.getConnectionStatus() +"\n" +
-                "Conexoes Ativas: "+ String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount())+ "\n" +
-                "Conexoes Criadas : "+ String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount()+ "\n \n"));
+        showMsg("\n Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "\n"
+                + "Status do Banco: " + DatabaseManager.getConnectionStatus() + "\n"
+                + "Conexoes Ativas: " + String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount()) + "\n"
+                + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "\n \n"));
     }
 
     /**
@@ -102,20 +103,6 @@ public class SystemUtil {
                 + "Version: " + System.getProperty("java.version") + "\n"
                 + "Java Class Version: " + System.getProperty("java.class.version") + "\n");
     }
-
-    /*private static void printSystemDateTime()
-    {
-    // instanciates Date Objec
-    Date dateInfo = new Date();
-
-    // generates a simple date format
-    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa");
-
-    // generates String that will get the formater info with values
-    String dayInfo = df.format(dateInfo);
-    SystemUtil.showMsg("Horario: "+dayInfo);
-    }*/
-
     /**
      * Converte segundos em milisegundos
      *
@@ -178,11 +165,12 @@ public class SystemUtil {
 
     /**
      * mostra mensagem de informacao ao usuario
+     *
      * @param msg
      */
     public static void showMsg(String msg)
     {
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("enviando janela de mensagem... \n");
         JOptionPane.showMessageDialog(null, msg, "Informacao", JOptionPane.INFORMATION_MESSAGE);
 
@@ -190,11 +178,12 @@ public class SystemUtil {
 
     /**
      * mostra mensagem de erro ao usuario
+     *
      * @param msg
      */
     public static void showErrorMsg(String msg)
     {
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("enviando janela de mensagem de erro... \n");
         JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
     }
@@ -216,33 +205,36 @@ public class SystemUtil {
             {
                 return pathname.getName().toLowerCase().endsWith(extension);
             }
+
         });
 
         return files;
     }
 
     /**
-     * Lista as Pastas 
+     * Lista as Pastas
+     *
      * @param path
      * @return files
      */
     public File[] listFolders(String path)
     {
         File F = new File(path);
-        File[] files = F.listFiles(new FileFilter() {
-
+        File[] files = F.listFiles(new FileFilter()
+        {
             @Override
             public boolean accept(File pathname)
             {
-                return pathname.getName(). toLowerCase().endsWith("");
+                return pathname.getName().toLowerCase().endsWith("");
             }
+
         });
 
         return files;
     }
 
     /**
-     *
+     * Imprime o Uso de Memória
      */
     public static void printMemUsage()
     {
@@ -258,20 +250,21 @@ public class SystemUtil {
         DecimalFormat df2 = new DecimalFormat("   'KB' ");
 
         SystemUtil.showMsg("Relatorio Gerado as "
-                + sdf.format(new Date()) + ": \n" + "\n"
-                + "|========= Memoria Livre =========" + "\n"
-                + "|    |= Total:" + df2.format(max) + "\n"
-                + "|    |= Memoria Total:" + df2.format(allocated)
-                + df.format(allocated / max * 100) + "\n"
-                + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
-                + df.format(nonAllocated / max * 100) + "\n" + "\n"
-                + " =========  Memoria Alocada ========== \n"
-                + "|    |= Total:" + df2.format(allocated) + "\n"
-                + "|    |= Memoria Usada:" + df2.format(used)
-                + df.format(used / max * 100) + "\n"
-                + "|    |= Memoria Cacheada:" + df2.format(cached)
-                + df.format(cached / max * 100) + "\n"
-                + "|    |= Memoria Disponivel:" + df2.format(useable)
-                + df.format(useable / max * 100));
+                           + sdf.format(new Date()) + ": \n" + "\n"
+                           + "|========= Memoria Livre =========" + "\n"
+                           + "|    |= Total:" + df2.format(max) + "\n"
+                           + "|    |= Memoria Total:" + df2.format(allocated)
+                           + df.format(allocated / max * 100) + "\n"
+                           + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
+                           + df.format(nonAllocated / max * 100) + "\n" + "\n"
+                           + " =========  Memoria Alocada ========== \n"
+                           + "|    |= Total:" + df2.format(allocated) + "\n"
+                           + "|    |= Memoria Usada:" + df2.format(used)
+                           + df.format(used / max * 100) + "\n"
+                           + "|    |= Memoria Cacheada:" + df2.format(cached)
+                           + df.format(cached / max * 100) + "\n"
+                           + "|    |= Memoria Disponivel:" + df2.format(useable)
+                           + df.format(useable / max * 100));
     }
+
 }

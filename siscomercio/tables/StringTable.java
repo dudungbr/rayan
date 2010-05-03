@@ -32,6 +32,9 @@ public class StringTable
      */
     public static final String INSERT_USER = "INSERT INTO `users`(codigo,login,passwd, accesslevel) VALUES (?,?,?,?)";
 
+    /**
+     * 
+     */
     public static final String DELETE_USER = "DELETE FROM `users` WHERE codigo=? AND login =?";
     /**
      * Deleta Usuario da Database

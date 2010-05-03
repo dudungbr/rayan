@@ -21,12 +21,12 @@ import com.siscomercio.Config;
  * $Date$
  * @author Rayan
  */
-public class WindowsUtils {
-
+public class WindowsUtils
+{
     private static Logger _log = Logger.getLogger(WindowsUtils.class.getName());
 
     /**
-     *
+     * Checa se um Processo esta em Execução.
      * @param namePart
      */
     public static void checkProcess(String namePart)
@@ -39,47 +39,52 @@ public class WindowsUtils {
 
         int i = 0;
 
-        while (it.hasNext())
+        while(it.hasNext())
         {
             result += it.next();
             i++;
         }
 
-        if (!result.contains(namePart))
+        if(!result.contains(namePart))
         {
             SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "\n \n Detalhes: \n" + getProcess(namePart) + "\n" + getSuport());
             System.exit(0);
-        } else
-        {
-            if (Config.DEBUG)
-            {
-                _log.info("processo ok \n");
-            }
         }
+        else
+            if(Config.DEBUG)
+                _log.info("processo ok \n");
     }
 
+    /**
+     * Nome do Suporte Técnico
+     * @return
+     */
     private static String getSuport()
     {
         return "Contacte o Suporte Técnico.";
     }
 
+    /**
+     * Pega um processo
+     * @param s
+     * @return
+     */
     private static String getProcess(String s)
     {
         String value;
-        if (s.startsWith("mysql"))
+        if(s.startsWith("mysql"))
         {
-            value = "mysqld.exe\n"
-                    + "mysqld-nt.exe\n";
+            value = "mysqld.exe\n" + "mysqld-nt.exe\n";
             s = value;
-        } else
-        {
-            throw new UnsupportedOperationException("valor nao suportado");
         }
+        else
+            throw new UnsupportedOperationException("valor nao suportado");
 
         return s;
     }
 
     /**
+     * Finaliza um Processo em Execucao na Máquina
      *
      * @param processo
      * @return false
@@ -93,21 +98,20 @@ public class WindowsUtils {
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 
-            while ((line = input.readLine()) != null)
+            while((line = input.readLine()) != null)
             {
-                if (!line.trim().equals(""))
-                {
-                    if (line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processo))
+                if(!line.trim().equals(""))
+                    if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processo))
                     {
                         Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
                         _log.info("Matando Processo: " + processo);
                         return true;
                     }
-                }
             }
             input.close();
 
-        } catch (Exception err)
+        }
+        catch(Exception err)
         {
             err.printStackTrace();
         }
@@ -115,7 +119,7 @@ public class WindowsUtils {
     }
 
     /**
-     *
+     * Retorna Todos os Processos em Execucao
      * @return processes
      */
     private static List<String> listRunningProcesses()
@@ -128,9 +132,9 @@ public class WindowsUtils {
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 
-            while ((line = input.readLine()) != null)
+            while((line = input.readLine()) != null)
             {
-                if (!line.trim().equals(""))
+                if(!line.trim().equals(""))
                 {
                     // keep only the process name
                     line = line.substring(1);
@@ -141,7 +145,8 @@ public class WindowsUtils {
             input.close();
 
 
-        } catch (Exception err)
+        }
+        catch(Exception err)
         {
             err.printStackTrace();
 
@@ -152,7 +157,7 @@ public class WindowsUtils {
     }
 
     /**
-     *
+     * Pega o Nome dessa Maquina
      * @return the name of this Machine
      */
     public static String getPcName()
@@ -160,9 +165,10 @@ public class WindowsUtils {
         String pcName = null;
         try
         {
-          pcName = InetAddress.getLocalHost().getHostName();
+            pcName = InetAddress.getLocalHost().getHostName();
 
-        } catch (Exception e)
+        }
+        catch(Exception e)
         {
             SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage());
         }
@@ -171,7 +177,7 @@ public class WindowsUtils {
     }
 
     /**
-     *
+     * Mostra Todos os Processos Em Execucao na Máquina
      */
     public static void showRunningProcesses()
     {
@@ -181,17 +187,17 @@ public class WindowsUtils {
         // display the result
         Iterator<String> it = processes.iterator();
         int i = 0;
-        while (it.hasNext())
+        while(it.hasNext())
         {
             result += it.next();
             i++;
-
         }
 
-        if (Config.DEBUG)
+        if(Config.DEBUG)
         {
             _log.info("Running processes : \n" + result);
             _log.info("Total de Processos: " + processes.size());
         }
     }
+
 }
