@@ -196,7 +196,7 @@ public class Config {
             LOGO = arquivo.getProperty("logo", "desktop.jpg");
             EXIT_SOUND = arquivo.getProperty("exit", "exitok.wav");
             PRE_EXIT_SOUND = arquivo.getProperty("preExit", "exit.wav");
-            LOGIN_SOUND = arquivo.getProperty("loginSound", "login.wav");
+            LOGIN_SOUND = arquivo.getProperty("loginSound", "welcome.wav");
             PRE_LOGIN_SOUND = arquivo.getProperty("preLogin", "login.wav");
             UNIPLEMENTED_SOUND = arquivo.getProperty("uniplemented", "implementar.wav");
             PRE_RESTART_SOUND = arquivo.getProperty("preRestart", "restart.wav");
