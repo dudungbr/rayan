@@ -29,6 +29,7 @@ public class SoundManager
 
         File file = new File(StringTable.SOUND_PATH + soundName);
         if(file.exists())
+        {
             try
             {
                 URI caminho = file.toURI();
@@ -46,6 +47,7 @@ public class SoundManager
             {
                 SystemUtil.showErrorMsg(ex.getMessage());
             }
+        }
         else
             SystemUtil.showErrorMsg("Arquivo de Som " + soundName + "nao encontrado.");
     }
