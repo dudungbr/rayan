@@ -17,13 +17,17 @@ import com.siscomercio.utilities.SystemUtil;
  * @author William Menezes
  *
  */
-public class Config {
-
+public class Config
+{
     private static Logger _log = Logger.getLogger(Config.class.getName());
     /**
      * som tocado quando o sistema for finalizado
      */
     public static String EXIT_SOUND;
+    /**
+     * som de boas vindas
+     */
+    public static String WELCOME_SOUND;
     /**
      *  som tocado quando for solicitado o solicitado o shutdown
      */
@@ -115,7 +119,7 @@ public class Config {
     /**
      * habilita/ desabilita Som
      */
-    public static boolean SOUND;
+    public static boolean ENABLE_SOUND;
     /**
      * versao do sistema
      */
@@ -159,13 +163,13 @@ public class Config {
     public static void load()
     {
         InputStream is = null;
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("Carregando o Arquuivo de Configuração...\n");
         try
         {
 
             File f = new File(path);
-            if (!f.exists())
+            if(!f.exists())
             {
                 SystemUtil.showErrorMsg("o arquivo de configuração nao existe!");
                 System.exit(0);//finaliza o sistema.
@@ -194,6 +198,9 @@ public class Config {
             GERENTE_LVL = Integer.parseInt(arquivo.getProperty("gerenteLvl", "250"));
             SITE = arquivo.getProperty("site", "www.wcom.com.br");
             LOGO = arquivo.getProperty("logo", "desktop.jpg");
+
+            // Configuracoes de Som
+            ENABLE_SOUND = Boolean.valueOf(arquivo.getProperty("sound", "true "));
             EXIT_SOUND = arquivo.getProperty("exit", "exitok.wav");
             PRE_EXIT_SOUND = arquivo.getProperty("preExit", "exit.wav");
             LOGIN_SOUND = arquivo.getProperty("loginSound", "loginok.wav");
@@ -201,13 +208,12 @@ public class Config {
             UNIPLEMENTED_SOUND = arquivo.getProperty("uniplemented", "implementar.wav");
             PRE_RESTART_SOUND = arquivo.getProperty("preRestart", "restart.wav");
             RESTART_SOUND = arquivo.getProperty("restartSound", "restartok.wav");
+            WELCOME_SOUND = arquivo.getProperty("welcomeSound", "welcome.wav");
             DEBUG = Boolean.valueOf(arquivo.getProperty("debug", "true"));
-            SOUND = Boolean.valueOf(arquivo.getProperty("sound", "true "));
-
             /**
              * Port Checks
              */
-            if (SERVER_PORT <= 0 || SERVER_PORT > 65535)
+            if(SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
                 SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n");
                 System.exit(0);
@@ -215,10 +221,12 @@ public class Config {
 
             _loaded = true;
 
-        } catch (Exception e)
+        }
+        catch(Exception e)
         {
             _log.warning(e.getMessage());
-            throw new Error("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e +"\n");
+            throw new Error("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e + "\n");
         }
     }
+
 }

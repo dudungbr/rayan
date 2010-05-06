@@ -40,7 +40,7 @@ public class AppManager extends JFrame {
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_EXIT_SOUND);
 
 
@@ -51,7 +51,7 @@ public class AppManager extends JFrame {
 
         if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.SOUND)
+            if (Config.ENABLE_SOUND)
                 SoundManager.playSound(Config.EXIT_SOUND);
 
             if (Config.DEBUG)
@@ -69,7 +69,7 @@ public class AppManager extends JFrame {
      */
     public static void implementar()
     {
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             SoundManager.playSound(Config.UNIPLEMENTED_SOUND);
         SystemUtil.showMsg("Funcao Ainda nao Disponivel");
     }

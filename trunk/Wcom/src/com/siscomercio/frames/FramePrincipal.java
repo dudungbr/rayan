@@ -98,9 +98,9 @@ public class FramePrincipal extends JFrame {
      */
     private void setSoundProperties()
     {
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
         {
-            SoundManager.playSound(Config.LOGIN_SOUND);
+            SoundManager.playSound(Config.WELCOME_SOUND);
             // Habilita ou Desabilita o Som de Acordo com a Config.
             jCheckBoxMenuItem1.setSelected(true);
         } else
@@ -112,7 +112,7 @@ public class FramePrincipal extends JFrame {
      */
     private void preenchaFrame()
     {
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             _log.info("preenchendo frame...\n");
         pcLabel.setText(WindowsUtils.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
@@ -128,7 +128,7 @@ public class FramePrincipal extends JFrame {
      */
     private void disparaRelogio()
     {
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             _log.info("inicializando relogio ...\n");
         // Dispara o Relogio
         Timer timer = new Timer(1000, new ClockListener());
@@ -630,7 +630,7 @@ public class FramePrincipal extends JFrame {
 
     private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemReiniciarActionPerformed
     {//GEN-HEADEREND:event_itemReiniciarActionPerformed
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_RESTART_SOUND);
 
         if (Config.DEBUG)
@@ -640,7 +640,7 @@ public class FramePrincipal extends JFrame {
 
         if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.SOUND)
+            if (Config.ENABLE_SOUND)
                 SoundManager.playSound(Config.RESTART_SOUND);
 
             if (Config.DEBUG)
@@ -743,9 +743,9 @@ public class FramePrincipal extends JFrame {
     {//GEN-HEADEREND:event_jCheckBoxMenuItem1ActionPerformed
 
         if (jCheckBoxMenuItem1.isSelected())
-            Config.SOUND = true;
+            Config.ENABLE_SOUND = true;
         else
-            Config.SOUND = false;
+            Config.ENABLE_SOUND = false;
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jCheckBoxMenuItem1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jCheckBoxMenuItem1StateChanged
