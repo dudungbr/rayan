@@ -62,21 +62,20 @@ public class FramePrincipal extends JFrame {
      */
     private void setDesktop(JLabel label)
     {
-        _log.info("Localizando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO);
+        _log.info("Carregando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO + "\n");
         File file = new File(StringTable.IMAGE_PATH+Config.LOGO);
 
         if (file.exists())
         {
-            _log.info(file.toString());
             ImageIcon img = new ImageIcon(file.toString());
             if (img != null)
                 label.setIcon(img);
             else
-                 SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+                 SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO+"\n");
         }
         else
         {
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO);
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO +"\n");
         }
     }
 
