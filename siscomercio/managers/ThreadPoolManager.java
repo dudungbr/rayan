@@ -30,8 +30,8 @@ import java.util.logging.Logger;
  * @author -Wooden-
  *
  */
-public class ThreadPoolManager {
-
+public class ThreadPoolManager
+{
     /**
      *
      */
@@ -65,10 +65,10 @@ public class ThreadPoolManager {
      */
     public static long validateDelay(long delay)
     {
-        if (delay < 0)
+        if(delay < 0)
             delay = 0;
         else
-            if (delay > MAX_DELAY)
+            if(delay > MAX_DELAY)
                 delay = MAX_DELAY;
         return delay;
     }
@@ -85,7 +85,8 @@ public class ThreadPoolManager {
         {
             delay = ThreadPoolManager.validateDelay(delay);
             return _generalScheduledThreadPool.schedule(r, delay, TimeUnit.MILLISECONDS);
-        } catch (RejectedExecutionException e)
+        }
+        catch(RejectedExecutionException e)
         {
             return null; /* shutdown, ignore */
         }
@@ -105,7 +106,8 @@ public class ThreadPoolManager {
             delay = ThreadPoolManager.validateDelay(delay);
             initial = ThreadPoolManager.validateDelay(initial);
             return _generalScheduledThreadPool.scheduleAtFixedRate(r, initial, delay, TimeUnit.MILLISECONDS);
-        } catch (RejectedExecutionException e)
+        }
+        catch(RejectedExecutionException e)
         {
             return null; /* shutdown, ignore */
         }
@@ -187,8 +189,8 @@ public class ThreadPoolManager {
                 };
     }
 
-    private class PriorityThreadFactory implements ThreadFactory {
-
+    private class PriorityThreadFactory implements ThreadFactory
+    {
         private int _prio;
         private String _name;
         private AtomicInteger _threadNumber = new AtomicInteger(1);
@@ -217,6 +219,7 @@ public class ThreadPoolManager {
         {
             return _group;
         }
+
     }
 
     /**
@@ -239,7 +242,8 @@ public class ThreadPoolManager {
             _generalThreadPool.shutdown();
             _log.info("All ThreadPools are now stopped");
 
-        } catch (InterruptedException e)
+        }
+        catch(InterruptedException e)
         {
             e.printStackTrace();
         }
@@ -267,8 +271,9 @@ public class ThreadPoolManager {
     }
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder {
-
+    private static class SingletonHolder
+    {
         protected static final ThreadPoolManager _instance = new ThreadPoolManager();
     }
+
 }
