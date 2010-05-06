@@ -78,7 +78,7 @@ public class Auth extends JFrame {
         if (Config.DEBUG)
             _log.info("Criando Janela de Autenticacao.... \n");
 
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_LOGIN_SOUND);
 
         if (_autenticado)
@@ -289,7 +289,7 @@ public class Auth extends JFrame {
     {
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-        if (Config.SOUND)
+        if (Config.ENABLE_SOUND)
             SoundManager.playSound(Config.LOGIN_SOUND);
 
 
