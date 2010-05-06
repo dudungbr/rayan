@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -29,6 +28,7 @@ import com.siscomercio.DatabaseFactory;
 
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
+import com.siscomercio.tables.StringTable;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -38,13 +38,13 @@ import com.siscomercio.utilities.SystemUtil;
  * $Date$
  * @author Rayan
  */
-public class Auth extends JFrame
-{
+public class Auth extends JFrame {
+
     private static final long serialVersionUID = 1L;
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder
-    {
+    private static class SingletonHolder {
+
         protected static final Auth _instance = new Auth();
     }
 
@@ -56,7 +56,6 @@ public class Auth extends JFrame
     {
         return SingletonHolder._instance;
     }
-
     private static Logger _log = Logger.getLogger(Auth.class.getName());
     /**
      *
@@ -69,7 +68,6 @@ public class Auth extends JFrame
     JButton botaoLogin;
     JButton botaoCancelar;
     JButton botaoConfigurar;
-  
 
     /**
      * Monta a Janela Principal da Aplicação
@@ -77,15 +75,15 @@ public class Auth extends JFrame
      */
     public Auth()
     {
-        if(Config.DEBUG)
+        if (Config.DEBUG)
             _log.info("Criando Janela de Autenticacao.... \n");
 
-        if(Config.SOUND)
+        if (Config.SOUND)
             SoundManager.playSound(Config.PRE_LOGIN_SOUND);
 
-        if(_autenticado)
+        if (_autenticado)
         {
-            if(Config.DEBUG)
+            if (Config.DEBUG)
                 _log.info("usuario ja autenticado nao ira criar janela");
             return;
         }
@@ -104,16 +102,15 @@ public class Auth extends JFrame
         botaoCancelar = new JButton("Cancelar");
         botaoConfigurar = new JButton("Configurar...");
 
-        if(Config.DEBUG)
+        if (Config.DEBUG)
             _log.info("Auth() ... install = " + DatabaseManager._installed + "\n");
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if(DatabaseManager._installed)
+        if (DatabaseManager._installed)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);
-        }
-        else
+        } else
             botaoLogin.setEnabled(false);
 
         // Design
@@ -146,42 +143,40 @@ public class Auth extends JFrame
         tela.add(BorderLayout.SOUTH, inferior);
 
         // ================= Botoes ===================================
-        botaoLogin.addActionListener(new ActionListener()
-        {
+        botaoLogin.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(Config.DEBUG)
+                if (Config.DEBUG)
                     _log.info("executando acao do botao login \n");
                 String senha = new String(campoSenha.getPassword());
                 String login = new String(campoUsuario.getText());
 
-                if(isAuthed(login, senha))
+                if (isAuthed(login, senha))
                     showConfirmWindow();
             }
-
         });
 
         getRootPane().setDefaultButton(botaoLogin);
 
         // Acao Botao Cancelar
-        botaoCancelar.addActionListener(new ActionListener()
-        {
+        botaoCancelar.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 dispose();
             }
-
         });
         // Ação botao Configurar
-        botaoConfigurar.addActionListener(new ActionListener()
-        {
+        botaoConfigurar.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                java.awt.EventQueue.invokeLater(new Runnable()
-                {
+                java.awt.EventQueue.invokeLater(new Runnable() {
+
                     @Override
                     public void run()
                     {
@@ -191,10 +186,8 @@ public class Auth extends JFrame
                         //Solicita Autenticacao.
                         new LogonFrame().setVisible(true);
                     }
-
                 });
             }
-
         });
         //===================================================
 
@@ -221,51 +214,19 @@ public class Auth extends JFrame
      *
      * @param login
      * @param senha
-     * @return
-     */
-    private int getUserCode(String login, String senha)
-    {
-    Connection con = null;
-        if(Config.DEBUG)
-            _log.info("procurando codigo do Usuario.. \n");
-        int codigo = -1;
-        try
-        {
-            String queryCodigo = "SELECT `codigo` from users WHERE login= '" + login + "' and `password`= '" + senha + "'";
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(queryCodigo);
-            ResultSet rset = ps.executeQuery();
-
-            if(rset.next())
-                codigo = rset.getInt("codigo");
-            DatabaseManager.closeConnections(ps, rset, con);
-
-            if(Config.DEBUG)
-                _log.info("o codigo do usuario " + login + " e " + codigo + "\n");
-        }
-        catch(SQLException ex)
-        {
-            Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return codigo;
-    }
-
-    /**
-     *
-     * @param login
-     * @param senha
      * @return boolean
      */
     public boolean isAuthed(String login, String senha)
-    { Connection con = null;
+    {
+        Connection con = null;
         boolean ok = false;
         try
         {
-            if(Config.DEBUG)
+            if (Config.DEBUG)
                 //checa se os dados estao ok...
                 _log.info("checando dados: senha  = " + senha + " user = " + login);
 
-            if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
+            if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {
                 SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>");
                 resetCampos();
@@ -280,17 +241,18 @@ public class Auth extends JFrame
             // ---------------------------------
             // Le a Tabela de Usuarios da Database
             // ---------------------------------
-            int userCode = getUserCode(login, senha);
-
-            String query = "SELECT * from USERS WHERE `codigo` = '" + userCode + "' and `login`='" + login + "' and `password`='" + senha + "'";
+            int userCode = DatabaseManager.getUserCode(login, senha);
             String logindb = null;
             String senhadb = null;
 
-            con =DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rset = ps.executeQuery();
-
-            if(rset.next())
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.CHECK_USER_PASS);
+            ps.setInt(1, userCode);
+            ps.setString(2, login);
+            ps.setString(3, senha);
+            ps.execute();
+             ResultSet rset = ps.getResultSet();
+            if (rset.next())
             {
                 // pega os dados
                 logindb = rset.getString("login");
@@ -300,65 +262,26 @@ public class Auth extends JFrame
             DatabaseManager.closeConnections(ps, rset, con);
 
             // Compara as Senhas Digitadas Pelo Usuario com a DB
-            if(login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
+            if (login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
             {
                 ok = true;
                 UserTable.getInstance().setLastUser(login);
-            }
-            else
+            } else
             {
                 SystemUtil.showErrorMsg("usuario ou senha incorretos!");
                 ok = false;
             }
 
-        }
-        catch(SQLException ex)
+        } catch (SQLException ex)
         {
             SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode());
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e);
         }
         return ok;
     }
-
-    /**
-     *
-     * @param usr
-     * @return
-     */
-    public int getAccessLevel(String usr)
-    {
-        Connection con = null;
-        if(Config.DEBUG)
-            _log.info("checando o nivel de acesso do usuario " + usr + "\n");
-
-        int level = 0;
-        String query = "SELECT accesslevel FROM USERS WHERE login ='" + usr + "'";
-        try
-        {
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rset = ps.executeQuery();
-            if(rset.next())
-                level = rset.getInt("accesslevel");
-            // Fecha as Conexoes
-            DatabaseManager.closeConnections(ps, rset, con);
-            if(Config.DEBUG)
-                _log.info("nivel de acesso do usuario " + usr + " e " + level);
-        }
-        catch(Exception e)
-        {
-            _log.log(Level.SEVERE, "DatabaseManager: Error reading User Table: " + e.getMessage(), e);
-        }
-
-        _log.info("nivel de accesso:  " + level);
-        return level;
-
-    }
-
     /**
      * Cria um Pop Up de Confirmacao do Login.
      */
@@ -366,31 +289,27 @@ public class Auth extends JFrame
     {
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-
-        if(Config.SOUND)
+        if (Config.SOUND)
             SoundManager.playSound(Config.LOGIN_SOUND);
 
 
-        if(!LogonFrame._reAuth)
+        if (!LogonFrame._reAuth)
         {
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
-            switch(confirm)
+            switch (confirm)
             {
                 // Switch > Case
                 case JOptionPane.YES_OPTION: // Attempt to Login user
-                    // jButton1.setEnabled(false); // Set button enable to false to
-                    // prevent 2 login attempts
                     setEnabled(true);
                     dispose(); //fecha a tela de login
-                    EventQueue.invokeLater(new Runnable()
-                    {
+                    EventQueue.invokeLater(new Runnable() {
+
                         @Override
                         public void run()
                         {
                             new FramePrincipal().setVisible(true);
                         }
-
                     });
                     break;
 
@@ -432,7 +351,7 @@ public class Auth extends JFrame
     {
         boolean ok = false;
         _log.info("checando senha mestre \n");
-        if(user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
+        if (user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
             ok = true;
         else
         {
@@ -441,5 +360,4 @@ public class Auth extends JFrame
         }
         return ok;
     }
-
 }
