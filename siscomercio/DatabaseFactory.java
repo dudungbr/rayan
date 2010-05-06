@@ -67,11 +67,8 @@ public class DatabaseFactory
         {
             _source = new ComboPooledDataSource();
             _source.setAutoCommitOnClose(true);
-
             _source.setInitialPoolSize(10);
             _source.setMinPoolSize(10);
-            //_source.setMaxPoolSize(Math.max(10, Config.DATABASE_MAX_CONNECTIONS));
-
             _source.setAcquireRetryAttempts(0); // try to obtain connections indefinitely (0 = never quit)
             _source.setAcquireRetryDelay(500); // 500 milliseconds wait before try to acquire connection again
             _source.setCheckoutTimeout(0); // 0 = wait indefinitely for new connection
@@ -142,7 +139,7 @@ public class DatabaseFactory
      * @param tableName
      * @param whereClause
      * @param returnOnlyTopRecord
-     * @return
+     * @return query
      */
     public final String prepQuerySelect(String[] fields, String tableName, String whereClause, boolean returnOnlyTopRecord)
     {
@@ -185,7 +182,7 @@ public class DatabaseFactory
     /**
      *
      * @param whatToCheck
-     * @return
+     * @return sbResult
      */
     public final String safetyString(String... whatToCheck)
     {
@@ -267,6 +264,9 @@ public class DatabaseFactory
         return con;
     }
 
+    /**
+     *
+     */
     private class ConnectionCloser implements Runnable
     {
         private Connection c;
@@ -303,7 +303,7 @@ public class DatabaseFactory
 
     /**
      *
-     * @return
+     * @return busy connections count
      * @throws SQLException
      */
     public int getBusyConnectionCount() throws SQLException
@@ -313,7 +313,7 @@ public class DatabaseFactory
 
     /**
      *
-     * @return
+     * @return num of iddle connections
      * @throws SQLException
      */
     public int getIdleConnectionCount() throws SQLException
@@ -322,8 +322,7 @@ public class DatabaseFactory
     }
 
     /**
-     *
-     * @return
+     * @return _providerType
      */
     public final ProviderType getProviderType()
     {

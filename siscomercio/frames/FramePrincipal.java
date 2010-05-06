@@ -63,11 +63,11 @@ public class FramePrincipal extends JFrame {
     private void setDesktop(JLabel label)
     {
         _log.info("Localizando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO);
-        File file = new File("/imagens/splash.png");
+        File file = new File(StringTable.IMAGE_PATH+Config.LOGO);
 
         if (file.exists())
         {
-            ImageIcon img = new ImageIcon(getClass().getResource(file.toString()/*StringTable.IMAGE_PATH+Config.LOGO*/));
+            ImageIcon img = new ImageIcon(getClass().getResource(file.toString()));
             if (img != null)
                 label.setIcon(img);
             else

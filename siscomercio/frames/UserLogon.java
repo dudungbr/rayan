@@ -13,6 +13,7 @@ package com.siscomercio.frames;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
+import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -126,7 +127,7 @@ public class UserLogon extends JFrame
 
         boolean autorizado = Auth.getInstance().isAuthed(usuario, senha);
 
-        int accessLevel = Auth.getInstance().getAccessLevel(usuario);
+        int accessLevel = DatabaseManager.getAccessLevel(usuario);
 
         if(autorizado)
         {

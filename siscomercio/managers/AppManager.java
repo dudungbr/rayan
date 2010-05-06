@@ -46,11 +46,9 @@ public class AppManager extends JFrame {
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "Encerrar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
         if (Config.DEBUG)
-        {
             _log.info("solicitacao de shutdown...\n");
-            _log.info("selected option = " + selectedOption);
-            _log.info("ok option = " + JOptionPane.OK_OPTION);
-        }
+
+
         if (selectedOption == JOptionPane.OK_OPTION)
         {
             if (Config.SOUND)
@@ -61,8 +59,7 @@ public class AppManager extends JFrame {
 
             //finaliza a aplicacao
             System.exit(0);
-        }
-        else
+        } else
             if (Config.DEBUG)
                 _log.info("usuario desiste de fechar o sistema.\n");
     }
