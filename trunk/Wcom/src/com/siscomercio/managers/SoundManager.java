@@ -34,7 +34,7 @@ public class SoundManager {
         try
         {
             sound = Applet.newAudioClip(caminho.toURL());
-            if (sound != null)
+            if (file!= null)
             {
                 sound.play();
                 Thread.sleep(SystemUtil.convertSecondsToMiliseconds(1));
