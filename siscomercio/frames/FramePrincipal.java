@@ -67,7 +67,8 @@ public class FramePrincipal extends JFrame {
 
         if (file.exists())
         {
-            ImageIcon img = new ImageIcon(getClass().getResource(file.toString()));
+            _log.info(file.toString());
+            ImageIcon img = new ImageIcon(file.toString());
             if (img != null)
                 label.setIcon(img);
             else
