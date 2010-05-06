@@ -41,7 +41,7 @@ public class AppManager extends JFrame {
     public void requestAppShutdown(JFrame janelaPai)
     {
         if (Config.SOUND)
-            SoundManager.playSound(Config.EXIT_SOUND);
+            SoundManager.playSound(Config.PRE_EXIT_SOUND);
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "Encerrar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
@@ -52,7 +52,7 @@ public class AppManager extends JFrame {
         if (selectedOption == JOptionPane.OK_OPTION)
         {
             if (Config.SOUND)
-                SoundManager.playSound("exitok.wav");
+                SoundManager.playSound(Config.EXIT_SOUND);
 
             if (Config.DEBUG)
                 _log.info("usuario finalizou o sistema.");
