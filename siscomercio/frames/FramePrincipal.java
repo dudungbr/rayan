@@ -32,7 +32,7 @@ import com.siscomercio.tables.UserTable;
 import com.siscomercio.security.Auth;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
-import com.siscomercio.utilities.WindowsUtils;
+import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -114,7 +114,7 @@ public class FramePrincipal extends JFrame {
     {
         if (Config.ENABLE_SOUND)
             _log.info("preenchendo frame...\n");
-        pcLabel.setText(WindowsUtils.getPcName());
+        pcLabel.setText(WindowsUtil.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
         dadosEmpresa.setText(Config.EMPRESA);
         jLabel11.setText(Config.EMPRESA);
@@ -675,7 +675,7 @@ public class FramePrincipal extends JFrame {
 
     private void itemMemoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemMemoriaActionPerformed
     {//GEN-HEADEREND:event_itemMemoriaActionPerformed
-        SystemUtil.printMemUsage();
+       WindowsUtil.printMemUsage();
     }//GEN-LAST:event_itemMemoriaActionPerformed
 
     private void itemSistemaOperacionalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSistemaOperacionalActionPerformed

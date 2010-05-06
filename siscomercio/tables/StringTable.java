@@ -26,7 +26,7 @@ public class StringTable {
     /**
      * Pasta de Scripts SQL
      */
-    public static String SQL_PATH = "./trunk/wcom/sql/";
+    public static String SQL_PATH = "./sql/";
     /**
      * pega o nivel de acesso do usuario na DB
      */

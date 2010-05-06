@@ -14,6 +14,12 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.siscomercio.Config;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *$Revision$
@@ -21,9 +27,119 @@ import com.siscomercio.Config;
  * $Date$
  * @author Rayan
  */
-public class WindowsUtils
+public class WindowsUtil
 {
-    private static Logger _log = Logger.getLogger(WindowsUtils.class.getName());
+    private static Logger _log = Logger.getLogger(WindowsUtil.class.getName());
+
+    /**
+     * File file = new File(diretorio);
+    File afile[] = file.listFiles();
+    int i = 0;
+    for (int j = afile.length; i < j; i++) {
+    File arquivos = afile[i];
+    System.out.println(arquivos.getName());
+     */
+    /**
+     * Lista todos os arquivos de um diretorio
+     *
+     * @param path
+     * @param extension
+     */
+    public static void listDirFiles(String path, final String extension)
+    {
+        File file = new File(path);
+        File afile[] = file.listFiles();
+        int i = 0;
+        for(int j = afile.length;i < j;i++)
+        {
+            File arquivos = afile[i];
+            _log.info(arquivos.getName() + "\n");
+        }
+    }
+
+    /**
+     * Lista as Pastas
+     *
+     * @param path
+     * @param extension
+     * @return files
+     */
+    public static int countFiles(String path, final String extension)
+    {
+        File dir = new File(path);//   aqui vc coloca o seu diretório
+        int i = 0;
+
+        for(File arq : dir.listFiles())
+        {
+            //condição para pegar só os arquivos, e nao diretórios
+            if(arq.isFile() && arq.getName().endsWith(extension))
+            {
+                // System.out.println("Arquivo " +
+                ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
+                //aqui vc poderia formar uma lista com os arquivos
+            }
+        }
+        if(Config.DEBUG)
+            _log.info("Contando Arquivos do Diretorio SQL, Total: " + i + " Arquivos. \n");
+
+        return i;
+    }
+
+    /**
+     * Lista as Pastas
+     *
+     * @param path
+     * @return files
+     */
+    public static File[] listFolders(String path)
+    {
+        File F = new File(path);
+        File[] files = F.listFiles(new FileFilter()
+        {
+            @Override
+            public boolean accept(File pathname)
+            {
+                return pathname.getName().toLowerCase().endsWith("");
+            }
+
+        });
+
+        return files;
+    }
+
+    /**
+     * Imprime o Uso de Memória
+     */
+    public static void printMemUsage()
+    {
+        double max = Runtime.getRuntime().maxMemory() / 1024; // maxMemory ismthe upper limit the jvm can use
+        double allocated = Runtime.getRuntime().totalMemory() / 1024; // totalMemory: the size of current allocation pool
+        double nonAllocated = max - allocated; // non allocated memory till jvm limit
+        double cached = Runtime.getRuntime().freeMemory() / 1024; // freeMemory: the unused memory in allocation pools
+        double used = allocated - cached; // really used memory
+        double useable = max - used; // allocated, but non-used and
+        // non-allocated memory
+        SimpleDateFormat sdf = new SimpleDateFormat("H:mm:ss");
+        DecimalFormat df = new DecimalFormat(" (0.0000' %')");
+        DecimalFormat df2 = new DecimalFormat("   'KB' ");
+
+        SystemUtil.showMsg("Relatorio Gerado as "
+                           + sdf.format(new Date()) + ": \n" + "\n"
+                           + "|========= Memoria Livre =========" + "\n"
+                           + "|    |= Total:" + df2.format(max) + "\n"
+                           + "|    |= Memoria Total:" + df2.format(allocated)
+                           + df.format(allocated / max * 100) + "\n"
+                           + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
+                           + df.format(nonAllocated / max * 100) + "\n" + "\n"
+                           + " =========  Memoria Alocada ========== \n"
+                           + "|    |= Total:" + df2.format(allocated) + "\n"
+                           + "|    |= Memoria Usada:" + df2.format(used)
+                           + df.format(used / max * 100) + "\n"
+                           + "|    |= Memoria Cacheada:" + df2.format(cached)
+                           + df.format(cached / max * 100) + "\n"
+                           + "|    |= Memoria Disponivel:" + df2.format(useable)
+                           + df.format(useable / max * 100));
+    }
 
     /**
      * Checa se um Processo esta em Execução.

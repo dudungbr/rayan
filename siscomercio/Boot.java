@@ -8,7 +8,8 @@ import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
-import com.siscomercio.utilities.WindowsUtils;
+import com.siscomercio.utilities.WindowsUtil;
+import java.util.logging.Logger;
 
 /**
  * $Revision$
@@ -20,17 +21,19 @@ import com.siscomercio.utilities.WindowsUtils;
  */
 public class Boot
 {
+    private static Logger _log = Logger.getLogger(Boot.class.getName());
     /**
      * @param args the command line arguments
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception
     {
+
         //Carrega as Configs
         Config.load();
       
         // Checka  O Processo MySQL esta em Execução.
-        WindowsUtils.checkProcess("mysql");
+        WindowsUtil.checkProcess("mysql");
 
         // Ler a Tabela de Instalacao da DB
         if(!DatabaseManager._installed)
