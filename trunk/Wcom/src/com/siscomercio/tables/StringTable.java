@@ -22,7 +22,7 @@ public class StringTable {
     /**
      * Pasta de Imagens
      */
-    public static String IMAGE_PATH = "./trunk/Wcom/imagens/";
+    public static String IMAGE_PATH = "./images/";
     /**
      * Pasta de Scripts SQL
      */
