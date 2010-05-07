@@ -13,7 +13,9 @@ package com.siscomercio.frames;
 import com.siscomercio.security.Auth;
 
 /**
- *
+ * $Revision$
+ * $Author$
+ * $Date$
  * @author Rayan
  */
 @SuppressWarnings("serial")
@@ -111,14 +113,10 @@ public class LogonFrame extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
-        
     }//GEN-LAST:event_campoSenhaActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         dispose();
-        
-        //if(!FramePrincipal.configDb)
-      //  new Auth().setVisible(true);
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
@@ -128,8 +126,8 @@ public class LogonFrame extends javax.swing.JFrame
         if(Auth.checkMasterKey(campoUsuario.getText(), pass))
         {
             _authed = true;
-             new DatabaseFrame().setVisible(true);
-             dispose();
+            new DatabaseFrame().setVisible(true);
+            dispose();
         }
         /* _reAuth = true;
         String senha = new String(campoSenha.getPassword());
@@ -145,7 +143,7 @@ public class LogonFrame extends javax.swing.JFrame
         {
         Util.showErrorMsg(Auth.LAST_USER + ", voce nao tem privilegios para esta operação.");
         }*/
-       
+
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     /**
@@ -160,6 +158,7 @@ public class LogonFrame extends javax.swing.JFrame
             {
                 new LogonFrame().setVisible(true);
             }
+
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

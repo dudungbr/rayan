@@ -9,12 +9,15 @@ import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
- *
+ * $Revision: 123 $
+ * $Author: rayan_rpg@hotmail.com $
+ * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
  * @author Administrador
  */
 public class PassChangeFrame extends javax.swing.JFrame
 {
     private static final long serialVersionUID = 1L;
+
     /** Creates new form PassChangeFrame */
     public PassChangeFrame()
     {

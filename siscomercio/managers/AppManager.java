@@ -15,8 +15,8 @@ import com.siscomercio.utilities.SystemUtil;
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class AppManager extends JFrame {
-
+public class AppManager extends JFrame
+{
     private Logger _log = Logger.getLogger(AppManager.class.getName());
 
     /**
@@ -29,8 +29,8 @@ public class AppManager extends JFrame {
     }
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder {
-
+    private static class SingletonHolder
+    {
         protected static final AppManager _instance = new AppManager();
     }
 
@@ -40,27 +40,28 @@ public class AppManager extends JFrame {
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_EXIT_SOUND);
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "Encerrar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("solicitacao de shutdown...\n");
 
 
-        if (selectedOption == JOptionPane.OK_OPTION)
+        if(selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.ENABLE_SOUND)
+            if(Config.ENABLE_SOUND)
                 SoundManager.playSound(Config.EXIT_SOUND);
 
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 _log.info("usuario finalizou o sistema.");
 
             //finaliza a aplicacao
             System.exit(0);
-        } else
-            if (Config.DEBUG)
+        }
+        else
+            if(Config.DEBUG)
                 _log.info("usuario desiste de fechar o sistema.\n");
     }
 
@@ -69,8 +70,9 @@ public class AppManager extends JFrame {
      */
     public static void implementar()
     {
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.UNIPLEMENTED_SOUND);
         SystemUtil.showMsg("Funcao Ainda nao Disponivel");
     }
+
 }

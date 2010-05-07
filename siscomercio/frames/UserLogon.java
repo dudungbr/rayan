@@ -18,7 +18,9 @@ import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
- *
+ * $Revision: 123 $
+ * $Author: rayan_rpg@hotmail.com $
+ * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
  * @author Rayan
  */
 @SuppressWarnings("serial")

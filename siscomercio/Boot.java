@@ -8,7 +8,6 @@ import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
-import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
 

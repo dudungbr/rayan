@@ -227,7 +227,7 @@ public class DatabaseFactory
     // Property - Public
     /**
      *
-     * @return
+     * @return  _instance = new DatabaseFactory()
      * @throws SQLException
      */
     public static DatabaseFactory getInstance() throws SQLException
@@ -241,8 +241,8 @@ public class DatabaseFactory
     }
 
     /**
-     *
-     * @return
+     * Inicia A Conexao SQL
+     * @return connection (SQL)
      */
     public Connection getConnection() //throws SQLException
     {

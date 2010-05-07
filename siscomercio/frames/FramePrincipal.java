@@ -38,16 +38,16 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 /**
- *$Revision$
+ * $Revision$
  * $Author$
  * $Date$
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class FramePrincipal extends JFrame {
-
+public class FramePrincipal extends JFrame
+{
     /**
-     *
+     * Looger Desse Arquivo
      */
     private Logger _log = Logger.getLogger(FramePrincipal.class.getName());
     Date date = new Date();
@@ -63,26 +63,26 @@ public class FramePrincipal extends JFrame {
     private void setDesktop(JLabel label)
     {
         _log.info("Carregando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO + "\n");
-        File file = new File(StringTable.IMAGE_PATH+Config.LOGO);
+        File file = new File(StringTable.IMAGE_PATH + Config.LOGO);
 
-        if (file.exists())
+        if(file.exists())
         {
             ImageIcon img = new ImageIcon(file.toString());
-            if (img != null)
+            if(img != null)
                 label.setIcon(img);
             else
-                 SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO+"\n");
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n");
         }
         else
         {
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO +"\n");
+            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n");
         }
     }
 
     /** Creates new form FramePrincipal */
     public FramePrincipal()
     {
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("montando janela principal do aplicativo. \n");
         initComponents();
         disparaRelogio();
@@ -98,12 +98,13 @@ public class FramePrincipal extends JFrame {
      */
     private void setSoundProperties()
     {
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
         {
             SoundManager.playSound(Config.WELCOME_SOUND);
             // Habilita ou Desabilita o Som de Acordo com a Config.
             jCheckBoxMenuItem1.setSelected(true);
-        } else
+        }
+        else
             jCheckBoxMenuItem1.setSelected(false);
     }
 
@@ -112,7 +113,7 @@ public class FramePrincipal extends JFrame {
      */
     private void preenchaFrame()
     {
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             _log.info("preenchendo frame...\n");
         pcLabel.setText(WindowsUtil.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
@@ -128,7 +129,7 @@ public class FramePrincipal extends JFrame {
      */
     private void disparaRelogio()
     {
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             _log.info("inicializando relogio ...\n");
         // Dispara o Relogio
         Timer timer = new Timer(1000, new ClockListener());
@@ -138,9 +139,9 @@ public class FramePrincipal extends JFrame {
     /**
      * Classe de Implementacao do Relogio
      */
-    class ClockListener implements ActionListener {
+    class ClockListener implements ActionListener
+    {
         // generates a simple date format
-
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         // generates String that will get the formater info with values
         String dayInfo = df.format(date);
@@ -152,10 +153,11 @@ public class FramePrincipal extends JFrame {
             dadosRelogio.setText(String.format("%1$tH:%1$tM:%1$tS", now));
             dadosData.setText(dayInfo);
         }
+
     }
 
     /**
-     *
+     * Retorna Apenas 1 Instancia dessa Classe
      * @return AppManager _instance
      */
     public static FramePrincipal getInstance()
@@ -164,8 +166,8 @@ public class FramePrincipal extends JFrame {
     }
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder {
-
+    private static class SingletonHolder
+    {
         protected static final FramePrincipal _instance = new FramePrincipal();
     }
 
@@ -630,20 +632,20 @@ public class FramePrincipal extends JFrame {
 
     private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemReiniciarActionPerformed
     {//GEN-HEADEREND:event_itemReiniciarActionPerformed
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_RESTART_SOUND);
 
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("solicitacao de restart.");
 
         int selectedOption = JOptionPane.showConfirmDialog(null, "Reiniciar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
 
-        if (selectedOption == JOptionPane.OK_OPTION)
+        if(selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.ENABLE_SOUND)
+            if(Config.ENABLE_SOUND)
                 SoundManager.playSound(Config.RESTART_SOUND);
 
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 _log.info("usuario reiniciou o sistema.");
 
             //retorna o Status de Autenticidade.
@@ -652,17 +654,19 @@ public class FramePrincipal extends JFrame {
             //Fecha Janela
             dispose();
 
-            EventQueue.invokeLater(new Runnable() {
-
+            EventQueue.invokeLater(new Runnable()
+            {
                 @Override
                 public void run()
                 {
                     new Auth().setVisible(true);
                 }
+
             });
-        } else
+        }
+        else
         {
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 _log.info("usuario desiste de reiniciar o sistema.");
             return;
         }
@@ -675,7 +679,7 @@ public class FramePrincipal extends JFrame {
 
     private void itemMemoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemMemoriaActionPerformed
     {//GEN-HEADEREND:event_itemMemoriaActionPerformed
-       WindowsUtil.printMemUsage();
+        WindowsUtil.printMemUsage();
     }//GEN-LAST:event_itemMemoriaActionPerformed
 
     private void itemSistemaOperacionalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSistemaOperacionalActionPerformed
@@ -696,26 +700,28 @@ public class FramePrincipal extends JFrame {
 
     private void subMenuDBActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_subMenuDBActionPerformed
     {//GEN-HEADEREND:event_subMenuDBActionPerformed
-        EventQueue.invokeLater(new Runnable() {
-
+        EventQueue.invokeLater(new Runnable()
+        {
             @Override
             public void run()
             {
                 new LogonFrame().setVisible(true);
             }
+
         });
 
     }//GEN-LAST:event_subMenuDBActionPerformed
 
     private void itemRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemRegistroActionPerformed
     {//GEN-HEADEREND:event_itemRegistroActionPerformed
-        EventQueue.invokeLater(new Runnable() {
-
+        EventQueue.invokeLater(new Runnable()
+        {
             @Override
             public void run()
             {
                 new LicenseFrame().setVisible(true);
             }
+
         });
     }//GEN-LAST:event_itemRegistroActionPerformed
 
@@ -729,7 +735,8 @@ public class FramePrincipal extends JFrame {
         try
         {
             SystemUtil.printDbInfo();
-        } catch (SQLException ex)
+        }
+        catch(SQLException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -742,7 +749,7 @@ public class FramePrincipal extends JFrame {
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
     {//GEN-HEADEREND:event_jCheckBoxMenuItem1ActionPerformed
 
-        if (jCheckBoxMenuItem1.isSelected())
+        if(jCheckBoxMenuItem1.isSelected())
             Config.ENABLE_SOUND = true;
         else
             Config.ENABLE_SOUND = false;
@@ -760,13 +767,14 @@ public class FramePrincipal extends JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
     {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
-          EventQueue.invokeLater(new Runnable() {
-
+        EventQueue.invokeLater(new Runnable()
+        {
             @Override
             public void run()
             {
                 new PassChangeFrame().setVisible(true);
             }
+
         });
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -776,15 +784,17 @@ public class FramePrincipal extends JFrame {
      */
     public static void main(String args[])
     {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
             @Override
             public void run()
             {
                 new FramePrincipal().setVisible(true);
             }
+
         });
     }
+
     JLabel lblClock;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraDeMenu;

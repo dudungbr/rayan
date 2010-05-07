@@ -46,8 +46,8 @@ public class ThreadPoolManager
     private boolean _shutdown;
 
     /**
-     *
-     * @return
+     * apenas uma instancia dessa classe
+     * @return SingletonHolder._instance
      */
     public static ThreadPoolManager getInstance()
     {
@@ -133,8 +133,8 @@ public class ThreadPoolManager
     }
 
     /**
-     *
-     * @return
+     * retorna com relatorio dessa Classe
+     * @return uma String com o Relatrio
      */
     public String[] getStats()
     {
@@ -251,7 +251,7 @@ public class ThreadPoolManager
 
     /**
      *
-     * @return
+     * @return _shutdown
      */
     public boolean isShutdown()
     {

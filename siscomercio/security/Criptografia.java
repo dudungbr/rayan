@@ -13,14 +13,14 @@ import com.siscomercio.Config;
  * @author William Menezes
  *
  */
-public class Criptografia {
-
+public class Criptografia
+{
     private static Logger _log = Logger.getLogger(Criptografia.class.getName());
 
     /**
-     *
+     * Criptografa a Senha do Usuario P/ Versao MD5 de Criptografia
      * @param password
-     * @return
+     * @return password
      */
     public static String criptografe(String password)
     {
@@ -33,23 +33,26 @@ public class Criptografia {
             byte messageDigest[] = algorithm.digest();
 
             StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
+            for(int i = 0;i < messageDigest.length;i++)
             {
                 hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
             }
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 _log.info("Criptografando Senha:  " + password + " P / Versao  MD5 : " + hexString.toString() + "\n");
             password = hexString + "";
-        } catch (NoSuchAlgorithmException nsae)
+        }
+        catch(NoSuchAlgorithmException nsae)
         {
             try
             {
                 throw nsae;
-            } catch (NoSuchAlgorithmException ex)
+            }
+            catch(NoSuchAlgorithmException ex)
             {
                 Logger.getLogger(Criptografia.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return password;
     }
+
 }

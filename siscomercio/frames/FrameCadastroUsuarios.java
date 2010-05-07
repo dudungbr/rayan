@@ -22,6 +22,7 @@ import com.siscomercio.managers.DatabaseManager;
 public class FrameCadastroUsuarios extends JFrame
 {
     private static final long serialVersionUID = 1L;
+
     /** Creates new form FrameCadastroUsuarios */
     public FrameCadastroUsuarios()
     {
@@ -144,7 +145,7 @@ public class FrameCadastroUsuarios extends JFrame
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
     {//GEN-HEADEREND:event_jButton3ActionPerformed
-     dispose();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
@@ -158,7 +159,7 @@ public class FrameCadastroUsuarios extends JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-       DatabaseManager.insertUser(campoLogin.getText(),String.valueOf(campoSenha.getPassword()));
+        DatabaseManager.insertUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -176,6 +177,7 @@ public class FrameCadastroUsuarios extends JFrame
 
         });
     }
+
     private void resetCampos()
     {
         campoNome.setText("");

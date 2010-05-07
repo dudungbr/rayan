@@ -47,8 +47,8 @@ public class DatabaseFrame extends JFrame
     }
 
     /**
-     *
-     * @return
+     * retorna apenas uma instancia dessa classe.
+     * @return SingletonHolder._instance
      */
     public static DatabaseFrame getInstance()
     {

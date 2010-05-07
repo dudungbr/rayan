@@ -30,12 +30,13 @@ import javolution.util.FastList;
 public class WindowsUtil
 {
     private static Logger _log = Logger.getLogger(WindowsUtil.class.getName());
+
     /**
      * Lista todos os arquivos de um diretorio
      *
      * @param path
      * @param extension
-     * @return
+     * @return o nome de todos os arquivos da pasta e extensao especificada
      */
     public static String listDirFiles(String path, final String extension)
     {
@@ -44,8 +45,8 @@ public class WindowsUtil
 
         for(File f : pasta.listFiles())
         {
-            if(f!=null && f.getName().endsWith(extension))
-            arquivos.add(f.getName());
+            if(f != null && f.getName().endsWith(extension))
+                arquivos.add(f.getName());
         }
         return arquivos.toString();
     }
@@ -67,10 +68,10 @@ public class WindowsUtil
             //condição para pegar só os arquivos, e nao diretórios
             if(arq.isFile() && arq.getName().endsWith(extension))
             {
-                if(arq!=null)
-                arquivos.add(arq);
+                if(arq != null)
+                    arquivos.add(arq);
                 // System.out.println("Arquivo " +
-               // ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
+                // ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
@@ -168,7 +169,7 @@ public class WindowsUtil
 
     /**
      * Nome do Suporte Técnico
-     * @return
+     * @return "Contacte o Suporte Técnico."
      */
     private static String getSuport()
     {
@@ -177,21 +178,20 @@ public class WindowsUtil
 
     /**
      * Pega um processo
-     * @param s
-     * @return
+     * @param pName
+     * @return  pName
      */
-    private static String getProcess(String s)
+    private static String getProcess(String pName)
     {
-        String value;
-        if(s.startsWith("mysql"))
+        if(pName.startsWith("mysql"))
         {
-            value = "mysqld.exe\n" + "mysqld-nt.exe\n";
-            s = value;
+           pName = "mysqld.exe\n" + "mysqld-nt.exe\n";
+           
         }
         else
             throw new UnsupportedOperationException("valor nao suportado");
 
-        return s;
+        return pName;
     }
 
     /**

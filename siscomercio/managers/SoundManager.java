@@ -21,7 +21,7 @@ public class SoundManager
     private static Logger _log = Logger.getLogger(SoundManager.class.getName());
 
     /**
-     * 
+     * Toca um Som em Formato WAV
      * @param soundName
      */
     public static void playSound(String soundName)
