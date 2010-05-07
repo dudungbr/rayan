@@ -178,7 +178,7 @@ public class DatabaseFrame extends JFrame
         if(!Config._loaded)
             Config.load();
 
-        DatabaseManager.deleTeBanco();
+        DatabaseManager.dropDatabase();
         dbStatusLabel.setText(DatabaseManager.getConnectionStatus());
         if(!DatabaseManager._installed)
         {

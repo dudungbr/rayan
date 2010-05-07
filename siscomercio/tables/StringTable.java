@@ -4,6 +4,8 @@
  */
 package com.siscomercio.tables;
 
+import com.siscomercio.Config;
+
 /**
  * $Revision$
  * $Author$
@@ -27,6 +29,11 @@ public class StringTable {
      * Pasta de Scripts SQL
      */
     public static String SQL_PATH = "./sql/";
+    
+    /**
+     * Dropa a Database Atual
+     */
+    public static String DELETE_DB ="DROP DATABASE "+ Config.DATABASE;
     /**
      * pega o nivel de acesso do usuario na DB
      */
