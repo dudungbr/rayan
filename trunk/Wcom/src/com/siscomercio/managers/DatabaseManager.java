@@ -17,7 +17,6 @@ import com.siscomercio.security.Criptografia;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
-import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
 
 /**
@@ -44,66 +43,78 @@ public class DatabaseManager
     public static boolean _installed;
 
     /**
-     * Executa os SQL Scripts dentro da pasta sql
-     * FIXME: modificar para ler todos os scrips sozinho.
-     * @param filename
+     *  ler eExecuta todos os  Scripts SQL dentro da pasta SQL
+     *
      */
-    public static void executeDBScripts(String filename)
+    public static void readAndExecuteDatabaseScripts()
     {
-        Connection con = null;
-        if(Config.DEBUG)
-            _log.info("DatabaseManager: executando script " + filename + " \n");
-
-        String thisLine, sqlQuery = null;
-        try
+        File pasta = new File(StringTable.SQL_PATH);
+        for(File f : pasta.listFiles())
         {
-            con = DatabaseFactory.getInstance().getConnection();
-            BufferedReader d = new BufferedReader(new FileReader(StringTable.SQL_PATH + filename));
-            sqlQuery = "";
-            Statement st = null;
-            
-           
-            //Now read line by line
-            while((thisLine = d.readLine()) != null)
+            if(f != null && f.getName().endsWith(".sql"))
             {
-                //Skip comments <strong class="highlight">and</strong> empty lines
-                if(thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
-                    continue;
-
-                sqlQuery = sqlQuery + " " + thisLine;
-
-                //If one command complete
-                if(sqlQuery.charAt(sqlQuery.length() - 1) == ';')
+                try
                 {
-                    sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc complains
-                    try
-                    {
-                        st = con.createStatement();
-                        st.execute(sqlQuery);
 
-                    }
-                    catch(SQLException ex)
-                    {
-                        SystemUtil.showErrorMsg("Erro" + ex);
-                    }
+                    Connection con = null;
+                    if(Config.DEBUG)
+                        _log.info("DatabaseManager: executando script " + f.getName() + " \n");
+                    String thisLine, sqlQuery = null;
 
+                    con = DatabaseFactory.getInstance().getConnection();
+                    BufferedReader d = new BufferedReader(new FileReader(StringTable.SQL_PATH + f.getName()));
                     sqlQuery = "";
+                    Statement st = null;
+
+
+                    //Now read line by line
+                    while((thisLine = d.readLine()) != null)
+                    {
+                        //Skip comments <strong class="highlight">and</strong> empty lines
+                        if(thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
+                            continue;
+
+                        sqlQuery = sqlQuery + " " + thisLine;
+
+                        //If one command complete
+                        if(sqlQuery.charAt(sqlQuery.length() - 1) == ';')
+                        {
+                            sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc complains
+                            try
+                            {
+                                st = con.createStatement();
+                                st.execute(sqlQuery);
+
+                            }
+                            catch(SQLException ex)
+                            {
+                                SystemUtil.showErrorMsg("Erro" + ex);
+                            }
+
+                            sqlQuery = "";
+                        }
+
+                    }
+                    closeConnections(st, con);
+
+
+                }
+                catch(Exception e)
+                {
+                    SystemUtil.showErrorMsg("Falha ao Executar Script SQL:  " + f.getName() + " Erro:  " + e.getMessage());
                 }
             }
-            closeConnections(st, con);
-        }
-        catch(Exception e)
-        {
-            SystemUtil.showErrorMsg("Falha ao Executar Script SQL:  " + filename + " Erro:  " + e.getMessage());
         }
     }
 
     /**
      * Executa uma query
      * @param query
+     * @return
      */
-    public static void executeQuery(String query)
+    public static boolean executeQuery(String query)
     {
+        boolean result = false;
         Connection con = null;
         if(Config.DEBUG)
             _log.info("Executando Query: " + query + "\n");
@@ -113,12 +124,14 @@ public class DatabaseManager
             Statement st = con.createStatement();
             st.execute(query);
             closeConnections(st, con);
+            result = true;
         }
         catch(SQLException e)
         {
             SystemUtil.showErrorMsg("" + e);
-
+            result = false;
         }
+        return result;
     }
 
     /**
@@ -153,11 +166,8 @@ public class DatabaseManager
         if(Config.DEBUG)
             _log.info("tentando Instalar Database...");
         createNewDatabase();
-        executeDBScripts("users.sql");
-        executeDBScripts("install.sql");
-        executeDBScripts("auditoria.sql");
+        readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
-        setConStatus(StringTable.STATUS_CONNECTED);
         _installed = true;
         SystemUtil.showMsg("banco instalado com sucesso!");
     }
@@ -165,12 +175,11 @@ public class DatabaseManager
     /**
      * Deleta a Database Atual
      */
-    public static void deleTeBanco()
+    public static void dropDatabase()
     {
-        executeDBScripts("drop.sql");
+        executeQuery(StringTable.DELETE_DB);
         SystemUtil.showMsg("Banco de Dados Deletado!");
         _installed = false;
-        setConStatus(StringTable.STATUS_DISCONNECTED);
         isDbDeleted = true;
     }
 
@@ -231,6 +240,7 @@ public class DatabaseManager
             ps.close();
             rset.close();
             con.close();
+            setConStatus(StringTable.STATUS_DISCONNECTED);
         }
         catch(SQLException ex)
         {
@@ -252,6 +262,7 @@ public class DatabaseManager
         {
             s.close();
             con.close();
+            setConStatus(StringTable.STATUS_DISCONNECTED);
         }
         catch(SQLException ex)
         {

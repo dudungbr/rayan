@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 import com.siscomercio.Config;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javolution.util.FastList;
 
 /**
  *$Revision$
@@ -30,31 +30,24 @@ import java.util.Date;
 public class WindowsUtil
 {
     private static Logger _log = Logger.getLogger(WindowsUtil.class.getName());
-
-    /**
-     * File file = new File(diretorio);
-    File afile[] = file.listFiles();
-    int i = 0;
-    for (int j = afile.length; i < j; i++) {
-    File arquivos = afile[i];
-    System.out.println(arquivos.getName());
-     */
     /**
      * Lista todos os arquivos de um diretorio
      *
      * @param path
      * @param extension
+     * @return
      */
-    public static void listDirFiles(String path, final String extension)
+    public static String listDirFiles(String path, final String extension)
     {
-        File file = new File(path);
-        File afile[] = file.listFiles();
-        int i = 0;
-        for(int j = afile.length;i < j;i++)
+        File pasta = new File(path);
+        List<String> arquivos = new FastList<String>();
+
+        for(File f : pasta.listFiles())
         {
-            File arquivos = afile[i];
-            _log.info(arquivos.getName() + "\n");
+            if(f!=null && f.getName().endsWith(extension))
+            arquivos.add(f.getName());
         }
+        return arquivos.toString();
     }
 
     /**
@@ -66,23 +59,25 @@ public class WindowsUtil
      */
     public static int countFiles(String path, final String extension)
     {
-        File dir = new File(path);//   aqui vc coloca o seu diretório
-        int i = 0;
+        File pasta = new File(path);//  diretório
+        List<File> arquivos = new FastList<File>(); // lista de arquivos a ser criada
 
-        for(File arq : dir.listFiles())
+        for(File arq : pasta.listFiles())
         {
             //condição para pegar só os arquivos, e nao diretórios
             if(arq.isFile() && arq.getName().endsWith(extension))
             {
+                if(arq!=null)
+                arquivos.add(arq);
                 // System.out.println("Arquivo " +
-                ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
+               // ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
         if(Config.DEBUG)
-            _log.info("Contando Arquivos do Diretorio SQL, Total: " + i + " Arquivos. \n");
+            _log.info("Contando Arquivos do Diretorio SQL, Total: " + arquivos.size() + " Arquivos. \n");
 
-        return i;
+        return arquivos.size();
     }
 
     /**

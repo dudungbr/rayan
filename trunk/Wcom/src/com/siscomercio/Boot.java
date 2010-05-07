@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
+import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class Boot
         // Ler a Tabela de Instalacao da DB
         if(!DatabaseManager._installed)
         DatabaseManager.readInstallTable();
-
+        
         // Chama a Tela de Login
         if(Config.DEBUG)
             EventQueue.invokeLater(new Runnable()
