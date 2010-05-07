@@ -28,11 +28,11 @@ public class UserTable
     {
         return SingletonHolder._instance;
     }
+
     private static Logger _log = Logger.getLogger(UserTable.class.getName());
 
     private UserTable()
     {
-      
     }
 
     @SuppressWarnings("synthetic-access")
@@ -75,7 +75,7 @@ public class UserTable
 
     /**
      *
-     * @return
+     * @return _id
      */
     public int getId()
     {
@@ -93,7 +93,7 @@ public class UserTable
 
     /**
      *
-     * @return
+     * @return _login
      */
     public String getUser()
     {
@@ -106,14 +106,14 @@ public class UserTable
      */
     public void setLastUser(String usr)
     {
-        _log.info("setando ultimo usuario como " + usr +"\n");
+        _log.info("setando ultimo usuario como " + usr + "\n");
         _lastLogin = usr;
 
     }
 
     /**
      * 
-     * @return
+     * @return _lastLogin
      */
     public String getLastUser()
     {
@@ -122,7 +122,7 @@ public class UserTable
 
     /**
      *
-     * @return
+     * @return _senha
      */
     public String getPassword()
     {

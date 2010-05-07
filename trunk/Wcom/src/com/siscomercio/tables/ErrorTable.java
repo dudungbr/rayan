@@ -12,12 +12,10 @@ package com.siscomercio.tables;
  */
 public class ErrorTable
 {
-    
     /**
      *
      */
     public static String MYSQL_PROCESS_ERROR = "0x001";
-
 
     /**
      *
@@ -40,4 +38,5 @@ public class ErrorTable
         }
         return msg;
     }
+
 }

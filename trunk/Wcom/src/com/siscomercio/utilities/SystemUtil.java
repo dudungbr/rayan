@@ -1,11 +1,6 @@
 package com.siscomercio.utilities;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
@@ -103,6 +98,7 @@ public class SystemUtil
                 + "Version: " + System.getProperty("java.version") + "\n"
                 + "Java Class Version: " + System.getProperty("java.class.version") + "\n");
     }
+
     /**
      * Converte segundos em milisegundos
      *
@@ -187,4 +183,5 @@ public class SystemUtil
             _log.info("enviando janela de mensagem de erro... \n");
         JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
     }
+
 }

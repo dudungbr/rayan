@@ -1,6 +1,5 @@
 package com.siscomercio.network;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,8 +32,7 @@ public class Client
         {
             kkSocket = new Socket("localhost", Config.CLIENT_PORT);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(kkSocket.
-                    getInputStream()));
+            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
             System.err.println("conectado");
         }
         catch(UnknownHostException e)
@@ -54,18 +52,18 @@ public class Client
         String fromServer;
         String fromUser;
 
-        while((fromServer = in.readLine())!=null)
+        while((fromServer = in.readLine()) != null)
         {
-            System.out.println("Server: "+fromServer);
+            System.out.println("Server: " + fromServer);
             if(fromServer.equals("Bye."))
             {
                 break;
             }
 
             fromUser = stdIn.readLine();
-            if(fromUser!=null)
+            if(fromUser != null)
             {
-                System.out.println("Client: "+fromUser);
+                System.out.println("Client: " + fromUser);
                 out.println(fromUser);
             }
         }
@@ -75,4 +73,5 @@ public class Client
         stdIn.close();
         kkSocket.close();
     }
+
 }

@@ -12,8 +12,8 @@ public class NetworkThread extends Thread
 
     /**
      *$Revision$
- * $Author$
- * $Date$
+     * $Author$
+     * $Date$
      * @param socket
      */
     public NetworkThread(Socket socket)
@@ -37,4 +37,5 @@ public class NetworkThread extends Thread
             e.printStackTrace();
         }
     }
+
 }

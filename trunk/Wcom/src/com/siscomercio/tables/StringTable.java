@@ -15,8 +15,8 @@ import com.siscomercio.Config;
  * Comandos SQL
  * executeQuery apenas para select os outros use o executeUpdate.
  */
-public class StringTable {
-
+public class StringTable
+{
     /**
      * Pasta de Sons
      */
@@ -29,11 +29,10 @@ public class StringTable {
      * Pasta de Scripts SQL
      */
     public static String SQL_PATH = "./sql/";
-    
     /**
      * Dropa a Database Atual
      */
-    public static String DELETE_DB ="DROP DATABASE "+ Config.DATABASE;
+    public static String DELETE_DB = "DROP DATABASE " + Config.DATABASE;
     /**
      * pega o nivel de acesso do usuario na DB
      */
@@ -84,11 +83,11 @@ public class StringTable {
     public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS wcom";
     // *************************** Status da Database **********************/
     /**                                          
-     *
+     * Status da Database
      */
     public static final String STATUS_CONNECTED = "Conectado";
     /**
-     *
+     * Status da Database
      */
     public static final String STATUS_DISCONNECTED = "Desconectado";
 }

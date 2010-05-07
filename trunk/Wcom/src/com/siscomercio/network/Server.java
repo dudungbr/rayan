@@ -12,8 +12,8 @@ public class Server
 {
     /**
      *$Revision$
- * $Author$
- * $Date$
+     * $Author$
+     * $Date$
      * @param args
      * @throws IOException
      */
@@ -29,7 +29,7 @@ public class Server
         }
         catch(IOException e)
         {
-            System.err.println("Could not listen on port: "+Config.SERVER_PORT);
+            System.err.println("Could not listen on port: " + Config.SERVER_PORT);
             System.exit(-1);
         }
 
@@ -40,4 +40,5 @@ public class Server
 
         serverSocket.close();
     }
+
 }

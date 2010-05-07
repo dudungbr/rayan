@@ -49,8 +49,8 @@ public class Auth extends JFrame {
     }
 
     /**
-     * 
-     * @return
+     * Apenas uma Instancia dessa Classe
+     * @return SingletonHolder._instance
      */
     public static Auth getInstance()
     {
@@ -331,33 +331,26 @@ public class Auth extends JFrame {
         }
     }
 
-    /**
-     *
-     * @return
-     */
-    public int getAcessLevel()
-    {
-        return _accessLevel;
-    }
+ 
 
     /**
      * Checa a Masterkey
      *
      * @param user
      * @param pass
-     * @return
+     * @return result
      */
     public static boolean checkMasterKey(String user, String pass)
     {
-        boolean ok = false;
+        boolean result = false;
         _log.info("checando senha mestre \n");
         if (user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
-            ok = true;
+            result = true;
         else
         {
             SystemUtil.showErrorMsg("usuario invalido.");
-            ok = false;
+           result = false;
         }
-        return ok;
+        return result;
     }
 }

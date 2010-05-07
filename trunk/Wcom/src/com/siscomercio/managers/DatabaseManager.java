@@ -110,7 +110,7 @@ public class DatabaseManager
     /**
      * Executa uma query
      * @param query
-     * @return
+     * @return o resultado dessa query como boolean
      */
     public static boolean executeQuery(String query)
     {
@@ -438,7 +438,7 @@ public class DatabaseManager
     /**
      * Checa o Nivel e Acesso do Usuario
      * @param usr
-     * @return
+     * @return o nivel de acesso desse usuario
      */
     public static int getAccessLevel(String usr)
     {
