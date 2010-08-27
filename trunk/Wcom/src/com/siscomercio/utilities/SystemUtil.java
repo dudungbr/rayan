@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import com.siscomercio.Config;
 import com.siscomercio.DatabaseFactory;
 import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.managers.SoundManager;
 
 /**
  * $Revision$
@@ -181,6 +182,7 @@ public class SystemUtil
     {
         if(Config.DEBUG)
             _log.info("enviando janela de mensagem de erro... \n");
+        SoundManager.playSound("error.wav");
         JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
