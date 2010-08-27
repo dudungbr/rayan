@@ -156,6 +156,7 @@ public class Config
      *  senha mestre
      */
     public static String MASTER_KEY = "sysdba";
+    static boolean DEVELOPER = true;
 
     /**
      * Carrega Todas as Propriedades do config.properties

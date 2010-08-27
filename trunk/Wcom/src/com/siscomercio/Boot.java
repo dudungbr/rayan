@@ -33,6 +33,7 @@ public class Boot
         Config.load();
       
         // Checka  O Processo MySQL esta em Execução.
+        if(!Config.DEVELOPER)
         WindowsUtil.checkProcess("mysql");
 
         // Ler a Tabela de Instalacao da DB
