@@ -5,12 +5,22 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class MotherBoardInfo {
+/**
+ * 
+ * @author Rayan
+ */
+public class MotherBoardInfo
+{
 
     private MotherBoardInfo() {
     }
 
-    public static String getMotherboardSN() {
+    /**
+     * 
+     * @return
+     */
+    public static String getMotherboardSN()
+    {
         String result = "";
         try {
             File file = File.createTempFile("realhowto", ".vbs");
@@ -42,7 +52,12 @@ public class MotherBoardInfo {
         return result.trim();
     }
 
-    public static void main(String[] args) {
+    /**
+     * 
+     * @param args
+     */
+    public static void main(String[] args)
+    {
         String cpuId = MotherBoardInfo.getMotherboardSN();
         javax.swing.JOptionPane.showConfirmDialog((java.awt.Component) null, cpuId, "Motherboard serial number",
                 javax.swing.JOptionPane.DEFAULT_OPTION);

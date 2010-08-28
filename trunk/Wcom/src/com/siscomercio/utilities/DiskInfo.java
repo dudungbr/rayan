@@ -4,13 +4,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
 
-public class DiskInfo {
-
+/**
+ *
+ * @author Rayan
+ */
+public class DiskInfo
+{
+ private static Logger _log = Logger.getLogger(DiskInfo.class.getName());
     private DiskInfo() {
     }
 
-    public static String getSerialNumber(String drive) {
+    /**
+     * 
+     * @param drive
+     * @return
+     */
+    public static String getSerialNumber(String drive)
+    {
         String result = "";
         try {
             File file = File.createTempFile("realhowto", ".vbs");
@@ -37,7 +49,12 @@ public class DiskInfo {
         return result.trim();
     }
 
-    public static void main(String[] args) {
+    /**
+     * 
+     * @param args
+     */
+    public static void main(String[] args)
+    {
         String sn = DiskInfo.getSerialNumber("C");
         javax.swing.JOptionPane.showConfirmDialog((java.awt.Component) null, sn, "Serial Number of C:",
                 javax.swing.JOptionPane.DEFAULT_OPTION);
