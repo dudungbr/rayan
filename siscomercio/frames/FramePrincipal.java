@@ -46,6 +46,7 @@ import javax.swing.SwingConstants;
 @SuppressWarnings("serial")
 public class FramePrincipal extends JFrame
 {
+
     /**
      * Looger Desse Arquivo
      */
@@ -55,6 +56,8 @@ public class FramePrincipal extends JFrame
      * if this frame was created of not.
      */
     public static boolean created;
+
+
 
     /**
      * seta  a Desktop do Label
@@ -82,6 +85,8 @@ public class FramePrincipal extends JFrame
     /** Creates new form FramePrincipal */
     public FramePrincipal()
     {
+        if(!Config._loaded)
+        Config.load();
         if(Config.DEBUG)
             _log.info("montando janela principal do aplicativo. \n");
         initComponents();

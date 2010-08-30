@@ -18,12 +18,13 @@ public class Serializer
     static String mac = NetworkInfo.getMac();
     static StringBuffer dados = new StringBuffer(mac + serialHD + serialMB);
     static String code ="";
+    public static boolean generated = false;
 
     /**
      * Captura Seriais HD / Placa de Rede e Mobo
      * @return
      */
-    public static String gereCodigoAtivacao()
+    public static String generateActivationCode()
     {
         int cont = 0;
         String remover = "-";
@@ -98,7 +99,9 @@ public class Serializer
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
         _log.info("Codigo de Ativação: " + code);
+         generated = true;
         return code;
+
     }
     public static String getGeneratedCode()
     {
@@ -109,7 +112,7 @@ public class Serializer
     }
      public static void main(String args[])
     {
-           gereCodigoAtivacao();
+           generateActivationCode();
      }
 }
 

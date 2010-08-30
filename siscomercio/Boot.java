@@ -35,7 +35,7 @@ public class Boot
 
         if(!isRegistrado)
         {
-            Serializer.gereCodigoAtivacao();
+            Serializer.generateActivationCode();
             EventQueue.invokeLater(new Runnable()
             {
                 @Override

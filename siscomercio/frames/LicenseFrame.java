@@ -257,8 +257,10 @@ public class LicenseFrame extends JFrame
         //Seta o Valor 1 no Contador de estacoes
         spinnerContadorEstacoes.getModel().setValue(1);
 
+        if(!Serializer.generated)
+            Serializer.generateActivationCode();
         //imprime no frame o codigo gerado pelos seriais
-        labelCodigoAtivacao.setText(Serializer.getGeneratedCode());
+        labelCodigoAtivacao.setText("<html><font color = blue>"+Serializer.getGeneratedCode()+"</font></html>");
     }
 
     /**
