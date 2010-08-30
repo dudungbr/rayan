@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
+import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
 
@@ -29,6 +30,8 @@ public class Boot
     public static void main(String[] args) throws Exception
     {
 
+      // new Serializer();
+
         //Carrega as Configs
         Config.load();
       
@@ -36,7 +39,7 @@ public class Boot
         if(!Config.DEVELOPER)
         WindowsUtil.checkProcess("mysql");
 
-        // Ler a Tabela de Instalacao da DB
+        // Lê a Tabela de Instalacao da DB
         if(!DatabaseManager._installed)
         DatabaseManager.readInstallTable();
         
