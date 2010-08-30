@@ -4,13 +4,13 @@
  */
 
 /*
- * LicenseFrame.java
  *
  * Created on 02/04/2010, 20:10:29
  */
 package com.siscomercio.frames;
 
 import com.siscomercio.security.Serializer;
+import com.siscomercio.utilities.SystemUtil;
 import javax.swing.JFrame;
 
 /**
@@ -25,8 +25,52 @@ public class LicenseFrame extends JFrame
     /** Creates new form LicenseFrame */
     public LicenseFrame()
     {
-         initComponents();
-         preencha();
+        initComponents();
+        preencha();
+    }
+
+    private void resetCampos()
+    {
+        campoEmpresa.setText("");
+        campoSerial.setText("");
+    }
+
+    private void coleteDados()
+    {
+        //Captura o Nome da Empresa
+        String nomeEmpresa = campoEmpresa.getText();
+        if(nomeEmpresa.isEmpty())
+        {
+            SystemUtil.showErrorMsg("Por Favor Digite o Nome da Empresa.");
+           return;
+
+        }
+        //Captura o Texto do Label
+        String codAtivacao = labelCodigoAtivacao.getText();
+        if(codAtivacao.isEmpty())
+        {
+            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.");
+             resetCampos();
+            return;
+        }
+
+        
+        Object numEstacoes = spinnerContadorEstacoes.getModel().getValue();
+
+        if(Integer.parseInt(numEstacoes.toString()) <= 0)
+        {
+            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.");
+             resetCampos();
+             return;
+        }
+        //Captura o Texto do cmpoSerial
+        String serial = campoSerial.getText();
+        if(serial.isEmpty())
+        {
+            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.");
+             resetCampos();
+              return;
+        }
     }
 
     /** This method is called from within the constructor to
@@ -43,78 +87,139 @@ public class LicenseFrame extends JFrame
 
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        campoEmpresa = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         labelCodigoAtivacao = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        botaoRegistrar = new javax.swing.JButton();
+        dropDownTipoLicenca = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerContadorEstacoes = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        labelValidade = new javax.swing.JLabel();
+        campoSerial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel7.setText("Código de Ativação:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        campoEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                campoEmpresaActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 260, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel3.setText("Empresa :");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel4.setText("Validade:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-        jPanel2.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 260, -1));
+        labelCodigoAtivacao.setText("              dadosDaAtivacao");
 
-        labelCodigoAtivacao.setText("              dadosa");
-        jPanel2.add(labelCodigoAtivacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 250, 20));
+        botaoRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoRegistrar.setText("Registrar Sistema");
+        botaoRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRegistrarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jButton1.setText("Registrar Sistema");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 180, -1));
-        getRootPane().setDefaultButton(jButton1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 80, -1));
+        dropDownTipoLicenca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mensal", "Semestral", "Anual" }));
+        dropDownTipoLicenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropDownTipoLicencaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel5.setText("Tipo de Licenca:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel6.setText("Nº Estações:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 80, 20));
-        jPanel2.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 39, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Numero de Série:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 23));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, 44));
 
-        labelValidade.setText("    dadosv");
-        jPanel2.add(labelValidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 160, 20));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3)
+                        .addGap(68, 68, 68)
+                        .addComponent(campoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(labelCodigoAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel5)))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dropDownTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinnerContadorEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(140, Short.MAX_VALUE)
+                .addComponent(botaoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(campoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(labelCodigoAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerContadorEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dropDownTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botaoRegistrar)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        getRootPane().setDefaultButton(botaoRegistrar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,22 +229,36 @@ public class LicenseFrame extends JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-450)/2, (screenSize.height-476)/2, 450, 476);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField2ActionPerformed
-    {//GEN-HEADEREND:event_jTextField2ActionPerformed
+    private void campoEmpresaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_campoEmpresaActionPerformed
+    {//GEN-HEADEREND:event_campoEmpresaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-    public void preencha()
+    }//GEN-LAST:event_campoEmpresaActionPerformed
+
+    private void dropDownTipoLicencaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_dropDownTipoLicencaActionPerformed
+    {//GEN-HEADEREND:event_dropDownTipoLicencaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropDownTipoLicencaActionPerformed
+
+    private void botaoRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoRegistrarActionPerformed
+    {//GEN-HEADEREND:event_botaoRegistrarActionPerformed
+       coleteDados();
+    }//GEN-LAST:event_botaoRegistrarActionPerformed
+    private void preencha()
     {
-      
-       labelCodigoAtivacao.setText(Serializer.getGeneratedCode());
-        
+        //Seta o Valor 1 no Contador de estacoes
+        spinnerContadorEstacoes.getModel().setValue(1);
+
+        //imprime no frame o codigo gerado pelos seriais
+        labelCodigoAtivacao.setText(Serializer.getGeneratedCode());
     }
 
     /**
@@ -152,28 +271,26 @@ public class LicenseFrame extends JFrame
             @Override
             public void run()
             {
-
                 new LicenseFrame().setVisible(true);
+
             }
 
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JButton botaoRegistrar;
+    private javax.swing.JTextField campoEmpresa;
+    private javax.swing.JTextField campoSerial;
+    private javax.swing.JComboBox dropDownTipoLicenca;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel labelCodigoAtivacao;
-    private javax.swing.JLabel labelValidade;
+    private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
 }
