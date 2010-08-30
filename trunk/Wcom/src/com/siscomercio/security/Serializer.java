@@ -13,18 +13,21 @@ import java.util.logging.Logger;
 public class Serializer
 {
     private static Logger _log = Logger.getLogger(Serializer.class.getName());
-    String serialHD = DiskInfo.getSerialNumber("c");
-    String serialMB = MotherBoardInfo.getMotherboardSN();
-    String mac = NetworkInfo.getMac();
-    StringBuffer dados = new StringBuffer(mac + serialHD + serialMB);
+    static String serialHD = DiskInfo.getSerialNumber("c");
+    static String serialMB = MotherBoardInfo.getMotherboardSN();
+    static String mac = NetworkInfo.getMac();
+    static StringBuffer dados = new StringBuffer(mac + serialHD + serialMB);
+    static String code ="";
 
     /**
      * Captura Seriais HD / Placa de Rede e Mobo
+     * @return
      */
-    public void gereCodigoAtivacao()
+    public static String gereCodigoAtivacao()
     {
         int cont = 0;
         String remover = "-";
+
         // Remove os "-" dos Numeros.
         //-------------------------------
         for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
@@ -49,7 +52,7 @@ public class Serializer
             if(dados.length() > 30)
             {
                 if(Config.DEBUG)
-                _log.info("deletando caracteres adicionais");
+                    _log.info("deletando caracteres adicionais");
                 dados.deleteCharAt(dados.length() - 1); // deleta os ultimos caracteres.
             }
         }
@@ -92,33 +95,22 @@ public class Serializer
                 if(Config.DEBUG)
                     _log.info(p5);
             }
-
-
-            //String com = dados.concat(str2);
-            //     x.concat("-");
-            // _log.info("concatenando apos o  caractere: " + x + " por - ");
-            //dados.setCharAt(i,'-'); // troca o caractere da posição "i" por '-'
-            //  _log.info("subistituindo o caractere: " + x + " por - ");
         }
-        String code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
+        code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
         _log.info("Codigo de Ativação: " + code);
-
+        return code;
     }
-
-    public Serializer()
+    public static String getGeneratedCode()
     {
-        gereCodigoAtivacao();
-    }
+        if(code.isEmpty())
+            return "nao foi posivel gerar o codigo";
 
-    public static void main(String[] args) throws Exception
+        return code;
+    }
+     public static void main(String args[])
     {
-        new Serializer();
-    }
-
-    public void checkDisk()
-    {
-    }
-
+           gereCodigoAtivacao();
+     }
 }
 
 
