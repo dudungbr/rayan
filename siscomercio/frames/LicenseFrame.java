@@ -11,6 +11,9 @@ package com.siscomercio.frames;
 
 import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JFrame;
 
 /**
@@ -35,6 +38,87 @@ public class LicenseFrame extends JFrame
         campoSerial.setText("");
     }
 
+    private void verifiqueSerial()
+    {
+        //Retorna o Tipo de Licenca Selecionado
+        // ------------------------------------
+        String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
+        System.out.println("tipo de licenca:" + tipoLicenca);
+
+        //Pega o Valor dao Campo Serial
+        // ------------------------------------
+        String valorCampoSerial = campoSerial.getText();
+        System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
+
+
+        // Remove os "-" da String
+        //-------------------------------
+        StringBuffer dados = new StringBuffer(labelCodigoAtivacao.getText());
+        String remover = "-";
+
+        for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
+        {
+            String res = dados.substring(i, (i + remover.length()));
+            if(res.equals(remover))
+            {
+                System.out.println("removendo - do serial");
+                int pos = dados.indexOf(remover);
+                dados.delete(pos, pos + remover.length());
+            }
+        }
+        System.out.println("valor variavel dados: " + dados.toString());
+        //--------------------------------------------
+
+        // Encripta a Variavel Dados
+        //----------------------------------------
+        String validSerial = encryptSerial(dados.toString());
+        System.out.println("serial valido: " + validSerial);
+
+        if(valorCampoSerial.equalsIgnoreCase(validSerial))
+        {
+            SystemUtil.showMsg("Obrigado por Registrar o Sistema! Reinicie o Sistema Para Total Acesso.");
+        }
+        else
+        {
+            SystemUtil.showErrorMsg("O Serial Digitado Nao é Valido.");
+        }
+    }
+
+    public static String encryptSerial(String st)
+    {
+        try
+        {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            digest.update(st.getBytes());
+            BigInteger hash = new BigInteger(1, digest.digest());
+            StringBuffer serial = new StringBuffer(hash.toString());
+
+            // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
+            //-------------------------------
+            for(int i = 0;i < serial.length();i++)
+            {
+                if(serial.length() > 30)
+                {
+                    serial.deleteCharAt(serial.length() - 1); // deleta os ultimos caracteres.
+                }
+            }
+            return serial.toString();
+
+        }
+        catch(NoSuchAlgorithmException ns)
+        {
+            ns.printStackTrace();
+            return st;
+        }
+    }
+
+    public static String createEncriptedString(String licenceType, String str)
+    {
+        String tmp;
+        tmp = encryptSerial(str);
+        return (licenceType.toUpperCase().concat(tmp));
+    }
+
     private void coleteDados()
     {
         //Captura o Nome da Empresa
@@ -42,7 +126,7 @@ public class LicenseFrame extends JFrame
         if(nomeEmpresa.isEmpty())
         {
             SystemUtil.showErrorMsg("Por Favor Digite o Nome da Empresa.");
-           return;
+            return;
 
         }
         //Captura o Texto do Label
@@ -50,26 +134,26 @@ public class LicenseFrame extends JFrame
         if(codAtivacao.isEmpty())
         {
             SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.");
-             resetCampos();
+            resetCampos();
             return;
         }
 
-        
+
         Object numEstacoes = spinnerContadorEstacoes.getModel().getValue();
 
         if(Integer.parseInt(numEstacoes.toString()) <= 0)
         {
             SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.");
-             resetCampos();
-             return;
+            resetCampos();
+            return;
         }
         //Captura o Texto do cmpoSerial
         String serial = campoSerial.getText();
         if(serial.isEmpty())
         {
             SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.");
-             resetCampos();
-              return;
+            resetCampos();
+            return;
         }
     }
 
@@ -250,7 +334,8 @@ public class LicenseFrame extends JFrame
 
     private void botaoRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoRegistrarActionPerformed
     {//GEN-HEADEREND:event_botaoRegistrarActionPerformed
-       coleteDados();
+        coleteDados();
+        verifiqueSerial();
     }//GEN-LAST:event_botaoRegistrarActionPerformed
     private void preencha()
     {
@@ -260,7 +345,7 @@ public class LicenseFrame extends JFrame
         if(!Serializer.generated)
             Serializer.generateActivationCode();
         //imprime no frame o codigo gerado pelos seriais
-        labelCodigoAtivacao.setText("<html><font color = blue>"+Serializer.getGeneratedCode()+"</font></html>");
+        labelCodigoAtivacao.setText(Serializer.getGeneratedCode());
     }
 
     /**
