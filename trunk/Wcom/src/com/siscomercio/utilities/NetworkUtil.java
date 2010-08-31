@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  *
  * @author Rayan
  */
-public final class NetworkInfo
+public final class NetworkUtil
 {
-    private static Logger _log = Logger.getLogger(NetworkInfo.class.getName());
+    private static Logger _log = Logger.getLogger(NetworkUtil.class.getName());
 
     private final static String getMacAddress() throws IOException
     {

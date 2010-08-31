@@ -1,9 +1,9 @@
 package com.siscomercio.security;
 
 import com.siscomercio.Config;
-import com.siscomercio.utilities.DiskInfo;
-import com.siscomercio.utilities.MotherBoardInfo;
-import com.siscomercio.utilities.NetworkInfo;
+import com.siscomercio.utilities.DiskUtil;
+import com.siscomercio.utilities.MbUtil;
+import com.siscomercio.utilities.NetworkUtil;
 import java.util.logging.Logger;
 
 /**
@@ -13,11 +13,14 @@ import java.util.logging.Logger;
 public class Serializer
 {
     private static Logger _log = Logger.getLogger(Serializer.class.getName());
-    static String serialHD = DiskInfo.getSerialNumber("c");
-    static String serialMB = MotherBoardInfo.getMotherboardSN();
-    static String mac = NetworkInfo.getMac();
+    static String serialHD = DiskUtil.getSerialNumber("c");
+    static String serialMB = MbUtil.getMotherboardSN();
+    static String mac = NetworkUtil.getMac();
     static StringBuffer dados = new StringBuffer(mac + serialHD + serialMB);
     static String code ="";
+    /**
+     *
+     */
     public static boolean generated = false;
 
     /**
@@ -104,6 +107,10 @@ public class Serializer
         return code;
 
     }
+    /**
+     * 
+     * @return
+     */
     public static String getGeneratedCode()
     {
         if(code.isEmpty())
@@ -111,7 +118,11 @@ public class Serializer
 
         return code;
     }
-     public static void main(String args[])
+    /**
+     *
+     * @param args
+     */
+    public static void main(String args[])
     {
            generateActivationCode();
      }
