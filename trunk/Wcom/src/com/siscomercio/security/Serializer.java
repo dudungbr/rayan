@@ -98,6 +98,7 @@ public class Serializer
             }
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
+         if(Config.DEBUG)
         _log.info("Codigo de Ativação: " + code);
          generated = true;
         return code;

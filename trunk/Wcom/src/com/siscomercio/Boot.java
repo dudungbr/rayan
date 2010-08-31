@@ -78,7 +78,6 @@ public class Boot
                     {
                         new FramePrincipal().setVisible(true);
                     }
-
                 });
         }
     }
