@@ -24,6 +24,9 @@ import java.util.logging.Logger;
 public class Boot
 {
     private static Logger _log = Logger.getLogger(Boot.class.getName());
+    /**
+     * 
+     */
     public static boolean isRegistrado = false;
 
     /**

@@ -84,6 +84,11 @@ public class LicenseFrame extends JFrame
         }
     }
 
+    /**
+     *
+     * @param st
+     * @return
+     */
     public static String encryptSerial(String st)
     {
         try
@@ -112,6 +117,12 @@ public class LicenseFrame extends JFrame
         }
     }
 
+    /**
+     * 
+     * @param licenceType
+     * @param str
+     * @return
+     */
     public static String createEncriptedString(String licenceType, String str)
     {
         String tmp;
