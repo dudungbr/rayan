@@ -44,6 +44,7 @@ public class DiskUtil
             }
             input.close();
         } catch (Exception e) {
+            SystemUtil.showErrorMsg(e.getMessage());
         }
         return result.trim();
     }

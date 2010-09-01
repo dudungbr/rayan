@@ -225,6 +225,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
+             SystemUtil.showErrorMsg(err.getMessage());
         }
         return false;
     }
@@ -259,6 +260,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
+             SystemUtil.showErrorMsg(err.getMessage());
         }
         return processes;
 
