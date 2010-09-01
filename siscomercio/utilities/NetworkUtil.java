@@ -244,18 +244,16 @@ public final class NetworkUtil
      */
     public static String getMac()
     {
-        String mac = null;
+       String mac = "";
         try
         {
-            mac = getMacAddress();
-            if(mac== null)
-               SystemUtil.showErrorMsg("nao foi possivel obter o MAC.");
-
+          mac =  getMacAddress();
         }
         catch(IOException ex)
         {
             SystemUtil.showErrorMsg(ex.getMessage());
         }
+
         return mac;
     }
 
