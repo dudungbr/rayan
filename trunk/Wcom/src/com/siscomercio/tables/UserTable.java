@@ -4,6 +4,7 @@
  */
 package com.siscomercio.tables;
 
+import com.siscomercio.Config;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ public class UserTable
     private int _id;
     private String _senha;
     private String _login;
-    private String _lastLogin;
+    private String _lastLogin = "Desconhecido";
 
     /**
      *
@@ -107,8 +108,10 @@ public class UserTable
      */
     public void setLastUser(String usr)
     {
+        if(Config.DEBUG)
         _log.log(Level.INFO, "setando ultimo usuario como {0}\n", usr);
-        _lastLogin = usr;
+            _lastLogin = usr;
+
 
     }
 

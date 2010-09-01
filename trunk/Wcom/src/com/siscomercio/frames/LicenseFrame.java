@@ -9,14 +9,17 @@
  */
 package com.siscomercio.frames;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.siscomercio.Boot;
 import com.siscomercio.Config;
 import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
+import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -46,18 +49,18 @@ public class LicenseFrame extends JFrame
         // ------------------------------------
         String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
         if(Config.DEBUG)
-        System.out.println("tipo de licenca:" + tipoLicenca);
+            System.out.println("tipo de licenca:" + tipoLicenca);
 
         //Pega o Valor dao Campo Serial
         // ------------------------------------
         String valorCampoSerial = campoSerial.getText();
         if(Config.DEBUG)
-        System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
+            System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
 
 
         // Remove os "-" da String
         //-------------------------------
-        StringBuffer dados = new StringBuffer(labelCodigoAtivacao.getText());
+        StringBuilder dados = new StringBuilder(labelCodigoAtivacao.getText());
         String remover = "-";
 
         for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
@@ -66,20 +69,20 @@ public class LicenseFrame extends JFrame
             if(res.equals(remover))
             {
                 if(Config.DEBUG)
-                System.out.println("removendo - do serial");
+                    System.out.println("removendo - do serial");
                 int pos = dados.indexOf(remover);
                 dados.delete(pos, pos + remover.length());
             }
         }
         if(Config.DEBUG)
-        System.out.println("valor variavel dados: " + dados.toString());
+            System.out.println("valor variavel dados: " + dados.toString());
         //--------------------------------------------
 
         // Encripta a Variavel Dados
         //----------------------------------------
         String validSerial = encryptSerial(dados.toString());
-       if(Config.DEBUG)
-        System.out.println("serial valido: " + validSerial);
+        if(Config.DEBUG)
+            System.out.println("serial valido: " + validSerial);
 
         if(valorCampoSerial.equalsIgnoreCase(validSerial))
         {
@@ -104,7 +107,7 @@ public class LicenseFrame extends JFrame
             MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(st.getBytes());
             BigInteger hash = new BigInteger(1, digest.digest());
-            StringBuffer serial = new StringBuffer(hash.toString());
+            StringBuilder serial = new StringBuilder(hash.toString());
 
             // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
             //-------------------------------
@@ -120,7 +123,6 @@ public class LicenseFrame extends JFrame
         }
         catch(NoSuchAlgorithmException ns)
         {
-            ns.printStackTrace();
             return st;
         }
     }
@@ -203,6 +205,7 @@ public class LicenseFrame extends JFrame
         campoSerial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro da Aplicação");
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -235,8 +238,7 @@ public class LicenseFrame extends JFrame
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Numero de Série:");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -321,7 +323,7 @@ public class LicenseFrame extends JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -351,11 +353,23 @@ public class LicenseFrame extends JFrame
      */
     public static void main(String args[])
     {
-        java.awt.EventQueue.invokeLater(new Runnable()
+        EventQueue.invokeLater(new Runnable()
         {
             @Override
             public void run()
             {
+                try
+                {
+                    //BlackBusiness subistantce
+                    //Luna jtoo
+                    //acryl - jato
+                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                    // UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                }
+                catch(Exception e)
+                {
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                }
                 new LicenseFrame().setVisible(true);
 
             }

@@ -10,6 +10,7 @@
  */
 package com.siscomercio.frames;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -50,7 +52,7 @@ public class FramePrincipal extends JFrame
     /**
      * Looger Desse Arquivo
      */
-    private Logger _log = Logger.getLogger(FramePrincipal.class.getName());
+    private static final Logger _log = Logger.getLogger(FramePrincipal.class.getName());
     Date date = new Date();
     /**
      * if this frame was created of not.
@@ -266,7 +268,7 @@ public class FramePrincipal extends JFrame
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Wcom - Sistema de Automacao Comercial");
+        setTitle("AutSiS- Sistema de Automacao Comercial");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -611,14 +613,14 @@ public class FramePrincipal extends JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-761)/2, (screenSize.height-498)/2, 761, 498);
+        setBounds((screenSize.width-761)/2, (screenSize.height-534)/2, 761, 534);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
@@ -782,6 +784,16 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
+                 try
+                {
+                    //OfficeBlue
+                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                   
+                }
+                catch(Exception e)
+                {
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                }
                 new FramePrincipal().setVisible(true);
             }
 
