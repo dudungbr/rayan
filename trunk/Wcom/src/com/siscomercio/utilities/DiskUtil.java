@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public class DiskUtil
 {
- private static Logger _log = Logger.getLogger(DiskUtil.class.getName());
+ private static final Logger _log = Logger.getLogger(DiskUtil.class.getName());
     private DiskUtil() {
     }
 
@@ -44,7 +44,6 @@ public class DiskUtil
             }
             input.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return result.trim();
     }

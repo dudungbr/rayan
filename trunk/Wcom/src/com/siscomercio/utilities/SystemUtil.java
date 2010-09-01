@@ -19,7 +19,7 @@ import com.siscomercio.managers.SoundManager;
 public class SystemUtil
 {
     private static final long serialVersionUID = 1L;
-    private static Logger _log = Logger.getLogger(SystemUtil.class.getName());
+    private static final Logger _log = Logger.getLogger(SystemUtil.class.getName());
 
     /**
      * Imprimve a Versoa e a Build do Sistema

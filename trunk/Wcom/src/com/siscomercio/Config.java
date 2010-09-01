@@ -19,7 +19,7 @@ import com.siscomercio.utilities.SystemUtil;
  */
 public class Config
 {
-    private static Logger _log = Logger.getLogger(Config.class.getName());
+    private static final Logger _log = Logger.getLogger(Config.class.getName());
     /**
      * som tocado quando o sistema for finalizado
      */
@@ -225,8 +225,7 @@ public class Config
         }
         catch(Exception e)
         {
-            _log.warning(e.getMessage());
-            throw new Error("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e + "\n");
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e + "\n");
         }
     }
 

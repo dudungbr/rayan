@@ -4,6 +4,7 @@
  */
 package com.siscomercio.tables;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -29,7 +30,7 @@ public class UserTable
         return SingletonHolder._instance;
     }
 
-    private static Logger _log = Logger.getLogger(UserTable.class.getName());
+    private static final Logger _log = Logger.getLogger(UserTable.class.getName());
 
     private UserTable()
     {
@@ -106,7 +107,7 @@ public class UserTable
      */
     public void setLastUser(String usr)
     {
-        _log.info("setando ultimo usuario como " + usr + "\n");
+        _log.log(Level.INFO, "setando ultimo usuario como {0}\n", usr);
         _lastLogin = usr;
 
     }

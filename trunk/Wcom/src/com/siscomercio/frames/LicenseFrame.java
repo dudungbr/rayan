@@ -211,12 +211,6 @@ public class LicenseFrame extends JFrame
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel7.setText("Código de Ativação:");
 
-        campoEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEmpresaActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel3.setText("Empresa :");
 
@@ -231,11 +225,6 @@ public class LicenseFrame extends JFrame
         });
 
         dropDownTipoLicenca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mensal", "Semestral", "Anual" }));
-        dropDownTipoLicenca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dropDownTipoLicencaActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel5.setText("Tipo de Licenca:");
@@ -340,16 +329,6 @@ public class LicenseFrame extends JFrame
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-450)/2, (screenSize.height-476)/2, 450, 476);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void campoEmpresaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_campoEmpresaActionPerformed
-    {//GEN-HEADEREND:event_campoEmpresaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEmpresaActionPerformed
-
-    private void dropDownTipoLicencaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_dropDownTipoLicencaActionPerformed
-    {//GEN-HEADEREND:event_dropDownTipoLicencaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dropDownTipoLicencaActionPerformed
 
     private void botaoRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoRegistrarActionPerformed
     {//GEN-HEADEREND:event_botaoRegistrarActionPerformed

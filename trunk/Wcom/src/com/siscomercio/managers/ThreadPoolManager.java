@@ -245,7 +245,6 @@ public class ThreadPoolManager
         }
         catch(InterruptedException e)
         {
-            e.printStackTrace();
         }
     }
 

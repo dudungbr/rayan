@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.siscomercio.Config;
@@ -29,7 +30,7 @@ import javolution.util.FastList;
  */
 public class WindowsUtil
 {
-    private static Logger _log = Logger.getLogger(WindowsUtil.class.getName());
+    private static final Logger _log = Logger.getLogger(WindowsUtil.class.getName());
 
     /**
      * Lista todos os arquivos de um diretorio
@@ -76,7 +77,7 @@ public class WindowsUtil
             }
         }
         if(Config.DEBUG)
-            _log.info("Contando Arquivos do Diretorio SQL, Total: " + arquivos.size() + " Arquivos. \n");
+            _log.log(Level.INFO, "Contando Arquivos do Diretorio SQL, Total: {0} Arquivos. \n", arquivos.size());
 
         return arquivos.size();
     }
@@ -215,7 +216,7 @@ public class WindowsUtil
                     if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processo))
                     {
                         Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
-                        _log.info("Matando Processo: " + processo);
+                        _log.log(Level.INFO, "Matando Processo: {0}", processo);
                         return true;
                     }
             }
@@ -224,7 +225,6 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-            err.printStackTrace();
         }
         return false;
     }
@@ -259,9 +259,6 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-            err.printStackTrace();
-
-
         }
         return processes;
 
@@ -306,8 +303,8 @@ public class WindowsUtil
 
         if(Config.DEBUG)
         {
-            _log.info("Running processes : \n" + result);
-            _log.info("Total de Processos: " + processes.size());
+            _log.log(Level.INFO, "Running processes : \n{0}", result);
+            _log.log(Level.INFO, "Total de Processos: {0}", processes.size());
         }
     }
 
