@@ -4,6 +4,7 @@ import com.siscomercio.Config;
 import com.siscomercio.utilities.DiskUtil;
 import com.siscomercio.utilities.MbUtil;
 import com.siscomercio.utilities.NetworkUtil;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Serializer
 {
-    private static Logger _log = Logger.getLogger(Serializer.class.getName());
+    private static final Logger _log = Logger.getLogger(Serializer.class.getName());
     static String serialHD = DiskUtil.getSerialNumber("c");
     static String serialMB = MbUtil.getMotherboardSN();
     static String mac = NetworkUtil.getMac();
@@ -46,7 +47,7 @@ public class Serializer
         }
 
         if(Config.DEBUG)
-            _log.info("A frase contem " + cont + " ocorrencias de " + remover);
+            _log.log(Level.INFO, "A frase contem {0} ocorrencias de {1}", new Object[]{cont, remover});
 
 
         // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
@@ -61,7 +62,7 @@ public class Serializer
             }
         }
         if(Config.DEBUG)
-            _log.info("Nova String Com: " + dados.toString() + "Caracteres.");
+            _log.log(Level.INFO, "Nova String Com: {0}Caracteres.", dados.toString());
 
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------
@@ -102,7 +103,7 @@ public class Serializer
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
          if(Config.DEBUG)
-        _log.info("Codigo de Ativação: " + code);
+        _log.log(Level.INFO, "Codigo de Ativa\u00e7\u00e3o: {0}", code);
          generated = true;
         return code;
 

@@ -5,6 +5,7 @@ import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.siscomercio.Config;
 import com.siscomercio.tables.StringTable;
@@ -18,7 +19,7 @@ import com.siscomercio.utilities.SystemUtil;
  */
 public class SoundManager
 {
-    private static Logger _log = Logger.getLogger(SoundManager.class.getName());
+    private static final Logger _log = Logger.getLogger(SoundManager.class.getName());
 
     /**
      * Toca um Som em Formato WAV
@@ -37,7 +38,7 @@ public class SoundManager
                 sound = Applet.newAudioClip(caminho.toURL());
                 sound.play();
                 Thread.sleep(SystemUtil.convertSecondsToMiliseconds(1/2));
-                if(Config.DEBUG)_log.info("playSound() Tocando Arquivo: " + file + "\n");
+                if(Config.DEBUG)_log.log(Level.INFO, "playSound() Tocando Arquivo: {0}\n", file);
             }
             catch(InterruptedException ex)
             {

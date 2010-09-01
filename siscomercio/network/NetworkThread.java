@@ -34,7 +34,6 @@ public class NetworkThread extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
         }
     }
 

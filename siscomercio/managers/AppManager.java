@@ -17,7 +17,7 @@ import com.siscomercio.utilities.SystemUtil;
 @SuppressWarnings("serial")
 public class AppManager extends JFrame
 {
-    private Logger _log = Logger.getLogger(AppManager.class.getName());
+    private static final Logger _log = Logger.getLogger(AppManager.class.getName());
 
     /**
      *

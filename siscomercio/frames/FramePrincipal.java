@@ -349,7 +349,7 @@ public class FramePrincipal extends JFrame
                         .addComponent(jLabel10)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,16 +560,9 @@ public class FramePrincipal extends JFrame
 
         barraDeMenu.add(menuDb);
 
-        jMenu3.setText("Opções");
-
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("       Habilitar Som");
         jCheckBoxMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
-        jCheckBoxMenuItem1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBoxMenuItem1StateChanged(evt);
-            }
-        });
         jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem1ActionPerformed(evt);
@@ -611,14 +604,14 @@ public class FramePrincipal extends JFrame
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -759,11 +752,6 @@ public class FramePrincipal extends JFrame
         else
             Config.ENABLE_SOUND = false;
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
-    private void jCheckBoxMenuItem1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jCheckBoxMenuItem1StateChanged
-    {//GEN-HEADEREND:event_jCheckBoxMenuItem1StateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem1StateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing

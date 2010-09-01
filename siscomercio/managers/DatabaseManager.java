@@ -28,7 +28,7 @@ import java.io.File;
  */
 public class DatabaseManager
 {
-    private static Logger _log = Logger.getLogger(DatabaseManager.class.getName());
+    private static final Logger _log = Logger.getLogger(DatabaseManager.class.getName());
     /**
      *  Status Atual do Banco
      */
@@ -58,7 +58,7 @@ public class DatabaseManager
 
                     Connection con = null;
                     if(Config.DEBUG)
-                        _log.info("DatabaseManager: executando script " + f.getName() + " \n");
+                        _log.log(Level.INFO, "DatabaseManager: executando script {0} \n", f.getName());
                     String thisLine, sqlQuery = null;
 
                     con = DatabaseFactory.getInstance().getConnection();
@@ -117,7 +117,7 @@ public class DatabaseManager
         boolean result = false;
         Connection con = null;
         if(Config.DEBUG)
-            _log.info("Executando Query: " + query + "\n");
+            _log.log(Level.INFO, "Executando Query: {0}\n", query);
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -317,11 +317,11 @@ public class DatabaseManager
             closeConnections(ps, con);
 
             if(Config.DEBUG)
-                _log.info("o codigo do usuario " + login + " e " + codigo + "\n");
+                _log.log(Level.INFO, "o codigo do usuario {0} e {1}\n", new Object[]{login, codigo});
         }
         catch(SQLException ex)
         {
-            _log.warning("Erro ao pegar codigo do usuario:  " + ex);
+            _log.log(Level.WARNING, "Erro ao pegar codigo do usuario:  {0}", ex);
         }
         return codigo;
     }
@@ -361,7 +361,7 @@ public class DatabaseManager
         if(ok)
         {
             if(Config.DEBUG)
-                _log.info("trocando senha do usuario: " + login + "para: " + newPass + "\n");
+                _log.log(Level.INFO, "trocando senha do usuario: {0}para: {1}\n", new Object[]{login, newPass});
             SystemUtil.showMsg("Senha Trocada com Sucesso!");
         }
     }
@@ -404,7 +404,7 @@ public class DatabaseManager
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)
-                _log.info("_installed = " + _installed + "\n");
+                _log.log(Level.INFO, "_installed = {0}\n", _installed);
         }
         catch(Exception e)
         {
@@ -444,7 +444,7 @@ public class DatabaseManager
     {
         Connection con = null;
         if(Config.DEBUG)
-            _log.info("checando o nivel de acesso do usuario " + usr + "\n");
+            _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
 
         int level = 0;
         try
@@ -459,7 +459,7 @@ public class DatabaseManager
             // Fecha as Conexoes
             closeConnections(ps, rset, con);
             if(Config.DEBUG)
-                _log.info("nivel de acesso do usuario " + usr + " e " + level);
+                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1}", new Object[]{usr, level});
         }
         catch(Exception e)
         {

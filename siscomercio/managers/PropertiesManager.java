@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 public final class PropertiesManager extends Properties
 {
     private static final long serialVersionUID = -4599023842346938325L;
-    private static Logger _log = Logger.getLogger(PropertiesManager.class.getName());
+    private static final Logger _log = Logger.getLogger(PropertiesManager.class.getName());
     private boolean _warn = true;
 
     /**
@@ -141,7 +142,7 @@ public final class PropertiesManager extends Properties
         {
             if(_warn)
             {
-                _log.warning("L2Properties: Missing property for key - " + key);
+                _log.log(Level.WARNING, "L2Properties: Missing property for key - {0}", key);
             }
 
             return null;
@@ -159,7 +160,7 @@ public final class PropertiesManager extends Properties
         {
             if(_warn)
             {
-                _log.warning("L2Properties: Missing defaultValue for key - " + key);
+                _log.log(Level.WARNING, "L2Properties: Missing defaultValue for key - {0}", key);
             }
 
             return null;

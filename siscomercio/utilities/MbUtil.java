@@ -47,7 +47,6 @@ public class MbUtil
             }
             input.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return result.trim();
     }

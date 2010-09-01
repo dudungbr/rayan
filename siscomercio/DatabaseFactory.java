@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.tables.StringTable;
+import com.siscomercio.utilities.SystemUtil;
 
 /**
  * $Revision$
@@ -32,7 +33,7 @@ import com.siscomercio.tables.StringTable;
  */
 public class DatabaseFactory
 {
-    static Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
+    static final Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
 
     /**
      * Tipo do Provedor
@@ -119,15 +120,15 @@ public class DatabaseFactory
         catch(SQLException x)
         {
             if(Config.DEBUG)
-                _log.fine("Database Connection FAILED");
+              SystemUtil.showErrorMsg("Database Connection FAILED");
             // re-throw the exception
             throw x;
         }
         catch(Exception e)
         {
             if(Config.DEBUG)
-                _log.fine("Database Connection FAILED");
-            throw new SQLException("could not init DB connection:" + e);
+              SystemUtil.showErrorMsg("Database Connection FAILED");
+            SystemUtil.showErrorMsg("could not init DB connection:" + e);
         }
     }
 
@@ -258,7 +259,7 @@ public class DatabaseFactory
             catch(SQLException e)
             {
                 DatabaseManager.setConStatus(StringTable.STATUS_DISCONNECTED);
-                _log.warning("L2DatabaseFactory: getConnection() failed, trying again " + e);
+                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}");
             }
         }
         return con;
@@ -289,12 +290,11 @@ public class DatabaseFactory
                 if(!c.isClosed())
                 {
                     _log.warning("Unclosed connection! Trace:");
-                    exp.printStackTrace();
                 }
             }
             catch(SQLException e)
             {
-                e.printStackTrace();
+                 SystemUtil.showErrorMsg(e.getMessage());
             }
 
         }
