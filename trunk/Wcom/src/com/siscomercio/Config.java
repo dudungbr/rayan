@@ -225,7 +225,7 @@ public class Config
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e + "\n");
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e.getMessage() + "\n");
         }
     }
 

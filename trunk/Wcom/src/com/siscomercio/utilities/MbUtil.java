@@ -47,6 +47,7 @@ public class MbUtil
             }
             input.close();
         } catch (Exception e) {
+             SystemUtil.showErrorMsg(e.getMessage());
         }
         return result.trim();
     }

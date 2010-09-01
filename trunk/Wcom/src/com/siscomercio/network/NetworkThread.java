@@ -1,5 +1,6 @@
 package com.siscomercio.network;
 
+import com.siscomercio.utilities.SystemUtil;
 import java.net.Socket;
 
 /**
@@ -34,6 +35,7 @@ public class NetworkThread extends Thread
         }
         catch(Exception e)
         {
+             SystemUtil.showErrorMsg(e.getMessage());
         }
     }
 

@@ -14,6 +14,7 @@
  */
 package com.siscomercio.managers;
 
+import com.siscomercio.utilities.SystemUtil;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -245,6 +246,7 @@ public class ThreadPoolManager
         }
         catch(InterruptedException e)
         {
+            SystemUtil.showErrorMsg(e.getMessage());
         }
     }
 
