@@ -276,38 +276,54 @@ public class FramePrincipal extends JFrame
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel3.setText("Data: ");
 
+        dadosData.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dadosData.setText("dInfo");
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Horario:");
 
+        dadosRelogio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dadosRelogio.setText("rInfo");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel4.setText("Empresa:");
 
+        dadosEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dadosEmpresa.setText("eInfo");
 
+        dadosOperador.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dadosOperador.setText("opInfo");
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel6.setText("Operador: ");
 
+        pcLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pcLabel.setText("pInforma");
 
+        statusInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         statusInfo.setText("sInfo");
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Status:");
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Versao: ");
 
+        versionInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         versionInfo.setText("vInfo");
 
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setText("Site:");
 
+        siteInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         siteInfo.setText("siteInfo");
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Terminal :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -351,7 +367,7 @@ public class FramePrincipal extends JFrame
                         .addComponent(jLabel10)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,6 +413,7 @@ public class FramePrincipal extends JFrame
         jLabel5.setDoubleBuffered(true);
         jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
 
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("nomeEmpresa");
         jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
@@ -409,7 +426,7 @@ public class FramePrincipal extends JFrame
         menuSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
         itemRegistro.setText("Registro");
         itemRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -420,7 +437,7 @@ public class FramePrincipal extends JFrame
         menuSistema.add(itemRegistro);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
-        itemReiniciar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemReiniciar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8437_16x16.png"))); // NOI18N
         itemReiniciar.setText("Reiniciar");
         itemReiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +448,7 @@ public class FramePrincipal extends JFrame
         menuSistema.add(itemReiniciar);
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
-        itemSair.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemSair.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6980_16x16.png"))); // NOI18N
         itemSair.setText("Sair");
         itemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -449,7 +466,9 @@ public class FramePrincipal extends JFrame
 
         menuHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
         menuHardware.setText("Hardware");
+        menuHardware.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
+        itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
         itemMemoria.setText("Memória");
         itemMemoria.addActionListener(new java.awt.event.ActionListener() {
@@ -459,6 +478,7 @@ public class FramePrincipal extends JFrame
         });
         menuHardware.add(itemMemoria);
 
+        itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
         itemProcessador.setText("Processador");
         itemProcessador.addActionListener(new java.awt.event.ActionListener() {
@@ -472,7 +492,9 @@ public class FramePrincipal extends JFrame
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
         jMenu2.setText("Software");
+        jMenu2.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
+        itemDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
         itemDb.setText("Banco de Dados");
         itemDb.addActionListener(new java.awt.event.ActionListener() {
@@ -482,6 +504,7 @@ public class FramePrincipal extends JFrame
         });
         jMenu2.add(itemDb);
 
+        itemJava.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
         itemJava.setText("Java");
         itemJava.addActionListener(new java.awt.event.ActionListener() {
@@ -491,6 +514,7 @@ public class FramePrincipal extends JFrame
         });
         jMenu2.add(itemJava);
 
+        itemSistemaOperacional.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
         itemSistemaOperacional.setText("Sistema Operacional");
         itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
@@ -504,8 +528,10 @@ public class FramePrincipal extends JFrame
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
         jMenu1.setText("Sistema");
+        jMenu1.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        itemVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
         itemVersao.setText("Versão");
         itemVersao.addActionListener(new java.awt.event.ActionListener() {
@@ -529,19 +555,24 @@ public class FramePrincipal extends JFrame
 
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6986_16x16.png"))); // NOI18N
         jMenu9.setText("Financeiro");
+        jMenu9.setFont(new java.awt.Font("Times New Roman", 1, 14));
         menuAdministracao.add(jMenu9);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
         jMenu8.setText("Cadastro de Usuarios");
+        jMenu8.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
+        jMenuItem5.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
         jMenuItem5.setText("Adicionar");
         jMenu8.add(jMenuItem5);
 
+        jMenuItem1.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
         jMenuItem1.setText("Editar");
         jMenu8.add(jMenuItem1);
 
+        itemExcluir.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
         itemExcluir.setText("Excluir");
         jMenu8.add(itemExcluir);
@@ -550,6 +581,7 @@ public class FramePrincipal extends JFrame
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/4317_16x16.png"))); // NOI18N
         jMenu10.setText("Auditoria");
+        jMenu10.setFont(new java.awt.Font("Times New Roman", 1, 14));
         menuAdministracao.add(jMenu10);
 
         barraDeMenu.add(menuAdministracao);
@@ -558,6 +590,7 @@ public class FramePrincipal extends JFrame
         menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         subMenuDB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        subMenuDB.setFont(new java.awt.Font("Times New Roman", 1, 14));
         subMenuDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
         subMenuDB.setText("Banco de Dados");
         subMenuDB.addActionListener(new java.awt.event.ActionListener() {
@@ -594,6 +627,7 @@ public class FramePrincipal extends JFrame
         menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemAssistenciaTecnica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        itemAssistenciaTecnica.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemAssistenciaTecnica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
         itemAssistenciaTecnica.setText("Assistência Técnica");
         itemAssistenciaTecnica.addActionListener(new java.awt.event.ActionListener() {
@@ -621,7 +655,7 @@ public class FramePrincipal extends JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
