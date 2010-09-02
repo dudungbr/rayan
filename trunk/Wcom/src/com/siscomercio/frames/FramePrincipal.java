@@ -406,8 +406,10 @@ public class FramePrincipal extends JFrame
         jLabel13.setText("jLabel13");
 
         menuSistema.setText("Sistema");
+        menuSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
         itemRegistro.setText("Registro");
         itemRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -418,6 +420,7 @@ public class FramePrincipal extends JFrame
         menuSistema.add(itemRegistro);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
+        itemReiniciar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8437_16x16.png"))); // NOI18N
         itemReiniciar.setText("Reiniciar");
         itemReiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -428,6 +431,7 @@ public class FramePrincipal extends JFrame
         menuSistema.add(itemReiniciar);
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        itemSair.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6980_16x16.png"))); // NOI18N
         itemSair.setText("Sair");
         itemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -440,6 +444,7 @@ public class FramePrincipal extends JFrame
         barraDeMenu.add(menuSistema);
 
         subMenuInformacoes.setText("Informações");
+        subMenuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
         subMenuInformacoes.add(jSeparator1);
 
         menuHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
@@ -515,6 +520,7 @@ public class FramePrincipal extends JFrame
         barraDeMenu.add(subMenuInformacoes);
 
         menuAdministracao.setText("Administração");
+        menuAdministracao.setFont(new java.awt.Font("Times New Roman", 1, 14));
         menuAdministracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuAdministracaoActionPerformed(evt);
@@ -549,6 +555,7 @@ public class FramePrincipal extends JFrame
         barraDeMenu.add(menuAdministracao);
 
         menuDb.setText("Configurações");
+        menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         subMenuDB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
         subMenuDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
@@ -584,6 +591,7 @@ public class FramePrincipal extends JFrame
         barraDeMenu.add(jMenu3);
 
         menuSuporte.setText("Suporte");
+        menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemAssistenciaTecnica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
         itemAssistenciaTecnica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
@@ -613,7 +621,7 @@ public class FramePrincipal extends JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
