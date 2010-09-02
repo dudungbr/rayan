@@ -224,9 +224,9 @@ public class FramePrincipal extends JFrame
         jLabel13 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
-        itemSair = new javax.swing.JMenuItem();
-        itemReiniciar = new javax.swing.JMenuItem();
         itemRegistro = new javax.swing.JMenuItem();
+        itemReiniciar = new javax.swing.JMenuItem();
+        itemSair = new javax.swing.JMenuItem();
         subMenuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuHardware = new javax.swing.JMenu();
@@ -407,15 +407,15 @@ public class FramePrincipal extends JFrame
 
         menuSistema.setText("Sistema");
 
-        itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
-        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6980_16x16.png"))); // NOI18N
-        itemSair.setText("Sair");
-        itemSair.addActionListener(new java.awt.event.ActionListener() {
+        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
+        itemRegistro.setText("Registro");
+        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSairActionPerformed(evt);
+                itemRegistroActionPerformed(evt);
             }
         });
-        menuSistema.add(itemSair);
+        menuSistema.add(itemRegistro);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8437_16x16.png"))); // NOI18N
@@ -427,15 +427,15 @@ public class FramePrincipal extends JFrame
         });
         menuSistema.add(itemReiniciar);
 
-        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
-        itemRegistro.setText("Registro");
-        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
+        itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6980_16x16.png"))); // NOI18N
+        itemSair.setText("Sair");
+        itemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRegistroActionPerformed(evt);
+                itemSairActionPerformed(evt);
             }
         });
-        menuSistema.add(itemRegistro);
+        menuSistema.add(itemSair);
 
         barraDeMenu.add(menuSistema);
 

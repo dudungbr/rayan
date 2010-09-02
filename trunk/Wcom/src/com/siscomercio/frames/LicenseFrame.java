@@ -9,7 +9,9 @@
  */
 package com.siscomercio.frames;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.plastic.theme.Silver;
 import com.siscomercio.Boot;
 import com.siscomercio.Config;
 import com.siscomercio.security.Serializer;
@@ -198,7 +200,7 @@ public class LicenseFrame extends JFrame
         botaoRegistrar = new javax.swing.JButton();
         dropDownTipoLicenca = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        labelNumEstacoes = new javax.swing.JLabel();
         spinnerContadorEstacoes = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -217,6 +219,7 @@ public class LicenseFrame extends JFrame
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel3.setText("Empresa :");
 
+        labelCodigoAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelCodigoAtivacao.setText("              dadosDaAtivacao");
 
         botaoRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -232,13 +235,13 @@ public class LicenseFrame extends JFrame
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel5.setText("Tipo de Licenca:");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel6.setText("Nº Estações:");
+        labelNumEstacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelNumEstacoes.setText("Nº Estações:");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Numero de Série:");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel8.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -264,7 +267,7 @@ public class LicenseFrame extends JFrame
                                 .addComponent(jLabel2))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(labelNumEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel5)))
@@ -300,7 +303,7 @@ public class LicenseFrame extends JFrame
                     .addComponent(campoSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNumEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spinnerContadorEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -358,12 +361,19 @@ public class LicenseFrame extends JFrame
             @Override
             public void run()
             {
+                // PlasticLookAndFeel.setPlasticTheme(new Silver());
                 try
                 {
+                    /**
+                     * #  com.jgoodies.looks.windows.WindowsLookAndFeel
+                    # com.jgoodies.looks.plastic.PlasticLookAndFeel
+                    # com.jgoodies.looks.plastic.Plastic3DLookAndFeel
+                    # com.jgoodies.looks.plastic.PlasticXPLookAndFeel
+                     */
                     //BlackBusiness subistantce
                     //Luna jtoo
                     //acryl - jato
-                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                    UIManager.setLookAndFeel(new PlasticLookAndFeel());
                     // UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
@@ -385,11 +395,11 @@ public class LicenseFrame extends JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelCodigoAtivacao;
+    private javax.swing.JLabel labelNumEstacoes;
     private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
 }
