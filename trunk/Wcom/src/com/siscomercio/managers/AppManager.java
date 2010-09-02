@@ -44,7 +44,7 @@ public class AppManager extends JFrame
             SoundManager.playSound(Config.PRE_EXIT_SOUND);
 
 
-        int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "Encerrar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
+        int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "<html><font color =black size=4 face = Times new Roman ><b>Encerrar Sistema ?</b></font></html>", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
         if(Config.DEBUG)
             _log.info("solicitacao de shutdown...\n");
 

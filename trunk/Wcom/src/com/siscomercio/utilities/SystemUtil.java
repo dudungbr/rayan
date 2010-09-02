@@ -8,6 +8,8 @@ import com.siscomercio.Config;
 import com.siscomercio.DatabaseFactory;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -169,7 +171,8 @@ public class SystemUtil
     {
         if(Config.DEBUG)
             _log.info("enviando janela de mensagem... \n");
-        JOptionPane.showMessageDialog(null, msg, "Informacao", JOptionPane.INFORMATION_MESSAGE);
+
+        JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> "+msg+ "</b></font></html>", "Informacao", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
