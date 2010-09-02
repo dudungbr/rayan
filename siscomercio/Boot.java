@@ -4,14 +4,17 @@
  */
 package com.siscomercio;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.LicenseFrame;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
 import com.siscomercio.security.Serializer;
+import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -40,14 +43,34 @@ public class Boot
         {
             Serializer.generateActivationCode();
             EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
             {
-                @Override
-                public void run()
+                // PlasticLookAndFeel.setPlasticTheme(new Silver());
+                try
                 {
-                    new LicenseFrame().setVisible(true);
+                    /**
+                     * #  com.jgoodies.looks.windows.WindowsLookAndFeel
+                    # com.jgoodies.looks.plastic.PlasticLookAndFeel
+                    # com.jgoodies.looks.plastic.Plastic3DLookAndFeel
+                    # com.jgoodies.looks.plastic.PlasticXPLookAndFeel
+                     */
+                    //BlackBusiness subistantce
+                    //Luna jtoo
+                    //acryl - jato
+                    // UIManager.setLookAndFeel(new PlasticLookAndFeel());
+                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
+                catch(Exception e)
+                {
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                }
+                new LicenseFrame().setVisible(true);
 
-            });
+            }
+
+        });
         }
         else
         {

@@ -9,13 +9,12 @@
  */
 package com.siscomercio.frames;
 
-import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.theme.Silver;
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.siscomercio.Boot;
 import com.siscomercio.Config;
 import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
+import com.siscomercio.utilities.UpperCaseLetter;
 import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -36,7 +35,7 @@ public class LicenseFrame extends JFrame
     public LicenseFrame()
     {
         initComponents();
-        preencha();
+        prepareFrame();
     }
 
     private void resetCampos()
@@ -89,11 +88,12 @@ public class LicenseFrame extends JFrame
         if(valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             Boot.isRegistrado = true;
-            SystemUtil.showMsg("Obrigado por Registrar o Sistema! Reinicie o Sistema Para Total Acesso.");
+            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
+            SystemUtil.showMsg("O Sistema Esta Sendo Reiniciado...");
         }
         else
         {
-            SystemUtil.showErrorMsg("O Serial Digitado Nao é Valido.");
+            SystemUtil.showErrorMsg("Numero de Série Inválido.");
         }
     }
 
@@ -144,15 +144,18 @@ public class LicenseFrame extends JFrame
 
     private void coleteDados()
     {
+
         //Captura o Nome da Empresa
+        // ---------------------
         String nomeEmpresa = campoEmpresa.getText();
         if(nomeEmpresa.isEmpty())
         {
-            SystemUtil.showErrorMsg("Por Favor Digite o Nome da Empresa.");
+            SystemUtil.showErrorMsg("Nome da Empresa Inválido.");
             return;
 
         }
         //Captura o Texto do Label
+        // ---------------------
         String codAtivacao = labelCodigoAtivacao.getText();
         if(codAtivacao.isEmpty())
         {
@@ -171,6 +174,7 @@ public class LicenseFrame extends JFrame
             return;
         }
         //Captura o Texto do cmpoSerial
+        // ---------------------
         String serial = campoSerial.getText();
         if(serial.isEmpty())
         {
@@ -340,8 +344,11 @@ public class LicenseFrame extends JFrame
         coleteDados();
         verifiqueSerial();
     }//GEN-LAST:event_botaoRegistrarActionPerformed
-    private void preencha()
+    private void prepareFrame()
     {
+        //Monitora o Campo e sempre insere caracteres em caixa alta
+        campoSerial.setDocument(new UpperCaseLetter());
+
         //Seta o Valor 1 no Contador de estacoes
         spinnerContadorEstacoes.getModel().setValue(1);
 
@@ -373,8 +380,8 @@ public class LicenseFrame extends JFrame
                     //BlackBusiness subistantce
                     //Luna jtoo
                     //acryl - jato
-                    UIManager.setLookAndFeel(new PlasticLookAndFeel());
-                    // UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                    // UIManager.setLookAndFeel(new PlasticLookAndFeel());
+                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
                 {
