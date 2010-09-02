@@ -35,6 +35,7 @@ import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -48,7 +49,6 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class FramePrincipal extends JFrame
 {
-
     /**
      * Looger Desse Arquivo
      */
@@ -58,8 +58,6 @@ public class FramePrincipal extends JFrame
      * if this frame was created of not.
      */
     public static boolean created;
-
-
 
     /**
      * seta  a Desktop do Label
@@ -88,7 +86,7 @@ public class FramePrincipal extends JFrame
     public FramePrincipal()
     {
         if(!Config._loaded)
-        Config.load();
+            Config.load();
         if(Config.DEBUG)
             _log.info("montando janela principal do aplicativo. \n");
         initComponents();
@@ -281,49 +279,49 @@ public class FramePrincipal extends JFrame
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel3.setText("Data: ");
 
-        dadosData.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        dadosData.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosData.setText("dInfo");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Horario:");
 
-        dadosRelogio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        dadosRelogio.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosRelogio.setText("rInfo");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel4.setText("Empresa:");
 
-        dadosEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        dadosEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosEmpresa.setText("eInfo");
 
-        dadosOperador.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        dadosOperador.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosOperador.setText("opInfo");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel6.setText("Operador: ");
 
-        pcLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pcLabel.setFont(new java.awt.Font("Times New Roman", 1, 14));
         pcLabel.setText("pInforma");
 
-        statusInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        statusInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         statusInfo.setText("sInfo");
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel1.setText("Status:");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel7.setText("Versao: ");
 
-        versionInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        versionInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         versionInfo.setText("vInfo");
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel10.setText("Site:");
 
-        siteInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        siteInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         siteInfo.setText("siteInfo");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel8.setText("Terminal :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -367,7 +365,7 @@ public class FramePrincipal extends JFrame
                         .addComponent(jLabel10)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +411,7 @@ public class FramePrincipal extends JFrame
         jLabel5.setDoubleBuffered(true);
         jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("nomeEmpresa");
         jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
@@ -648,7 +646,7 @@ public class FramePrincipal extends JFrame
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -662,7 +660,7 @@ public class FramePrincipal extends JFrame
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-761)/2, (screenSize.height-534)/2, 761, 534);
+        setBounds((screenSize.width-800)/2, (screenSize.height-534)/2, 800, 534);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSairActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSairActionPerformed
@@ -826,11 +824,16 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                 try
+                try
                 {
-                    //OfficeBlue
+                    //Define O Tema Visual e o Texto do Pop UP
+                    Properties props = new Properties();
+                    props.put("logoString", "AutSIS");
+                    props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
+                    AcrylLookAndFeel.setCurrentTheme(props);
+
                     UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                   
+
                 }
                 catch(Exception e)
                 {
