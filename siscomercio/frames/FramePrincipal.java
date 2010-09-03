@@ -266,7 +266,7 @@ public class FramePrincipal extends JFrame
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("AutSiS- Sistema de Automacao Comercial");
+        setTitle("SiSCom - Sistema de Automação Comercial");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
