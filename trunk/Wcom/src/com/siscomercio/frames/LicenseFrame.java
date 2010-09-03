@@ -12,6 +12,7 @@ package com.siscomercio.frames;
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.siscomercio.Boot;
 import com.siscomercio.Config;
+import com.siscomercio.managers.AppManager;
 import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
@@ -89,7 +90,10 @@ public class LicenseFrame extends JFrame
         {
             Boot.isRegistrado = true;
             SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
-            SystemUtil.showMsg("O Sistema Esta Sendo Reiniciado...");
+            //SystemUtil.showMsg("O Sistema Esta Sendo Reiniciado...");
+            dispose();
+            //registreAplicacao();
+           AppManager.getInstance().restartApp();
         }
         else
         {
@@ -409,4 +413,9 @@ public class LicenseFrame extends JFrame
     private javax.swing.JLabel labelNumEstacoes;
     private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
+
+    private void registreAplicacao()
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
