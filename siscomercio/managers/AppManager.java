@@ -5,8 +5,10 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.siscomercio.Config;
+import com.siscomercio.security.Auth;
 
 import com.siscomercio.utilities.SystemUtil;
+import java.awt.EventQueue;
 
 /**
  * $Revision$
@@ -34,6 +36,41 @@ public class AppManager extends JFrame
         protected static final AppManager _instance = new AppManager();
     }
 
+    public void restartApp()
+    {
+         if(Config.ENABLE_SOUND)
+            SoundManager.playSound(Config.PRE_RESTART_SOUND);
+
+        if(Config.DEBUG)
+            _log.info("solicitacao de restart.");
+
+        int selectedOption = JOptionPane.showConfirmDialog(null, "Iniciar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
+
+        if(selectedOption == JOptionPane.OK_OPTION)
+        {
+            if(Config.ENABLE_SOUND)
+                SoundManager.playSound(Config.RESTART_SOUND);
+
+            if(Config.DEBUG)
+                _log.info("usuario reiniciou o sistema.");
+
+            //retorna o Status de Autenticidade.
+            Auth._autenticado = false;
+
+            //Fecha Janela
+            dispose();
+
+            EventQueue.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    new Auth().setVisible(true);
+                }
+
+            });
+        }
+    }
     /**
      *
      * @param janelaPai 
