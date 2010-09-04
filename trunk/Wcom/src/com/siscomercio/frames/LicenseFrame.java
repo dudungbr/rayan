@@ -10,16 +10,23 @@
 package com.siscomercio.frames;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import com.siscomercio.Boot;
 import com.siscomercio.Config;
+import com.siscomercio.DatabaseFactory;
 import com.siscomercio.managers.AppManager;
+import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Serializer;
+import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
 import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -89,11 +96,10 @@ public class LicenseFrame extends JFrame
         if(valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             Boot.isRegistrado = true;
-            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
-            //SystemUtil.showMsg("O Sistema Esta Sendo Reiniciado...");
             dispose();
-            //registreAplicacao();
-           AppManager.getInstance().restartApp();
+            registreAplicacao();
+            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
+            AppManager.getInstance().restartApp();
         }
         else
         {
@@ -348,6 +354,33 @@ public class LicenseFrame extends JFrame
         coleteDados();
         verifiqueSerial();
     }//GEN-LAST:event_botaoRegistrarActionPerformed
+
+    /**
+     * Registra a Aplicação Baseada nos Dados Fornecidos.
+     */
+     private void registreAplicacao()
+    {
+
+        Connection con = null;
+        String commandLine = StringTable.REGISTRE_APP;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(commandLine);
+            ResultSet rset = ps.executeQuery();
+            DatabaseManager.closeConnections(ps, rset, con);
+            SystemUtil.showMsg("Usuario Cadastrado com Sucesso!");
+        }
+        catch(SQLException e)
+        {
+            SystemUtil.showErrorMsg(e.toString());
+
+        }
+    }
+
+     /**
+      *
+      */
     private void prepareFrame()
     {
         //Monitora o Campo e sempre insere caracteres em caixa alta
@@ -376,23 +409,21 @@ public class LicenseFrame extends JFrame
                 try
                 {
                     /**
-                     * #  com.jgoodies.looks.windows.WindowsLookAndFeel
-                    # com.jgoodies.looks.plastic.PlasticLookAndFeel
-                    # com.jgoodies.looks.plastic.Plastic3DLookAndFeel
-                    # com.jgoodies.looks.plastic.PlasticXPLookAndFeel
+                     * com.jgoodies.looks.windows.WindowsLookAndFeel
+                     * com.jgoodies.looks.plastic.PlasticLookAndFeel
+                     * com.jgoodies.looks.plastic.Plastic3DLookAndFeel
+                     * com.jgoodies.looks.plastic.PlasticXPLookAndFeel
+                     * BlackBusiness subistantce
+                     * Luna jtoo
+                     * acryl - jato
                      */
-                    //BlackBusiness subistantce
-                    //Luna jtoo
-                    //acryl - jato
-                    // UIManager.setLookAndFeel(new PlasticLookAndFeel());
                     UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
                 {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin: "+e.getMessage());
                 }
                 new LicenseFrame().setVisible(true);
-
             }
 
         });
@@ -414,8 +445,4 @@ public class LicenseFrame extends JFrame
     private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
 
-    private void registreAplicacao()
-    {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }
