@@ -60,7 +60,7 @@ public class Boot
                     //Luna jtoo
                     //acryl - jato
                     // UIManager.setLookAndFeel(new PlasticLookAndFeel());
-                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                  UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
                 {

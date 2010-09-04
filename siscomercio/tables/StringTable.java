@@ -61,6 +61,23 @@ public class StringTable
      * Atualiza Dados
      */
     public static final String UPDATE_USER = "UPDATE users SET (codigo,login,password)WHERE codigo=? AND login=?";
+
+    /**
+     * Registra a App
+     */
+    public static final String REGISTRE_APP = "INSERT INTO `install`(bancoInstalado,statioMAC,StationMBSerial,Empresa,stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
+
+    /**
+     * `bancoInstalado` varchar(5) NOT NULL default 'false',
+     * `statioMAC` varchar(50) NOT NULL,
+     * `StationMBSerial` varchar(50) NOT NULL,
+     * `Empresa` varchar(50) default NULL,
+     * `stationHDSerial` varchar(50) NOT NULL,
+     * `NumEstacoes` int(50) NOT NULL,
+     * `licenseType` varchar(10) NOT NULL,
+     * `registeredFor` varchar(30) NOT NULL,
+     */
+
     /**
      * Le a tabela de Usuarios
      */
