@@ -67,6 +67,13 @@ public class StringTable
      */
     public static final String REGISTRE_APP = "INSERT INTO `install`(bancoInstalado,statioMAC,StationMBSerial,Empresa,stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
 
+      /**
+     * Registra a App
+     */
+    public static final String READ_APP_LICENSE_DATA = "SELECT `stationMAC`, `StationMBSerial`, `Empresa`, `stationHDSerial`, `NumEstacoes`, `licenseType`, `registeredFor` FROM install";
+
+    
+
     /**
      * `bancoInstalado` varchar(5) NOT NULL default 'false',
      * `statioMAC` varchar(50) NOT NULL,
@@ -97,7 +104,7 @@ public class StringTable
     /**
      * Cria a Database
      */
-    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS wcom";
+    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS siscom";
     // *************************** Status da Database **********************/
     /**                                          
      * Status da Database

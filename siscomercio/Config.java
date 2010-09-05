@@ -164,8 +164,7 @@ public class Config
     public static void load()
     {
         InputStream is = null;
-        if(Config.DEBUG)
-            _log.info("Carregando o Arquuivo de Configuração...\n");
+            _log.info("Config: Carregando o Arquuivo de Configuração...\n");
         try
         {
 

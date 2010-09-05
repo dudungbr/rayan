@@ -10,6 +10,7 @@
  */
 package com.siscomercio.frames;
 
+import com.siscomercio.Boot;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
@@ -103,8 +104,10 @@ public class DatabaseFrame extends JFrame
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banco de Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Franklin Gothic Medium Cond", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
         jPanel2.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        botaoDeletar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoDeletar.setText("Deletar Database");
         botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +116,7 @@ public class DatabaseFrame extends JFrame
         });
         jPanel2.add(botaoDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
+        botaoInstalar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoInstalar.setText("Instalar Database");
         botaoInstalar.setToolTipText("Clique para Instalar a Base de Dados.");
         botaoInstalar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +126,7 @@ public class DatabaseFrame extends JFrame
         });
         jPanel2.add(botaoInstalar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,9 +135,11 @@ public class DatabaseFrame extends JFrame
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Status do Banco: ");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
+        dbStatusLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dbStatusLabel.setText("statusDb");
         jPanel2.add(dbStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
 
@@ -166,11 +173,12 @@ public class DatabaseFrame extends JFrame
             botaoDeletar.setEnabled(true);
         }
 
-        if(!FramePrincipal.created)
-        {
-            new Auth().setVisible(true);
+       //if(!FramePrincipal.created)
+       // {
+          //  new Auth().setVisible(true);
             dispose();
-        }
+        //   new Boot();
+     //   }*/
     }//GEN-LAST:event_botaoInstalarActionPerformed
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoDeletarActionPerformed

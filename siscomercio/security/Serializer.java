@@ -47,7 +47,7 @@ public class Serializer
         }
 
         if(Config.DEBUG)
-            _log.log(Level.INFO, "A frase contem {0} ocorrencias de {1}", new Object[]{cont, remover});
+            _log.log(Level.INFO, "A frase contem "+ cont+" ocorrencias de - ");
 
 
         // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
@@ -57,12 +57,12 @@ public class Serializer
             if(dados.length() > 30)
             {
                 if(Config.DEBUG)
-                    _log.info("deletando caracteres adicionais");
+                    _log.info("deletando caracteres adicionais..  \n");
                 dados.deleteCharAt(dados.length() - 1); // deleta os ultimos caracteres.
             }
         }
         if(Config.DEBUG)
-            _log.log(Level.INFO, "Nova String Com: {0}Caracteres.", dados.toString());
+            _log.log(Level.INFO, "Nova String Com: "+ dados.length()+ "Caracteres. \n");
 
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------
@@ -103,7 +103,7 @@ public class Serializer
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
          if(Config.DEBUG)
-        _log.log(Level.INFO, "Codigo de Ativa\u00e7\u00e3o: {0}", code);
+        _log.info("Codigo de Ativacao: " + code);
          generated = true;
         return code;
 
@@ -115,7 +115,7 @@ public class Serializer
     public static String getGeneratedCode()
     {
         if(code.isEmpty())
-            return "nao foi posivel gerar o codigo";
+            return "nao foi posivel gerar o codigo\n";
 
         return code;
     }
