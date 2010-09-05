@@ -144,6 +144,7 @@ public class WindowsUtil
      */
     public static void checkProcess(String namePart)
     {
+        _log.info("Checando Existencia do Servidor MySQL...\n");
         List<String> processes = listRunningProcesses();
         String result = "";
 
@@ -165,7 +166,7 @@ public class WindowsUtil
         }
         else
             if(Config.DEBUG)
-                _log.info("processo ok \n");
+                _log.info("processo mysql funcionando! ok \n");
     }
 
     /**

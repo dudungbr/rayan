@@ -5,12 +5,12 @@
 package com.siscomercio;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+import com.siscomercio.frames.DatabaseFrame;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.LicenseFrame;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
-import com.siscomercio.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
@@ -27,10 +27,6 @@ import javax.swing.UIManager;
 public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
-    /**
-     * 
-     */
-    public static boolean isRegistrado = false;
 
     /**
      * @param args the command line arguments
@@ -38,54 +34,76 @@ public class Boot
      */
     public static void main(String[] args) throws Exception
     {
+        //Carrega as Configs
+        Config.load();
 
-        if(!isRegistrado)
+        // Checka  O Processo MySQL esta em Execução.
+        // ------------------------
+        // if(!Config.DEVELOPER)
+        WindowsUtil.checkProcess("mysql");
+
+        // Lê a Tabela de Instalacao da DB
+        // --------------------------------
+         if(!DatabaseManager._installed)
+        DatabaseManager.readInstallTable();
+
+        _log.info("instalacao: " +DatabaseManager._installed+ "\n");
+
+
+        // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
+        // ------------------------
+        if(!DatabaseManager._installed)
         {
-            Serializer.generateActivationCode();
+
             EventQueue.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
             {
-                // PlasticLookAndFeel.setPlasticTheme(new Silver());
-                try
+                @Override
+                public void run()
                 {
-                    /**
-                     * #  com.jgoodies.looks.windows.WindowsLookAndFeel
-                    # com.jgoodies.looks.plastic.PlasticLookAndFeel
-                    # com.jgoodies.looks.plastic.Plastic3DLookAndFeel
-                    # com.jgoodies.looks.plastic.PlasticXPLookAndFeel
-                     */
-                    //BlackBusiness subistantce
-                    //Luna jtoo
-                    //acryl - jato
-                    // UIManager.setLookAndFeel(new PlasticLookAndFeel());
+                     try
+                {
                   UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
                 {
                     SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
                 }
-                new LicenseFrame().setVisible(true);
+                    DatabaseFrame.getInstance().setVisible(true);
+                }
 
-            }
-
-        });
+            });
         }
-        else
+        //Le os Dados da Licenca
+        // --------------------------
+        DatabaseManager.readLicenseData();
+
+        // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
+        // ------------------------
+        if(DatabaseManager._installed && !DatabaseManager._licensed)
         {
-            //Carrega as Configs
-            Config.load();
+            EventQueue.invokeLater(new Runnable()
+            {
 
-            // Checka  O Processo MySQL esta em Execução.
-            if(!Config.DEVELOPER)
-                WindowsUtil.checkProcess("mysql");
+                @Override
+                public void run()
+                {
+                try
+                {
+                  UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                }
+                catch(Exception e)
+                {
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                }
+                    new LicenseFrame().setVisible(true);
+                }
 
-            // Lê a Tabela de Instalacao da DB
-            if(!DatabaseManager._installed)
-                DatabaseManager.readInstallTable();
-
+            });
+        }
+        if(DatabaseManager._installed && DatabaseManager._licensed)
+        {
             // Chama a Tela de Login
+            // ------------------------
             if(Config.DEBUG)
                 EventQueue.invokeLater(new Runnable()
                 {
@@ -104,6 +122,7 @@ public class Boot
                     {
                         new FramePrincipal().setVisible(true);
                     }
+
                 });
         }
     }

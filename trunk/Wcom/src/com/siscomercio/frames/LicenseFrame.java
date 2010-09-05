@@ -95,7 +95,7 @@ public class LicenseFrame extends JFrame
 
         if(valorCampoSerial.equalsIgnoreCase(validSerial))
         {
-            Boot.isRegistrado = true;
+            DatabaseManager._licensed = true;
             dispose();
             registreAplicacao();
             SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");

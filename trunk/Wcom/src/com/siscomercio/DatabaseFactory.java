@@ -119,16 +119,13 @@ public class DatabaseFactory
         }
         catch(SQLException x)
         {
-            if(Config.DEBUG)
-              SystemUtil.showErrorMsg("Database Connection FAILED");
+             SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + x.getLocalizedMessage());
             // re-throw the exception
             throw x;
         }
         catch(Exception e)
         {
-            if(Config.DEBUG)
-              SystemUtil.showErrorMsg("Database Connection FAILED");
-            SystemUtil.showErrorMsg("could not init DB connection:" + e);
+            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage());
         }
     }
 

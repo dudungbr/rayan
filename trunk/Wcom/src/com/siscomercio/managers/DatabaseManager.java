@@ -41,6 +41,17 @@ public class DatabaseManager
      *se o banco esta instalado
      */
     public static boolean _installed;
+    /**
+     *se a apliacao esta Licenciada
+     */
+    public static boolean _licensed;
+    public static String _registeredFor;
+    public static String _registeredMac;
+    public static String _registeredMBSN;
+    public static String _empresa;
+    public static String _licenceType;
+    public static String _registeredHDSN;
+    public static int _numStacoes;
 
     /**
      *  ler eExecuta todos os  Scripts SQL dentro da pasta SQL
@@ -317,7 +328,10 @@ public class DatabaseManager
             closeConnections(ps, con);
 
             if(Config.DEBUG)
-                _log.log(Level.INFO, "o codigo do usuario {0} e {1}\n", new Object[]{login, codigo});
+                _log.log(Level.INFO, "o codigo do usuario {0} e {1}\n", new Object[]
+                        {
+                            login, codigo
+                        });
         }
         catch(SQLException ex)
         {
@@ -361,7 +375,10 @@ public class DatabaseManager
         if(ok)
         {
             if(Config.DEBUG)
-                _log.log(Level.INFO, "trocando senha do usuario: {0}para: {1}\n", new Object[]{login, newPass});
+                _log.log(Level.INFO, "trocando senha do usuario: {0}para: {1}\n", new Object[]
+                        {
+                            login, newPass
+                        });
             SystemUtil.showMsg("Senha Trocada com Sucesso!");
         }
     }
@@ -414,6 +431,38 @@ public class DatabaseManager
     }
 
     /**
+     * Le os dados da tabela e Instalacao
+     **/
+    public static void readLicenseData()
+    {
+        Connection con = null;
+        if(Config.DEBUG)
+            _log.info("lendo dados da Licensa \n");
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.READ_APP_LICENSE_DATA);
+            ResultSet rset = ps.executeQuery();
+            while(rset.next())
+            {
+                _registeredMac = rset.getString("stationMAC");
+                _registeredMBSN = rset.getString("stationMBSerial");
+                _empresa = rset.getString("Empresa");
+                _registeredHDSN = rset.getString("stationHDSerial");
+                _numStacoes = rset.getInt("NumEstacoes");
+                _licenceType = rset.getString("licenseType");
+                _registeredFor = rset.getString("registeredFor");
+            }
+            closeConnections(ps, rset, con);
+        }
+        catch(Exception e)
+        {
+            if(Config.DEBUG)
+                _log.log(Level.SEVERE, "DatabaseManager: Error reading License Data: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * seta o nivel de acesso de um usuario
      * @param lvl
      */
@@ -459,7 +508,10 @@ public class DatabaseManager
             // Fecha as Conexoes
             closeConnections(ps, rset, con);
             if(Config.DEBUG)
-                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1}", new Object[]{usr, level});
+                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1}", new Object[]
+                        {
+                            usr, level
+                        });
         }
         catch(Exception e)
         {
