@@ -43,87 +43,98 @@ public class Boot
         WindowsUtil.checkProcess("mysql");
 
         // Lê a Tabela de Instalacao da DB
-        // --------------------------------
-         if(!DatabaseManager._installed)
-        DatabaseManager.readInstallTable();
-
-        _log.info("instalacao: " +DatabaseManager._installed+ "\n");
-
+        //--------------------------------
+        DatabaseManager.tryReadInstallData();
 
         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
         // ------------------------
         if(!DatabaseManager._installed)
         {
-
             EventQueue.invokeLater(new Runnable()
             {
                 @Override
                 public void run()
                 {
-                     try
-                {
-                  UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                }
-                catch(Exception e)
-                {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                }
+                    try
+                    {
+                        UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                    }
+                    catch(Exception e)
+                    {
+                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                    }
                     DatabaseFrame.getInstance().setVisible(true);
                 }
 
             });
         }
-        //Le os Dados da Licenca
-        // --------------------------
-        DatabaseManager.readLicenseData();
 
-        // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
-        // ------------------------
-        if(DatabaseManager._installed && !DatabaseManager._licensed)
+        // Caso a DB Esteja Instalada Prosegue Para a Licenca
+        // ------------------------------------------------
+        if(DatabaseManager._installed)
         {
-            EventQueue.invokeLater(new Runnable()
-            {
-
-                @Override
-                public void run()
-                {
-                try
-                {
-                  UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                }
-                catch(Exception e)
-                {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                }
-                    new LicenseFrame().setVisible(true);
-                }
-
-            });
-        }
-        if(DatabaseManager._installed && DatabaseManager._licensed)
-        {
-            // Chama a Tela de Login
+            // OK! Podemos Abrir o Sistema.
             // ------------------------
-            if(Config.DEBUG)
-                EventQueue.invokeLater(new Runnable()
+            if(DatabaseManager._licensed)
+            {
+                // Chama a Tela de Login
+                // ------------------------
+                if(Config.DEBUG)
                 {
-                    @Override
-                    public void run()
+                    EventQueue.invokeLater(new Runnable()
                     {
-                        Auth.getInstance().setVisible(true);
-                    }
+                        @Override
+                        public void run()
+                        {
+                            Auth.getInstance().setVisible(true);
+                        }
 
-                });
+                    });
+                }
+                else
+                {
+                    EventQueue.invokeLater(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            new FramePrincipal().setVisible(true);
+                        }
+
+                    });
+                }
+            }
+            //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
+            // -----------------------------------------------------------
             else
-                EventQueue.invokeLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        new FramePrincipal().setVisible(true);
-                    }
+            {
+                //Le os Dados da Licenca
+                // --------------------------
+                DatabaseManager.readLicenseData();
 
-                });
+                // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
+                // ------------------------
+                if(!DatabaseManager._licensed)
+                {
+                    EventQueue.invokeLater(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            try
+                            {
+                                UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                            }
+                            catch(Exception e)
+                            {
+                                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                            }
+                            new LicenseFrame().setVisible(true);
+                        }
+
+                    });
+                }
+            }
         }
     }
 

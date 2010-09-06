@@ -62,7 +62,7 @@ public class Serializer
             }
         }
         if(Config.DEBUG)
-            _log.log(Level.INFO, "Nova String Com: "+ dados.length()+ "Caracteres. \n");
+            _log.log(Level.INFO, "Nova String Com: "+ dados.length()+ " Caracteres. \n");
 
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------

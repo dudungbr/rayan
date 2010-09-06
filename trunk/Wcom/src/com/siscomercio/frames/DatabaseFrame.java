@@ -10,12 +10,14 @@
  */
 package com.siscomercio.frames;
 
-import com.siscomercio.Boot;
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
 import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.security.Auth;
+import com.siscomercio.utilities.SystemUtil;
+import java.awt.EventQueue;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -173,12 +175,37 @@ public class DatabaseFrame extends JFrame
             botaoDeletar.setEnabled(true);
         }
 
-       //if(!FramePrincipal.created)
-       // {
-          //  new Auth().setVisible(true);
-            dispose();
-        //   new Boot();
-     //   }*/
+        //fecha esse frame
+        // -------------------
+        dispose();
+
+
+        //Le os Dados da Licenca
+        // --------------------------
+        DatabaseManager.readLicenseData();
+
+        // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
+        // ------------------------
+        if(!DatabaseManager._licensed)
+        {
+            EventQueue.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        UIManager.setLookAndFeel(new AcrylLookAndFeel());
+                    }
+                    catch(Exception e)
+                    {
+                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                    }
+                    new LicenseFrame().setVisible(true);
+                }
+            });
+        }
+
     }//GEN-LAST:event_botaoInstalarActionPerformed
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoDeletarActionPerformed
