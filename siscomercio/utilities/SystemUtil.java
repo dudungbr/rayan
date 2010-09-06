@@ -169,7 +169,7 @@ public class SystemUtil
     {
         if(Config.DEBUG)
             _log.info("enviando janela de mensagem... \n");
-
+   SoundManager.playSound("info.wav");
         JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> "+msg+ "</b></font></html>", "Informacao", JOptionPane.INFORMATION_MESSAGE);
 
     }

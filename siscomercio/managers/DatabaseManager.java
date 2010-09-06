@@ -53,6 +53,7 @@ public class DatabaseManager
     public static String _registeredHDSN;
     public static int _numStacoes;
 
+    // public static boolean _leuTabela;
     /**
      *  ler eExecuta todos os  Scripts SQL dentro da pasta SQL
      *
@@ -180,7 +181,7 @@ public class DatabaseManager
         readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
         _installed = true;
-        SystemUtil.showMsg("banco instalado com sucesso!");
+        SystemUtil.showMsg("Banco de Dados Instalado com Sucesso!");
     }
 
     /**
@@ -403,8 +404,9 @@ public class DatabaseManager
 
     /**
      * Le a Tabela de Instalacao Atual
-     **/
-    public static void readInstallTable()
+     *
+     */
+    public static void tryReadInstallData()
     {
         Connection con = null;
         if(Config.DEBUG)
@@ -418,10 +420,11 @@ public class DatabaseManager
             {
                 _installed = rset.getBoolean("bancoInstalado");
             }
+           
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)
-                _log.log(Level.INFO, "_installed = {0}\n", _installed);
+                _log.info("tryReadInstallData(): _installed: "+ _installed);
         }
         catch(Exception e)
         {
