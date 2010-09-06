@@ -65,16 +65,10 @@ public class StringTable
     /**
      * Registra a App
      */
-    public static final String REGISTRE_APP = "INSERT INTO `install`(bancoInstalado,statioMAC,StationMBSerial,Empresa,stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
+    public static final String REGISTRE_APP = "REPLACE INTO install VALUES (?,?,?,?,?,?,?,?,?)";
+            // bancoInstalado=?,stationMAC=?,StationMBSerial=?,Empresa=?,stationHDSerial=?,NumEstacoes=?,licenseType=?,registeredFor=?";
 
-      /**
-     * Registra a App
-     */
-    public static final String READ_APP_LICENSE_DATA = "SELECT `stationMAC`, `StationMBSerial`, `Empresa`, `stationHDSerial`, `NumEstacoes`, `licenseType`, `registeredFor` FROM install";
-
-    
-
-    /**
+        /**
      * `bancoInstalado` varchar(5) NOT NULL default 'false',
      * `statioMAC` varchar(50) NOT NULL,
      * `StationMBSerial` varchar(50) NOT NULL,
@@ -84,6 +78,15 @@ public class StringTable
      * `licenseType` varchar(10) NOT NULL,
      * `registeredFor` varchar(30) NOT NULL,
      */
+
+
+      /**
+     * Registra a App
+     */
+    public static final String READ_APP_LICENSE_DATA = "SELECT `stationMAC`, `StationMBSerial`, `Empresa`, `stationHDSerial`, `NumEstacoes`, `licenseType`, `registeredFor`, `licenciado` FROM install";
+
+    
+
 
     /**
      * Le a tabela de Usuarios
@@ -104,7 +107,7 @@ public class StringTable
     /**
      * Cria a Database
      */
-    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS siscom";
+    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.DATABASE;
     // *************************** Status da Database **********************/
     /**                                          
      * Status da Database
