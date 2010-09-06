@@ -455,6 +455,8 @@ public class DatabaseManager
                 _numStacoes = rset.getInt("NumEstacoes");
                 _licenceType = rset.getString("licenseType");
                 _registeredFor = rset.getString("registeredFor");
+                _licensed = rset.getBoolean("licenciado");
+
             }
             closeConnections(ps, rset, con);
         }

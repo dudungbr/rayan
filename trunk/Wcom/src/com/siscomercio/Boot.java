@@ -73,6 +73,13 @@ public class Boot
         // ------------------------------------------------
         if(DatabaseManager._installed)
         {
+
+            //Le os Dados da Licenca
+            // --------------------------
+            DatabaseManager.readLicenseData();
+
+               _log.info("LICENCA: "+DatabaseManager._licensed);
+
             // OK! Podemos Abrir o Sistema.
             // ------------------------
             if(DatabaseManager._licensed)
@@ -108,34 +115,23 @@ public class Boot
             // -----------------------------------------------------------
             else
             {
-                //Le os Dados da Licenca
-                // --------------------------
-                DatabaseManager.readLicenseData();
-
-                // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
-                // ------------------------
-                if(!DatabaseManager._licensed)
+                EventQueue.invokeLater(new Runnable()
                 {
-                    EventQueue.invokeLater(new Runnable()
+                    @Override
+                    public void run()
                     {
-                        @Override
-                        public void run()
+                        try
                         {
-                            try
-                            {
-                                UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                            }
-                            catch(Exception e)
-                            {
-                                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                            }
-                            new LicenseFrame().setVisible(true);
+                            UIManager.setLookAndFeel(new AcrylLookAndFeel());
                         }
-
-                    });
-                }
+                        catch(Exception e)
+                        {
+                            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                        }
+                        new LicenseFrame().setVisible(true);
+                    }
+                });
             }
         }
     }
-
 }

@@ -12,21 +12,23 @@ package com.siscomercio.frames;
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import com.siscomercio.Boot;
 import com.siscomercio.Config;
 import com.siscomercio.DatabaseFactory;
 import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Serializer;
 import com.siscomercio.tables.StringTable;
+import com.siscomercio.utilities.DiskUtil;
+import com.siscomercio.utilities.MbUtil;
+import com.siscomercio.utilities.NetworkUtil;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
 import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -39,6 +41,9 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class LicenseFrame extends JFrame
 {
+    int numEstacoes = 0;
+    private static final Logger _log = Logger.getLogger(LicenseFrame.class.getName());
+
     /** Creates new form LicenseFrame */
     public LicenseFrame()
     {
@@ -97,7 +102,7 @@ public class LicenseFrame extends JFrame
         {
             DatabaseManager._licensed = true;
             dispose();
-            registreAplicacao();
+            registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
             SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
             AppManager.getInstance().restartApp();
         }
@@ -173,11 +178,9 @@ public class LicenseFrame extends JFrame
             resetCampos();
             return;
         }
+        numEstacoes = Integer.parseInt(String.valueOf(spinnerContadorEstacoes.getModel().getValue()));
 
-
-        Object numEstacoes = spinnerContadorEstacoes.getModel().getValue();
-
-        if(Integer.parseInt(numEstacoes.toString()) <= 0)
+        if(numEstacoes <= 0)
         {
             SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.");
             resetCampos();
@@ -327,7 +330,7 @@ public class LicenseFrame extends JFrame
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botaoRegistrar)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getRootPane().setDefaultButton(botaoRegistrar);
@@ -358,29 +361,39 @@ public class LicenseFrame extends JFrame
     /**
      * Registra a Aplicação Baseada nos Dados Fornecidos.
      */
-     private void registreAplicacao()
+    private void registreAplicacao(String nomeEmpresa, int numEstacoes, String licenceType)
     {
-
+        //"INSERT INTO `install`(bancoInstalado,stationMAC,StationMBSerial,Empresa,
+        //stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
         Connection con = null;
-        String commandLine = StringTable.REGISTRE_APP;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(commandLine);
-            ResultSet rset = ps.executeQuery();
-            DatabaseManager.closeConnections(ps, rset, con);
-            SystemUtil.showMsg("Usuario Cadastrado com Sucesso!");
+            PreparedStatement ps = con.prepareStatement(StringTable.REGISTRE_APP);
+            ps.setBoolean(1, true);
+            ps.setString(2, NetworkUtil.getMac());
+            ps.setString(3, MbUtil.getMotherboardSN());
+            ps.setString(4, nomeEmpresa);
+            ps.setString(5, DiskUtil.getSerialNumber("C"));
+            ps.setInt(6, numEstacoes);
+            ps.setString(7, licenceType);
+            ps.setString(8, nomeEmpresa);
+             ps.setBoolean(9, true);
+            ps.execute();
+            ps.close();
+            con.close();
+            _log.info("gravando dados do registro no Banco de Dados.");
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg(e.toString());
+            SystemUtil.showErrorMsg(e.getMessage());
 
         }
     }
 
-     /**
-      *
-      */
+    /**
+     *
+     */
     private void prepareFrame()
     {
         //Monitora o Campo e sempre insere caracteres em caixa alta
@@ -400,28 +413,21 @@ public class LicenseFrame extends JFrame
      */
     public static void main(String args[])
     {
+        //esse codigo do e eecutando quando o arquivo e rodado diretamente
         EventQueue.invokeLater(new Runnable()
         {
             @Override
             public void run()
             {
-                // PlasticLookAndFeel.setPlasticTheme(new Silver());
+
                 try
                 {
-                    /**
-                     * com.jgoodies.looks.windows.WindowsLookAndFeel
-                     * com.jgoodies.looks.plastic.PlasticLookAndFeel
-                     * com.jgoodies.looks.plastic.Plastic3DLookAndFeel
-                     * com.jgoodies.looks.plastic.PlasticXPLookAndFeel
-                     * BlackBusiness subistantce
-                     * Luna jtoo
-                     * acryl - jato
-                     */
+
                     UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 }
                 catch(Exception e)
                 {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin: "+e.getMessage());
+                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin: " + e.getMessage());
                 }
                 new LicenseFrame().setVisible(true);
             }
@@ -444,5 +450,4 @@ public class LicenseFrame extends JFrame
     private javax.swing.JLabel labelNumEstacoes;
     private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
-
 }
