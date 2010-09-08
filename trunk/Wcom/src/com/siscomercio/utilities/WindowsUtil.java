@@ -4,6 +4,7 @@
  */
 package com.siscomercio.utilities;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.siscomercio.tables.ErrorTable;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,6 +21,7 @@ import java.io.FileFilter;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.UIManager;
 import javolution.util.FastList;
 
 /**
@@ -161,7 +163,15 @@ public class WindowsUtil
 
         if(!result.contains(namePart))
         {
-            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "\n \n Detalhes: \n" + getProcess(namePart) + "\n" + getSuport());
+            try
+            {
+                UIManager.setLookAndFeel(new AcrylLookAndFeel());
+            }
+            catch(Exception e)
+            {
+                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+            }
+            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport()+"<br><br>");
             System.exit(0);
         }
         else
@@ -187,8 +197,9 @@ public class WindowsUtil
     {
         if(pName.startsWith("mysql"))
         {
-           pName = "mysqld.exe\n" + "mysqld-nt.exe\n";
-           
+            pName = "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld.exe<br>" 
+                  + "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld-nt.exe<br>";
+
         }
         else
             throw new UnsupportedOperationException("valor nao suportado");
@@ -199,10 +210,10 @@ public class WindowsUtil
     /**
      * Finaliza um Processo em Execucao na Máquina
      *
-     * @param processo
+     * @param processToKill
      * @return false
      */
-    public static boolean killProcess(String processo)
+    public static boolean killProcess(String processToKill)
     {
         try
         {
@@ -214,10 +225,10 @@ public class WindowsUtil
             while((line = input.readLine()) != null)
             {
                 if(!line.trim().equals(""))
-                    if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processo))
+                    if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processToKill))
                     {
                         Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
-                        _log.log(Level.INFO, "Matando Processo: {0}", processo);
+                        _log.log(Level.INFO, "Matando Processo: {0}", processToKill);
                         return true;
                     }
             }
@@ -226,7 +237,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-             SystemUtil.showErrorMsg(err.getMessage());
+            SystemUtil.showErrorMsg(err.getMessage());
         }
         return false;
     }
@@ -261,7 +272,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-             SystemUtil.showErrorMsg(err.getMessage());
+            SystemUtil.showErrorMsg(err.getMessage());
         }
         return processes;
 

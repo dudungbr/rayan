@@ -61,7 +61,7 @@ public class Boot
                     }
                     catch(Exception e)
                     {
-                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
+                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin"+ e.getMessage());
                     }
                     DatabaseFrame.getInstance().setVisible(true);
                 }
