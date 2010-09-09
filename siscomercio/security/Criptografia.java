@@ -15,7 +15,7 @@ import com.siscomercio.Config;
  */
 public class Criptografia
 {
-    private static Logger _log = Logger.getLogger(Criptografia.class.getName());
+    private static final Logger _log = Logger.getLogger(Criptografia.class.getName());
 
     /**
      * Criptografa a Senha do Usuario P/ Versao MD5 de Criptografia
@@ -38,7 +38,7 @@ public class Criptografia
                 hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
             }
             if(Config.DEBUG)
-                _log.info("Criptografando Senha:  " + password + " P / Versao  MD5 : " + hexString.toString() + "\n");
+                _log.log(Level.INFO, "Criptografando Senha:  {0} P / Versao  MD5 : {1}\n", new Object[]{password, hexString.toString()});
             password = hexString + "";
         }
         catch(NoSuchAlgorithmException nsae)

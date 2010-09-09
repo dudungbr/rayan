@@ -47,7 +47,7 @@ public class Serializer
         }
 
         if(Config.DEBUG)
-            _log.log(Level.INFO, "A frase contem "+ cont+" ocorrencias de - ");
+            _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);
 
 
         // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
@@ -62,7 +62,7 @@ public class Serializer
             }
         }
         if(Config.DEBUG)
-            _log.log(Level.INFO, "Nova String Com: "+ dados.length()+ " Caracteres. \n");
+            _log.log(Level.INFO, "Nova String Com: {0} Caracteres. \n", dados.length());
 
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------
@@ -103,7 +103,7 @@ public class Serializer
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
          if(Config.DEBUG)
-        _log.info("Codigo de Ativacao: " + code);
+        _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
          generated = true;
         return code;
 
