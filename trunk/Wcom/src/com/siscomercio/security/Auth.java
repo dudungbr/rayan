@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -56,7 +57,7 @@ public class Auth extends JFrame {
     {
         return SingletonHolder._instance;
     }
-    private static Logger _log = Logger.getLogger(Auth.class.getName());
+    private static final Logger _log = Logger.getLogger(Auth.class.getName());
     /**
      *
      */
@@ -103,7 +104,7 @@ public class Auth extends JFrame {
         botaoConfigurar = new JButton("Configurar...");
 
         if (Config.DEBUG)
-            _log.info("Auth() ... install = " + DatabaseManager._installed + "\n");
+            _log.log(Level.INFO, "Auth() ... install = {0}\n", DatabaseManager._installed);
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
         if (DatabaseManager._installed)
@@ -151,7 +152,7 @@ public class Auth extends JFrame {
                 if (Config.DEBUG)
                     _log.info("executando acao do botao login \n");
                 String senha = new String(campoSenha.getPassword());
-                String login = new String(campoUsuario.getText());
+                String login = campoUsuario.getText();
 
                 if (isAuthed(login, senha))
                     showConfirmWindow();
@@ -224,7 +225,7 @@ public class Auth extends JFrame {
         {
             if (Config.DEBUG)
                 //checa se os dados estao ok...
-                _log.info("checando dados: senha  = " + senha + " user = " + login);
+                _log.log(Level.INFO, "checando dados: senha  = {0} user = {1}", new Object[]{senha, login});
 
             if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {

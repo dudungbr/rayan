@@ -424,7 +424,7 @@ public class DatabaseManager
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)
-                _log.info("tryReadInstallData(): _installed: "+ _installed);
+                _log.log(Level.INFO, "tryReadInstallData(): _installed: {0}", _installed);
         }
         catch(Exception e)
         {
@@ -522,7 +522,7 @@ public class DatabaseManager
         {
             _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
         }
-        _log.info("nivel de accesso:  " + level);
+        _log.log(Level.INFO, "nivel de accesso:  {0}", level);
         return level;
     }
 

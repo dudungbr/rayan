@@ -13,6 +13,7 @@ import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 
@@ -78,7 +79,7 @@ public class Boot
             // --------------------------
             DatabaseManager.readLicenseData();
 
-               _log.info("LICENCA: "+DatabaseManager._licensed);
+               _log.log(Level.INFO, "LICENCA: {0}", DatabaseManager._licensed);
 
             // OK! Podemos Abrir o Sistema.
             // ------------------------
