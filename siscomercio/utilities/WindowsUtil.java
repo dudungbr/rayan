@@ -123,19 +123,19 @@ public class WindowsUtil
         DecimalFormat df2 = new DecimalFormat("   'KB' ");
 
         SystemUtil.showMsg("Relatorio Gerado as "
-                           + sdf.format(new Date()) + ": \n" + "\n"
-                           + "|========= Memoria Livre =========" + "\n"
-                           + "|    |= Total:" + df2.format(max) + "\n"
+                           + sdf.format(new Date()) + ": <br>" + "<br>"
+                           + "|========= Memoria Livre =========" + "<br>"
+                           + "|    |= Total:" + df2.format(max) + "<br>"
                            + "|    |= Memoria Total:" + df2.format(allocated)
-                           + df.format(allocated / max * 100) + "\n"
+                           + df.format(allocated / max * 100) + "<br>"
                            + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
-                           + df.format(nonAllocated / max * 100) + "\n" + "\n"
-                           + " =========  Memoria Alocada ========== \n"
-                           + "|    |= Total:" + df2.format(allocated) + "\n"
+                           + df.format(nonAllocated / max * 100) + "<br>" + "<br>"
+                           + " =========  Memoria Alocada ========== <br>"
+                           + "|    |= Total:" + df2.format(allocated) + "<br>"
                            + "|    |= Memoria Usada:" + df2.format(used)
-                           + df.format(used / max * 100) + "\n"
+                           + df.format(used / max * 100) + "<br>"
                            + "|    |= Memoria Cacheada:" + df2.format(cached)
-                           + df.format(cached / max * 100) + "\n"
+                           + df.format(cached / max * 100) + "<br>"
                            + "|    |= Memoria Disponivel:" + df2.format(useable)
                            + df.format(useable / max * 100));
     }

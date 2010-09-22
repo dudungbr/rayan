@@ -222,7 +222,15 @@ public class FramePrincipal extends JFrame
         jLabel13 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
-        subMenuInformacoes = new javax.swing.JMenu();
+        itemReiniciar = new javax.swing.JMenuItem();
+        itemSair = new javax.swing.JMenuItem();
+        menuDb = new javax.swing.JMenu();
+        itemBancoDados = new javax.swing.JMenuItem();
+        menuOpcoes = new javax.swing.JMenu();
+        itemHabilitarSom = new javax.swing.JCheckBoxMenuItem();
+        itemTrocarSenha = new javax.swing.JMenuItem();
+        menuSuporte = new javax.swing.JMenu();
+        menuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         itemHardware = new javax.swing.JMenu();
         itemMemoria = new javax.swing.JMenuItem();
@@ -234,13 +242,6 @@ public class FramePrincipal extends JFrame
         itemSistema = new javax.swing.JMenu();
         itemRegistro = new javax.swing.JMenuItem();
         itemVersao = new javax.swing.JMenuItem();
-        itemReiniciar = new javax.swing.JMenuItem();
-        itemSair = new javax.swing.JMenuItem();
-        menuDb = new javax.swing.JMenu();
-        itemBancoDados = new javax.swing.JMenuItem();
-        menuOpcoes = new javax.swing.JMenu();
-        itemHabilitarSom = new javax.swing.JCheckBoxMenuItem();
-        itemTrocarSenha = new javax.swing.JMenuItem();
 
         jMenu4.setText("File");
         jMenuBar1.add(jMenu4);
@@ -414,98 +415,6 @@ public class FramePrincipal extends JFrame
         menuSistema.setText("Sistema");
         menuSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        subMenuInformacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
-        subMenuInformacoes.setText("Informações");
-        subMenuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        subMenuInformacoes.add(jSeparator1);
-
-        itemHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
-        itemHardware.setText("Hardware");
-        itemHardware.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
-        itemMemoria.setText("Memória");
-        itemHardware.add(itemMemoria);
-
-        itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
-        itemProcessador.setText("Processador");
-        itemProcessador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemProcessadorActionPerformed(evt);
-            }
-        });
-        itemHardware.add(itemProcessador);
-
-        subMenuInformacoes.add(itemHardware);
-
-        itemSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
-        itemSoftware.setText("Software");
-        itemSoftware.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
-        itemDb.setText("Banco de Dados");
-        itemDb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDbActionPerformed(evt);
-            }
-        });
-        itemSoftware.add(itemDb);
-
-        itemJava.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
-        itemJava.setText("Java");
-        itemJava.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemJavaActionPerformed(evt);
-            }
-        });
-        itemSoftware.add(itemJava);
-
-        itemSistemaOperacional.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
-        itemSistemaOperacional.setText("Sistema Operacional");
-        itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSistemaOperacionalActionPerformed(evt);
-            }
-        });
-        itemSoftware.add(itemSistemaOperacional);
-
-        subMenuInformacoes.add(itemSoftware);
-
-        itemSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
-        itemSistema.setText("Sistema");
-        itemSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
-        itemRegistro.setText("Registro");
-        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRegistroActionPerformed(evt);
-            }
-        });
-        itemSistema.add(itemRegistro);
-
-        itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
-        itemVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
-        itemVersao.setText("Versão");
-        itemVersao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemVersaoActionPerformed(evt);
-            }
-        });
-        itemSistema.add(itemVersao);
-
-        subMenuInformacoes.add(itemSistema);
-
-        menuSistema.add(subMenuInformacoes);
-
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         itemReiniciar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8437_16x16.png"))); // NOI18N
@@ -549,6 +458,7 @@ public class FramePrincipal extends JFrame
         menuOpcoes.setText("Opções");
         menuOpcoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
+        itemHabilitarSom.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemHabilitarSom.setSelected(true);
         itemHabilitarSom.setText("       Habilitar Som");
         itemHabilitarSom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
@@ -559,6 +469,7 @@ public class FramePrincipal extends JFrame
         });
         menuOpcoes.add(itemHabilitarSom);
 
+        itemTrocarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemTrocarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7724_16x16.png"))); // NOI18N
         itemTrocarSenha.setText("      Trocar Senha");
         itemTrocarSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -569,6 +480,106 @@ public class FramePrincipal extends JFrame
         menuOpcoes.add(itemTrocarSenha);
 
         barraDeMenu.add(menuOpcoes);
+
+        menuSuporte.setText("Suporte");
+        menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        barraDeMenu.add(menuSuporte);
+
+        menuInformacoes.setText("Informações");
+        menuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        menuInformacoes.add(jSeparator1);
+
+        itemHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
+        itemHardware.setText("Hardware");
+        itemHardware.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
+        itemMemoria.setText("Memória");
+        itemMemoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMemoriaActionPerformed(evt);
+            }
+        });
+        itemHardware.add(itemMemoria);
+
+        itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
+        itemProcessador.setText("Processador");
+        itemProcessador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemProcessadorActionPerformed(evt);
+            }
+        });
+        itemHardware.add(itemProcessador);
+
+        menuInformacoes.add(itemHardware);
+
+        itemSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
+        itemSoftware.setText("Software");
+        itemSoftware.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
+        itemDb.setText("Banco de Dados");
+        itemDb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDbActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemDb);
+
+        itemJava.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
+        itemJava.setText("Java");
+        itemJava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemJavaActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemJava);
+
+        itemSistemaOperacional.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
+        itemSistemaOperacional.setText("Sistema Operacional");
+        itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSistemaOperacionalActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemSistemaOperacional);
+
+        menuInformacoes.add(itemSoftware);
+
+        itemSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
+        itemSistema.setText("Sistema");
+        itemSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8271_16x16.png"))); // NOI18N
+        itemRegistro.setText("Registro");
+        itemRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRegistroActionPerformed(evt);
+            }
+        });
+        itemSistema.add(itemRegistro);
+
+        itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        itemVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
+        itemVersao.setText("Versão");
+        itemVersao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVersaoActionPerformed(evt);
+            }
+        });
+        itemSistema.add(itemVersao);
+
+        menuInformacoes.add(itemSistema);
+
+        barraDeMenu.add(menuInformacoes);
 
         setJMenuBar(barraDeMenu);
 
@@ -816,13 +827,14 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel labelVersao;
     private javax.swing.JLabel lalbelHorario;
     private javax.swing.JMenu menuDb;
+    private javax.swing.JMenu menuInformacoes;
     private javax.swing.JMenu menuOpcoes;
     private javax.swing.JMenu menuSistema;
+    private javax.swing.JMenu menuSuporte;
     private javax.swing.JLabel pcLabel;
     private javax.swing.JPanel rodape;
     private javax.swing.JLabel siteInfo;
     private javax.swing.JLabel statusInfo;
-    private javax.swing.JMenu subMenuInformacoes;
     private javax.swing.JLabel versionInfo;
     // End of variables declaration//GEN-END:variables
 }
