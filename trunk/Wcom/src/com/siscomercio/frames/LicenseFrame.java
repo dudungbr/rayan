@@ -74,7 +74,7 @@ public class LicenseFrame extends JFrame
 
         // Remove os "-" da String
         //-------------------------------
-        StringBuilder dados = new StringBuilder(labelCodigoAtivacao.getText());
+        StringBuilder dados = new StringBuilder(dadosCodAtivacao.getText());
         String remover = "-";
 
         for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
@@ -171,7 +171,7 @@ public class LicenseFrame extends JFrame
         }
         //Captura o Texto do Label
         // ---------------------
-        String codAtivacao = labelCodigoAtivacao.getText();
+        String codAtivacao = dadosCodAtivacao.getText();
         if(codAtivacao.isEmpty())
         {
             SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.");
@@ -209,35 +209,35 @@ public class LicenseFrame extends JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        painel = new javax.swing.JPanel();
+        labelCodAtivacao = new javax.swing.JLabel();
         campoEmpresa = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        labelCodigoAtivacao = new javax.swing.JLabel();
+        labelEmpresa = new javax.swing.JLabel();
+        dadosCodAtivacao = new javax.swing.JLabel();
         botaoRegistrar = new javax.swing.JButton();
         dropDownTipoLicenca = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
+        labelTipoLicenca = new javax.swing.JLabel();
         labelNumEstacoes = new javax.swing.JLabel();
         spinnerContadorEstacoes = new javax.swing.JSpinner();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        labelNumSerie = new javax.swing.JLabel();
+        labelInformacaoSuporte = new javax.swing.JLabel();
         campoSerial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro da Aplicação");
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(800, 600));
+        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        painel.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel7.setText("Código de Ativação:");
+        labelCodAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelCodAtivacao.setText("Código de Ativação:");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel3.setText("Empresa :");
+        labelEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelEmpresa.setText("Empresa :");
 
-        labelCodigoAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        labelCodigoAtivacao.setText("              dadosDaAtivacao");
+        dadosCodAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        dadosCodAtivacao.setText("              dadosDaAtivacao");
 
         botaoRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoRegistrar.setText("Registrar Sistema");
@@ -249,88 +249,88 @@ public class LicenseFrame extends JFrame
 
         dropDownTipoLicenca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mensal", "Semestral", "Anual" }));
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel5.setText("Tipo de Licenca:");
+        labelTipoLicenca.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelTipoLicenca.setText("Tipo de Licenca:");
 
         labelNumEstacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelNumEstacoes.setText("Nº Estações:");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel2.setText("Numero de Série:");
+        labelNumSerie.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelNumSerie.setText("Numero de Série:");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel8.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
+        labelInformacaoSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelInformacaoSuporte.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
+        painel.setLayout(painelLayout);
+        painelLayout.setHorizontalGroup(
+            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelLayout.createSequentialGroup()
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel3)
+                        .addComponent(labelEmpresa)
                         .addGap(68, 68, 68)
                         .addComponent(campoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(painelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel7)
+                        .addComponent(labelCodAtivacao)
                         .addGap(8, 8, 8)
-                        .addComponent(labelCodigoAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(dadosCodAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labelNumSerie))
+                            .addGroup(painelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(labelNumEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(painelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5)))
+                                .addComponent(labelTipoLicenca)))
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropDownTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spinnerContadorEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(campoSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addComponent(labelInformacaoSuporte)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                 .addContainerGap(140, Short.MAX_VALUE)
                 .addComponent(botaoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        painelLayout.setVerticalGroup(
+            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEmpresa)
                     .addComponent(campoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(labelCodigoAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCodAtivacao)
+                    .addComponent(dadosCodAtivacao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNumEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spinnerContadorEstacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropDownTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelInformacaoSuporte, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botaoRegistrar)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getRootPane().setDefaultButton(botaoRegistrar);
@@ -339,12 +339,12 @@ public class LicenseFrame extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -405,7 +405,7 @@ public class LicenseFrame extends JFrame
         if(!Serializer.generated)
             Serializer.generateActivationCode();
         //imprime no frame o codigo gerado pelos seriais
-        labelCodigoAtivacao.setText(Serializer.getGeneratedCode());
+        dadosCodAtivacao.setText(Serializer.getGeneratedCode());
     }
 
     /**
@@ -439,15 +439,15 @@ public class LicenseFrame extends JFrame
     private javax.swing.JButton botaoRegistrar;
     private javax.swing.JTextField campoEmpresa;
     private javax.swing.JTextField campoSerial;
+    private javax.swing.JLabel dadosCodAtivacao;
     private javax.swing.JComboBox dropDownTipoLicenca;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labelCodigoAtivacao;
+    private javax.swing.JLabel labelCodAtivacao;
+    private javax.swing.JLabel labelEmpresa;
+    private javax.swing.JLabel labelInformacaoSuporte;
     private javax.swing.JLabel labelNumEstacoes;
+    private javax.swing.JLabel labelNumSerie;
+    private javax.swing.JLabel labelTipoLicenca;
+    private javax.swing.JPanel painel;
     private javax.swing.JSpinner spinnerContadorEstacoes;
     // End of variables declaration//GEN-END:variables
 }
