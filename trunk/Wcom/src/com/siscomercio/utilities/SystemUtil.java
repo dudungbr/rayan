@@ -88,7 +88,7 @@ public class SystemUtil
      */
     public static void printJvmInfo()
     {
-        showMsg("\n == Virtual Machine Information (JVM) == <br>"
+        showMsg("<br> == Virtual Machine Information (JVM) == <br>"
                 + "Name: " + System.getProperty("java.vm.name") + "<br>"
                 + "JRE Directory:  " + System.getProperty("java.home") + "<br>"
                 + "Version:  " + System.getProperty("java.vm.version") + "<br>"
