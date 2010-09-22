@@ -183,7 +183,7 @@ public class SystemUtil
         {
             try
             {
-                File file = new File("./sounds/error.wav");
+                File file = new File(StringTable.SOUND_PATH.concat("info.wav"));
                 URI caminho = file.toURI();
                 AudioClip sound;
                 sound = Applet.newAudioClip(caminho.toURL());
