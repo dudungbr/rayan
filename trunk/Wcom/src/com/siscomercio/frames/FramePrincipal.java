@@ -225,10 +225,7 @@ public class FramePrincipal extends JFrame
         itemReiniciar = new javax.swing.JMenuItem();
         itemSair = new javax.swing.JMenuItem();
         menuAdministracao = new javax.swing.JMenu();
-        subMenuCadastroUsuarios = new javax.swing.JMenu();
-        itemIncluirUsuario = new javax.swing.JMenuItem();
-        itemEditarUsuario = new javax.swing.JMenuItem();
-        itemExcluirUsuario = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         itemHardware = new javax.swing.JMenu();
@@ -448,26 +445,14 @@ public class FramePrincipal extends JFrame
         menuAdministracao.setText("Administração");
         menuAdministracao.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        subMenuCadastroUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
-        subMenuCadastroUsuarios.setText("Cadastro de Usuarios");
-        subMenuCadastroUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        itemIncluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        itemIncluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
-        itemIncluirUsuario.setText("Incluir");
-        subMenuCadastroUsuarios.add(itemIncluirUsuario);
-
-        itemEditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
-        itemEditarUsuario.setText("Editar");
-        subMenuCadastroUsuarios.add(itemEditarUsuario);
-
-        itemExcluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        itemExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
-        itemExcluirUsuario.setText("Excluir");
-        subMenuCadastroUsuarios.add(itemExcluirUsuario);
-
-        menuAdministracao.add(subMenuCadastroUsuarios);
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1331_16x16.png"))); // NOI18N
+        jMenuItem1.setText("Painel De Administração");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuAdministracao.add(jMenuItem1);
 
         barraDeMenu.add(menuAdministracao);
 
@@ -612,7 +597,7 @@ public class FramePrincipal extends JFrame
         menuSuporte.setText("Suporte");
         menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        itemSuporteTecnico.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemSuporteTecnico.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemSuporteTecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
         itemSuporteTecnico.setText("Contato");
         menuSuporte.add(itemSuporteTecnico);
@@ -727,7 +712,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                new LogonFrame().setVisible(true);
+                new UserLogon().setVisible(true);
             }
 
         });
@@ -780,11 +765,25 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                new PassChangeFrame().setVisible(true);
+                new TrocarSenha().setVisible(true);
             }
 
         });
     }//GEN-LAST:event_itemTrocarSenhaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+        EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                AppManager.setTema();
+                new AdminLogon().setVisible(true);
+            }
+
+        });
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      *
@@ -828,11 +827,8 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel desktop1;
     private javax.swing.JMenuItem itemBancoDados;
     private javax.swing.JMenuItem itemDb;
-    private javax.swing.JMenuItem itemEditarUsuario;
-    private javax.swing.JMenuItem itemExcluirUsuario;
     private javax.swing.JCheckBoxMenuItem itemHabilitarSom;
     private javax.swing.JMenu itemHardware;
-    private javax.swing.JMenuItem itemIncluirUsuario;
     private javax.swing.JMenuItem itemJava;
     private javax.swing.JMenuItem itemMemoria;
     private javax.swing.JMenuItem itemProcessador;
@@ -856,6 +852,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -878,7 +875,6 @@ public class FramePrincipal extends JFrame
     private javax.swing.JPanel rodape;
     private javax.swing.JLabel siteInfo;
     private javax.swing.JLabel statusInfo;
-    private javax.swing.JMenu subMenuCadastroUsuarios;
     private javax.swing.JLabel versionInfo;
     // End of variables declaration//GEN-END:variables
 }

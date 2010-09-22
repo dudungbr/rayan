@@ -29,7 +29,7 @@ public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
 
-    private static void setTema()
+    public static void setTema()
     {
         try
         {

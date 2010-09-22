@@ -26,17 +26,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="painel" alignment="0" pref="193" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="185" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="painel" alignment="0" pref="132" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="128" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="painel">
+    <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -44,7 +44,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="Autentica&#xe7;&#xe3;o">
-              <Font PropertyName="font" name="Times New Roman" size="14" style="1"/>
+              <Font PropertyName="font" name="Tahoma" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -74,11 +74,8 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="labelUsuario">
+        <Component class="javax.swing.JLabel" name="rotuloUsuario">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
           </Properties>
           <Constraints>
@@ -87,11 +84,8 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="labelSenha">
+        <Component class="javax.swing.JLabel" name="rotuloSenha">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Senha"/>
           </Properties>
           <Constraints>
@@ -102,9 +96,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoLogin">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
           <Events>
@@ -122,9 +113,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoCancelar">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>

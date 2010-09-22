@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import com.siscomercio.Config;
 import com.siscomercio.frames.FramePrincipal;
-import com.siscomercio.frames.LogonFrame;
+import com.siscomercio.frames.UserLogon;
 import com.siscomercio.DatabaseFactory;
 
 import com.siscomercio.managers.DatabaseManager;
@@ -192,7 +192,7 @@ public class Auth extends JFrame
                         dispose();
 
                         //Solicita Autenticacao.
-                        new LogonFrame().setVisible(true);
+                        new UserLogon().setVisible(true);
                     }
 
                 });
@@ -310,7 +310,7 @@ public class Auth extends JFrame
             SoundManager.playSound(Config.LOGIN_SOUND);
 
 
-        if(!LogonFrame._reAuth)
+        if(!UserLogon._reAuth)
         {
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 

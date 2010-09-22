@@ -10,34 +10,34 @@
  */
 package com.siscomercio.frames;
 
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import com.siscomercio.Config;
+import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
+import com.siscomercio.utilities.SystemUtil;
 
 /**
- * $Revision$
- * $Author$
- * $Date$
+ * $Revision: 123 $
+ * $Author: rayan_rpg@hotmail.com $
+ * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class LogonFrame extends javax.swing.JFrame
+public class AdminLogon extends JFrame
 {
     /**
      *
      */
-    public static boolean adm;
-    /**
-     *
-     */
-    public static boolean _reAuth;
-    /**
-     *
-     */
-    public static boolean _authed;
+    public static boolean _securityAuth;
+    private Logger _log = Logger.getLogger(AdminLogon.class.getName());
 
     /** Creates new form LogonFrame */
-    public LogonFrame()
+    public AdminLogon()
     {
         initComponents();
+        if(Config.DEBUG)
+            _log.info("montando janela de logon de usuario \n");
     }
 
     /** This method is called from within the constructor to
@@ -49,35 +49,39 @@ public class LogonFrame extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        painel = new javax.swing.JPanel();
         campoUsuario = new javax.swing.JTextField();
         campoSenha = new javax.swing.JPasswordField();
-        rotuloUsuario = new javax.swing.JLabel();
-        rotuloSenha = new javax.swing.JLabel();
+        labelUsuario = new javax.swing.JLabel();
+        labelSenha = new javax.swing.JLabel();
         botaoLogin = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Autenticação Administrativa");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 14))); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 33, 63, -1));
+        painel.setBackground(new java.awt.Color(255, 255, 255));
+        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        painel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        painel.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 63, -1));
 
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
             }
         });
-        jPanel1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 63, 63, -1));
+        painel.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 63, -1));
 
-        rotuloUsuario.setText("Usuário");
-        jPanel1.add(rotuloUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, 10));
+        labelUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelUsuario.setText("Usuário");
+        painel.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 10));
 
-        rotuloSenha.setText("Senha");
-        jPanel1.add(rotuloSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, -1, -1));
+        labelSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelSenha.setText("Senha");
+        painel.add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
+        botaoLogin.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoLogin.setText("Login");
         botaoLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,31 +89,32 @@ public class LogonFrame extends javax.swing.JFrame
             }
         });
         getRootPane().setDefaultButton(botaoLogin);
-        jPanel1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        painel.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
         );
 
         getRootPane().setDefaultButton(botaoLogin);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-201)/2, (screenSize.height-166)/2, 201, 166);
+        setBounds((screenSize.width-306)/2, (screenSize.height-172)/2, 306, 172);
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
@@ -121,29 +126,26 @@ public class LogonFrame extends javax.swing.JFrame
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
 
-        String pass = new String(campoSenha.getPassword());
+        //pega o nome do usuario
+        String usuario = campoUsuario.getText();
 
-        if(Auth.checkMasterKey(campoUsuario.getText(), pass))
-        {
-            _authed = true;
-            new DatabaseFrame().setVisible(true);
-            dispose();
-        }
-        /* _reAuth = true;
-        String senha = new String(campoSenha.getPassword());
-        String usuario = new String(campoUsuario.getText());
-        Auth.getInstance().autentique(usuario, senha);
-        boolean check = DatabaseManager.checkAccessLevel(500);
-        if(check)
-        {
-        new DatabaseFrame().setVisible(true);
-        dispose();
-        }
-        else
-        {
-        Util.showErrorMsg(Auth.LAST_USER + ", voce nao tem privilegios para esta operação.");
-        }*/
+        // Pega a Senha Digitada Pelo Usuario
+        String senha = String.valueOf(campoSenha.getPassword());
 
+        boolean autorizado = Auth.getInstance().isAuthed(usuario, senha);
+
+        int accessLevel = DatabaseManager.getAccessLevel(usuario);
+
+        if(autorizado)
+        {
+            if(accessLevel >= Config.ADMIN_LVL)
+            {
+                dispose();
+                new PainelAdministracao().setVisible(true);
+            }
+            else
+                SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.");
+        }
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     /**
@@ -156,18 +158,22 @@ public class LogonFrame extends javax.swing.JFrame
             @Override
             public void run()
             {
-                new LogonFrame().setVisible(true);
+                new AdminLogon().setVisible(true);
+
+
             }
 
         });
+
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoLogin;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUsuario;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel rotuloSenha;
-    private javax.swing.JLabel rotuloUsuario;
+    private javax.swing.JLabel labelSenha;
+    private javax.swing.JLabel labelUsuario;
+    private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
 }

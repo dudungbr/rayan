@@ -1,5 +1,5 @@
 /*
- * PassChangeFrame.java
+ * TrocarSenha.java
  *
  * Created on 03/05/2010, 12:01:48
  */
@@ -14,12 +14,12 @@ import com.siscomercio.utilities.SystemUtil;
  * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
  * @author Administrador
  */
-public class PassChangeFrame extends javax.swing.JFrame
+public class TrocarSenha extends javax.swing.JFrame
 {
     private static final long serialVersionUID = 1L;
 
-    /** Creates new form PassChangeFrame */
-    public PassChangeFrame()
+    /** Creates new form TrocarSenha */
+    public TrocarSenha()
     {
         initComponents();
     }
@@ -57,7 +57,7 @@ public class PassChangeFrame extends javax.swing.JFrame
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
-        botaoAlterarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        botaoAlterarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoAlterarSenha.setText("Alterar Senha");
         botaoAlterarSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,10 +66,10 @@ public class PassChangeFrame extends javax.swing.JFrame
         });
         getRootPane().setDefaultButton(botaoAlterarSenha);
 
-        labelNovaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        labelNovaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelNovaSenha.setText("Nova Senha");
 
-        labelRepetirSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        labelRepetirSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelRepetirSenha.setText("Repetir Nova Senha");
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
@@ -166,7 +166,7 @@ public class PassChangeFrame extends javax.swing.JFrame
             @Override
             public void run()
             {
-                new PassChangeFrame().setVisible(true);
+                new TrocarSenha().setVisible(true);
             }
 
         });

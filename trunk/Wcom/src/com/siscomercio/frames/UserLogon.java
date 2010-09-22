@@ -4,40 +4,40 @@
  */
 
 /*
- * LogonFrame.java
+ * UserLogon.java
  *
  * Created on 12/04/2010, 09:53:28
  */
 package com.siscomercio.frames;
 
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import com.siscomercio.Config;
-import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
-import com.siscomercio.utilities.SystemUtil;
 
 /**
- * $Revision: 123 $
- * $Author: rayan_rpg@hotmail.com $
- * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
+ * $Revision$
+ * $Author$
+ * $Date$
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class UserLogon extends JFrame
+public class UserLogon extends javax.swing.JFrame
 {
     /**
      *
      */
-    public static boolean _securityAuth;
-    private Logger _log = Logger.getLogger(UserLogon.class.getName());
+    public static boolean adm;
+    /**
+     *
+     */
+    public static boolean _reAuth;
+    /**
+     *
+     */
+    public static boolean _authed;
 
-    /** Creates new form LogonFrame */
+    /** Creates new form UserLogon */
     public UserLogon()
     {
         initComponents();
-        if(Config.DEBUG)
-            _log.info("montando janela de logon de usuario \n");
     }
 
     /** This method is called from within the constructor to
@@ -49,38 +49,35 @@ public class UserLogon extends JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        painel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         campoUsuario = new javax.swing.JTextField();
         campoSenha = new javax.swing.JPasswordField();
-        labelUsuario = new javax.swing.JLabel();
-        labelSenha = new javax.swing.JLabel();
+        rotuloUsuario = new javax.swing.JLabel();
+        rotuloSenha = new javax.swing.JLabel();
         botaoLogin = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
-        painel.setBackground(new java.awt.Color(255, 255, 255));
-        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        painel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        painel.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 33, 63, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 14))); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 33, 63, -1));
 
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
             }
         });
-        painel.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 63, 63, -1));
+        jPanel1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 63, 63, -1));
 
-        labelUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        labelUsuario.setText("Usuário");
-        painel.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, 10));
+        rotuloUsuario.setText("Usuário");
+        jPanel1.add(rotuloUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, 10));
 
-        labelSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        labelSenha.setText("Senha");
-        painel.add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, -1, -1));
+        rotuloSenha.setText("Senha");
+        jPanel1.add(rotuloSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, -1, -1));
 
-        botaoLogin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoLogin.setText("Login");
         botaoLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,26 +85,25 @@ public class UserLogon extends JFrame
             }
         });
         getRootPane().setDefaultButton(botaoLogin);
-        painel.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
             }
         });
-        painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        jPanel1.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
         );
 
         getRootPane().setDefaultButton(botaoLogin);
@@ -125,26 +121,29 @@ public class UserLogon extends JFrame
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
 
-        //pega o nome do usuario
-        String usuario = campoUsuario.getText();
+        String pass = new String(campoSenha.getPassword());
 
-        // Pega a Senha Digitada Pelo Usuario
-        String senha = String.valueOf(campoSenha.getPassword());
-
-        boolean autorizado = Auth.getInstance().isAuthed(usuario, senha);
-
-        int accessLevel = DatabaseManager.getAccessLevel(usuario);
-
-        if(autorizado)
+        if(Auth.checkMasterKey(campoUsuario.getText(), pass))
         {
-            if(accessLevel >= Config.ADMIN_LVL)
-            {
-                dispose();
-                new AdministrationFrame().setVisible(true);
-            }
-            else
-                SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.");
+            _authed = true;
+            new DatabaseFrame().setVisible(true);
+            dispose();
         }
+        /* _reAuth = true;
+        String senha = new String(campoSenha.getPassword());
+        String usuario = new String(campoUsuario.getText());
+        Auth.getInstance().autentique(usuario, senha);
+        boolean check = DatabaseManager.checkAccessLevel(500);
+        if(check)
+        {
+        new DatabaseFrame().setVisible(true);
+        dispose();
+        }
+        else
+        {
+        Util.showErrorMsg(Auth.LAST_USER + ", voce nao tem privilegios para esta operação.");
+        }*/
+
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     /**
@@ -158,21 +157,17 @@ public class UserLogon extends JFrame
             public void run()
             {
                 new UserLogon().setVisible(true);
-
-
             }
 
         });
-
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoLogin;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUsuario;
-    private javax.swing.JLabel labelSenha;
-    private javax.swing.JLabel labelUsuario;
-    private javax.swing.JPanel painel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel rotuloSenha;
+    private javax.swing.JLabel rotuloUsuario;
     // End of variables declaration//GEN-END:variables
 }
