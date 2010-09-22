@@ -39,13 +39,13 @@ import com.siscomercio.utilities.SystemUtil;
  * $Date$
  * @author Rayan
  */
-public class Auth extends JFrame {
-
+public class Auth extends JFrame
+{
     private static final long serialVersionUID = 1L;
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder {
-
+    private static class SingletonHolder
+    {
         protected static final Auth _instance = new Auth();
     }
 
@@ -57,6 +57,7 @@ public class Auth extends JFrame {
     {
         return SingletonHolder._instance;
     }
+
     private static final Logger _log = Logger.getLogger(Auth.class.getName());
     /**
      *
@@ -76,15 +77,15 @@ public class Auth extends JFrame {
      */
     public Auth()
     {
-        if (Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("Criando Janela de Autenticacao.... \n");
 
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_LOGIN_SOUND);
 
-        if (_autenticado)
+        if(_autenticado)
         {
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 _log.info("usuario ja autenticado nao ira criar janela");
             return;
         }
@@ -96,22 +97,26 @@ public class Auth extends JFrame {
 
         // Textos da Interface
         JLabel lblUsuario = new JLabel("Usuario:");
+        lblUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         JLabel lblSenha = new JLabel("Senha:");
-
+        lblSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         // Botoes
         botaoLogin = new JButton("Login");
+        botaoLogin.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoCancelar = new JButton("Cancelar");
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoConfigurar = new JButton("Configurar...");
-
-        if (Config.DEBUG)
+        botaoConfigurar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        if(Config.DEBUG)
             _log.log(Level.INFO, "Auth() ... install = {0}\n", DatabaseManager._installed);
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if (DatabaseManager._installed)
+        if(DatabaseManager._installed)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);
-        } else
+        }
+        else
             botaoLogin.setEnabled(false);
 
         // Design
@@ -144,40 +149,42 @@ public class Auth extends JFrame {
         tela.add(BorderLayout.SOUTH, inferior);
 
         // ================= Botoes ===================================
-        botaoLogin.addActionListener(new ActionListener() {
-
+        botaoLogin.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (Config.DEBUG)
+                if(Config.DEBUG)
                     _log.info("executando acao do botao login \n");
                 String senha = new String(campoSenha.getPassword());
                 String login = campoUsuario.getText();
 
-                if (isAuthed(login, senha))
+                if(isAuthed(login, senha))
                     showConfirmWindow();
             }
+
         });
 
         getRootPane().setDefaultButton(botaoLogin);
 
         // Acao Botao Cancelar
-        botaoCancelar.addActionListener(new ActionListener() {
-
+        botaoCancelar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 dispose();
             }
+
         });
         // Ação botao Configurar
-        botaoConfigurar.addActionListener(new ActionListener() {
-
+        botaoConfigurar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                java.awt.EventQueue.invokeLater(new Runnable() {
-
+                java.awt.EventQueue.invokeLater(new Runnable()
+                {
                     @Override
                     public void run()
                     {
@@ -187,8 +194,10 @@ public class Auth extends JFrame {
                         //Solicita Autenticacao.
                         new LogonFrame().setVisible(true);
                     }
+
                 });
             }
+
         });
         //===================================================
 
@@ -223,11 +232,14 @@ public class Auth extends JFrame {
         boolean ok = false;
         try
         {
-            if (Config.DEBUG)
+            if(Config.DEBUG)
                 //checa se os dados estao ok...
-                _log.log(Level.INFO, "checando dados: senha  = {0} user = {1}", new Object[]{senha, login});
+                _log.log(Level.INFO, "checando dados: senha  = {0} user = {1}", new Object[]
+                        {
+                            senha, login
+                        });
 
-            if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
+            if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {
                 SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>");
                 resetCampos();
@@ -252,8 +264,8 @@ public class Auth extends JFrame {
             ps.setString(2, login);
             ps.setString(3, senha);
             ps.execute();
-             ResultSet rset = ps.getResultSet();
-            if (rset.next())
+            ResultSet rset = ps.getResultSet();
+            if(rset.next())
             {
                 // pega os dados
                 logindb = rset.getString("login");
@@ -263,26 +275,30 @@ public class Auth extends JFrame {
             DatabaseManager.closeConnections(ps, rset, con);
 
             // Compara as Senhas Digitadas Pelo Usuario com a DB
-            if (login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
+            if(login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
             {
                 ok = true;
                 UserTable.getInstance().setLastUser(login);
-            } else
+            }
+            else
             {
                 SystemUtil.showErrorMsg("usuario ou senha incorretos!");
                 ok = false;
             }
 
-        } catch (SQLException ex)
+        }
+        catch(SQLException ex)
         {
             SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode());
 
-        } catch (Exception e)
+        }
+        catch(Exception e)
         {
             SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e);
         }
         return ok;
     }
+
     /**
      * Cria um Pop Up de Confirmacao do Login.
      */
@@ -290,27 +306,28 @@ public class Auth extends JFrame {
     {
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-        if (Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.LOGIN_SOUND);
 
 
-        if (!LogonFrame._reAuth)
+        if(!LogonFrame._reAuth)
         {
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
-            switch (confirm)
+            switch(confirm)
             {
                 // Switch > Case
                 case JOptionPane.YES_OPTION: // Attempt to Login user
                     setEnabled(true);
                     dispose(); //fecha a tela de login
-                    EventQueue.invokeLater(new Runnable() {
-
+                    EventQueue.invokeLater(new Runnable()
+                    {
                         @Override
                         public void run()
                         {
                             new FramePrincipal().setVisible(true);
                         }
+
                     });
                     break;
 
@@ -332,8 +349,6 @@ public class Auth extends JFrame {
         }
     }
 
- 
-
     /**
      * Checa a Masterkey
      *
@@ -345,13 +360,14 @@ public class Auth extends JFrame {
     {
         boolean result = false;
         _log.info("checando senha mestre \n");
-        if (user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
+        if(user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
             result = true;
         else
         {
             SystemUtil.showErrorMsg("usuario invalido.");
-           result = false;
+            result = false;
         }
         return result;
     }
+
 }

@@ -29,6 +29,18 @@ public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
 
+    private static void setTema()
+    {
+        try
+        {
+            UIManager.setLookAndFeel(new AcrylLookAndFeel());
+        }
+        catch(Exception e)
+        {
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      * @throws Exception 
@@ -56,14 +68,7 @@ public class Boot
                 @Override
                 public void run()
                 {
-                    try
-                    {
-                        UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                    }
-                    catch(Exception e)
-                    {
-                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin"+ e.getMessage());
-                    }
+                    setTema();
                     DatabaseFrame.getInstance().setVisible(true);
                 }
 
@@ -74,12 +79,11 @@ public class Boot
         // ------------------------------------------------
         if(DatabaseManager._installed)
         {
-
             //Le os Dados da Licenca
             // --------------------------
             DatabaseManager.readLicenseData();
 
-               _log.log(Level.INFO, "LICENCA: {0}", DatabaseManager._licensed);
+            _log.log(Level.INFO, "LICENCA: {0}", DatabaseManager._licensed);
 
             // OK! Podemos Abrir o Sistema.
             // ------------------------
@@ -94,6 +98,7 @@ public class Boot
                         @Override
                         public void run()
                         {
+                            setTema();
                             Auth.getInstance().setVisible(true);
                         }
 
@@ -121,18 +126,13 @@ public class Boot
                     @Override
                     public void run()
                     {
-                        try
-                        {
-                            UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                        }
-                        catch(Exception e)
-                        {
-                            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                        }
+                        setTema();
                         new LicenseFrame().setVisible(true);
                     }
+
                 });
             }
         }
     }
+
 }
