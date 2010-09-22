@@ -1,5 +1,6 @@
 package com.siscomercio.managers;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import com.siscomercio.security.Auth;
 
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
+import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -36,6 +38,18 @@ public class AppManager extends JFrame
         protected static final AppManager _instance = new AppManager();
     }
 
+
+    public static void setTema()
+    {
+        try
+        {
+            UIManager.setLookAndFeel(new AcrylLookAndFeel());
+        }
+        catch(Exception e)
+        {
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+        }
+    }
     public void restartApp()
     {
          if(Config.ENABLE_SOUND)
