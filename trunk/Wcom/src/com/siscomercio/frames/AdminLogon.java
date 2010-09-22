@@ -144,7 +144,7 @@ public class AdminLogon extends JFrame
                 new PainelAdministracao().setVisible(true);
             }
             else
-                SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.");
+                SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.",true);
         }
     }//GEN-LAST:event_botaoLoginActionPerformed
 

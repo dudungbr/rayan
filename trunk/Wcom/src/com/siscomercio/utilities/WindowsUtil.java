@@ -137,7 +137,7 @@ public class WindowsUtil
                            + "|    |= Memoria Cacheada:" + df2.format(cached)
                            + df.format(cached / max * 100) + "<br>"
                            + "|    |= Memoria Disponivel:" + df2.format(useable)
-                           + df.format(useable / max * 100));
+                           + df.format(useable / max * 100),true);
     }
 
     /**
@@ -169,9 +169,9 @@ public class WindowsUtil
             }
             catch(Exception e)
             {
-                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(),true);
             }
-            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport()+"<br><br>");
+            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport()+"<br><br>",true);
             System.exit(0);
         }
         else
@@ -237,7 +237,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage());
+            SystemUtil.showErrorMsg(err.getMessage(),true);
         }
         return false;
     }
@@ -272,7 +272,7 @@ public class WindowsUtil
         }
         catch(Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage());
+            SystemUtil.showErrorMsg(err.getMessage(),true);
         }
         return processes;
 
@@ -292,7 +292,7 @@ public class WindowsUtil
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage());
+            SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage(),true);
         }
 
         return pcName;

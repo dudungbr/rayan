@@ -37,20 +37,15 @@ public class SoundManager
                 AudioClip sound;
                 sound = Applet.newAudioClip(caminho.toURL());
                 sound.play();
-                Thread.sleep(SystemUtil.convertSecondsToMiliseconds(1/2));
                 if(Config.DEBUG)_log.log(Level.INFO, "playSound() Tocando Arquivo: {0}\n", file);
-            }
-            catch(InterruptedException ex)
-            {
-                SystemUtil.showErrorMsg(ex.getMessage());
             }
             catch(MalformedURLException ex)
             {
-                SystemUtil.showErrorMsg(ex.getMessage());
+                SystemUtil.showErrorMsg(ex.getMessage(),false);
             }
         }
         else
-            SystemUtil.showErrorMsg("Arquivo de Som: " + soundName + " nao foi encontrado !");
+            SystemUtil.showErrorMsg("Arquivo de Som: " + soundName + " nao foi encontrado !",false);
     }
 
 }

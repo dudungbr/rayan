@@ -9,7 +9,6 @@
  */
 package com.siscomercio.frames;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import com.siscomercio.Config;
@@ -30,7 +29,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -103,12 +101,12 @@ public class LicenseFrame extends JFrame
             DatabaseManager._licensed = 1;
             dispose();
             registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
-            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
+            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ",true);
             AppManager.getInstance().restartApp();
         }
         else
         {
-            SystemUtil.showErrorMsg("Numero de Série Inválido.");
+            SystemUtil.showErrorMsg("Numero de Série Inválido.",true);
         }
     }
 
@@ -165,7 +163,7 @@ public class LicenseFrame extends JFrame
         String nomeEmpresa = campoEmpresa.getText();
         if(nomeEmpresa.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nome da Empresa Inválido.");
+            SystemUtil.showErrorMsg("Nome da Empresa Inválido.",true);
             return;
 
         }
@@ -174,7 +172,7 @@ public class LicenseFrame extends JFrame
         String codAtivacao = dadosCodAtivacao.getText();
         if(codAtivacao.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.");
+            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.",true);
             resetCampos();
             return;
         }
@@ -182,7 +180,7 @@ public class LicenseFrame extends JFrame
 
         if(numEstacoes <= 0)
         {
-            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.");
+            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.",true);
             resetCampos();
             return;
         }
@@ -191,7 +189,7 @@ public class LicenseFrame extends JFrame
         String serial = campoSerial.getText();
         if(serial.isEmpty())
         {
-            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.");
+            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.",true);
             resetCampos();
             return;
         }
@@ -387,7 +385,7 @@ public class LicenseFrame extends JFrame
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage());
+            SystemUtil.showErrorMsg(e.getMessage(),true);
 
         }
     }
@@ -421,15 +419,7 @@ public class LicenseFrame extends JFrame
             public void run()
             {
 
-                try
-                {
-
-                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                }
-                catch(Exception e)
-                {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin: " + e.getMessage());
-                }
+               AppManager.setTema();
                 new LicenseFrame().setVisible(true);
             }
 

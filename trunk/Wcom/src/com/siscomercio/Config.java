@@ -171,7 +171,7 @@ public class Config
             File f = new File(path);
             if(!f.exists())
             {
-                SystemUtil.showErrorMsg("o arquivo de configuração nao existe!");
+                SystemUtil.showErrorMsg("o arquivo: "+f.getName()+" nao existe!",true);
                 System.exit(0);//finaliza o sistema.
             }
 
@@ -215,7 +215,7 @@ public class Config
              */
             if(SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
-                SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n");
+                SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n",true);
                 System.exit(0);
             }
 
@@ -224,7 +224,7 @@ public class Config
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e.getMessage() + "\n");
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e.getMessage() + "\n",true);
         }
     }
 

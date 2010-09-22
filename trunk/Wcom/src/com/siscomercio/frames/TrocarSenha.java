@@ -142,13 +142,13 @@ public class TrocarSenha extends javax.swing.JFrame
         //nao permite campos em branco.
         if((senhaNova.equalsIgnoreCase("") || confirma.equalsIgnoreCase("")))
         {
-            SystemUtil.showErrorMsg("todos os campos devem ser preenchidos");
+            SystemUtil.showErrorMsg("todos os campos devem ser preenchidos",true);
             return;
         }
 
         if(!senhaNova.equalsIgnoreCase(confirma))
         {
-            SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!");
+            SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!",true);
             return;
         }
         else
