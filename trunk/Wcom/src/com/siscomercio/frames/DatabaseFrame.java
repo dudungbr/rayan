@@ -194,7 +194,7 @@ public class DatabaseFrame extends JFrame
                 @Override
                 public void run()
                 {
-                   AppManager.setTema();
+                   AppManager.setTema(getClass().getName());
                     new LicenseFrame().setVisible(true);
                 }
             });

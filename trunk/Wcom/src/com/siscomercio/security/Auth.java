@@ -26,6 +26,7 @@ import com.siscomercio.Config;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.UserLogon;
 import com.siscomercio.DatabaseFactory;
+import com.siscomercio.managers.AppManager;
 
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
@@ -77,6 +78,8 @@ public class Auth extends JFrame
      */
     public Auth()
     {
+          if(Config.DEBUG)
+            _log.info(" inicializando ...\n");
         if(Config.DEBUG)
             _log.info("Criando Janela de Autenticacao.... \n");
 
@@ -108,7 +111,7 @@ public class Auth extends JFrame
         botaoConfigurar = new JButton("Configurar...");
         botaoConfigurar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         if(Config.DEBUG)
-            _log.log(Level.INFO, "Auth() ... install = {0}\n", DatabaseManager._installed);
+            _log.info("Auth:  Aguardando Login... \n");
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
         if(DatabaseManager._installed==1)
@@ -155,7 +158,7 @@ public class Auth extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 if(Config.DEBUG)
-                    _log.info("executando acao do botao login \n");
+                    _log.info("Auth: Executando acao do botao login \n");
                 String senha = new String(campoSenha.getPassword());
                 String login = campoUsuario.getText();
 
@@ -216,6 +219,8 @@ public class Auth extends JFrame
      */
     private void resetCampos()
     {
+          if(Config.DEBUG)
+            _log.info("Auth:  resetando campos ...\n");
         campoUsuario.setText("");
         campoSenha.setText("");
     }
@@ -228,15 +233,18 @@ public class Auth extends JFrame
      */
     public boolean isAuthed(String login, String senha)
     {
+         if(Config.DEBUG)
+            _log.info("Auth: Checando Usuario e Senha ...\n");
+
         Connection con = null;
         boolean ok = false;
         try
         {
             if(Config.DEBUG)
                 //checa se os dados estao ok...
-                _log.log(Level.INFO, "checando dados: senha  = {0} user = {1}", new Object[]
+                _log.log(Level.INFO, "Auth: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
                         {
-                            senha, login
+                            senha, login+"\n"
                         });
 
             if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
@@ -304,6 +312,8 @@ public class Auth extends JFrame
      */
     public void showConfirmWindow()
     {
+        if(Config.DEBUG)
+            _log.info("Auth: Enviando janela de confirmacao...\n");
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
         if(Config.ENABLE_SOUND)
@@ -325,6 +335,7 @@ public class Auth extends JFrame
                         @Override
                         public void run()
                         {
+                            AppManager.setTema(getClass().getName());
                             new FramePrincipal().setVisible(true);
                         }
 
@@ -359,7 +370,7 @@ public class Auth extends JFrame
     public static boolean checkMasterKey(String user, String pass)
     {
         boolean result = false;
-        _log.info("checando senha mestre \n");
+        _log.info("Auth: Checando senha mestre... \n");
         if(user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
             result = true;
         else

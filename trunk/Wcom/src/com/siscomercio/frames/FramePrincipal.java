@@ -85,12 +85,14 @@ public class FramePrincipal extends JFrame
         if(!Config._loaded)
             Config.load();
         if(Config.DEBUG)
-            _log.info("montando janela principal do aplicativo. \n");
+            _log.info("Montando janela principal do aplicativo. \n");
         initComponents();
         disparaRelogio();
         setSoundProperties();
         preenchaFrame();
         setDesktop(desktop1);
+          if(Config.DEBUG)
+            _log.info("Frame Principal Criado, Aguardando Comandos... \n");
         created = true;
 
     }
@@ -775,7 +777,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema();
+                AppManager.setTema(getClass().getName());
                 new AdminLogon().setVisible(true);
             }
 
@@ -793,7 +795,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema();
+                AppManager.setTema(getClass().getName());
                 new FramePrincipal().setVisible(true);
             }
 

@@ -4,18 +4,15 @@
  */
 package com.siscomercio;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.siscomercio.frames.DatabaseFrame;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.LicenseFrame;
+import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.security.Auth;
-import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -29,20 +26,6 @@ public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
 
-    /**
-     *
-     */
-    public static void setTema()
-    {
-        try
-        {
-            UIManager.setLookAndFeel(new AcrylLookAndFeel());
-        }
-        catch(Exception e)
-        {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(),true);
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -71,7 +54,7 @@ public class Boot
                 @Override
                 public void run()
                 {
-                    setTema();
+                    AppManager.setTema(getClass().getName());
                     DatabaseFrame.getInstance().setVisible(true);
                 }
 
@@ -80,13 +63,11 @@ public class Boot
 
         // Caso a DB Esteja Instalada Prosegue Para a Licenca
         // ------------------------------------------------
-        if(DatabaseManager._installed==1)
+        else
         {
             //Le os Dados da Licenca
             // --------------------------
             DatabaseManager.readLicenseData();
-
-            _log.log(Level.INFO, "LICENCA: {0}", DatabaseManager._licensed);
 
             // OK! Podemos Abrir o Sistema.
             // ------------------------
@@ -101,7 +82,7 @@ public class Boot
                         @Override
                         public void run()
                         {
-                            setTema();
+                            AppManager.setTema(getClass().getName());
                             Auth.getInstance().setVisible(true);
                         }
 
@@ -129,7 +110,7 @@ public class Boot
                     @Override
                     public void run()
                     {
-                        setTema();
+                        AppManager.setTema(getClass().getName());
                         new LicenseFrame().setVisible(true);
                     }
 
