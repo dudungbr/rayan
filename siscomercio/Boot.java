@@ -61,7 +61,7 @@ public class Boot
 
         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
         // ------------------------
-        if(!DatabaseManager._installed)
+        if(DatabaseManager._installed==0)
         {
             EventQueue.invokeLater(new Runnable()
             {
@@ -77,7 +77,7 @@ public class Boot
 
         // Caso a DB Esteja Instalada Prosegue Para a Licenca
         // ------------------------------------------------
-        if(DatabaseManager._installed)
+        if(DatabaseManager._installed==1)
         {
             //Le os Dados da Licenca
             // --------------------------
@@ -87,7 +87,7 @@ public class Boot
 
             // OK! Podemos Abrir o Sistema.
             // ------------------------
-            if(DatabaseManager._licensed)
+            if(DatabaseManager._licensed==1)
             {
                 // Chama a Tela de Login
                 // ------------------------

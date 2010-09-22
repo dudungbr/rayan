@@ -40,11 +40,11 @@ public class DatabaseManager
     /**
      *se o banco esta instalado
      */
-    public static boolean _installed;
+    public static int _installed;
     /**
      *se a apliacao esta Licenciada
      */
-    public static boolean _licensed;
+    public static int _licensed;
     public static String _registeredFor;
     public static String _registeredMac;
     public static String _registeredMBSN;
@@ -180,7 +180,7 @@ public class DatabaseManager
         createNewDatabase();
         readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
-        _installed = true;
+        _installed = 1;
         SystemUtil.showMsg("Banco de Dados Instalado com Sucesso!");
     }
 
@@ -191,7 +191,7 @@ public class DatabaseManager
     {
         executeQuery(StringTable.DELETE_DB);
         SystemUtil.showMsg("Banco de Dados Deletado!");
-        _installed = false;
+        _installed = 0;
         isDbDeleted = true;
     }
 
@@ -418,7 +418,7 @@ public class DatabaseManager
             ResultSet rset = ps.executeQuery();
             while(rset.next())
             {
-                _installed = rset.getBoolean("bancoInstalado");
+                _installed = rset.getInt("bancoInstalado");
             }
            
             closeConnections(ps, rset, con);
@@ -455,7 +455,7 @@ public class DatabaseManager
                 _numStacoes = rset.getInt("NumEstacoes");
                 _licenceType = rset.getString("licenseType");
                 _registeredFor = rset.getString("registeredFor");
-                _licensed = rset.getBoolean("licenciado");
+                _licensed = rset.getInt("licenciado");
 
             }
             closeConnections(ps, rset, con);

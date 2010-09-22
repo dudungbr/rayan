@@ -95,7 +95,7 @@ public class StringTable
     /**
      * Atualiza a Tabela de Instalacao
      */
-    public static final String INSTALL = "UPDATE install SET bancoInstalado = 'true'";
+    public static final String INSTALL = "UPDATE install SET bancoInstalado = '1'";
     /**
      * Le a Tabela de Instalacao
      */

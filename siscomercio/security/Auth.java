@@ -111,7 +111,7 @@ public class Auth extends JFrame
             _log.log(Level.INFO, "Auth() ... install = {0}\n", DatabaseManager._installed);
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if(DatabaseManager._installed)
+        if(DatabaseManager._installed==1)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);

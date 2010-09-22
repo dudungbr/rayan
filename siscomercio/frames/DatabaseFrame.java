@@ -36,10 +36,10 @@ public class DatabaseFrame extends JFrame
     public DatabaseFrame()
     {
         initComponents();
-        dbStatusLabel.setText(DatabaseManager.getConnectionStatus());
+        dadosStatus.setText(DatabaseManager.getConnectionStatus());
 
         //o usuario esta reconfigurando a db.
-        if(DatabaseManager._installed)
+        if(DatabaseManager._installed==1)
             botaoInstalar.setEnabled(false);
         else
             botaoDeletar.setEnabled(false);
@@ -76,12 +76,12 @@ public class DatabaseFrame extends JFrame
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        painel = new javax.swing.JPanel();
         botaoDeletar = new javax.swing.JButton();
         botaoInstalar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        dbStatusLabel = new javax.swing.JLabel();
+        botaoCancelar = new javax.swing.JButton();
+        labelStatus = new javax.swing.JLabel();
+        dadosStatus = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,22 +103,22 @@ public class DatabaseFrame extends JFrame
         setForeground(new java.awt.Color(204, 204, 255));
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banco de Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Franklin Gothic Medium Cond", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
-        jPanel2.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        painel.setBackground(new java.awt.Color(255, 255, 255));
+        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banco de Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Franklin Gothic Medium Cond", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
+        painel.setForeground(new java.awt.Color(204, 204, 204));
+        painel.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        painel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botaoDeletar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        botaoDeletar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoDeletar.setText("Deletar Database");
         botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoDeletarActionPerformed(evt);
             }
         });
-        jPanel2.add(botaoDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        painel.add(botaoDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        botaoInstalar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        botaoInstalar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoInstalar.setText("Instalar Database");
         botaoInstalar.setToolTipText("Clique para Instalar a Base de Dados.");
         botaoInstalar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,34 +126,34 @@ public class DatabaseFrame extends JFrame
                 botaoInstalarActionPerformed(evt);
             }
         });
-        jPanel2.add(botaoInstalar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        painel.add(botaoInstalar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoCancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
+        painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setText("Status do Banco: ");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        labelStatus.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelStatus.setText("Status do Banco: ");
+        painel.add(labelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        dbStatusLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        dbStatusLabel.setText("statusDb");
-        jPanel2.add(dbStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
+        dadosStatus.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        dadosStatus.setText("statusDb");
+        painel.add(dadosStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -167,8 +167,8 @@ public class DatabaseFrame extends JFrame
 
         DatabaseManager.instaleBanco();
 
-        dbStatusLabel.setText(DatabaseManager.getConnectionStatus());
-        if(DatabaseManager._installed)
+        dadosStatus.setText(DatabaseManager.getConnectionStatus());
+        if(DatabaseManager._installed==1)
         {
             //desabilita o botao instalar apos o banco ja ter sido instalado.
             botaoInstalar.setEnabled(false);
@@ -186,7 +186,7 @@ public class DatabaseFrame extends JFrame
 
         // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
         // ------------------------
-        if(!DatabaseManager._licensed)
+        if(DatabaseManager._licensed==0)
         {
             EventQueue.invokeLater(new Runnable()
             {
@@ -214,8 +214,8 @@ public class DatabaseFrame extends JFrame
             Config.load();
 
         DatabaseManager.dropDatabase();
-        dbStatusLabel.setText(DatabaseManager.getConnectionStatus());
-        if(!DatabaseManager._installed)
+        dadosStatus.setText(DatabaseManager.getConnectionStatus());
+        if(DatabaseManager._installed==0)
         {
             //Habilita o botao instalar apos o banco ter sido deletado.
             botaoInstalar.setEnabled(true);
@@ -223,10 +223,10 @@ public class DatabaseFrame extends JFrame
         }
     }//GEN-LAST:event_botaoDeletarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoCancelarActionPerformed
+    {//GEN-HEADEREND:event_botaoCancelarActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,13 +244,13 @@ public class DatabaseFrame extends JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoDeletar;
     private javax.swing.JButton botaoInstalar;
-    private javax.swing.JLabel dbStatusLabel;
+    private javax.swing.JLabel dadosStatus;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelStatus;
+    private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
 }
