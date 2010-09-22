@@ -14,6 +14,7 @@ import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
+import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
@@ -193,14 +194,7 @@ public class DatabaseFrame extends JFrame
                 @Override
                 public void run()
                 {
-                    try
-                    {
-                        UIManager.setLookAndFeel(new AcrylLookAndFeel());
-                    }
-                    catch(Exception e)
-                    {
-                        SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                    }
+                   AppManager.setTema();
                     new LicenseFrame().setVisible(true);
                 }
             });

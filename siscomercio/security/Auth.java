@@ -241,7 +241,7 @@ public class Auth extends JFrame
 
             if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {
-                SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>");
+                SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>",true);
                 resetCampos();
                 ok = false;
             }
@@ -282,19 +282,19 @@ public class Auth extends JFrame
             }
             else
             {
-                SystemUtil.showErrorMsg("usuario ou senha incorretos!");
+                SystemUtil.showErrorMsg("usuario ou senha incorretos!",true);
                 ok = false;
             }
 
         }
         catch(SQLException ex)
         {
-            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode());
+            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(),true);
 
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e);
+            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e,true);
         }
         return ok;
     }
@@ -364,7 +364,7 @@ public class Auth extends JFrame
             result = true;
         else
         {
-            SystemUtil.showErrorMsg("usuario invalido.");
+            SystemUtil.showErrorMsg("usuario invalido.",true);
             result = false;
         }
         return result;

@@ -10,7 +10,6 @@
  */
 package com.siscomercio.frames;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,10 +34,8 @@ import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
-import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -74,11 +71,11 @@ public class FramePrincipal extends JFrame
             if(img != null)
                 label.setIcon(img);
             else
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n");
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n", true);
         }
         else
         {
-            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n");
+            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n", true);
         }
     }
 
@@ -796,21 +793,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                try
-                {
-                    //Define O Tema Visual e o Texto do Pop UP
-                    Properties props = new Properties();
-                    props.put("logoString", "Siscom");
-                    props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
-                    AcrylLookAndFeel.setCurrentTheme(props);
-
-                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
-
-                }
-                catch(Exception e)
-                {
-                    SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin");
-                }
+                AppManager.setTema();
                 new FramePrincipal().setVisible(true);
             }
 

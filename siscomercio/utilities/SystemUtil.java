@@ -1,6 +1,8 @@
 package com.siscomercio.utilities;
 
+import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
@@ -8,6 +10,11 @@ import com.siscomercio.Config;
 import com.siscomercio.DatabaseFactory;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
+import com.siscomercio.tables.StringTable;
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.io.File;
+import java.net.URI;
 
 /**
  * $Revision$
@@ -30,7 +37,7 @@ public class SystemUtil
                            + Config.BUILD_NUM.substring(1, 14) + "<br>"
                            + Config.BUILD_DATE.substring(1, 52) + "<br>"
                            + Config.BUILD_URL.substring(1, 75) + "<br>"
-                           + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>");
+                           + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>", true);
 
     }
 
@@ -61,7 +68,7 @@ public class SystemUtil
         showMsg("<br> Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "<br>"
                 + "Status do Banco: " + DatabaseManager.getConnectionStatus() + "<br>"
                 + "Conexoes Ativas: " + String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount()) + "<br>"
-                + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "<br><br>"));
+                + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "<br><br>"), true);
     }
 
     /**
@@ -70,7 +77,7 @@ public class SystemUtil
     public static void printCpuInfo()
     {
         showMsg("Processadores: " + Runtime.getRuntime().availableProcessors() + "<br>"
-                + "Arquitetura " + System.getenv("PROCESSOR_IDENTIFIER"));
+                + "Arquitetura " + System.getenv("PROCESSOR_IDENTIFIER"), true);
     }
 
     /**
@@ -80,7 +87,7 @@ public class SystemUtil
     {
         showMsg("Sistema Operacional: " + System.getProperty("os.name") + "<br>"
                 + "Build: " + System.getProperty("os.version") + "<br>"
-                + "Arquitetura: " + System.getProperty("os.arch"));
+                + "Arquitetura: " + System.getProperty("os.arch"), true);
     }
 
     /**
@@ -97,7 +104,7 @@ public class SystemUtil
                 + "== Java Platform Information == <br>"
                 + "Name:  " + System.getProperty("java.runtime.name") + "<br>"
                 + "Version: " + System.getProperty("java.version") + "<br>"
-                + "Java Class Version: " + System.getProperty("java.class.version") + "<br>");
+                + "Java Class Version: " + System.getProperty("java.class.version") + "<br>", true);
     }
 
     /**
@@ -164,14 +171,29 @@ public class SystemUtil
      * mostra mensagem de informacao ao usuario
      *
      * @param msg
+     * @param playSound
      */
-    public static void showMsg(String msg)
+    public static void showMsg(String msg, Boolean playSound)
     {
         if(Config.DEBUG)
         {
             _log.info("enviando janela de mensagem... \n");
         }
-        SoundManager.playSound("info.wav");
+        if(playSound)
+        {
+            try
+            {
+                File file = new File("./sounds/error.wav");
+                URI caminho = file.toURI();
+                AudioClip sound;
+                sound = Applet.newAudioClip(caminho.toURL());
+                sound.play();
+            }
+            catch(MalformedURLException ex)
+            {
+                Logger.getLogger(SystemUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Informacao", JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -180,14 +202,29 @@ public class SystemUtil
      * mostra mensagem de erro ao usuario
      *
      * @param msg
+     * @param playSound
      */
-    public static void showErrorMsg(String msg)
+    public static void showErrorMsg(String msg, Boolean playSound)
     {
         if(Config.DEBUG)
         {
             _log.info("enviando janela de mensagem de erro... \n");
         }
-        SoundManager.playSound("error.wav");
+        if(playSound)
+        {
+            try
+            {
+                File file = new File(StringTable.SOUND_PATH.concat("error.wav"));
+                URI caminho = file.toURI();
+                AudioClip sound;
+                sound = Applet.newAudioClip(caminho.toURL());
+                sound.play();
+            }
+            catch(MalformedURLException ex)
+            {
+                Logger.getLogger(SystemUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Erro", JOptionPane.ERROR_MESSAGE);
     }
 

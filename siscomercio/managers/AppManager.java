@@ -10,6 +10,7 @@ import com.siscomercio.security.Auth;
 
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
+import java.util.Properties;
 import javax.swing.UIManager;
 
 /**
@@ -38,21 +39,38 @@ public class AppManager extends JFrame
         protected static final AppManager _instance = new AppManager();
     }
 
-
+    /**
+     *
+     */
+    /**
+     * 
+     */
     public static void setTema()
     {
         try
         {
+            //Define O Tema Visual e o Texto do Pop UP
+            Properties props = new Properties();
+            props.put("logoString", "Siscom");
+            props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
+            AcrylLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel(new AcrylLookAndFeel());
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
         }
     }
+
+    /**
+     *
+     */
+    /**
+     *
+     */
     public void restartApp()
     {
-         if(Config.ENABLE_SOUND)
+        if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.PRE_RESTART_SOUND);
 
         if(Config.DEBUG)
@@ -85,6 +103,7 @@ public class AppManager extends JFrame
             });
         }
     }
+
     /**
      *
      * @param janelaPai 
@@ -123,7 +142,7 @@ public class AppManager extends JFrame
     {
         if(Config.ENABLE_SOUND)
             SoundManager.playSound(Config.UNIPLEMENTED_SOUND);
-        SystemUtil.showMsg("Funcao Ainda nao Disponivel");
+        SystemUtil.showMsg("Funcao Ainda nao Disponivel", true);
     }
 
 }

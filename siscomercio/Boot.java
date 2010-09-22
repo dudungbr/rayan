@@ -29,6 +29,9 @@ public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
 
+    /**
+     *
+     */
     public static void setTema()
     {
         try
@@ -37,7 +40,7 @@ public class Boot
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage());
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(),true);
         }
     }
 

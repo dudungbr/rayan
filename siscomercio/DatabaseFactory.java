@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
@@ -119,13 +120,14 @@ public class DatabaseFactory
         }
         catch(SQLException x)
         {
-             SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + x.getLocalizedMessage());
+            AppManager.setTema();
+            SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(),true);
             // re-throw the exception
             throw x;
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage());
+            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage(),true);
         }
     }
 
@@ -256,7 +258,7 @@ public class DatabaseFactory
             catch(SQLException e)
             {
                 DatabaseManager.setConStatus(StringTable.STATUS_DISCONNECTED);
-                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}");
+                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}",true);
             }
         }
         return con;
@@ -291,7 +293,7 @@ public class DatabaseFactory
             }
             catch(SQLException e)
             {
-                 SystemUtil.showErrorMsg(e.getMessage());
+                 SystemUtil.showErrorMsg(e.getMessage(),true);
             }
 
         }

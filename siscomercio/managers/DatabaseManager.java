@@ -45,12 +45,54 @@ public class DatabaseManager
      *se a apliacao esta Licenciada
      */
     public static int _licensed;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static String _registeredFor;
+    /**
+     *
+     */
+    /**
+     * 
+     */
     public static String _registeredMac;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static String _registeredMBSN;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static String _empresa;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static String _licenceType;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static String _registeredHDSN;
+    /**
+     *
+     */
+    /**
+     *
+     */
     public static int _numStacoes;
 
     // public static boolean _leuTabela;
@@ -100,7 +142,7 @@ public class DatabaseManager
                             }
                             catch(SQLException ex)
                             {
-                                SystemUtil.showErrorMsg("Erro" + ex);
+                                SystemUtil.showErrorMsg("Erro" + ex, true);
                             }
 
                             sqlQuery = "";
@@ -113,7 +155,7 @@ public class DatabaseManager
                 }
                 catch(Exception e)
                 {
-                    SystemUtil.showErrorMsg("Falha ao Executar Script SQL:  " + f.getName() + " Erro:  " + e.getMessage());
+                    SystemUtil.showErrorMsg("Falha ao Executar Script SQL:  " + f.getName() + " Erro:  " + e.getMessage(), true);
                 }
             }
         }
@@ -140,7 +182,7 @@ public class DatabaseManager
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg("" + e);
+            SystemUtil.showErrorMsg("" + e, true);
             result = false;
         }
         return result;
@@ -166,7 +208,7 @@ public class DatabaseManager
         }
         catch(Exception ex)
         {
-            SystemUtil.showErrorMsg("Erro ao criar nova base de dados: " + ex);
+            SystemUtil.showErrorMsg("Erro ao criar nova base de dados: " + ex, true);
         }
     }
 
@@ -181,7 +223,7 @@ public class DatabaseManager
         readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
         _installed = 1;
-        SystemUtil.showMsg("Banco de Dados Instalado com Sucesso!");
+        SystemUtil.showMsg("Banco de Dados Instalado com Sucesso!", true);
     }
 
     /**
@@ -190,7 +232,7 @@ public class DatabaseManager
     public static void dropDatabase()
     {
         executeQuery(StringTable.DELETE_DB);
-        SystemUtil.showMsg("Banco de Dados Deletado!");
+        SystemUtil.showMsg("Banco de Dados Deletado!", true);
         _installed = 0;
         isDbDeleted = true;
     }
@@ -227,11 +269,11 @@ public class DatabaseManager
             PreparedStatement ps = con.prepareStatement(commandLine);
             ResultSet rset = ps.executeQuery();
             closeConnections(ps, rset, con);
-            SystemUtil.showMsg("Usuario Cadastrado com Sucesso!");
+            SystemUtil.showMsg("Usuario Cadastrado com Sucesso!", true);
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg(e.toString());
+            SystemUtil.showErrorMsg(e.toString(), true);
 
         }
     }
@@ -256,7 +298,7 @@ public class DatabaseManager
         }
         catch(SQLException ex)
         {
-            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex);
+            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
         }
     }
 
@@ -278,7 +320,7 @@ public class DatabaseManager
         }
         catch(SQLException ex)
         {
-            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex);
+            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
         }
     }
 
@@ -299,7 +341,7 @@ public class DatabaseManager
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + user + " , " + e);
+            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + user + " , " + e, true);
         }
     }
 
@@ -370,7 +412,7 @@ public class DatabaseManager
         catch(SQLException e)
         {
             ok = false;
-            SystemUtil.showErrorMsg("Erro ao Trocar Senha do Usuario: " + login + "," + e);
+            SystemUtil.showErrorMsg("Erro ao Trocar Senha do Usuario: " + login + "," + e, true);
 
         }
         if(ok)
@@ -380,7 +422,7 @@ public class DatabaseManager
                         {
                             login, newPass
                         });
-            SystemUtil.showMsg("Senha Trocada com Sucesso!");
+            SystemUtil.showMsg("Senha Trocada com Sucesso!", true);
         }
     }
 
@@ -420,7 +462,7 @@ public class DatabaseManager
             {
                 _installed = rset.getInt("bancoInstalado");
             }
-           
+
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)

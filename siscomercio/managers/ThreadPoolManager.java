@@ -246,7 +246,7 @@ public class ThreadPoolManager
         }
         catch(InterruptedException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage());
+            SystemUtil.showErrorMsg(e.getMessage(),true);
         }
     }
 
