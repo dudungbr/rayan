@@ -100,7 +100,7 @@ public class LicenseFrame extends JFrame
 
         if(valorCampoSerial.equalsIgnoreCase(validSerial))
         {
-            DatabaseManager._licensed = true;
+            DatabaseManager._licensed = 1;
             dispose();
             registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
             SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ");
@@ -370,7 +370,7 @@ public class LicenseFrame extends JFrame
         {
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(StringTable.REGISTRE_APP);
-            ps.setBoolean(1, true);
+            ps.setInt(1, 1);
             ps.setString(2, NetworkUtil.getMac());
             ps.setString(3, MbUtil.getMotherboardSN());
             ps.setString(4, nomeEmpresa);
@@ -378,7 +378,7 @@ public class LicenseFrame extends JFrame
             ps.setInt(6, numEstacoes);
             ps.setString(7, licenceType);
             ps.setString(8, nomeEmpresa);
-             ps.setBoolean(9, true);
+            ps.setInt(9, 1);
             ps.execute();
             ps.close();
             con.close();
