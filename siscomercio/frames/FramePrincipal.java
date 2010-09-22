@@ -224,12 +224,11 @@ public class FramePrincipal extends JFrame
         menuSistema = new javax.swing.JMenu();
         itemReiniciar = new javax.swing.JMenuItem();
         itemSair = new javax.swing.JMenuItem();
-        menuDb = new javax.swing.JMenu();
-        itemBancoDados = new javax.swing.JMenuItem();
-        menuOpcoes = new javax.swing.JMenu();
-        itemHabilitarSom = new javax.swing.JCheckBoxMenuItem();
-        itemTrocarSenha = new javax.swing.JMenuItem();
-        menuSuporte = new javax.swing.JMenu();
+        menuAdministracao = new javax.swing.JMenu();
+        subMenuCadastroUsuarios = new javax.swing.JMenu();
+        itemIncluirUsuario = new javax.swing.JMenuItem();
+        itemEditarUsuario = new javax.swing.JMenuItem();
+        itemExcluirUsuario = new javax.swing.JMenuItem();
         menuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         itemHardware = new javax.swing.JMenu();
@@ -242,6 +241,13 @@ public class FramePrincipal extends JFrame
         itemSistema = new javax.swing.JMenu();
         itemRegistro = new javax.swing.JMenuItem();
         itemVersao = new javax.swing.JMenuItem();
+        menuDb = new javax.swing.JMenu();
+        itemBancoDados = new javax.swing.JMenuItem();
+        menuOpcoes = new javax.swing.JMenu();
+        itemHabilitarSom = new javax.swing.JCheckBoxMenuItem();
+        itemTrocarSenha = new javax.swing.JMenuItem();
+        menuSuporte = new javax.swing.JMenu();
+        itemSuporteTecnico = new javax.swing.JMenuItem();
 
         jMenu4.setText("File");
         jMenuBar1.add(jMenu4);
@@ -439,51 +445,31 @@ public class FramePrincipal extends JFrame
 
         barraDeMenu.add(menuSistema);
 
-        menuDb.setText("Configurações");
-        menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        menuAdministracao.setText("Administração");
+        menuAdministracao.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        itemBancoDados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
-        itemBancoDados.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemBancoDados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
-        itemBancoDados.setText("Banco de Dados");
-        itemBancoDados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemBancoDadosActionPerformed(evt);
-            }
-        });
-        menuDb.add(itemBancoDados);
+        subMenuCadastroUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
+        subMenuCadastroUsuarios.setText("Cadastro de Usuarios");
+        subMenuCadastroUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        barraDeMenu.add(menuDb);
+        itemIncluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemIncluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
+        itemIncluirUsuario.setText("Incluir");
+        subMenuCadastroUsuarios.add(itemIncluirUsuario);
 
-        menuOpcoes.setText("Opções");
-        menuOpcoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemEditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
+        itemEditarUsuario.setText("Editar");
+        subMenuCadastroUsuarios.add(itemEditarUsuario);
 
-        itemHabilitarSom.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemHabilitarSom.setSelected(true);
-        itemHabilitarSom.setText("       Habilitar Som");
-        itemHabilitarSom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
-        itemHabilitarSom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemHabilitarSomActionPerformed(evt);
-            }
-        });
-        menuOpcoes.add(itemHabilitarSom);
+        itemExcluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
+        itemExcluirUsuario.setText("Excluir");
+        subMenuCadastroUsuarios.add(itemExcluirUsuario);
 
-        itemTrocarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemTrocarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7724_16x16.png"))); // NOI18N
-        itemTrocarSenha.setText("      Trocar Senha");
-        itemTrocarSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemTrocarSenhaActionPerformed(evt);
-            }
-        });
-        menuOpcoes.add(itemTrocarSenha);
+        menuAdministracao.add(subMenuCadastroUsuarios);
 
-        barraDeMenu.add(menuOpcoes);
-
-        menuSuporte.setText("Suporte");
-        menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        barraDeMenu.add(menuSuporte);
+        barraDeMenu.add(menuAdministracao);
 
         menuInformacoes.setText("Informações");
         menuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -580,6 +566,58 @@ public class FramePrincipal extends JFrame
         menuInformacoes.add(itemSistema);
 
         barraDeMenu.add(menuInformacoes);
+
+        menuDb.setText("Configurações");
+        menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemBancoDados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        itemBancoDados.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemBancoDados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
+        itemBancoDados.setText("Banco de Dados");
+        itemBancoDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBancoDadosActionPerformed(evt);
+            }
+        });
+        menuDb.add(itemBancoDados);
+
+        barraDeMenu.add(menuDb);
+
+        menuOpcoes.setText("Opções");
+        menuOpcoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemHabilitarSom.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemHabilitarSom.setSelected(true);
+        itemHabilitarSom.setText("       Habilitar Som");
+        itemHabilitarSom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
+        itemHabilitarSom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemHabilitarSomActionPerformed(evt);
+            }
+        });
+        menuOpcoes.add(itemHabilitarSom);
+
+        itemTrocarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemTrocarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7724_16x16.png"))); // NOI18N
+        itemTrocarSenha.setText("      Trocar Senha");
+        itemTrocarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTrocarSenhaActionPerformed(evt);
+            }
+        });
+        menuOpcoes.add(itemTrocarSenha);
+
+        barraDeMenu.add(menuOpcoes);
+
+        menuSuporte.setText("Suporte");
+        menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemSuporteTecnico.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemSuporteTecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
+        itemSuporteTecnico.setText("Contato");
+        menuSuporte.add(itemSuporteTecnico);
+
+        barraDeMenu.add(menuSuporte);
 
         setJMenuBar(barraDeMenu);
 
@@ -790,8 +828,11 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel desktop1;
     private javax.swing.JMenuItem itemBancoDados;
     private javax.swing.JMenuItem itemDb;
+    private javax.swing.JMenuItem itemEditarUsuario;
+    private javax.swing.JMenuItem itemExcluirUsuario;
     private javax.swing.JCheckBoxMenuItem itemHabilitarSom;
     private javax.swing.JMenu itemHardware;
+    private javax.swing.JMenuItem itemIncluirUsuario;
     private javax.swing.JMenuItem itemJava;
     private javax.swing.JMenuItem itemMemoria;
     private javax.swing.JMenuItem itemProcessador;
@@ -801,6 +842,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JMenu itemSistema;
     private javax.swing.JMenuItem itemSistemaOperacional;
     private javax.swing.JMenu itemSoftware;
+    private javax.swing.JMenuItem itemSuporteTecnico;
     private javax.swing.JMenuItem itemTrocarSenha;
     private javax.swing.JMenuItem itemVersao;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -826,6 +868,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel labelTerminal;
     private javax.swing.JLabel labelVersao;
     private javax.swing.JLabel lalbelHorario;
+    private javax.swing.JMenu menuAdministracao;
     private javax.swing.JMenu menuDb;
     private javax.swing.JMenu menuInformacoes;
     private javax.swing.JMenu menuOpcoes;
@@ -835,6 +878,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JPanel rodape;
     private javax.swing.JLabel siteInfo;
     private javax.swing.JLabel statusInfo;
+    private javax.swing.JMenu subMenuCadastroUsuarios;
     private javax.swing.JLabel versionInfo;
     // End of variables declaration//GEN-END:variables
 }
