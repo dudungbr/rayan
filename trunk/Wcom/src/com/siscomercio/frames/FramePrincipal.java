@@ -236,20 +236,11 @@ public class FramePrincipal extends JFrame
         itemSistemaOperacional = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         itemVersao = new javax.swing.JMenuItem();
-        menuAdministracao = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        itemExcluir = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
         menuDb = new javax.swing.JMenu();
         subMenuDB = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        menuSuporte = new javax.swing.JMenu();
-        itemAssistenciaTecnica = new javax.swing.JMenuItem();
 
         jMenu4.setText("File");
         jMenuBar1.add(jMenu4);
@@ -266,7 +257,6 @@ public class FramePrincipal extends JFrame
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("SiSCom - Sistema de Automação Comercial");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -469,11 +459,6 @@ public class FramePrincipal extends JFrame
         itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
         itemMemoria.setText("Memória");
-        itemMemoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMemoriaActionPerformed(evt);
-            }
-        });
         menuHardware.add(itemMemoria);
 
         itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -543,47 +528,6 @@ public class FramePrincipal extends JFrame
 
         barraDeMenu.add(subMenuInformacoes);
 
-        menuAdministracao.setText("Administração");
-        menuAdministracao.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        menuAdministracao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAdministracaoActionPerformed(evt);
-            }
-        });
-
-        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6986_16x16.png"))); // NOI18N
-        jMenu9.setText("Financeiro");
-        jMenu9.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        menuAdministracao.add(jMenu9);
-
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
-        jMenu8.setText("Cadastro de Usuarios");
-        jMenu8.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        jMenuItem5.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
-        jMenuItem5.setText("Adicionar");
-        jMenu8.add(jMenuItem5);
-
-        jMenuItem1.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
-        jMenuItem1.setText("Editar");
-        jMenu8.add(jMenuItem1);
-
-        itemExcluir.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
-        itemExcluir.setText("Excluir");
-        jMenu8.add(itemExcluir);
-
-        menuAdministracao.add(jMenu8);
-
-        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/4317_16x16.png"))); // NOI18N
-        jMenu10.setText("Auditoria");
-        jMenu10.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        menuAdministracao.add(jMenu10);
-
-        barraDeMenu.add(menuAdministracao);
-
         menuDb.setText("Configurações");
         menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
@@ -620,22 +564,6 @@ public class FramePrincipal extends JFrame
         jMenu3.add(jMenuItem2);
 
         barraDeMenu.add(jMenu3);
-
-        menuSuporte.setText("Suporte");
-        menuSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemAssistenciaTecnica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        itemAssistenciaTecnica.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemAssistenciaTecnica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
-        itemAssistenciaTecnica.setText("Assistência Técnica");
-        itemAssistenciaTecnica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAssistenciaTecnicaActionPerformed(evt);
-            }
-        });
-        menuSuporte.add(itemAssistenciaTecnica);
-
-        barraDeMenu.add(menuSuporte);
 
         setJMenuBar(barraDeMenu);
 
@@ -765,11 +693,6 @@ public class FramePrincipal extends JFrame
         });
     }//GEN-LAST:event_itemRegistroActionPerformed
 
-    private void itemAssistenciaTecnicaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemAssistenciaTecnicaActionPerformed
-    {//GEN-HEADEREND:event_itemAssistenciaTecnicaActionPerformed
-        SystemUtil.showMsg("Suporte Técnico: 8695-1664");
-    }//GEN-LAST:event_itemAssistenciaTecnicaActionPerformed
-
     private void itemDbActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemDbActionPerformed
     {//GEN-HEADEREND:event_itemDbActionPerformed
         try
@@ -781,10 +704,6 @@ public class FramePrincipal extends JFrame
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_itemDbActionPerformed
-
-    private void menuAdministracaoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuAdministracaoActionPerformed
-    {//GEN-HEADEREND:event_menuAdministracaoActionPerformed
-    }//GEN-LAST:event_menuAdministracaoActionPerformed
 
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
     {//GEN-HEADEREND:event_jCheckBoxMenuItem1ActionPerformed
@@ -852,9 +771,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel dadosEmpresa;
     private javax.swing.JLabel dadosOperador;
     private javax.swing.JLabel dadosRelogio;
-    private javax.swing.JMenuItem itemAssistenciaTecnica;
     private javax.swing.JMenuItem itemDb;
-    private javax.swing.JMenuItem itemExcluir;
     private javax.swing.JMenuItem itemJava;
     private javax.swing.JMenuItem itemMemoria;
     private javax.swing.JMenuItem itemProcessador;
@@ -880,29 +797,22 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenu menuAdministracao;
     private javax.swing.JMenu menuDb;
     private javax.swing.JMenu menuHardware;
     private javax.swing.JMenu menuSistema;
-    private javax.swing.JMenu menuSuporte;
     private javax.swing.JLabel pcLabel;
     private javax.swing.JLabel siteInfo;
     private javax.swing.JLabel statusInfo;
