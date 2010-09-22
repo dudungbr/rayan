@@ -39,7 +39,12 @@ public class AppManager extends JFrame
         protected static final AppManager _instance = new AppManager();
     }
 
-   
+
+    public static void optimizeRam()
+    {
+          _log.info("Chamando Garbage Collector..  ");
+        System.gc();
+    }
     /**
      * 
      * @param requesterClass
@@ -47,7 +52,6 @@ public class AppManager extends JFrame
     public static void setTema(String requesterClass)
     {
         if(Config.DEBUG)
-         
             _log.info("Setando Tema Visual para o Frame:  "+requesterClass+"\n");
         try
         {

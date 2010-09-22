@@ -91,10 +91,10 @@ public class FramePrincipal extends JFrame
         setSoundProperties();
         preenchaFrame();
         setDesktop(desktop1);
-          if(Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("Frame Principal Criado, Aguardando Comandos... \n");
         created = true;
-
+       AppManager.optimizeRam();
     }
 
     /**
