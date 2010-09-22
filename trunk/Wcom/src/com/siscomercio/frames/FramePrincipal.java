@@ -107,10 +107,10 @@ public class FramePrincipal extends JFrame
         {
             SoundManager.playSound(Config.WELCOME_SOUND);
             // Habilita ou Desabilita o Som de Acordo com a Config.
-            jCheckBoxMenuItem1.setSelected(true);
+            itemHabilitarSom.setSelected(true);
         }
         else
-            jCheckBoxMenuItem1.setSelected(false);
+            itemHabilitarSom.setSelected(false);
     }
 
     /**
@@ -238,9 +238,9 @@ public class FramePrincipal extends JFrame
         itemSair = new javax.swing.JMenuItem();
         menuDb = new javax.swing.JMenu();
         itemBancoDados = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuOpcoes = new javax.swing.JMenu();
+        itemHabilitarSom = new javax.swing.JCheckBoxMenuItem();
+        itemTrocarSenha = new javax.swing.JMenuItem();
 
         jMenu4.setText("File");
         jMenuBar1.add(jMenu4);
@@ -257,6 +257,7 @@ public class FramePrincipal extends JFrame
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("SiSCOM - Sistema de Automação Comercial");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -545,26 +546,29 @@ public class FramePrincipal extends JFrame
 
         barraDeMenu.add(menuDb);
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("       Habilitar Som");
-        jCheckBoxMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuOpcoes.setText("Opções");
+        menuOpcoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemHabilitarSom.setSelected(true);
+        itemHabilitarSom.setText("       Habilitar Som");
+        itemHabilitarSom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10521_16x16.png"))); // NOI18N
+        itemHabilitarSom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                itemHabilitarSomActionPerformed(evt);
             }
         });
-        jMenu3.add(jCheckBoxMenuItem1);
+        menuOpcoes.add(itemHabilitarSom);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7724_16x16.png"))); // NOI18N
-        jMenuItem2.setText("      Trocar Senha");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        itemTrocarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/7724_16x16.png"))); // NOI18N
+        itemTrocarSenha.setText("      Trocar Senha");
+        itemTrocarSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                itemTrocarSenhaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        menuOpcoes.add(itemTrocarSenha);
 
-        barraDeMenu.add(jMenu3);
+        barraDeMenu.add(menuOpcoes);
 
         setJMenuBar(barraDeMenu);
 
@@ -706,22 +710,22 @@ public class FramePrincipal extends JFrame
         }
     }//GEN-LAST:event_itemDbActionPerformed
 
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-    {//GEN-HEADEREND:event_jCheckBoxMenuItem1ActionPerformed
+    private void itemHabilitarSomActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemHabilitarSomActionPerformed
+    {//GEN-HEADEREND:event_itemHabilitarSomActionPerformed
 
-        if(jCheckBoxMenuItem1.isSelected())
+        if(itemHabilitarSom.isSelected())
             Config.ENABLE_SOUND = true;
         else
             Config.ENABLE_SOUND = false;
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    }//GEN-LAST:event_itemHabilitarSomActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
         AppManager.getInstance().requestAppShutdown(FramePrincipal.this);
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
+    private void itemTrocarSenhaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemTrocarSenhaActionPerformed
+    {//GEN-HEADEREND:event_itemTrocarSenhaActionPerformed
         EventQueue.invokeLater(new Runnable()
         {
             @Override
@@ -731,7 +735,7 @@ public class FramePrincipal extends JFrame
             }
 
         });
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_itemTrocarSenhaActionPerformed
 
     /**
      *
@@ -775,6 +779,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel desktop1;
     private javax.swing.JMenuItem itemBancoDados;
     private javax.swing.JMenuItem itemDb;
+    private javax.swing.JCheckBoxMenuItem itemHabilitarSom;
     private javax.swing.JMenu itemHardware;
     private javax.swing.JMenuItem itemJava;
     private javax.swing.JMenuItem itemMemoria;
@@ -785,21 +790,19 @@ public class FramePrincipal extends JFrame
     private javax.swing.JMenu itemSistema;
     private javax.swing.JMenuItem itemSistemaOperacional;
     private javax.swing.JMenu itemSoftware;
+    private javax.swing.JMenuItem itemTrocarSenha;
     private javax.swing.JMenuItem itemVersao;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -813,6 +816,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel labelVersao;
     private javax.swing.JLabel lalbelHorario;
     private javax.swing.JMenu menuDb;
+    private javax.swing.JMenu menuOpcoes;
     private javax.swing.JMenu menuSistema;
     private javax.swing.JLabel pcLabel;
     private javax.swing.JPanel rodape;

@@ -26,11 +26,11 @@ public class SystemUtil
      */
     public static void printVersion()
     {
-        SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "\n"
-                           + Config.BUILD_NUM.substring(1, 14) + "\n"
-                           + Config.BUILD_DATE.substring(1, 52) + "\n"
-                           + Config.BUILD_URL.substring(1, 75) + "\n"
-                           + "Versao do Sistema " + Config.SYSTEM_VERSION);
+        SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
+                           + Config.BUILD_NUM.substring(1, 14) + "<br>"
+                           + Config.BUILD_DATE.substring(1, 52) + "<br>"
+                           + Config.BUILD_URL.substring(1, 75) + "<br>"
+                           + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>");
 
     }
 
@@ -58,10 +58,10 @@ public class SystemUtil
      */
     public static void printDbInfo() throws SQLException
     {
-        showMsg("\n Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "\n"
-                + "Status do Banco: " + DatabaseManager.getConnectionStatus() + "\n"
-                + "Conexoes Ativas: " + String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount()) + "\n"
-                + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "\n \n"));
+        showMsg("<br> Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "<br>"
+                + "Status do Banco: " + DatabaseManager.getConnectionStatus() + "<br>"
+                + "Conexoes Ativas: " + String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount()) + "<br>"
+                + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "<br><br>"));
     }
 
     /**
@@ -69,7 +69,7 @@ public class SystemUtil
      */
     public static void printCpuInfo()
     {
-        showMsg("Processadores: " + Runtime.getRuntime().availableProcessors() + "\n"
+        showMsg("Processadores: " + Runtime.getRuntime().availableProcessors() + "<br>"
                 + "Arquitetura " + System.getenv("PROCESSOR_IDENTIFIER"));
     }
 
@@ -78,8 +78,8 @@ public class SystemUtil
      */
     public static void printOSInfo()
     {
-        showMsg("Sistema Operacional: " + System.getProperty("os.name") + "\n"
-                + "Build: " + System.getProperty("os.version") + "\n"
+        showMsg("Sistema Operacional: " + System.getProperty("os.name") + "<br>"
+                + "Build: " + System.getProperty("os.version") + "<br>"
                 + "Arquitetura: " + System.getProperty("os.arch"));
     }
 
@@ -88,16 +88,16 @@ public class SystemUtil
      */
     public static void printJvmInfo()
     {
-        showMsg("\n == Virtual Machine Information (JVM) == \n"
-                + "Name: " + System.getProperty("java.vm.name") + "\n"
-                + "JRE Directory:  " + System.getProperty("java.home") + "\n"
-                + "Version:  " + System.getProperty("java.vm.version") + "\n"
-                + "Vendor:  " + System.getProperty("java.vm.vendor") + "\n"
-                + "Info:  " + System.getProperty("java.vm.info") + "\n \n"
-                + "== Java Platform Information == \n"
-                + "Name:  " + System.getProperty("java.runtime.name") + "\n"
-                + "Version: " + System.getProperty("java.version") + "\n"
-                + "Java Class Version: " + System.getProperty("java.class.version") + "\n");
+        showMsg("\n == Virtual Machine Information (JVM) == <br>"
+                + "Name: " + System.getProperty("java.vm.name") + "<br>"
+                + "JRE Directory:  " + System.getProperty("java.home") + "<br>"
+                + "Version:  " + System.getProperty("java.vm.version") + "<br>"
+                + "Vendor:  " + System.getProperty("java.vm.vendor") + "<br>"
+                + "Info:  " + System.getProperty("java.vm.info") + "<br><br>"
+                + "== Java Platform Information == <br>"
+                + "Name:  " + System.getProperty("java.runtime.name") + "<br>"
+                + "Version: " + System.getProperty("java.version") + "<br>"
+                + "Java Class Version: " + System.getProperty("java.class.version") + "<br>");
     }
 
     /**
@@ -168,9 +168,11 @@ public class SystemUtil
     public static void showMsg(String msg)
     {
         if(Config.DEBUG)
+        {
             _log.info("enviando janela de mensagem... \n");
-   SoundManager.playSound("info.wav");
-        JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> "+msg+ "</b></font></html>", "Informacao", JOptionPane.INFORMATION_MESSAGE);
+        }
+        SoundManager.playSound("info.wav");
+        JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Informacao", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -182,9 +184,11 @@ public class SystemUtil
     public static void showErrorMsg(String msg)
     {
         if(Config.DEBUG)
+        {
             _log.info("enviando janela de mensagem de erro... \n");
+        }
         SoundManager.playSound("error.wav");
-        JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> "+msg+ "</b></font></html>", "Erro", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
 }
