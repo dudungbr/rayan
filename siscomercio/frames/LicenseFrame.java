@@ -228,6 +228,7 @@ public class LicenseFrame extends JFrame
         setResizable(false);
 
         painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        painel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         painel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         labelCodAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
