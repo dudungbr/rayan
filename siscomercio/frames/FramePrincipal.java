@@ -93,7 +93,7 @@ public class FramePrincipal extends JFrame
         disparaRelogio();
         setSoundProperties();
         preenchaFrame();
-        setDesktop(jLabel5);
+        setDesktop(desktop1);
         created = true;
 
     }
@@ -123,7 +123,7 @@ public class FramePrincipal extends JFrame
         pcLabel.setText(WindowsUtil.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
         dadosEmpresa.setText(Config.EMPRESA);
-        jLabel11.setText(Config.EMPRESA);
+        labelNomeEmpresa.setText(Config.EMPRESA);
         dadosOperador.setText(UserTable.getInstance().getLastUser());
         siteInfo.setText(Config.SITE);
         versionInfo.setText(SystemUtil.getVersion());
@@ -198,46 +198,46 @@ public class FramePrincipal extends JFrame
         jMenu7 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        rodape = new javax.swing.JPanel();
+        labelData = new javax.swing.JLabel();
         dadosData = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lalbelHorario = new javax.swing.JLabel();
         dadosRelogio = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelEmpresa = new javax.swing.JLabel();
         dadosEmpresa = new javax.swing.JLabel();
         dadosOperador = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        labelOperador = new javax.swing.JLabel();
         pcLabel = new javax.swing.JLabel();
         statusInfo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        labelStatus = new javax.swing.JLabel();
+        labelVersao = new javax.swing.JLabel();
         versionInfo = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        labelSite = new javax.swing.JLabel();
         siteInfo = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        labelTerminal = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        desktop1 = new javax.swing.JLabel();
+        labelNomeEmpresa = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         menuSistema = new javax.swing.JMenu();
-        itemRegistro = new javax.swing.JMenuItem();
-        itemReiniciar = new javax.swing.JMenuItem();
-        itemSair = new javax.swing.JMenuItem();
         subMenuInformacoes = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        menuHardware = new javax.swing.JMenu();
+        itemHardware = new javax.swing.JMenu();
         itemMemoria = new javax.swing.JMenuItem();
         itemProcessador = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        itemSoftware = new javax.swing.JMenu();
         itemDb = new javax.swing.JMenuItem();
         itemJava = new javax.swing.JMenuItem();
         itemSistemaOperacional = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        itemSistema = new javax.swing.JMenu();
+        itemRegistro = new javax.swing.JMenuItem();
         itemVersao = new javax.swing.JMenuItem();
+        itemReiniciar = new javax.swing.JMenuItem();
+        itemSair = new javax.swing.JMenuItem();
         menuDb = new javax.swing.JMenu();
-        subMenuDB = new javax.swing.JMenuItem();
+        itemBancoDados = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -263,23 +263,23 @@ public class FramePrincipal extends JFrame
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        rodape.setBackground(new java.awt.Color(255, 255, 255));
+        rodape.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Informações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel3.setText("Data: ");
+        labelData.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelData.setText("Data: ");
 
         dadosData.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosData.setText("dInfo");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel2.setText("Horario:");
+        lalbelHorario.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        lalbelHorario.setText("Horario:");
 
         dadosRelogio.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosRelogio.setText("rInfo");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel4.setText("Empresa:");
+        labelEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelEmpresa.setText("Empresa:");
 
         dadosEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosEmpresa.setText("eInfo");
@@ -287,8 +287,8 @@ public class FramePrincipal extends JFrame
         dadosOperador.setFont(new java.awt.Font("Times New Roman", 1, 14));
         dadosOperador.setText("opInfo");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel6.setText("Operador: ");
+        labelOperador.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelOperador.setText("Operador: ");
 
         pcLabel.setFont(new java.awt.Font("Times New Roman", 1, 14));
         pcLabel.setText("pInforma");
@@ -296,115 +296,115 @@ public class FramePrincipal extends JFrame
         statusInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         statusInfo.setText("sInfo");
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel1.setText("Status:");
+        labelStatus.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelStatus.setText("Status:");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel7.setText("Versao: ");
+        labelVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelVersao.setText("Versao: ");
 
         versionInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         versionInfo.setText("vInfo");
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel10.setText("Site:");
+        labelSite.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelSite.setText("Site:");
 
         siteInfo.setFont(new java.awt.Font("Times New Roman", 1, 14));
         siteInfo.setText("siteInfo");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel8.setText("Terminal :");
+        labelTerminal.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelTerminal.setText("Terminal :");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout rodapeLayout = new javax.swing.GroupLayout(rodape);
+        rodape.setLayout(rodapeLayout);
+        rodapeLayout.setHorizontalGroup(
+            rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rodapeLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rodapeLayout.createSequentialGroup()
+                        .addComponent(lalbelHorario)
                         .addGap(6, 6, 6)
                         .addComponent(dadosRelogio)
                         .addGap(32, 32, 32)
-                        .addComponent(jLabel6)
+                        .addComponent(labelOperador)
                         .addGap(6, 6, 6)
                         .addComponent(dadosOperador))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                    .addGroup(rodapeLayout.createSequentialGroup()
+                        .addComponent(labelData)
                         .addGap(6, 6, 6)
                         .addComponent(dadosData)
                         .addGap(35, 35, 35)
-                        .addComponent(jLabel4)
+                        .addComponent(labelEmpresa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dadosEmpresa)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel1))
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTerminal)
+                    .addComponent(labelStatus))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pcLabel)
                     .addComponent(statusInfo))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rodapeLayout.createSequentialGroup()
+                        .addComponent(labelVersao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(versionInfo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                    .addGroup(rodapeLayout.createSequentialGroup()
+                        .addComponent(labelSite)
                         .addGap(22, 22, 22)
                         .addComponent(siteInfo)))
                 .addContainerGap(222, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        rodapeLayout.setVerticalGroup(
+            rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rodapeLayout.createSequentialGroup()
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rodapeLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelData))
+                    .addGroup(rodapeLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(dadosData))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(rodapeLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dadosEmpresa)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
+                            .addComponent(labelEmpresa)
+                            .addComponent(labelTerminal)))
+                    .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelVersao)
                         .addComponent(versionInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pcLabel)))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lalbelHorario)
                     .addComponent(dadosRelogio)
-                    .addComponent(jLabel6)
+                    .addComponent(labelOperador)
                     .addComponent(dadosOperador)
-                    .addComponent(jLabel1)
+                    .addComponent(labelStatus)
                     .addComponent(statusInfo)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(rodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(siteInfo)
-                        .addComponent(jLabel10)))
+                        .addComponent(labelSite)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setAlignmentX(SwingConstants.CENTER);
-        jLabel5.setAlignmentY(SwingConstants.CENTER);
-        jLabel5.setAutoscrolls(true);
-        jLabel5.setDoubleBuffered(true);
-        jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
+        desktop1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        desktop1.setAlignmentX(SwingConstants.CENTER);
+        desktop1.setAlignmentY(SwingConstants.CENTER);
+        desktop1.setAutoscrolls(true);
+        desktop1.setDoubleBuffered(true);
+        jPanel2.add(desktop1, java.awt.BorderLayout.CENTER);
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("nomeEmpresa");
-        jPanel2.add(jLabel11, java.awt.BorderLayout.PAGE_START);
+        labelNomeEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelNomeEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNomeEmpresa.setText("nomeEmpresa");
+        jPanel2.add(labelNomeEmpresa, java.awt.BorderLayout.PAGE_START);
 
         jLabel12.setText("jLabel12");
 
@@ -412,6 +412,72 @@ public class FramePrincipal extends JFrame
 
         menuSistema.setText("Sistema");
         menuSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        subMenuInformacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
+        subMenuInformacoes.setText("Informações");
+        subMenuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        subMenuInformacoes.add(jSeparator1);
+
+        itemHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
+        itemHardware.setText("Hardware");
+        itemHardware.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
+        itemMemoria.setText("Memória");
+        itemHardware.add(itemMemoria);
+
+        itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
+        itemProcessador.setText("Processador");
+        itemProcessador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemProcessadorActionPerformed(evt);
+            }
+        });
+        itemHardware.add(itemProcessador);
+
+        subMenuInformacoes.add(itemHardware);
+
+        itemSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
+        itemSoftware.setText("Software");
+        itemSoftware.setFont(new java.awt.Font("Times New Roman", 1, 14));
+
+        itemDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
+        itemDb.setText("Banco de Dados");
+        itemDb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDbActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemDb);
+
+        itemJava.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
+        itemJava.setText("Java");
+        itemJava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemJavaActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemJava);
+
+        itemSistemaOperacional.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
+        itemSistemaOperacional.setText("Sistema Operacional");
+        itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSistemaOperacionalActionPerformed(evt);
+            }
+        });
+        itemSoftware.add(itemSistemaOperacional);
+
+        subMenuInformacoes.add(itemSoftware);
+
+        itemSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
+        itemSistema.setText("Sistema");
+        itemSistema.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         itemRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
         itemRegistro.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -422,7 +488,22 @@ public class FramePrincipal extends JFrame
                 itemRegistroActionPerformed(evt);
             }
         });
-        menuSistema.add(itemRegistro);
+        itemSistema.add(itemRegistro);
+
+        itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        itemVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
+        itemVersao.setText("Versão");
+        itemVersao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVersaoActionPerformed(evt);
+            }
+        });
+        itemSistema.add(itemVersao);
+
+        subMenuInformacoes.add(itemSistema);
+
+        menuSistema.add(subMenuInformacoes);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         itemReiniciar.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -448,99 +529,19 @@ public class FramePrincipal extends JFrame
 
         barraDeMenu.add(menuSistema);
 
-        subMenuInformacoes.setText("Informações");
-        subMenuInformacoes.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        subMenuInformacoes.add(jSeparator1);
-
-        menuHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10524_16x16.png"))); // NOI18N
-        menuHardware.setText("Hardware");
-        menuHardware.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemMemoria.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/10517_16x16.png"))); // NOI18N
-        itemMemoria.setText("Memória");
-        menuHardware.add(itemMemoria);
-
-        itemProcessador.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemProcessador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/985_16x16.png"))); // NOI18N
-        itemProcessador.setText("Processador");
-        itemProcessador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemProcessadorActionPerformed(evt);
-            }
-        });
-        menuHardware.add(itemProcessador);
-
-        subMenuInformacoes.add(menuHardware);
-
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9719_16x16.png"))); // NOI18N
-        jMenu2.setText("Software");
-        jMenu2.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemDb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
-        itemDb.setText("Banco de Dados");
-        itemDb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDbActionPerformed(evt);
-            }
-        });
-        jMenu2.add(itemDb);
-
-        itemJava.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemJava.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/9400_16x16.png"))); // NOI18N
-        itemJava.setText("Java");
-        itemJava.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemJavaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(itemJava);
-
-        itemSistemaOperacional.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemSistemaOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1080_16x16.png"))); // NOI18N
-        itemSistemaOperacional.setText("Sistema Operacional");
-        itemSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSistemaOperacionalActionPerformed(evt);
-            }
-        });
-        jMenu2.add(itemSistemaOperacional);
-
-        subMenuInformacoes.add(jMenu2);
-
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6957_16x16.png"))); // NOI18N
-        jMenu1.setText("Sistema");
-        jMenu1.setFont(new java.awt.Font("Times New Roman", 1, 14));
-
-        itemVersao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
-        itemVersao.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        itemVersao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8246_16x16.png"))); // NOI18N
-        itemVersao.setText("Versão");
-        itemVersao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemVersaoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(itemVersao);
-
-        subMenuInformacoes.add(jMenu1);
-
-        barraDeMenu.add(subMenuInformacoes);
-
         menuDb.setText("Configurações");
         menuDb.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        subMenuDB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
-        subMenuDB.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        subMenuDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
-        subMenuDB.setText("Banco de Dados");
-        subMenuDB.addActionListener(new java.awt.event.ActionListener() {
+        itemBancoDados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        itemBancoDados.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        itemBancoDados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1023_16x16.png"))); // NOI18N
+        itemBancoDados.setText("Banco de Dados");
+        itemBancoDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subMenuDBActionPerformed(evt);
+                itemBancoDadosActionPerformed(evt);
             }
         });
-        menuDb.add(subMenuDB);
+        menuDb.add(itemBancoDados);
 
         barraDeMenu.add(menuDb);
 
@@ -571,7 +572,7 @@ public class FramePrincipal extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
@@ -583,7 +584,7 @@ public class FramePrincipal extends JFrame
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                 .addGap(29, 29, 29)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -666,8 +667,8 @@ public class FramePrincipal extends JFrame
 
     }//GEN-LAST:event_itemVersaoActionPerformed
 
-    private void subMenuDBActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_subMenuDBActionPerformed
-    {//GEN-HEADEREND:event_subMenuDBActionPerformed
+    private void itemBancoDadosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemBancoDadosActionPerformed
+    {//GEN-HEADEREND:event_itemBancoDadosActionPerformed
         EventQueue.invokeLater(new Runnable()
         {
             @Override
@@ -678,7 +679,7 @@ public class FramePrincipal extends JFrame
 
         });
 
-    }//GEN-LAST:event_subMenuDBActionPerformed
+    }//GEN-LAST:event_itemBancoDadosActionPerformed
 
     private void itemRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemRegistroActionPerformed
     {//GEN-HEADEREND:event_itemRegistroActionPerformed
@@ -747,7 +748,7 @@ public class FramePrincipal extends JFrame
                 {
                     //Define O Tema Visual e o Texto do Pop UP
                     Properties props = new Properties();
-                    props.put("logoString", "AutSIS");
+                    props.put("logoString", "Siscom");
                     props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
                     AcrylLookAndFeel.setCurrentTheme(props);
 
@@ -771,33 +772,26 @@ public class FramePrincipal extends JFrame
     private javax.swing.JLabel dadosEmpresa;
     private javax.swing.JLabel dadosOperador;
     private javax.swing.JLabel dadosRelogio;
+    private javax.swing.JLabel desktop1;
+    private javax.swing.JMenuItem itemBancoDados;
     private javax.swing.JMenuItem itemDb;
+    private javax.swing.JMenu itemHardware;
     private javax.swing.JMenuItem itemJava;
     private javax.swing.JMenuItem itemMemoria;
     private javax.swing.JMenuItem itemProcessador;
     private javax.swing.JMenuItem itemRegistro;
     private javax.swing.JMenuItem itemReiniciar;
     private javax.swing.JMenuItem itemSair;
+    private javax.swing.JMenu itemSistema;
     private javax.swing.JMenuItem itemSistemaOperacional;
+    private javax.swing.JMenu itemSoftware;
     private javax.swing.JMenuItem itemVersao;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -806,17 +800,24 @@ public class FramePrincipal extends JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel labelData;
+    private javax.swing.JLabel labelEmpresa;
+    private javax.swing.JLabel labelNomeEmpresa;
+    private javax.swing.JLabel labelOperador;
+    private javax.swing.JLabel labelSite;
+    private javax.swing.JLabel labelStatus;
+    private javax.swing.JLabel labelTerminal;
+    private javax.swing.JLabel labelVersao;
+    private javax.swing.JLabel lalbelHorario;
     private javax.swing.JMenu menuDb;
-    private javax.swing.JMenu menuHardware;
     private javax.swing.JMenu menuSistema;
     private javax.swing.JLabel pcLabel;
+    private javax.swing.JPanel rodape;
     private javax.swing.JLabel siteInfo;
     private javax.swing.JLabel statusInfo;
-    private javax.swing.JMenuItem subMenuDB;
     private javax.swing.JMenu subMenuInformacoes;
     private javax.swing.JLabel versionInfo;
     // End of variables declaration//GEN-END:variables
