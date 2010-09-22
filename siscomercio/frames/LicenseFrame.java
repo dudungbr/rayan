@@ -419,7 +419,7 @@ public class LicenseFrame extends JFrame
             public void run()
             {
 
-               AppManager.setTema();
+               AppManager.setTema(getClass().getName());
                 new LicenseFrame().setVisible(true);
             }
 

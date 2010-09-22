@@ -67,6 +67,7 @@ public class DatabaseFactory
     {
         try
         {
+             _log.log(Level.INFO, "Inicializando Database Engine C3P0... \n");
             _source = new ComboPooledDataSource();
             _source.setAutoCommitOnClose(true);
             _source.setInitialPoolSize(10);
@@ -120,7 +121,7 @@ public class DatabaseFactory
         }
         catch(SQLException x)
         {
-            AppManager.setTema();
+            AppManager.setTema(getClass().getName());
             SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(),true);
             // re-throw the exception
             throw x;

@@ -112,7 +112,7 @@ public class DatabaseManager
 
                     Connection con = null;
                     if(Config.DEBUG)
-                        _log.log(Level.INFO, "DatabaseManager: executando script {0} \n", f.getName());
+                        _log.log(Level.INFO, "\n DatabaseManager: executando script {0} \n", f.getName());
                     String thisLine, sqlQuery = null;
 
                     con = DatabaseFactory.getInstance().getConnection();
@@ -171,7 +171,7 @@ public class DatabaseManager
         boolean result = false;
         Connection con = null;
         if(Config.DEBUG)
-            _log.log(Level.INFO, "Executando Query: {0}\n", query);
+            _log.log(Level.INFO, "\n Executando Query: {0} \n", query);
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -196,7 +196,7 @@ public class DatabaseManager
         Connection con = null;
 
         if(Config.DEBUG)
-            _log.info("criando novo banco.");
+            _log.info("\n criando novo banco. \n ");
         try
         {
             Class.forName(Config.DATABASE_DRIVER).newInstance();
@@ -218,7 +218,7 @@ public class DatabaseManager
     public static void instaleBanco()
     {
         if(Config.DEBUG)
-            _log.info("tentando Instalar Database...");
+            _log.info("\n tentando Instalar Database...");
         createNewDatabase();
         readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
@@ -288,7 +288,8 @@ public class DatabaseManager
     public static void closeConnections(PreparedStatement ps, ResultSet rset, Connection con)
     {
         if(Config.DEBUG)
-            _log.info("fechando conexoes c/ a database \n");
+        System.out.println();
+            _log.info("Fechando conexoes c/ a database \n");
         try
         {
             ps.close();
@@ -311,7 +312,7 @@ public class DatabaseManager
     private static void closeConnections(Statement s, Connection con)
     {
         if(Config.DEBUG)
-            _log.info("fechando conexoes c/ a database \n");
+            _log.info("Fechando conexoes c/ a database \n");
         try
         {
             s.close();
@@ -355,7 +356,7 @@ public class DatabaseManager
     {
         Connection con = null;
         if(Config.DEBUG)
-            _log.info("procurando codigo do Usuario.. \n");
+            _log.info("Procurando codigo do Usuario.. \n");
         int codigo = -1;
         try
         {
@@ -371,7 +372,7 @@ public class DatabaseManager
             closeConnections(ps, con);
 
             if(Config.DEBUG)
-                _log.log(Level.INFO, "o codigo do usuario {0} e {1}\n", new Object[]
+                _log.log(Level.INFO, "O codigo do usuario {0} e {1}\n", new Object[]
                         {
                             login, codigo
                         });
@@ -418,7 +419,7 @@ public class DatabaseManager
         if(ok)
         {
             if(Config.DEBUG)
-                _log.log(Level.INFO, "trocando senha do usuario: {0}para: {1}\n", new Object[]
+                _log.log(Level.INFO, "\n trocando senha do usuario: {0}para: {1}\n", new Object[]
                         {
                             login, newPass
                         });
@@ -452,6 +453,7 @@ public class DatabaseManager
     {
         Connection con = null;
         if(Config.DEBUG)
+          
             _log.info("lendo tabela de estado da instalacao \n");
         try
         {
@@ -466,12 +468,12 @@ public class DatabaseManager
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)
-                _log.log(Level.INFO, "tryReadInstallData(): _installed: {0}", _installed);
+                _log.info("Estado da Instalação: "+ _installed+" ok .....\n");
         }
         catch(Exception e)
         {
             if(Config.DEBUG)
-                _log.log(Level.SEVERE, "DatabaseManager: Error reading Install Table: " + e.getMessage(), e);
+                _log.warning("DatabaseManager: Error reading Install Table: " + e.getMessage());
         }
     }
 
@@ -482,7 +484,7 @@ public class DatabaseManager
     {
         Connection con = null;
         if(Config.DEBUG)
-            _log.info("lendo dados da Licensa \n");
+            _log.info("Lendo dados da Licenca \n");
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -501,6 +503,8 @@ public class DatabaseManager
 
             }
             closeConnections(ps, rset, con);
+              if(Config.DEBUG)
+            _log.info("Status da Licenca: "+_licensed+"\n");
         }
         catch(Exception e)
         {
@@ -515,6 +519,8 @@ public class DatabaseManager
      */
     public void setAcessLevel(int lvl)
     {
+        if(Config.DEBUG)
+            _log.info("\n setando nivel de acesso para usuario \n");
         Connection con = null;
         try
         {
@@ -538,6 +544,7 @@ public class DatabaseManager
      */
     public static int getAccessLevel(String usr)
     {
+        
         Connection con = null;
         if(Config.DEBUG)
             _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);

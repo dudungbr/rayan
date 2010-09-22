@@ -39,14 +39,16 @@ public class AppManager extends JFrame
         protected static final AppManager _instance = new AppManager();
     }
 
-    /**
-     *
-     */
+   
     /**
      * 
+     * @param requesterClass
      */
-    public static void setTema()
+    public static void setTema(String requesterClass)
     {
+        if(Config.DEBUG)
+         
+            _log.info("Setando Tema Visual para o Frame:  "+requesterClass+"\n");
         try
         {
             //Define O Tema Visual e o Texto do Pop UP
