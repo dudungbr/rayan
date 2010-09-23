@@ -473,7 +473,7 @@ public class DatabaseManager
         catch(Exception e)
         {
             if(Config.DEBUG)
-                _log.warning("DatabaseManager: Error reading Install Table: " + e.getMessage());
+                _log.severe("DatabaseManager: Error reading Install Table: " + e.getMessage());
         }
     }
 

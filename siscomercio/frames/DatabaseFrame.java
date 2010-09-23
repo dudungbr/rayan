@@ -10,15 +10,12 @@
  */
 package com.siscomercio.frames;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
 import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
-import javax.swing.UIManager;
 
 /**
  * $Revision$
@@ -194,7 +191,7 @@ public class DatabaseFrame extends JFrame
                 @Override
                 public void run()
                 {
-                   AppManager.setTema(getClass().getName());
+                   AppManager.setTema(DatabaseFrame.class.getSimpleName());
                     new LicenseFrame().setVisible(true);
                 }
             });

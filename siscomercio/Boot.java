@@ -10,6 +10,7 @@ import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.LicenseFrame;
 import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.managers.LogMonitor;
 import com.siscomercio.security.Auth;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
@@ -26,19 +27,22 @@ public class Boot
 {
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
 
-
     /**
      * @param args the command line arguments
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception
     {
+        // Inicializa o Log Monitor
+        // ---------------
+        LogMonitor.init();
+
         //Carrega as Configs
+        // ---------------
         Config.load();
 
         // Checka  O Processo MySQL esta em Execução.
         // ------------------------
-        // if(!Config.DEVELOPER)
         WindowsUtil.checkProcess("mysql");
 
         // Lê a Tabela de Instalacao da DB
@@ -47,20 +51,19 @@ public class Boot
 
         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
         // ------------------------
-        if(DatabaseManager._installed==0)
+        if(DatabaseManager._installed == 0)
         {
             EventQueue.invokeLater(new Runnable()
             {
                 @Override
                 public void run()
                 {
-                    AppManager.setTema(getClass().getName());
+                    AppManager.setTema(Boot.class.getSimpleName());
                     DatabaseFrame.getInstance().setVisible(true);
                 }
 
             });
         }
-
         // Caso a DB Esteja Instalada Prosegue Para a Licenca
         // ------------------------------------------------
         else
@@ -71,7 +74,7 @@ public class Boot
 
             // OK! Podemos Abrir o Sistema.
             // ------------------------
-            if(DatabaseManager._licensed==1)
+            if(DatabaseManager._licensed == 1)
             {
                 // Chama a Tela de Login
                 // ------------------------
@@ -82,7 +85,8 @@ public class Boot
                         @Override
                         public void run()
                         {
-                            AppManager.setTema(getClass().getName());
+                            _log.finest("Fim do Boot.");
+                            AppManager.setTema(Boot.class.getSimpleName());
                             Auth.getInstance().setVisible(true);
                         }
 
@@ -110,7 +114,7 @@ public class Boot
                     @Override
                     public void run()
                     {
-                        AppManager.setTema(getClass().getName());
+                        AppManager.setTema(Boot.class.getSimpleName());
                         new LicenseFrame().setVisible(true);
                     }
 
