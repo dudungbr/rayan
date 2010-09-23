@@ -777,7 +777,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema(FramePrincipal.class.getName());
+                AppManager.setTema(FramePrincipal.class.getSimpleName());
                 new AdminLogon().setVisible(true);
             }
 
@@ -795,7 +795,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema(FramePrincipal.class.getName());
+                AppManager.setTema(FramePrincipal.class.getSimpleName());
                 new FramePrincipal().setVisible(true);
             }
 
