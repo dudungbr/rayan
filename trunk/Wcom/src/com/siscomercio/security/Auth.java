@@ -168,6 +168,7 @@ public class Auth extends JFrame
 
         });
 
+        //adiciona listener ao enter no login
         getRootPane().setDefaultButton(botaoLogin);
 
         // Acao Botao Cancelar
