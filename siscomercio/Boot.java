@@ -4,10 +4,10 @@
  */
 package com.siscomercio;
 
-import com.siscomercio.frames.DatabaseFrame;
+import com.siscomercio.frames.ConfigBancoDados;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
-import com.siscomercio.frames.LicenseFrame;
+import com.siscomercio.frames.FrameLicenca;
 import com.siscomercio.managers.AppManager;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.LogMonitor;
@@ -35,32 +35,39 @@ public class Boot
     {
         //Carrega as Configs
         // ---------------
+        _log.info("Inicializando Config...");
         Config.load();
 
          // Inicializa o Log Monitor
         // ---------------
         if(Config.LOG_DEBUG)
+        {
+             _log.info("Inicializando Log Monitor...");
         LogMonitor.init();
-
+        }
         // Checka  O Processo MySQL esta em Execução.
         // ------------------------
+          _log.info("Checando Servidor Banco de Dados...");
         WindowsUtil.checkProcess("mysql");
 
         // Lê a Tabela de Instalacao da DB
         //--------------------------------
+          _log.info("Lendo Tabela de Instalacao do Banco ...");
         DatabaseManager.tryReadInstallData();
 
         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
         // ------------------------
         if(DatabaseManager._installed == 0)
         {
+              _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
             EventQueue.invokeLater(new Runnable()
             {
                 @Override
                 public void run()
                 {
-                    AppManager.setTema(Boot.class.getSimpleName());
-                    DatabaseFrame.getInstance().setVisible(true);
+                    AppManager.setTema(ConfigBancoDados.class.getSimpleName());
+                      _log.info("Abrindo Instalador da Database...");
+                    ConfigBancoDados.getInstance().setVisible(true);
                 }
 
             });
@@ -69,6 +76,7 @@ public class Boot
         // ------------------------------------------------
         else
         {
+              _log.info("Inicializando Log Monitor...");
             //Le os Dados da Licenca
             // --------------------------
             DatabaseManager.readLicenseData();
@@ -116,7 +124,7 @@ public class Boot
                     public void run()
                     {
                         AppManager.setTema(Boot.class.getSimpleName());
-                        new LicenseFrame().setVisible(true);
+                        new FrameLicenca().setVisible(true);
                     }
 
                 });

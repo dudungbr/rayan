@@ -37,13 +37,13 @@ import javax.swing.JFrame;
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class LicenseFrame extends JFrame
+public class FrameLicenca extends JFrame
 {
     int numEstacoes = 0;
-    private static final Logger _log = Logger.getLogger(LicenseFrame.class.getName());
+    private static final Logger _log = Logger.getLogger(FrameLicenca.class.getName());
 
-    /** Creates new form LicenseFrame */
-    public LicenseFrame()
+    /** Creates new form FrameLicenca */
+    public FrameLicenca()
     {
         initComponents();
         prepareFrame();
@@ -226,7 +226,7 @@ public class LicenseFrame extends JFrame
         setResizable(false);
 
         painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
-        painel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        painel.setFont(new java.awt.Font("Times New Roman", 1, 14));
         painel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         labelCodAtivacao.setFont(new java.awt.Font("Times New Roman", 1, 14));
@@ -419,8 +419,8 @@ public class LicenseFrame extends JFrame
             public void run()
             {
 
-               AppManager.setTema(LicenseFrame.class.getSimpleName());
-                new LicenseFrame().setVisible(true);
+               AppManager.setTema(FrameLicenca.class.getSimpleName());
+                new FrameLicenca().setVisible(true);
             }
 
         });

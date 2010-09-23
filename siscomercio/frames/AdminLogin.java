@@ -24,16 +24,16 @@ import com.siscomercio.utilities.SystemUtil;
  * @author Rayan
  */
 @SuppressWarnings("serial")
-public class AdminLogon extends JFrame
+public class AdminLogin extends JFrame
 {
     /**
      *
      */
     public static boolean _securityAuth;
-    private Logger _log = Logger.getLogger(AdminLogon.class.getName());
+    private Logger _log = Logger.getLogger(AdminLogin.class.getName());
 
     /** Creates new form LogonFrame */
-    public AdminLogon()
+    public AdminLogin()
     {
         initComponents();
         if(Config.DEBUG)
@@ -158,7 +158,7 @@ public class AdminLogon extends JFrame
             @Override
             public void run()
             {
-                new AdminLogon().setVisible(true);
+                new AdminLogin().setVisible(true);
 
 
             }

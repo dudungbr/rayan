@@ -1,5 +1,5 @@
 /*
- * RegistryInfo.java
+ * InformacoesRegistro.java
  *
  * Created on 23/09/2010, 08:45:32
  */
@@ -14,11 +14,11 @@ import javax.swing.JFrame;
  *
  * @author Usuario
  */
-public class RegistryInfo extends JFrame
+public class InformacoesRegistro extends JFrame
 {
     private static final long serialVersionUID = 1L;
-    /** Creates new form RegistryInfo */
-    public RegistryInfo()
+    /** Creates new form InformacoesRegistro */
+    public InformacoesRegistro()
     {
         initComponents();
     }
@@ -114,7 +114,7 @@ public class RegistryInfo extends JFrame
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelValidade)
                     .add(dadosValidade))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -142,7 +142,7 @@ public class RegistryInfo extends JFrame
             @Override
             public void run()
             {
-                new RegistryInfo().setVisible(true);
+                new InformacoesRegistro().setVisible(true);
             }
         });
     }

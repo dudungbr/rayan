@@ -4,7 +4,7 @@
  */
 
 /*
- * FrameCadastroUsuarios.java
+ * CadastroUsuarios.java
  *
  * Created on 23/04/2010, 02:22:50
  */
@@ -19,12 +19,12 @@ import com.siscomercio.managers.DatabaseManager;
  * $Date$
  * @author Rayan
  */
-public class FrameCadastroUsuarios extends JFrame
+public class CadastroUsuarios extends JFrame
 {
     private static final long serialVersionUID = 1L;
 
-    /** Creates new form FrameCadastroUsuarios */
-    public FrameCadastroUsuarios()
+    /** Creates new form CadastroUsuarios */
+    public CadastroUsuarios()
     {
         initComponents();
     }
@@ -172,7 +172,7 @@ public class FrameCadastroUsuarios extends JFrame
             @Override
             public void run()
             {
-                new FrameCadastroUsuarios().setVisible(true);
+                new CadastroUsuarios().setVisible(true);
             }
 
         });

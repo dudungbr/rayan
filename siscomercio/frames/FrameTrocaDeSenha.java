@@ -1,5 +1,5 @@
 /*
- * TrocarSenha.java
+ * FrameTrocaDeSenha.java
  *
  * Created on 03/05/2010, 12:01:48
  */
@@ -14,12 +14,12 @@ import com.siscomercio.utilities.SystemUtil;
  * $Date: 2010-05-03 14:39:12 -0300 (seg, 03 mai 2010) $
  * @author Administrador
  */
-public class TrocarSenha extends javax.swing.JFrame
+public class FrameTrocaDeSenha extends javax.swing.JFrame
 {
     private static final long serialVersionUID = 1L;
 
-    /** Creates new form TrocarSenha */
-    public TrocarSenha()
+    /** Creates new form FrameTrocaDeSenha */
+    public FrameTrocaDeSenha()
     {
         initComponents();
     }
@@ -166,7 +166,7 @@ public class TrocarSenha extends javax.swing.JFrame
             @Override
             public void run()
             {
-                new TrocarSenha().setVisible(true);
+                new FrameTrocaDeSenha().setVisible(true);
             }
 
         });
