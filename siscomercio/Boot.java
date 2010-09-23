@@ -33,13 +33,14 @@ public class Boot
      */
     public static void main(String[] args) throws Exception
     {
-        // Inicializa o Log Monitor
-        // ---------------
-        LogMonitor.init();
-
         //Carrega as Configs
         // ---------------
         Config.load();
+
+         // Inicializa o Log Monitor
+        // ---------------
+        if(Config.LOG_DEBUG)
+        LogMonitor.init();
 
         // Checka  O Processo MySQL esta em Execução.
         // ------------------------

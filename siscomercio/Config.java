@@ -20,6 +20,11 @@ import com.siscomercio.utilities.SystemUtil;
 public class Config
 {
     private static final Logger _log = Logger.getLogger(Config.class.getName());
+
+    /**
+     *
+     */
+    public static boolean LOG_DEBUG;
     /**
      * som tocado quando o sistema for finalizado
      */
@@ -210,6 +215,7 @@ public class Config
             RESTART_SOUND = arquivo.getProperty("restartSound", "restartok.wav");
             WELCOME_SOUND = arquivo.getProperty("welcomeSound", "welcome.wav");
             DEBUG = Boolean.valueOf(arquivo.getProperty("debug", "true"));
+            LOG_DEBUG = Boolean.valueOf(arquivo.getProperty("logdebug", "false"));
             /**
              * Port Checks
              */

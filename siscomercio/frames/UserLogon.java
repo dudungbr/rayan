@@ -57,27 +57,31 @@ public class UserLogon extends javax.swing.JFrame
         botaoLogin = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Autenticação de Usuário");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 33, 63, -1));
+        jPanel1.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 80, -1));
 
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
             }
         });
-        jPanel1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 63, 63, -1));
+        jPanel1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 80, -1));
 
+        rotuloUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         rotuloUsuario.setText("Usuário");
-        jPanel1.add(rotuloUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, 10));
+        jPanel1.add(rotuloUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 10));
 
+        rotuloSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         rotuloSenha.setText("Senha");
-        jPanel1.add(rotuloSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, -1, -1));
+        jPanel1.add(rotuloSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
+        botaoLogin.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoLogin.setText("Login");
         botaoLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,31 +89,32 @@ public class UserLogon extends javax.swing.JFrame
             }
         });
         getRootPane().setDefaultButton(botaoLogin);
-        jPanel1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        jPanel1.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
         getRootPane().setDefaultButton(botaoLogin);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-201)/2, (screenSize.height-166)/2, 201, 166);
+        setBounds((screenSize.width-236)/2, (screenSize.height-184)/2, 236, 184);
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed

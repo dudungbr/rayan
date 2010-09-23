@@ -52,7 +52,7 @@ public class AppManager extends JFrame
     public static void setTema(String requesterClass)
     {
         if(Config.DEBUG)
-            _log.info("Setando Tema Visual a partir da Classe:  "+requesterClass+".java \n");
+            _log.info("Setando Tema Visual para a Classe:  "+requesterClass+".java \n");
         try
         {
             //Define O Tema Visual e o Texto do Pop UP

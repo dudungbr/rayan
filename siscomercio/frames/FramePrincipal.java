@@ -725,7 +725,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                new LicenseFrame().setVisible(true);
+                new RegistryInfo().setVisible(true);
             }
 
         });
