@@ -32,8 +32,38 @@ public class PainelAdministracao extends JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuCadastro = new javax.swing.JMenu();
+        subMenuCadUsuarios = new javax.swing.JMenu();
+        itemAddUsuario = new javax.swing.JMenuItem();
+        itemEditarUsuario = new javax.swing.JMenuItem();
+        itemExcluirUsuario = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Administração");
+
+        menuCadastro.setText("Cadastros");
+
+        subMenuCadUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
+        subMenuCadUsuarios.setText("Usuarios");
+
+        itemAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
+        itemAddUsuario.setText("Incluir");
+        subMenuCadUsuarios.add(itemAddUsuario);
+
+        itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
+        itemEditarUsuario.setText("Editar");
+        subMenuCadUsuarios.add(itemEditarUsuario);
+
+        itemExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
+        itemExcluirUsuario.setText("Excluir");
+        subMenuCadUsuarios.add(itemExcluirUsuario);
+
+        menuCadastro.add(subMenuCadUsuarios);
+
+        jMenuBar1.add(menuCadastro);
+
+        setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,7 +73,7 @@ public class PainelAdministracao extends JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
+            .add(0, 279, Short.MAX_VALUE)
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,6 +96,12 @@ public class PainelAdministracao extends JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemAddUsuario;
+    private javax.swing.JMenuItem itemEditarUsuario;
+    private javax.swing.JMenuItem itemExcluirUsuario;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuCadastro;
+    private javax.swing.JMenu subMenuCadUsuarios;
     // End of variables declaration//GEN-END:variables
 
 }
