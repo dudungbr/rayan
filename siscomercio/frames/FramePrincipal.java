@@ -439,8 +439,9 @@ public class FramePrincipal extends JFrame
         menuAdministracao.setText("Administração");
         menuAdministracao.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
+        jMenuItem1.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/1331_16x16.png"))); // NOI18N
-        jMenuItem1.setText("Painel De Administração");
+        jMenuItem1.setText("Painel de Administração");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
