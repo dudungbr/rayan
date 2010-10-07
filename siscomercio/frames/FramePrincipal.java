@@ -721,7 +721,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                new InformacoesRegistro().setVisible(true);
+                new RegistryInfo().setVisible(true);
             }
 
         });
@@ -760,7 +760,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                new FrameTrocaDeSenha().setVisible(true);
+                new TrocaSenha().setVisible(true);
             }
 
         });

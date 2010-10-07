@@ -1,5 +1,5 @@
 /*
- * InformacoesRegistro.java
+ * RegistryInfo.java
  *
  * Created on 23/09/2010, 08:45:32
  */
@@ -14,11 +14,11 @@ import javax.swing.JFrame;
  *
  * @author Usuario
  */
-public class InformacoesRegistro extends JFrame
+public class RegistryInfo extends JFrame
 {
     private static final long serialVersionUID = 1L;
-    /** Creates new form InformacoesRegistro */
-    public InformacoesRegistro()
+    /** Creates new form RegistryInfo */
+    public RegistryInfo()
     {
         initComponents();
     }
@@ -142,7 +142,7 @@ public class InformacoesRegistro extends JFrame
             @Override
             public void run()
             {
-                new InformacoesRegistro().setVisible(true);
+                new RegistryInfo().setVisible(true);
             }
         });
     }

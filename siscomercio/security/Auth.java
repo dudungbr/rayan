@@ -210,7 +210,7 @@ public class Auth extends JFrame
         setSize(290, 160);
         setResizable(false);
         setTitle("Login no Sistema");
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
     }

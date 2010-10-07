@@ -131,7 +131,7 @@ public class UserLogon extends javax.swing.JFrame
         if(Auth.checkMasterKey(campoUsuario.getText(), pass))
         {
             _authed = true;
-            new ConfigBancoDados().setVisible(true);
+            new DBConfig().setVisible(true);
             dispose();
         }
         /* _reAuth = true;
@@ -141,7 +141,7 @@ public class UserLogon extends javax.swing.JFrame
         boolean check = DatabaseManager.checkAccessLevel(500);
         if(check)
         {
-        new ConfigBancoDados().setVisible(true);
+        new DBConfig().setVisible(true);
         dispose();
         }
         else

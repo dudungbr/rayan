@@ -1,6 +1,6 @@
 
 /*
- * PainelAdministracao.java
+ * AdminPanel.java
  *
  * Created on 22/09/2010, 12:07:46
  */
@@ -14,11 +14,11 @@ import javax.swing.JFrame;
  *
  * @author Usuario
  */
-public class PainelAdministracao extends JFrame
+public class AdminPanel extends JFrame
 {
     private static final long serialVersionUID = 1L;
-    /** Creates new form PainelAdministracao */
-    public PainelAdministracao()
+    /** Creates new form AdminPanel */
+    public AdminPanel()
     {
         initComponents();
     }
@@ -108,7 +108,7 @@ public class PainelAdministracao extends JFrame
             @Override
             public void run()
             {
-                new PainelAdministracao().setVisible(true);
+                new AdminPanel().setVisible(true);
             }
         });
     }
