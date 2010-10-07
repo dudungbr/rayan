@@ -26,12 +26,12 @@ import java.awt.EventQueue;
  *
  */
 @SuppressWarnings("serial")
-public class ConfigBancoDados extends JFrame
+public class DBConfig extends JFrame
 {
-    private static Logger _log = Logger.getLogger(ConfigBancoDados.class.getName());
+    private static Logger _log = Logger.getLogger(DBConfig.class.getName());
 
     /** Creates new form FrameDatabase */
-    public ConfigBancoDados()
+    public DBConfig()
     {
         initComponents();
         dadosStatus.setText(DatabaseManager.getConnectionStatus());
@@ -51,7 +51,7 @@ public class ConfigBancoDados extends JFrame
      * retorna apenas uma instancia dessa classe.
      * @return SingletonHolder._instance
      */
-    public static ConfigBancoDados getInstance()
+    public static DBConfig getInstance()
     {
         return SingletonHolder._instance;
     }
@@ -59,7 +59,7 @@ public class ConfigBancoDados extends JFrame
     @SuppressWarnings("synthetic-access")
     private static class SingletonHolder
     {
-        protected static final ConfigBancoDados _instance = new ConfigBancoDados();
+        protected static final DBConfig _instance = new DBConfig();
     }
 
     /**
@@ -191,7 +191,7 @@ public class ConfigBancoDados extends JFrame
                 @Override
                 public void run()
                 {
-                   AppManager.setTema(ConfigBancoDados.class.getSimpleName());
+                   AppManager.setTema(DBConfig.class.getSimpleName());
                     new FrameLicenca().setVisible(true);
                 }
             });
@@ -229,7 +229,7 @@ public class ConfigBancoDados extends JFrame
             @Override
             public void run()
             {
-                new ConfigBancoDados().setVisible(true);
+                new DBConfig().setVisible(true);
             }
 
         });

@@ -57,29 +57,29 @@ public class AdminLogin extends JFrame
         botaoLogin = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Autenticação Administrativa");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Autenticação");
         setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
-        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autenticação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
         painel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        painel.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 63, -1));
+        painel.add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 35, 63, -1));
 
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
             }
         });
-        painel.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 63, -1));
+        painel.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 61, 63, -1));
 
         labelUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelUsuario.setText("Usuário");
-        painel.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 10));
+        painel.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 39, -1, 10));
 
         labelSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         labelSenha.setText("Senha");
-        painel.add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        painel.add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 61, 46, -1));
 
         botaoLogin.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoLogin.setText("Login");
@@ -89,7 +89,7 @@ public class AdminLogin extends JFrame
             }
         });
         getRootPane().setDefaultButton(botaoLogin);
-        painel.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        painel.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoCancelar.setText("Cancelar");
@@ -98,23 +98,23 @@ public class AdminLogin extends JFrame
                 botaoCancelarActionPerformed(evt);
             }
         });
-        painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
+        painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
         );
 
         getRootPane().setDefaultButton(botaoLogin);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-306)/2, (screenSize.height-172)/2, 306, 172);
+        setBounds((screenSize.width-195)/2, (screenSize.height-177)/2, 195, 177);
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
@@ -141,7 +141,7 @@ public class AdminLogin extends JFrame
             if(accessLevel >= Config.ADMIN_LVL)
             {
                 dispose();
-                new PainelAdministracao().setVisible(true);
+                new AdminPanel().setVisible(true);
             }
             else
                 SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.",true);

@@ -4,7 +4,7 @@
  */
 package com.siscomercio;
 
-import com.siscomercio.frames.ConfigBancoDados;
+import com.siscomercio.frames.DBConfig;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.FrameLicenca;
@@ -65,9 +65,9 @@ public class Boot
                 @Override
                 public void run()
                 {
-                    AppManager.setTema(ConfigBancoDados.class.getSimpleName());
+                    AppManager.setTema(DBConfig.class.getSimpleName());
                       _log.info("Abrindo Instalador da Database...");
-                    ConfigBancoDados.getInstance().setVisible(true);
+                    DBConfig.getInstance().setVisible(true);
                 }
 
             });
