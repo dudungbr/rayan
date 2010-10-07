@@ -12,6 +12,7 @@ package com.siscomercio.frames;
 
 import javax.swing.JFrame;
 import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.utilities.SystemUtil;
 
 /**
  * $Revision$
@@ -149,7 +150,23 @@ public class AddUser extends JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        DatabaseManager.insertUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
+       if(campoLogin.getText().equals(""))
+       {
+            SystemUtil.showErrorMsg("o login nao deve ser em branco", true);
+            return;
+       }
+
+        if(String.valueOf(campoSenha.getPassword()).equalsIgnoreCase((String.valueOf(campoConfirma.getPassword()))))
+        {
+            DatabaseManager.insertUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
+        }
+        else
+        {
+            SystemUtil.showErrorMsg("os campos de senha devem coincidir", true);
+            campoSenha.setText("");
+            campoConfirma.setText("");
+        }
+
 }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
