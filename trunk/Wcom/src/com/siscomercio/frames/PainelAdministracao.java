@@ -43,12 +43,18 @@ public class PainelAdministracao extends JFrame
         setTitle("Painel de Administração");
 
         menuCadastro.setText("Cadastros");
+        menuCadastro.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         subMenuCadUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
         subMenuCadUsuarios.setText("Usuarios");
 
         itemAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
         itemAddUsuario.setText("Incluir");
+        itemAddUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAddUsuarioActionPerformed(evt);
+            }
+        });
         subMenuCadUsuarios.add(itemAddUsuario);
 
         itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
@@ -73,12 +79,24 @@ public class PainelAdministracao extends JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 279, Short.MAX_VALUE)
+            .add(0, 277, Short.MAX_VALUE)
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-408)/2, (screenSize.height-334)/2, 408, 334);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itemAddUsuarioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemAddUsuarioActionPerformed
+    {//GEN-HEADEREND:event_itemAddUsuarioActionPerformed
+     EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                new AddUser().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_itemAddUsuarioActionPerformed
 
     /**
     * @param args the command line arguments
