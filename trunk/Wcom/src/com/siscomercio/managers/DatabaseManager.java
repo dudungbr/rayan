@@ -256,25 +256,28 @@ public class DatabaseManager
     /**
      * Insere Novo Usuario na Base de dados
      *
-     * @param name
-     * @param passwd
+     * @param login
+     * @param senha
+     * @param nivelAcesso
      */
-    public static void insertUser(String name, String passwd)
+    public static void addNewUser(String login, String senha,int nivelAcesso)
     {
         Connection con = null;
-        String commandLine = StringTable.INSERT_USER;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(commandLine);
-            ResultSet rset = ps.executeQuery();
-            closeConnections(ps, rset, con);
+            PreparedStatement ps = con.prepareStatement(StringTable.INSERT_USER);
+            ps.setInt(1, getLastCode()+1);
+            ps.setString(2, login);
+            ps.setString(3, senha);
+            ps.setInt(4,  nivelAcesso);
+            ps.execute();
+            closeConnections(ps, con);
             SystemUtil.showMsg("Usuario Cadastrado com Sucesso!", true);
         }
         catch(SQLException e)
         {
             SystemUtil.showErrorMsg(e.toString(), true);
-
         }
     }
 
@@ -346,6 +349,40 @@ public class DatabaseManager
         }
     }
 
+    ;
+
+    /**
+     * pega o ultimo codigo usado
+     * @return codigo
+     */
+    public static int getLastCode()
+    {
+        Connection con = null;
+        if(Config.DEBUG)
+            _log.info("Procurando ultimo codigo gerado na DB.. \n");
+        int codigo = -1;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.GET_LAST_CODE);
+
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if(rset.next())
+                codigo = rset.getInt("codigo");
+
+            closeConnections(ps, con);
+
+            if(Config.DEBUG)
+                _log.info( "ultimo codigo: "+ codigo);
+
+        }
+        catch(SQLException ex)
+        {
+            _log.log(Level.WARNING, "Erro ao procurar ultimo codigo gerado na DB: ", ex);
+        }
+        return codigo;
+    }
     /**
      * pega o codigo do usuario do banco
      * @param login
