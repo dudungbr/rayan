@@ -13,6 +13,7 @@ package com.siscomercio.frames;
 import javax.swing.JFrame;
 import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.utilities.SystemUtil;
+import java.util.logging.Logger;
 
 /**
  * $Revision$
@@ -22,6 +23,7 @@ import com.siscomercio.utilities.SystemUtil;
  */
 public class AddUser extends JFrame
 {
+    private Logger _log = Logger.getLogger(AddUser.class.getName());
     private static final long serialVersionUID = 1L;
 
     /** Creates new form AddUser */
@@ -46,10 +48,9 @@ public class AddUser extends JFrame
         labelSobrenome = new javax.swing.JLabel();
         labelLogin = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        botaoCancelar = new javax.swing.JButton();
+        botaoLimpar = new javax.swing.JButton();
+        botaoCadastrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         confirmarSenha = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
@@ -57,6 +58,7 @@ public class AddUser extends JFrame
         campoLogin = new javax.swing.JTextField();
         campoConfirma = new javax.swing.JPasswordField();
         campoSenha = new javax.swing.JPasswordField();
+        caixaCombinacao = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adcionar Usuário");
@@ -87,44 +89,42 @@ public class AddUser extends JFrame
         labelSenha.setText("Senha");
         jPanel3.add(labelSenha);
         labelSenha.setBounds(80, 130, 38, 20);
-        jPanel3.add(jSlider1);
-        jSlider1.setBounds(80, 250, 192, 25);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoCancelarActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3);
-        jButton3.setBounds(120, 300, 87, 25);
+        jPanel3.add(botaoCancelar);
+        botaoCancelar.setBounds(120, 300, 87, 25);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jButton2.setText("Limpar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoLimpar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoLimpar.setText("Limpar");
+        botaoLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoLimparActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2);
-        jButton2.setBounds(220, 300, 77, 25);
+        jPanel3.add(botaoLimpar);
+        botaoLimpar.setBounds(220, 300, 77, 25);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoCadastrar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoCadastrar.setText("Cadastrar");
+        botaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoCadastrarActionPerformed(evt);
             }
         });
-        getRootPane().setDefaultButton(jButton1);
-        jPanel3.add(jButton1);
-        jButton1.setBounds(20, 300, 93, 25);
+        getRootPane().setDefaultButton(botaoCadastrar);
+        jPanel3.add(botaoCadastrar);
+        botaoCadastrar.setBounds(20, 300, 93, 25);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14));
         jLabel2.setText("Nível de Acesso");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(120, 220, 95, 17);
+        jLabel2.setBounds(120, 210, 95, 17);
 
         confirmarSenha.setFont(new java.awt.Font("Times New Roman", 1, 14));
         confirmarSenha.setText("Confirma Senha");
@@ -141,6 +141,11 @@ public class AddUser extends JFrame
         jPanel3.add(campoSenha);
         campoSenha.setBounds(130, 130, 90, 20);
 
+        caixaCombinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        caixaCombinacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Funcionario", "Gerente", "Administrador" }));
+        jPanel3.add(caixaCombinacao);
+        caixaCombinacao.setBounds(100, 240, 130, 20);
+
         getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 0, 340, 350);
 
@@ -148,8 +153,8 @@ public class AddUser extends JFrame
         setBounds((screenSize.width-345)/2, (screenSize.height-381)/2, 345, 381);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
+    private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoCadastrarActionPerformed
+    {//GEN-HEADEREND:event_botaoCadastrarActionPerformed
        if(campoLogin.getText().equals(""))
        {
             SystemUtil.showErrorMsg("o login nao deve ser em branco", true);
@@ -158,7 +163,8 @@ public class AddUser extends JFrame
 
         if(String.valueOf(campoSenha.getPassword()).equalsIgnoreCase((String.valueOf(campoConfirma.getPassword()))))
         {
-            DatabaseManager.insertUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
+            _log.info(String.valueOf(caixaCombinacao.getModel()));
+            DatabaseManager.addNewUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()), 500);
         }
         else
         {
@@ -167,21 +173,21 @@ public class AddUser extends JFrame
             campoConfirma.setText("");
         }
 
-}//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_botaoCadastrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void botaoLimparActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoLimparActionPerformed
+    {//GEN-HEADEREND:event_botaoLimparActionPerformed
         campoNome.setText("");
         campoLogin.setText("");
         campoSenha.setText("");
         campoConfirma.setText("");
         campoSobrenome.setText("");
-}//GEN-LAST:event_jButton2ActionPerformed
+}//GEN-LAST:event_botaoLimparActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
-    {//GEN-HEADEREND:event_jButton3ActionPerformed
+    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoCancelarActionPerformed
+    {//GEN-HEADEREND:event_botaoCancelarActionPerformed
         dispose();
-}//GEN-LAST:event_jButton3ActionPerformed
+}//GEN-LAST:event_botaoCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,20 +214,20 @@ public class AddUser extends JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCadastrar;
+    private javax.swing.JButton botaoCancelar;
+    private javax.swing.JButton botaoLimpar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox caixaCombinacao;
     private javax.swing.JPasswordField campoConfirma;
     private javax.swing.JTextField campoLogin;
     private javax.swing.JTextField campoNome;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoSobrenome;
     private javax.swing.JLabel confirmarSenha;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JLabel labelLogin;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelSenha;

@@ -8,13 +8,13 @@
 package com.siscomercio.frames;
 
 import java.awt.EventQueue;
-import javax.swing.JInternalFrame;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Usuario
  */
-public class AdminPanel extends JInternalFrame
+public class AdminPanel extends JFrame
 {
     private static final long serialVersionUID = 1L;
     /** Creates new form AdminPanel */
