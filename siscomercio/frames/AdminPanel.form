@@ -18,10 +18,16 @@
                   <Image iconType="3" name="/com/siscomercio/icones/6475_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="itemAddUsuario">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/siscomercio/icones/6420_16x16.png"/>
                     </Property>
@@ -33,6 +39,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="itemEditarUsuario">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/siscomercio/icones/6439_16x16.png"/>
                     </Property>
@@ -41,6 +50,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="itemExcluirUsuario">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/siscomercio/icones/6464_16x16.png"/>
                     </Property>

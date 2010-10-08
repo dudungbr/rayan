@@ -8,13 +8,13 @@
 package com.siscomercio.frames;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author Usuario
  */
-public class AdminPanel extends JFrame
+public class AdminPanel extends JInternalFrame
 {
     private static final long serialVersionUID = 1L;
     /** Creates new form AdminPanel */
@@ -47,7 +47,9 @@ public class AdminPanel extends JFrame
 
         subMenuCadUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
         subMenuCadUsuarios.setText("Usuarios");
+        subMenuCadUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
+        itemAddUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
         itemAddUsuario.setText("Incluir");
         itemAddUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -57,10 +59,12 @@ public class AdminPanel extends JFrame
         });
         subMenuCadUsuarios.add(itemAddUsuario);
 
+        itemEditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
         itemEditarUsuario.setText("Editar");
         subMenuCadUsuarios.add(itemEditarUsuario);
 
+        itemExcluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         itemExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
         itemExcluirUsuario.setText("Excluir");
         subMenuCadUsuarios.add(itemExcluirUsuario);
