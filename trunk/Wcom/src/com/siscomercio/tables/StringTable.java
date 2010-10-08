@@ -45,6 +45,12 @@ public class StringTable
      * Pega o Codigo do Usuario.
      */
     public static final String GET_USER_CODE = "SELECT `codigo` from users WHERE login=? AND password=?";
+
+    /**
+     * Pega o ultimo codigo cadastrado.
+     */
+    public static final String GET_LAST_CODE = "SELECT MAX(codigo) FROM `users`";
+
     /**
      * Checa a Senha do Usuario
      */
