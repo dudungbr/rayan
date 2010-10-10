@@ -238,19 +238,40 @@ public class DatabaseManager
     }
 
     /**
-     * Edita os Dados de um Usuario da Database
+     *
+     * @param value
+     * @return
      */
-    public static void editUser()
+    public static boolean valorExistente(String value)
     {
-        AppManager.implementar();
-    }
+          if(Config.DEBUG)
+            _log.info("checando se o login existe na Database...\n");
+        Connection con = null;
+        boolean result = false;
+        try
+        {
+            String sql = "select `login` from users where `login` like '" + value + "';";
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if(rset.next())
+            {
+               SystemUtil.showErrorMsg("Login já Cadastrado.",true);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            SystemUtil.showErrorMsg("ERRO " + ex.getMessage(), true);
+        }
+        return result;
 
-    /**
-     *  Deleta um Usuario da Databse
-     */
-    public static void deleteUser()
-    {
-        AppManager.implementar();
     }
 
     /**
@@ -260,13 +281,14 @@ public class DatabaseManager
      * @param senha
      * @param nivelAcesso
      */
-    public static void addNewUser(String login, String senha, int nivelAcesso)
+    public static void addUser(String login, String senha, int nivelAcesso)
     {
+        if(Config.DEBUG)
+            _log.info("Adcionando Usuario: " + login);
         Connection con = null;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
-            ;
             PreparedStatement ps = con.prepareStatement(StringTable.INSERT_USER);
             ps.setInt(1, getLastCode() + 1);
             ps.setString(2, login);
@@ -274,7 +296,7 @@ public class DatabaseManager
             ps.setInt(4, nivelAcesso);
             ps.execute();
             closeConnections(ps, con);
-            SystemUtil.showMsg("Usuario Cadastrado com Sucesso!", true);
+            SystemUtil.showMsg("usuario cadastrado com sucesso!", true);
         }
         catch(SQLException e)
         {
@@ -283,50 +305,11 @@ public class DatabaseManager
     }
 
     /**
-     * Close Connections
-     *
-     * @param ps
-     * @param rset
-     * @param con
+     * Edita os Dados de um Usuario da Database
      */
-    public static void closeConnections(PreparedStatement ps, ResultSet rset, Connection con)
+    public static void editUser()
     {
-        if(Config.DEBUG)
-            System.out.println();
-        _log.info("Fechando conexoes c/ a database \n");
-        try
-        {
-            ps.close();
-            rset.close();
-            con.close();
-            setConStatus(StringTable.STATUS_DISCONNECTED);
-        }
-        catch(SQLException ex)
-        {
-            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
-        }
-    }
-
-    /**
-     * Close Connections
-     *
-     * @param s
-     * @param con
-     */
-    private static void closeConnections(Statement s, Connection con)
-    {
-        if(Config.DEBUG)
-            _log.info("Fechando conexoes c/ a database \n");
-        try
-        {
-            s.close();
-            con.close();
-            setConStatus(StringTable.STATUS_DISCONNECTED);
-        }
-        catch(SQLException ex)
-        {
-            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
-        }
+        AppManager.implementar();
     }
 
     /**
@@ -334,7 +317,7 @@ public class DatabaseManager
      * @param user
      * @param pass
      */
-    public static void deleteUsuario(String user, String pass)
+    public static void delUser(String user, String pass)
     {
         Connection con = null;
         try
@@ -356,9 +339,10 @@ public class DatabaseManager
      */
     public static int getLastCode()
     {
+
         Connection con = null;
         if(Config.DEBUG)
-            _log.info("Procurando ultimo codigo gerado na DB.. \n");
+            _log.info("Procurando ultimo codigo gerado na DB..");
 
         int codigo = -1;
         try
@@ -371,7 +355,7 @@ public class DatabaseManager
             codigo = rset.getInt(1);
             closeConnections(ps, con);
             if(Config.DEBUG)
-                _log.info("ultimo codigo: " + codigo + "\n");
+                _log.info("ultimo codigo : " + codigo + "\n");
 
         }
         catch(SQLException ex)
@@ -421,7 +405,7 @@ public class DatabaseManager
 
     /**
      * Troca a Senha de um Usuario na base de dados
-    
+
      * @param newPass
      */
     public static void changePassword(String newPass)
@@ -459,6 +443,115 @@ public class DatabaseManager
                             login, newPass
                         });
             SystemUtil.showMsg("Senha Trocada com Sucesso!", true);
+        }
+    }
+
+    /**
+     * seta o nivel de acesso de um usuario
+     * @param lvl
+     */
+    public void setAcessLevel(int lvl)
+    {
+        if(Config.DEBUG)
+            _log.info("\n setando nivel de acesso para usuario \n");
+        Connection con = null;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.UPDATE_USER_ACCESS_LVL);
+            ResultSet rset = ps.executeQuery();
+            closeConnections(ps, rset, con);
+
+        }
+        catch(Exception e)
+        {
+            if(Config.DEBUG)
+                _log.log(Level.SEVERE, "DatabaseManager: Error Updating Users Access Level: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Checa o Nivel e Acesso do Usuario
+     * @param usr
+     * @return o nivel de acesso desse usuario
+     */
+    public static int getAccessLevel(String usr)
+    {
+
+        Connection con = null;
+        if(Config.DEBUG)
+            _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
+
+        int level = 0;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.GET_ACC_LVL);
+            ps.setString(1, usr);
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if(rset.next())
+                level = rset.getInt("accesslevel");
+            // Fecha as Conexoes
+            closeConnections(ps, rset, con);
+            if(Config.DEBUG)
+                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1} \n", new Object[]
+                        {
+                            usr, level
+                        });
+        }
+        catch(Exception e)
+        {
+            _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
+        }
+        _log.log(Level.INFO, "nivel de accesso:  {0}\n", level);
+        return level;
+    }
+
+    /**
+     * Close Connections
+     *
+     * @param ps
+     * @param rset
+     * @param con
+     */
+    public static void closeConnections(PreparedStatement ps, ResultSet rset, Connection con)
+    {
+        if(Config.DEBUG)
+            System.out.println();
+        _log.info("Fechando conexoes c/ a database \n");
+        try
+        {
+            ps.close();
+            rset.close();
+            con.close();
+            setConStatus(StringTable.STATUS_DISCONNECTED);
+        }
+        catch(SQLException ex)
+        {
+            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
+        }
+    }
+
+    /**
+     * Close Connections
+     *
+     * @param s
+     * @param con
+     */
+    private static void closeConnections(Statement s, Connection con)
+    {
+        if(Config.DEBUG)
+            _log.info("Fechando conexoes c/ a database \n");
+        try
+        {
+            s.close();
+            con.close();
+            setConStatus(StringTable.STATUS_DISCONNECTED);
+        }
+        catch(SQLException ex)
+        {
+            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
         }
     }
 
@@ -545,68 +638,6 @@ public class DatabaseManager
             if(Config.DEBUG)
                 _log.log(Level.SEVERE, "DatabaseManager: Error reading License Data: " + e.getMessage(), e);
         }
-    }
-
-    /**
-     * seta o nivel de acesso de um usuario
-     * @param lvl
-     */
-    public void setAcessLevel(int lvl)
-    {
-        if(Config.DEBUG)
-            _log.info("\n setando nivel de acesso para usuario \n");
-        Connection con = null;
-        try
-        {
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(StringTable.UPDATE_USER_ACCESS_LVL);
-            ResultSet rset = ps.executeQuery();
-            closeConnections(ps, rset, con);
-
-        }
-        catch(Exception e)
-        {
-            if(Config.DEBUG)
-                _log.log(Level.SEVERE, "DatabaseManager: Error Updating Users Access Level: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Checa o Nivel e Acesso do Usuario
-     * @param usr
-     * @return o nivel de acesso desse usuario
-     */
-    public static int getAccessLevel(String usr)
-    {
-
-        Connection con = null;
-        if(Config.DEBUG)
-            _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
-
-        int level = 0;
-        try
-        {
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(StringTable.GET_ACC_LVL);
-            ps.setString(1, usr);
-            ps.execute();
-            ResultSet rset = ps.getResultSet();
-            if(rset.next())
-                level = rset.getInt("accesslevel");
-            // Fecha as Conexoes
-            closeConnections(ps, rset, con);
-            if(Config.DEBUG)
-                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1} \n", new Object[]
-                        {
-                            usr, level
-                        });
-        }
-        catch(Exception e)
-        {
-            _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
-        }
-        _log.log(Level.INFO, "nivel de accesso:  {0}\n", level);
-        return level;
     }
 
 }
