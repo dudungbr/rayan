@@ -260,17 +260,18 @@ public class DatabaseManager
      * @param senha
      * @param nivelAcesso
      */
-    public static void addNewUser(String login, String senha,int nivelAcesso)
+    public static void addNewUser(String login, String senha, int nivelAcesso)
     {
         Connection con = null;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
+            ;
             PreparedStatement ps = con.prepareStatement(StringTable.INSERT_USER);
-            ps.setInt(1, getLastCode()+1);
+            ps.setInt(1, getLastCode() + 1);
             ps.setString(2, login);
             ps.setString(3, senha);
-            ps.setInt(4,  nivelAcesso);
+            ps.setInt(4, nivelAcesso);
             ps.execute();
             closeConnections(ps, con);
             SystemUtil.showMsg("Usuario Cadastrado com Sucesso!", true);
@@ -291,8 +292,8 @@ public class DatabaseManager
     public static void closeConnections(PreparedStatement ps, ResultSet rset, Connection con)
     {
         if(Config.DEBUG)
-        System.out.println();
-            _log.info("Fechando conexoes c/ a database \n");
+            System.out.println();
+        _log.info("Fechando conexoes c/ a database \n");
         try
         {
             ps.close();
@@ -349,8 +350,6 @@ public class DatabaseManager
         }
     }
 
-    ;
-
     /**
      * pega o ultimo codigo usado
      * @return codigo
@@ -360,21 +359,19 @@ public class DatabaseManager
         Connection con = null;
         if(Config.DEBUG)
             _log.info("Procurando ultimo codigo gerado na DB.. \n");
+
         int codigo = -1;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(StringTable.GET_LAST_CODE);
-
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
-                codigo = rset.getInt("codigo");
-
+            rset.next();
+            codigo = rset.getInt(1);
             closeConnections(ps, con);
-
             if(Config.DEBUG)
-                _log.info( "ultimo codigo: "+ codigo);
+                _log.info("ultimo codigo: " + codigo + "\n");
 
         }
         catch(SQLException ex)
@@ -383,6 +380,7 @@ public class DatabaseManager
         }
         return codigo;
     }
+
     /**
      * pega o codigo do usuario do banco
      * @param login
@@ -423,7 +421,7 @@ public class DatabaseManager
 
     /**
      * Troca a Senha de um Usuario na base de dados
-
+    
      * @param newPass
      */
     public static void changePassword(String newPass)
@@ -490,7 +488,6 @@ public class DatabaseManager
     {
         Connection con = null;
         if(Config.DEBUG)
-          
             _log.info("lendo tabela de estado da instalacao \n");
         try
         {
@@ -505,7 +502,7 @@ public class DatabaseManager
             closeConnections(ps, rset, con);
 
             if(Config.DEBUG)
-                _log.info("Estado da Instalação: "+ _installed+" ok .....\n");
+                _log.info("Estado da Instalação: " + _installed + " ok .....\n");
         }
         catch(Exception e)
         {
@@ -540,8 +537,8 @@ public class DatabaseManager
 
             }
             closeConnections(ps, rset, con);
-              if(Config.DEBUG)
-            _log.info("Status da Licenca: "+_licensed+"\n");
+            if(Config.DEBUG)
+                _log.info("Status da Licenca: " + _licensed + "\n");
         }
         catch(Exception e)
         {
@@ -581,7 +578,7 @@ public class DatabaseManager
      */
     public static int getAccessLevel(String usr)
     {
-        
+
         Connection con = null;
         if(Config.DEBUG)
             _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
@@ -599,7 +596,7 @@ public class DatabaseManager
             // Fecha as Conexoes
             closeConnections(ps, rset, con);
             if(Config.DEBUG)
-                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1}", new Object[]
+                _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1} \n", new Object[]
                         {
                             usr, level
                         });
@@ -608,7 +605,7 @@ public class DatabaseManager
         {
             _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
         }
-        _log.log(Level.INFO, "nivel de accesso:  {0}", level);
+        _log.log(Level.INFO, "nivel de accesso:  {0}\n", level);
         return level;
     }
 

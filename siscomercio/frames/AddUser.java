@@ -163,7 +163,7 @@ public class AddUser extends JFrame
 
         if(String.valueOf(campoSenha.getPassword()).equalsIgnoreCase((String.valueOf(campoConfirma.getPassword()))))
         {
-            _log.info(String.valueOf(caixaCombinacao.getModel()));
+            
             DatabaseManager.addNewUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()), 500);
         }
         else

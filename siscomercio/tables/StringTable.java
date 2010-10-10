@@ -49,7 +49,7 @@ public class StringTable
     /**
      * Pega o ultimo codigo cadastrado.
      */
-    public static final String GET_LAST_CODE = "SELECT MAX(codigo) FROM `users`";
+    public static final String GET_LAST_CODE = "SELECT MAX(`codigo`) FROM `users`";
 
     /**
      * Checa a Senha do Usuario
