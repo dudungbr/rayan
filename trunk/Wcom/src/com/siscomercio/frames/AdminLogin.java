@@ -144,7 +144,7 @@ public class AdminLogin extends JFrame
                 new AdminPanel().setVisible(true);
             }
             else
-                SystemUtil.showMsg("Voce nao Tem permissao para executar esta ação.",true);
+                SystemUtil.showMsg("voce nao tem privilegios para acessar o painel de administração.",true);
         }
     }//GEN-LAST:event_botaoLoginActionPerformed
 

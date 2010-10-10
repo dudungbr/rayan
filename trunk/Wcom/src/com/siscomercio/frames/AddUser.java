@@ -10,8 +10,10 @@
  */
 package com.siscomercio.frames;
 
+import com.siscomercio.Config;
 import javax.swing.JFrame;
 import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
 import java.util.logging.Logger;
 
@@ -153,18 +155,52 @@ public class AddUser extends JFrame
         setBounds((screenSize.width-345)/2, (screenSize.height-381)/2, 345, 381);
     }// </editor-fold>//GEN-END:initComponents
 
+    @SuppressWarnings("empty-statement")
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoCadastrarActionPerformed
     {//GEN-HEADEREND:event_botaoCadastrarActionPerformed
-       if(campoLogin.getText().equals(""))
-       {
+        String login = campoLogin.getText();
+        String senha = String.valueOf(campoSenha.getPassword());
+        String confirmaSenha = String.valueOf(campoConfirma.getPassword());
+
+        boolean loginExiste = DatabaseManager.valorExistente(login);
+
+        if(login.equals(""))
+        {
             SystemUtil.showErrorMsg("o login nao deve ser em branco", true);
             return;
-       }
-
-        if(String.valueOf(campoSenha.getPassword()).equalsIgnoreCase((String.valueOf(campoConfirma.getPassword()))))
+        }
+        if(senha.equalsIgnoreCase(confirmaSenha))
         {
-            
-            DatabaseManager.addNewUser(campoLogin.getText(), String.valueOf(campoSenha.getPassword()), 500);
+            //caso o login ja exista encerra a funcao.
+            if(loginExiste)
+                return;
+
+            String tipoAcesso = caixaCombinacao.getSelectedItem().toString();
+            int nivelAcesso = 0;
+
+            if(Config.DEBUG)
+            _log.info("tipo acesso = " + tipoAcesso + "\n");
+            if(tipoAcesso.startsWith("Fun"))
+            {
+                  if(Config.DEBUG)
+                _log.info("0");
+                nivelAcesso = 0;
+            }
+            else if(tipoAcesso.startsWith("Ger"))
+                {
+                  if(Config.DEBUG)
+                    _log.info("1");
+                    nivelAcesso = 100;
+                }
+                else
+                {
+                  if(Config.DEBUG)
+                    _log.info("2");
+                    nivelAcesso = 500;
+                }
+            String senhaCripto = Criptografia.criptografe(senha);
+            DatabaseManager.addUser(login, senhaCripto, nivelAcesso);
+            dispose();
         }
         else
         {
