@@ -22,6 +22,10 @@ public class Config
     private static final Logger _log = Logger.getLogger(Config.class.getName());
 
     /**
+     * som tocado quando o sistema for finalizado
+     */
+    public static String QUESTION_SOUND;
+    /**
      *
      */
     public static boolean LOG_DEBUG;
@@ -216,6 +220,7 @@ public class Config
             WELCOME_SOUND = arquivo.getProperty("welcomeSound", "welcome.wav");
             DEBUG = Boolean.valueOf(arquivo.getProperty("debug", "true"));
             LOG_DEBUG = Boolean.valueOf(arquivo.getProperty("logdebug", "false"));
+            QUESTION_SOUND = arquivo.getProperty("questionSound", "question.wav");
             /**
              * Port Checks
              */

@@ -39,7 +39,6 @@ public class AdminPanel extends JFrame
         itemEditarUsuario = new javax.swing.JMenuItem();
         itemExcluirUsuario = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Administração");
 
         menuCadastro.setText("Cadastros");
@@ -47,9 +46,9 @@ public class AdminPanel extends JFrame
 
         subMenuCadUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6475_16x16.png"))); // NOI18N
         subMenuCadUsuarios.setText("Usuarios");
-        subMenuCadUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        subMenuCadUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
-        itemAddUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemAddUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6420_16x16.png"))); // NOI18N
         itemAddUsuario.setText("Incluir");
         itemAddUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -59,14 +58,24 @@ public class AdminPanel extends JFrame
         });
         subMenuCadUsuarios.add(itemAddUsuario);
 
-        itemEditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemEditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6439_16x16.png"))); // NOI18N
         itemEditarUsuario.setText("Editar");
+        itemEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEditarUsuarioActionPerformed(evt);
+            }
+        });
         subMenuCadUsuarios.add(itemEditarUsuario);
 
-        itemExcluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        itemExcluirUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/6464_16x16.png"))); // NOI18N
         itemExcluirUsuario.setText("Excluir");
+        itemExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemExcluirUsuarioActionPerformed(evt);
+            }
+        });
         subMenuCadUsuarios.add(itemExcluirUsuario);
 
         menuCadastro.add(subMenuCadUsuarios);
@@ -102,6 +111,30 @@ public class AdminPanel extends JFrame
         });
     }//GEN-LAST:event_itemAddUsuarioActionPerformed
 
+    private void itemEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemEditarUsuarioActionPerformed
+    {//GEN-HEADEREND:event_itemEditarUsuarioActionPerformed
+       EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                new AddUser().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_itemEditarUsuarioActionPerformed
+
+    private void itemExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemExcluirUsuarioActionPerformed
+    {//GEN-HEADEREND:event_itemExcluirUsuarioActionPerformed
+        EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                new DelUser().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_itemExcluirUsuarioActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -112,7 +145,7 @@ public class AdminPanel extends JFrame
             @Override
             public void run()
             {
-                new AdminPanel().setVisible(true);
+                new EditUser().setVisible(true);
             }
         });
     }

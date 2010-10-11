@@ -78,7 +78,7 @@ public class Auth extends JFrame
      */
     public Auth()
     {
-          if(Config.DEBUG)
+        if(Config.DEBUG)
             _log.info(" inicializando ...\n");
         if(Config.DEBUG)
             _log.info("Criando Janela de Autenticacao.... \n");
@@ -114,7 +114,7 @@ public class Auth extends JFrame
             _log.info("Auth:  Aguardando Login... \n");
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if(DatabaseManager._installed==1)
+        if(DatabaseManager._installed == 1)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);
@@ -220,7 +220,7 @@ public class Auth extends JFrame
      */
     private void resetCampos()
     {
-          if(Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("Auth:  resetando campos ...\n");
         campoUsuario.setText("");
         campoSenha.setText("");
@@ -234,7 +234,7 @@ public class Auth extends JFrame
      */
     public boolean isAuthed(String login, String senha)
     {
-         if(Config.DEBUG)
+        if(Config.DEBUG)
             _log.info("Auth: Checando Usuario e Senha ...\n");
 
         Connection con = null;
@@ -245,12 +245,12 @@ public class Auth extends JFrame
                 //checa se os dados estao ok...
                 _log.log(Level.INFO, "Auth: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
                         {
-                            senha, login+"\n"
+                            senha, login + "\n"
                         });
 
             if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {
-                SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>",true);
+                SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
                 resetCampos();
                 ok = false;
             }
@@ -291,19 +291,19 @@ public class Auth extends JFrame
             }
             else
             {
-                SystemUtil.showErrorMsg("usuario ou senha incorretos!",true);
+                SystemUtil.showErrorMsg("usuario ou senha incorretos!", true);
                 ok = false;
             }
 
         }
         catch(SQLException ex)
         {
-            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(),true);
+            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
 
         }
         catch(Exception e)
         {
-            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e,true);
+            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
         }
         return ok;
     }
@@ -336,8 +336,11 @@ public class Auth extends JFrame
                         @Override
                         public void run()
                         {
+
                             AppManager.setTema(Auth.class.getSimpleName());
                             new FramePrincipal().setVisible(true);
+                            if(Config.ENABLE_SOUND)
+                                SoundManager.playSound(Config.WELCOME_SOUND);
                         }
 
                     });
@@ -376,7 +379,7 @@ public class Auth extends JFrame
             result = true;
         else
         {
-            SystemUtil.showErrorMsg("usuario invalido.",true);
+            SystemUtil.showErrorMsg("usuario invalido.", true);
             result = false;
         }
         return result;

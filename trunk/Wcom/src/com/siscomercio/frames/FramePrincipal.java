@@ -595,6 +595,11 @@ public class FramePrincipal extends JFrame
         itemSuporteTecnico.setFont(new java.awt.Font("Times New Roman", 1, 14));
         itemSuporteTecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/icones/8405_16x16.png"))); // NOI18N
         itemSuporteTecnico.setText("Contato");
+        itemSuporteTecnico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSuporteTecnicoActionPerformed(evt);
+            }
+        });
         menuSuporte.add(itemSuporteTecnico);
 
         barraDeMenu.add(menuSuporte);
@@ -779,6 +784,11 @@ public class FramePrincipal extends JFrame
 
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void itemSuporteTecnicoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSuporteTecnicoActionPerformed
+    {//GEN-HEADEREND:event_itemSuporteTecnicoActionPerformed
+      AppManager.implementar();
+    }//GEN-LAST:event_itemSuporteTecnicoActionPerformed
 
     /**
      *
