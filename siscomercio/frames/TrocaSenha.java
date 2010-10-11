@@ -143,19 +143,28 @@ public class TrocaSenha extends javax.swing.JFrame
         if((senhaNova.equalsIgnoreCase("") || confirma.equalsIgnoreCase("")))
         {
             SystemUtil.showErrorMsg("todos os campos devem ser preenchidos",true);
+            resetCampos();
             return;
         }
 
         if(!senhaNova.equalsIgnoreCase(confirma))
         {
             SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!",true);
+            resetCampos();
             return;
         }
         else
+        {
             DatabaseManager.changePassword(senhaNova);
         dispose();
+        }
     }//GEN-LAST:event_botaoAlterarSenhaActionPerformed
 
+    private void resetCampos()
+    {
+        campoNovaSenha.setText("");
+        campoRepetirSenha.setText("");
+    }
     /**
      * @param args the command line arguments
      */

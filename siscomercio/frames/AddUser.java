@@ -13,9 +13,12 @@ package com.siscomercio.frames;
 import com.siscomercio.Config;
 import javax.swing.JFrame;
 import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.managers.SoundManager;
 import com.siscomercio.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * $Revision$
@@ -155,7 +158,6 @@ public class AddUser extends JFrame
         setBounds((screenSize.width-345)/2, (screenSize.height-381)/2, 345, 381);
     }// </editor-fold>//GEN-END:initComponents
 
-    @SuppressWarnings("empty-statement")
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoCadastrarActionPerformed
     {//GEN-HEADEREND:event_botaoCadastrarActionPerformed
         String login = campoLogin.getText();
@@ -179,28 +181,52 @@ public class AddUser extends JFrame
             int nivelAcesso = 0;
 
             if(Config.DEBUG)
-            _log.info("tipo acesso = " + tipoAcesso + "\n");
+                _log.info("tipo acesso = " + tipoAcesso + "\n");
             if(tipoAcesso.startsWith("Fun"))
             {
-                  if(Config.DEBUG)
-                _log.info("0");
-                nivelAcesso = 0;
+                if(Config.DEBUG)
+                    _log.info("0");
+                nivelAcesso = Config.OPERADOR_LVL;
             }
             else if(tipoAcesso.startsWith("Ger"))
                 {
-                  if(Config.DEBUG)
-                    _log.info("1");
-                    nivelAcesso = 100;
+                    if(Config.DEBUG)
+                        _log.info("1");
+                    nivelAcesso = Config.GERENTE_LVL;
                 }
                 else
                 {
-                  if(Config.DEBUG)
-                    _log.info("2");
-                    nivelAcesso = 500;
+                    if(Config.DEBUG)
+                        _log.info("2");
+                    nivelAcesso = Config.ADMIN_LVL;
                 }
-            String senhaCripto = Criptografia.criptografe(senha);
-            DatabaseManager.addUser(login, senhaCripto, nivelAcesso);
-            dispose();
+
+            JLabel optionLabel = new JLabel("<html>confirma adição do usuario <font color = blue>" + login + "</font> como <font color = blue>"+ tipoAcesso+ "</font> ? </font> </html>");
+           SoundManager.playSound(Config.QUESTION_SOUND);
+            int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
+
+            switch(confirm)
+            {
+                // Switch > Case
+                case JOptionPane.YES_OPTION: // Attempt to Login user
+                {
+                    String senhaCripto = Criptografia.criptografe(senha);
+                    DatabaseManager.addUser(login, senhaCripto, nivelAcesso);
+                    dispose();
+                    break;
+                }
+                case JOptionPane.NO_OPTION: // No Case.(Go back. Set text to 0)
+                {
+                    resetCampos();
+                    break;
+                }
+                case JOptionPane.CANCEL_OPTION: // Cancel Case.(Go back. Set text to/0)
+                {
+                    resetCampos();
+                    break;
+                }
+            } // End Switch > Case
+
         }
         else
         {
@@ -241,11 +267,15 @@ public class AddUser extends JFrame
         });
     }
 
+    /**
+     * Reseta Todos os Campos.
+     */
     private void resetCampos()
     {
         campoNome.setText("");
         campoLogin.setText("");
         campoSenha.setText("");
+        campoConfirma.setText("");
         campoSobrenome.setText("");
     }
 
