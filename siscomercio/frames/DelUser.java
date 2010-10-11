@@ -35,7 +35,8 @@ public class DelUser extends JFrame
         botaoExcluir = new javax.swing.JButton();
         rotulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Exclusao de Usuario");
 
         botaoExcluir.setText("Excluir");
 
@@ -68,7 +69,8 @@ public class DelUser extends JFrame
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-295)/2, (screenSize.height-198)/2, 295, 198);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

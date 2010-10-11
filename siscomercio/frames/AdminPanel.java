@@ -118,7 +118,7 @@ public class AdminPanel extends JFrame
             @Override
             public void run()
             {
-                new AddUser().setVisible(true);
+                new EditUser().setVisible(true);
             }
         });
     }//GEN-LAST:event_itemEditarUsuarioActionPerformed

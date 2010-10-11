@@ -336,11 +336,11 @@ public class Auth extends JFrame
                         @Override
                         public void run()
                         {
-
                             AppManager.setTema(Auth.class.getSimpleName());
                             new FramePrincipal().setVisible(true);
-                            if(Config.ENABLE_SOUND)
-                                SoundManager.playSound(Config.WELCOME_SOUND);
+                            //FIXME: ta travando a app...
+                          //  if(Config.ENABLE_SOUND)
+                            //    SoundManager.playSound(Config.WELCOME_SOUND);
                         }
 
                     });
