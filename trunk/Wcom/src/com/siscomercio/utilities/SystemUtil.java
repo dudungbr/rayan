@@ -178,7 +178,7 @@ public class SystemUtil
         {
             _log.info("enviando janela de mensagem... \n");
         }
-        if(playSound)
+        if(playSound && Config.ENABLE_SOUND)
         {
             try
             {
@@ -209,7 +209,7 @@ public class SystemUtil
         {
             _log.info("enviando janela de mensagem de erro... \n");
         }
-        if(playSound)
+        if(playSound && Config.ENABLE_SOUND)
         {
             try
             {
