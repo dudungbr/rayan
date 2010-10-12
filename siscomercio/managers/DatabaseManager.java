@@ -240,9 +240,10 @@ public class DatabaseManager
     /**
      *
      * @param value
+     * @param showMsg
      * @return
      */
-    public static boolean valorExistente(String value)
+    public static boolean valorExistente(String value,boolean showMsg)
     {
           if(Config.DEBUG)
             _log.info("checando se o login existe na Database...\n");
@@ -257,7 +258,8 @@ public class DatabaseManager
             ResultSet rset = ps.getResultSet();
             if(rset.next())
             {
-               SystemUtil.showErrorMsg("Login já Cadastrado.",true);
+                if(showMsg)
+                SystemUtil.showErrorMsg("Login já Cadastrado.",true);
                 result = true;
             }
             else
@@ -314,22 +316,24 @@ public class DatabaseManager
 
     /**
      * Deleta Usuario do Banco
-     * @param user
-     * @param pass
+     * @param login
      */
-    public static void delUser(String user, String pass)
+    public static void delUser(String login)
     {
         Connection con = null;
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(StringTable.DELETE_USER);
-            ResultSet rset = ps.executeQuery();
-            closeConnections(ps, rset, con);
+            ps.setInt(1, getUserCodeByLogin(login));
+            ps.setString(2, login);
+            ps.execute();
+            SystemUtil.showMsg("usuário excluido com sucesso!", true);
+            closeConnections(ps, con);
         }
         catch(SQLException e)
         {
-            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + user + " , " + e, true);
+            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + login + " , " + e, true);
         }
     }
 
@@ -402,7 +406,42 @@ public class DatabaseManager
         }
         return codigo;
     }
+/**
+     * pega o codigo do usuario do banco
+     * @param login
+     * @param senha
+     * @return codigo
+     */
+    public static int getUserCodeByLogin(String login)
+    {
+        Connection con = null;
+        if(Config.DEBUG)
+            _log.info("Procurando codigo do Usuario.. \n");
+        int codigo = -1;
+        try
+        {
+            con = DatabaseFactory.getInstance().getConnection();
+            PreparedStatement ps = con.prepareStatement(StringTable.GET_USER_CODE_BY_LOGIN);
+            ps.setString(1, login);
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if(rset.next())
+                codigo = rset.getInt("codigo");
 
+            closeConnections(ps, con);
+
+            if(Config.DEBUG)
+                _log.log(Level.INFO, "O codigo do usuario {0} e {1}\n", new Object[]
+                        {
+                            login, codigo
+                        });
+        }
+        catch(SQLException ex)
+        {
+            _log.log(Level.WARNING, "Erro ao pegar codigo do usuario:  {0}", ex);
+        }
+        return codigo;
+    }
     /**
      * Troca a Senha de um Usuario na base de dados
 

@@ -48,6 +48,11 @@ public class StringTable
     public static final String GET_USER_CODE = "SELECT `codigo` from users WHERE login=? AND password=?";
 
     /**
+     * Pega o Codigo pelo Login
+     */
+    public static final String GET_USER_CODE_BY_LOGIN = "SELECT `codigo` from users WHERE login=?";
+
+    /**
      * Pega o ultimo codigo cadastrado.
      */
     public static final String GET_LAST_CODE = "SELECT MAX(`codigo`) FROM users";
