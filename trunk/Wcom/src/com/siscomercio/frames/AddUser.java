@@ -164,7 +164,7 @@ public class AddUser extends JFrame
         String senha = String.valueOf(campoSenha.getPassword());
         String confirmaSenha = String.valueOf(campoConfirma.getPassword());
 
-        boolean loginExiste = DatabaseManager.valorExistente(login);
+        boolean loginExiste = DatabaseManager.valorExistente(login,true);
 
         if(login.equals(""))
         {

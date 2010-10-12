@@ -3,11 +3,16 @@
  *
  * Created on 06/10/2010, 11:02:33
  */
-
 package com.siscomercio.frames;
 
+import com.siscomercio.Config;
+import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.managers.SoundManager;
+import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,24 +43,33 @@ public class DelUser extends JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Exclusao de Usuario");
 
+        botaoExcluir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoExcluir.setText("Excluir");
+        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoExcluirActionPerformed(evt);
+            }
+        });
 
-        rotulo.setText("Nome do Usuario a Excluir");
+        rotulo.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        rotulo.setText(" Login do Usuário a Excluir");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .add(rotulo)
+                .add(63, 63, 63))
             .add(layout.createSequentialGroup()
                 .add(77, 77, 77)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(campoNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(rotulo))
+                .add(campoNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(76, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .add(106, 106, 106)
                 .add(botaoExcluir)
-                .add(102, 102, 102))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -66,16 +80,61 @@ public class DelUser extends JFrame
                 .add(campoNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(botaoExcluir)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-295)/2, (screenSize.height-198)/2, 295, 198);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoExcluirActionPerformed
+    {//GEN-HEADEREND:event_botaoExcluirActionPerformed
+        String login = campoNome.getText();
+        boolean loginExiste = DatabaseManager.valorExistente(login,false);
+
+        if(login.isEmpty())
+        {
+            SystemUtil.showErrorMsg("o login deve ser informado", true);
+            return;
+        }
+        else
+        {
+            if(!loginExiste)
+            {
+                SystemUtil.showErrorMsg("o login informado nao esta cadastrado", true);
+                campoNome.setText("");
+                return;
+            }
+            JLabel optionLabel = new JLabel("<html>confirma exclusao do usuario <font color = blue>" + login + "</font> </html>");
+            SoundManager.playSound(Config.QUESTION_SOUND);
+            int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
+
+            switch(confirm)
+            {
+                // Switch > Case
+                case JOptionPane.YES_OPTION: // Attempt to Login user
+                {
+                    DatabaseManager.delUser(login);
+                    dispose();
+                    break;
+                }
+                case JOptionPane.NO_OPTION: // No Case.(Go back. Set text to 0)
+                {
+                  //  dispose();
+                    break;
+                }
+                case JOptionPane.CANCEL_OPTION: // Cancel Case.(Go back. Set text to/0)
+                {
+                   // dispose();
+                    break;
+                }
+            } // End Switch > Case
+        }
+    }//GEN-LAST:event_botaoExcluirActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[])
     {
         EventQueue.invokeLater(new Runnable()
@@ -85,6 +144,7 @@ public class DelUser extends JFrame
             {
                 new DelUser().setVisible(true);
             }
+
         });
     }
 
@@ -93,5 +153,4 @@ public class DelUser extends JFrame
     private javax.swing.JTextField campoNome;
     private javax.swing.JLabel rotulo;
     // End of variables declaration//GEN-END:variables
-
 }
