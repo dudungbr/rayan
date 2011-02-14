@@ -5,7 +5,6 @@
 package com.siscomercio.tables;
 
 import com.siscomercio.Config;
-import com.siscomercio.managers.DatabaseManager;
 
 /**
  * $Revision$
