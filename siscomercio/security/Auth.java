@@ -78,17 +78,17 @@ public class Auth extends JFrame
      */
     public Auth()
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info(" inicializando ...\n");
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Criando Janela de Autenticacao.... \n");
 
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.PRE_LOGIN_SOUND);
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getPreLoginSound());
 
         if(_autenticado)
         {
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario ja autenticado nao ira criar janela");
             return;
         }
@@ -110,7 +110,7 @@ public class Auth extends JFrame
         botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoConfigurar = new JButton("Configurar...");
         botaoConfigurar.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Auth:  Aguardando Login... \n");
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
@@ -157,7 +157,7 @@ public class Auth extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info("Auth: Executando acao do botao login \n");
                 String senha = new String(campoSenha.getPassword());
                 String login = campoUsuario.getText();
@@ -220,7 +220,7 @@ public class Auth extends JFrame
      */
     private void resetCampos()
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Auth:  resetando campos ...\n");
         campoUsuario.setText("");
         campoSenha.setText("");
@@ -234,14 +234,14 @@ public class Auth extends JFrame
      */
     public boolean isAuthed(String login, String senha)
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Auth: Checando Usuario e Senha ...\n");
 
         Connection con = null;
         boolean ok = false;
         try
         {
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 //checa se os dados estao ok...
                 _log.log(Level.INFO, "Auth: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
                         {
@@ -313,12 +313,12 @@ public class Auth extends JFrame
      */
     public void showConfirmWindow()
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Auth: Enviando janela de confirmacao...\n");
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.LOGIN_SOUND);
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getLoginSound());
 
 
         if(!LogonUsuario._reAuth)
@@ -371,7 +371,7 @@ public class Auth extends JFrame
      * @param pass
      * @return result
      */
-    public static boolean checkMasterKey(String user, String pass)
+ /*  public static boolean checkMasterKey(String user, String pass)
     {
         boolean result = false;
         _log.info("Auth: Checando senha mestre... \n");
@@ -384,5 +384,5 @@ public class Auth extends JFrame
         }
         return result;
     }
-
+*/
 }

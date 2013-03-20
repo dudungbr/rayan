@@ -37,7 +37,7 @@ public class Criptografia
             {
                 hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
             }
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.log(Level.INFO, "Criptografando Senha:  {0} P / Versao  MD5 : {1}\n", new Object[]{password, hexString.toString()});
             password = hexString + "";
         }

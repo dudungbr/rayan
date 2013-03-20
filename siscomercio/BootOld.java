@@ -23,9 +23,9 @@ import java.util.logging.Logger;
  * 
  * @author Rayan
  */
-public class Boot
+public class BootOld
 {
-    private static final Logger _log = Logger.getLogger(Boot.class.getName());
+    private static final Logger _log = Logger.getLogger(BootOld.class.getName());
 
     /**
      * @param args the command line arguments
@@ -40,7 +40,7 @@ public class Boot
 
          // Inicializa o Log Monitor
         // ---------------
-        if(Config.LOG_DEBUG)
+        if(Config.isEnableLog())
         {
              _log.info("Inicializando Log Monitor...");
         LogMonitor.init();
@@ -87,7 +87,7 @@ public class Boot
             {
                 // Chama a Tela de Login
                 // ------------------------
-                if(Config.DEBUG)
+                if(Config.isDebug())
                 {
                     EventQueue.invokeLater(new Runnable()
                     {
@@ -95,7 +95,7 @@ public class Boot
                         public void run()
                         {
                             _log.finest("Fim do Boot.");
-                            AppManager.setTema(Boot.class.getSimpleName());
+                            AppManager.setTema(BootOld.class.getSimpleName());
                             Auth.getInstance().setVisible(true);
                         }
 
@@ -123,7 +123,7 @@ public class Boot
                     @Override
                     public void run()
                     {
-                        AppManager.setTema(Boot.class.getSimpleName());
+                        AppManager.setTema(BootOld.class.getSimpleName());
                         new FrameLicenca().setVisible(true);
                     }
 

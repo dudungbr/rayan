@@ -36,7 +36,7 @@ public class AdminLogin extends JFrame
     public AdminLogin()
     {
         initComponents();
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("montando janela de logon de usuario \n");
     }
 
@@ -138,14 +138,14 @@ public class AdminLogin extends JFrame
 
         if(autorizado)
         {
-            if(accessLevel >= Config.ADMIN_LVL)
+/*            if(accessLevel >= Config.ADMIN_LVL)
             {
                 dispose();
                 new AdminPanel().setVisible(true);
             }
             else
                 SystemUtil.showMsg("voce nao tem privilegios para acessar o painel de administração.",true);
-        }
+        */}
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     /**

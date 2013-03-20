@@ -63,7 +63,7 @@ public class Serializer
       
      
             while(temp.length() > 30)
-            {  if(Config.DEBUG)
+            {  if(Config.isDebug())
                  System.out.println("[Temps] Deletando Index :"+temp.length()+ " , ");
              
 
@@ -73,7 +73,7 @@ public class Serializer
 
 
         
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.log(Level.INFO, "Nova String Com: {0} Caracteres:  "+ temp, temp.length());
          
         // Divide a String em 5 Partes e Organiza com "-"
@@ -87,49 +87,49 @@ public class Serializer
                 case 5:
                 {
                       p1 = temp.substring(0, i);
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info(p1);
                     break;
                 }
                 case 10:
                 {
                       p2 = temp.substring(5, i);
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info(p2);
                     break;
                 }
                 case 15:
                 {
                      p3 = temp.substring(10, i);
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info(p3);
                    break;
                 }
                 case 20:
                 {
                      p4 = temp.substring(15, i);
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info(p4);
                     break;
                 }
                 case 25:
                 {
                     p5 = temp.substring(20, i);
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info(p5);
                     break;
                 }
                 case 30:
                 {
                     p6 = temp.substring(25,i);
-                     if(Config.DEBUG)
+                     if(Config.isDebug())
                     _log.info(p6);
                     break;
                 }
             }
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5).concat("-" +p6);
-         if(Config.DEBUG)
+         if(Config.isDebug())
         _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
          generated = true;
         return code;

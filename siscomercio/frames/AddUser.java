@@ -16,6 +16,7 @@ import com.siscomercio.managers.DatabaseManager;
 import com.siscomercio.managers.SoundManager;
 import com.siscomercio.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,7 +29,7 @@ import javax.swing.JOptionPane;
  */
 public class AddUser extends JFrame
 {
-    private Logger _log = Logger.getLogger(AddUser.class.getName());
+    private static final Logger _log = Logger.getLogger(AddUser.class.getName());
     private static final long serialVersionUID = 1L;
 
     /** Creates new form AddUser */
@@ -180,29 +181,29 @@ public class AddUser extends JFrame
             String tipoAcesso = caixaCombinacao.getSelectedItem().toString();
             int nivelAcesso = 0;
 
-            if(Config.DEBUG)
-                _log.info("tipo acesso = " + tipoAcesso + "\n");
+            if(Config.isDebug())
+                _log.log(Level.INFO, "tipo acesso = {0}\n", tipoAcesso);
             if(tipoAcesso.startsWith("Fun"))
             {
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     _log.info("0");
-                nivelAcesso = Config.OPERADOR_LVL;
+               // nivelAcesso = Config.OPERADOR_LVL;
             }
             else if(tipoAcesso.startsWith("Ger"))
                 {
-                    if(Config.DEBUG)
+                    if(Config.isDebug())
                         _log.info("1");
-                    nivelAcesso = Config.GERENTE_LVL;
+                 //   nivelAcesso = Config.GERENTE_LVL;
                 }
                 else
                 {
-                    if(Config.DEBUG)
+                    if(Config.isDebug())
                         _log.info("2");
-                    nivelAcesso = Config.ADMIN_LVL;
+                 //   nivelAcesso = Config.ADMIN_LVL;
                 }
 
             JLabel optionLabel = new JLabel("<html>confirma adição do usuario <font color = blue>" + login + "</font> como <font color = blue>"+ tipoAcesso+ "</font> ? </font> </html>");
-           SoundManager.playSound(Config.QUESTION_SOUND);
+//           SoundManager.getInstance().playSound(Config.QUESTION_SOUND);
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
             switch(confirm)

@@ -43,7 +43,7 @@ public class DBConfig extends JFrame
             botaoDeletar.setEnabled(false);
         if(DatabaseManager.isDbDeleted)
             botaoDeletar.setEnabled(false);
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("montando janela de configuracao de database \n");
     }
 
@@ -160,7 +160,7 @@ public class DBConfig extends JFrame
 
     private void botaoInstalarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoInstalarActionPerformed
     {//GEN-HEADEREND:event_botaoInstalarActionPerformed
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("chamando funcao de instalacao do banco");
 
         DatabaseManager.instaleBanco();
@@ -201,7 +201,7 @@ public class DBConfig extends JFrame
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoDeletarActionPerformed
     {//GEN-HEADEREND:event_botaoDeletarActionPerformed
-        if(!Config._loaded)
+    //    if(!Config.isLoad())
             Config.load();
 
         DatabaseManager.dropDatabase();
