@@ -13,95 +13,122 @@ import java.util.logging.Logger;
  */
 public class Serializer
 {
-    private static final Logger _log = Logger.getLogger(Serializer.class.getName());
-    static String serialHD = DiskUtil.getSerialNumber("c");
-    static String serialMB = MbUtil.getMotherboardSN();
-    static String mac = NetworkUtil.getMac();
-    static StringBuffer dados = new StringBuffer(mac + serialHD + serialMB);
-    static String code ="";
-    /**
-     *
-     */
-    public static boolean generated = false;
+      private static final Logger _log = Logger.getLogger(Serializer.class.getName());
+    
+     private Serializer() 
+    {
+    }
+    
+    private String code ="";
+    private boolean generated = false;
+
+    public boolean isGenerated() {
+        return generated;
+    }
 
     /**
-     * Captura Seriais HD / Placa de Rede e Mobo
+     * Captura Seriais HD / Mobo e  MAC da Placa de Rede 
+     * Divide em um Serial de 6 Partes de 5 Caracteres
+     * Fechando um Total de 30.
      * @return
      */
-    public static String generateActivationCode()
+    public String generateActivationCode()
     {
-        int cont = 0;
-        String remover = "-";
-
-        // Remove os "-" dos Numeros.
+        //Coleta os Dados
+      String serialHD = DiskUtil.getSerialNumber("c");
+      String serialMB = MbUtil.getMotherboardSN();
+      String mac = NetworkUtil.getMac();
+      StringBuilder dados = new StringBuilder();
+      dados.append(mac);
+      dados.append(serialHD);
+      dados.append(serialMB);
+      
+       System.out.println("[DADOS]String Atual:" +dados);
+      System.out.println("[DADOS] Quantidade: " +dados.length());
+     System.out.println("------------------------------------------------");
+      System.out.println("Removido os Caracteres: :  - ");
+         
+      /* Expressores Regulares
+       \\W vai retirar todo e qualquer caracter que não seja número , letra ou underscope
+        usamos duas barras invertidas, pois caso contrário ela será reconhecida apenas como caractere de escape */
+      StringBuilder temp = new StringBuilder();
+      temp.append(dados.toString().replaceAll("\\W",""));
+      
+      System.out.println("[Temps]String Atual:" +temp);
+      System.out.println("[Temps]Quantidade: " +temp.length());
+   
+           // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
         //-------------------------------
-        for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
-        {
-            String res = dados.substring(i, (i + remover.length()));
-            if(res.equals(remover))
-            {
-                int pos = dados.indexOf(remover);
-                dados.delete(pos, pos + remover.length());
-                cont++;
+      System.out.println("[Temps] Reduzindo String P/ 30 Caracteres");
+      
+     
+            while(temp.length() > 30)
+            {  if(Config.DEBUG)
+                 System.out.println("[Temps] Deletando Index :"+temp.length()+ " , ");
+             
+
+               temp.deleteCharAt(temp.length() - 1); // deleta os ultimos caracteres.
             }
-        }
+         //System.out.println(temp);
 
+
+        
         if(Config.DEBUG)
-            _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);
-
-
-        // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
-        //-------------------------------
-        for(int i = 0;i < dados.length();i++)
-        {
-            if(dados.length() > 30)
-            {
-                if(Config.DEBUG)
-                    _log.info("deletando caracteres adicionais..  \n");
-                dados.deleteCharAt(dados.length() - 1); // deleta os ultimos caracteres.
-            }
-        }
-        if(Config.DEBUG)
-            _log.log(Level.INFO, "Nova String Com: {0} Caracteres. \n", dados.length());
-
+            _log.log(Level.INFO, "Nova String Com: {0} Caracteres:  "+ temp, temp.length());
+         
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------
-        String p1 = "", p2 = "", p3 = "", p4 = "", p5 = "";
+        String p1 = "", p2 = "", p3 = "", p4 = "", p5 = "",p6 ="";
 
-        for(int i = 0;i < dados.length();i++)
+        for(int i = 0;i <= temp.length();i++)
         {
-            if(i == 5)
+            switch(i)
             {
-                p1 = dados.substring(0, i);
+                case 5:
+                {
+                      p1 = temp.substring(0, i);
                 if(Config.DEBUG)
                     _log.info(p1);
-            }
-            if(i == 10)
-            {
-                p2 = dados.substring(5, i);
+                    break;
+                }
+                case 10:
+                {
+                      p2 = temp.substring(5, i);
                 if(Config.DEBUG)
                     _log.info(p2);
-            }
-            if(i == 15)
-            {
-                p3 = dados.substring(10, i);
+                    break;
+                }
+                case 15:
+                {
+                     p3 = temp.substring(10, i);
                 if(Config.DEBUG)
                     _log.info(p3);
-            }
-            if(i == 20)
-            {
-                p4 = dados.substring(15, i);
+                   break;
+                }
+                case 20:
+                {
+                     p4 = temp.substring(15, i);
                 if(Config.DEBUG)
                     _log.info(p4);
-            }
-            if(i == 25)
-            {
-                p5 = dados.substring(20, i);
+                    break;
+                }
+                case 25:
+                {
+                    p5 = temp.substring(20, i);
                 if(Config.DEBUG)
                     _log.info(p5);
+                    break;
+                }
+                case 30:
+                {
+                    p6 = temp.substring(25,i);
+                     if(Config.DEBUG)
+                    _log.info(p6);
+                    break;
+                }
             }
         }
-        code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5);
+        code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5).concat("-" +p6);
          if(Config.DEBUG)
         _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
          generated = true;
@@ -112,20 +139,36 @@ public class Serializer
      * 
      * @return
      */
-    public static String getGeneratedCode()
+    public String getGeneratedCode()
     {
         if(code.isEmpty())
-            return "nao foi posivel gerar o codigo\n";
+            return "Erro: nao foi posivel gerar o codigo\n";
 
         return code;
     }
+
+   /**
+     * Retorna Apenas 1 Instancia dessa Classe
+     * @return AppManager _instance
+     */
+    public static Serializer getInstance()
+    {
+        return SingletonHolder._instance;
+    }
+
+    @SuppressWarnings("synthetic-access")
+    private static class SingletonHolder
+    {
+        protected static final Serializer _instance = new Serializer();
+    }
+   
     /**
      *
      * @param args
      */
     public static void main(String args[])
     {
-           generateActivationCode();
+           new Serializer().generateActivationCode();
      }
 }
 

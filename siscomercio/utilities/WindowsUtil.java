@@ -35,6 +35,23 @@ public class WindowsUtil
     private static final Logger _log = Logger.getLogger(WindowsUtil.class.getName());
 
     /**
+     * 
+        // Remove os "-" dos Numeros.
+        //-------------------------------
+        /*for(int i = 0; i < (dados.length() - remover.length() + 1); i++)
+        {
+            String res = dados.substring(i, (i + remover.length()));
+            if(res.equals(remover))
+            {
+                int pos = dados.indexOf(remover);
+                dados.delete(pos, pos + remover.length());
+                cont++;
+            }
+        }*/
+
+       // if(Config.DEBUG)
+          //  _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);*/
+    /**
      * Lista todos os arquivos de um diretorio
      *
      * @param path
