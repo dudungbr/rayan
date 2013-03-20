@@ -95,7 +95,6 @@ public class DelUser extends JFrame
         if(login.isEmpty())
         {
             SystemUtil.showErrorMsg("o login deve ser informado", true);
-            return;
         }
         else
         {
@@ -106,7 +105,7 @@ public class DelUser extends JFrame
                 return;
             }
             JLabel optionLabel = new JLabel("<html>confirma exclusao do usuario <font color = blue>" + login + "</font> </html>");
-            SoundManager.playSound(Config.QUESTION_SOUND);
+//            SoundManager.getInstance().playSound(Config.QUESTION_SOUND);
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
             switch(confirm)

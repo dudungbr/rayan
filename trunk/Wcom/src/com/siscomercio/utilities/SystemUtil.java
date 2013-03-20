@@ -32,12 +32,12 @@ public class SystemUtil
      */
     public static void printVersion()
     {
-        SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
+       /* SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
                            + Config.BUILD_NUM.substring(1, 14) + "<br>"
                            + Config.BUILD_DATE.substring(1, 52) + "<br>"
                            + Config.BUILD_URL.substring(1, 75) + "<br>"
                            + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>", true);
-
+*/
     }
 
     /**
@@ -46,7 +46,7 @@ public class SystemUtil
      */
     public static String getSite()
     {
-        return Config.SITE;
+        return Config.getSite();
     }
 
     /**
@@ -55,7 +55,8 @@ public class SystemUtil
      */
     public static String getVersion()
     {
-        return String.valueOf(Config.SYSTEM_VERSION);
+        return null;
+    //    return String.valueOf(Config.SYSTEM_VERSION);
     }
 
     /**
@@ -174,11 +175,11 @@ public class SystemUtil
      */
     public static void showMsg(String msg, Boolean playSound)
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
         {
             _log.info("enviando janela de mensagem... \n");
         }
-        if(playSound && Config.ENABLE_SOUND)
+        if(playSound && Config.isEnableSound())
         {
             try
             {
@@ -205,11 +206,11 @@ public class SystemUtil
      */
     public static void showErrorMsg(String msg, Boolean playSound)
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
         {
             _log.info("enviando janela de mensagem de erro... \n");
         }
-        if(playSound && Config.ENABLE_SOUND)
+        if(playSound && Config.isEnableSound())
         {
             try
             {

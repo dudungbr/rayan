@@ -32,7 +32,7 @@ public class StringTable
     /**
      * Dropa a Database Atual
      */
-    public static String DELETE_DB = "DROP DATABASE " + Config.DATABASE;
+    public static String DELETE_DB = "DROP DATABASE " + Config.getDatabase();
     /**
      * pega o nivel de acesso do usuario na DB
      */
@@ -119,7 +119,7 @@ public class StringTable
     /**
      * Cria a Database
      */
-    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.DATABASE;
+    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
     // *************************** Status da Database **********************/
     /**                                          
      * Status da Database

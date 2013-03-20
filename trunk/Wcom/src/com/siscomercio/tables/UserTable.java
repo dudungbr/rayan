@@ -108,7 +108,7 @@ public class UserTable
      */
     public void setLastUser(String usr)
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
         _log.log(Level.INFO, "setando ultimo usuario como {0}\n", usr);
             _lastLogin = usr;
 

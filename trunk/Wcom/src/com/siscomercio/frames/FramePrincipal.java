@@ -62,8 +62,8 @@ public class FramePrincipal extends JFrame
      */
     private void setDesktop(JLabel label)
     {
-        _log.info("Carregando Imagem: " + StringTable.IMAGE_PATH + Config.LOGO + "\n");
-        File file = new File(StringTable.IMAGE_PATH + Config.LOGO);
+        _log.log(Level.INFO, "Carregando Imagem: {0}{1}\n", new Object[]{StringTable.IMAGE_PATH, Config.getLogo()});
+        File file = new File(StringTable.IMAGE_PATH + Config.getLogo());
 
         if(file.exists())
         {
@@ -71,27 +71,27 @@ public class FramePrincipal extends JFrame
             if(img != null)
                 label.setIcon(img);
             else
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n", true);
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo()+ "\n", true);
         }
         else
         {
-            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.LOGO + "\n", true);
+            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo() + "\n", true);
         }
     }
 
     /** Creates new form FramePrincipal */
     public FramePrincipal()
     {
-        if(!Config._loaded)
+      //  if(!Config._loaded)
             Config.load();
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Montando janela principal do aplicativo. \n");
         initComponents();
         disparaRelogio();
         setSoundProperties();
         preenchaFrame();
         setDesktop(desktop1);
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Frame Principal Criado, Aguardando Comandos... \n");
         created = true;
        AppManager.optimizeRam();
@@ -102,9 +102,9 @@ public class FramePrincipal extends JFrame
      */
     private void setSoundProperties()
     {
-        if(Config.ENABLE_SOUND)
+        if(Config.isEnableSound())
         {
-            SoundManager.playSound(Config.WELCOME_SOUND);
+            SoundManager.getInstance().playSound(Config.getWelcomeSound());
             // Habilita ou Desabilita o Som de Acordo com a Config.
             itemHabilitarSom.setSelected(true);
         }
@@ -117,14 +117,14 @@ public class FramePrincipal extends JFrame
      */
     private void preenchaFrame()
     {
-        if(Config.ENABLE_SOUND)
+        if(Config.isEnableSound())
             _log.info("preenchendo frame...\n");
         pcLabel.setText(WindowsUtil.getPcName());
         statusInfo.setText(DatabaseManager.getConnectionStatus());
-        dadosEmpresa.setText(Config.EMPRESA);
-        labelNomeEmpresa.setText(Config.EMPRESA);
+        dadosEmpresa.setText(Config.getEmpresa());
+        labelNomeEmpresa.setText(Config.getEmpresa());
         dadosOperador.setText(UserTable.getInstance().getLastUser());
-        siteInfo.setText(Config.SITE);
+        siteInfo.setText(Config.getSite());
         versionInfo.setText(SystemUtil.getVersion());
     }
 
@@ -133,7 +133,7 @@ public class FramePrincipal extends JFrame
      */
     private void disparaRelogio()
     {
-        if(Config.ENABLE_SOUND)
+        if(Config.isEnableSound())
             _log.info("inicializando relogio ...\n");
         // Dispara o Relogio
         Timer timer = new Timer(1000, new ClockListener());
@@ -639,20 +639,20 @@ public class FramePrincipal extends JFrame
 
     private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemReiniciarActionPerformed
     {//GEN-HEADEREND:event_itemReiniciarActionPerformed
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.PRE_RESTART_SOUND);
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getPreRestartSound());
 
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("solicitacao de restart.");
 
         int selectedOption = JOptionPane.showConfirmDialog(null, "Reiniciar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
 
         if(selectedOption == JOptionPane.OK_OPTION)
         {
-            if(Config.ENABLE_SOUND)
-                SoundManager.playSound(Config.RESTART_SOUND);
+            if(Config.isEnableSound())
+                SoundManager.getInstance().playSound(Config.getRestartSound());
 
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario reiniciou o sistema.");
 
             //retorna o Status de Autenticidade.
@@ -673,9 +673,8 @@ public class FramePrincipal extends JFrame
         }
         else
         {
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario desiste de reiniciar o sistema.");
-            return;
         }
     }//GEN-LAST:event_itemReiniciarActionPerformed
 
@@ -748,9 +747,9 @@ public class FramePrincipal extends JFrame
     {//GEN-HEADEREND:event_itemHabilitarSomActionPerformed
 
         if(itemHabilitarSom.isSelected())
-            Config.ENABLE_SOUND = true;
+            Config.setEnableSound(true);
         else
-            Config.ENABLE_SOUND = false;
+            Config.setEnableSound(false);
     }//GEN-LAST:event_itemHabilitarSomActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing

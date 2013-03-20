@@ -25,11 +25,11 @@ public class Server
         try
         {
             Config.load();
-            serverSocket = new ServerSocket(Config.SERVER_PORT);
+            serverSocket = new ServerSocket(Config.getServerPort());
         }
         catch(IOException e)
         {
-            System.err.println("Could not listen on port: " + Config.SERVER_PORT);
+            System.err.println("Could not listen on port: " + Config.getServerPort());
             System.exit(-1);
         }
 

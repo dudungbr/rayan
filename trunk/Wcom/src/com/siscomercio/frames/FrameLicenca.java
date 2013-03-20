@@ -60,13 +60,13 @@ public class FrameLicenca extends JFrame
         //Retorna o Tipo de Licenca Selecionado
         // ------------------------------------
         String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
-        if(Config.DEBUG)
+        if(Config.isDebug())
             System.out.println("tipo de licenca:" + tipoLicenca);
 
         //Pega o Valor dao Campo Serial
         // ------------------------------------
         String valorCampoSerial = campoSerial.getText();
-        if(Config.DEBUG)
+        if(Config.isDebug())
             System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
 
 
@@ -80,20 +80,20 @@ public class FrameLicenca extends JFrame
             String res = dados.substring(i, (i + remover.length()));
             if(res.equals(remover))
             {
-                if(Config.DEBUG)
+                if(Config.isDebug())
                     System.out.println("removendo - do serial");
                 int pos = dados.indexOf(remover);
                 dados.delete(pos, pos + remover.length());
             }
         }
-        if(Config.DEBUG)
+        if(Config.isDebug())
             System.out.println("valor variavel dados: " + dados.toString());
         //--------------------------------------------
 
         // Encripta a Variavel Dados
         //----------------------------------------
         String validSerial = encryptSerial(dados.toString());
-        if(Config.DEBUG)
+        if(Config.isDebug())
             System.out.println("serial valido: " + validSerial);
 
         if(valorCampoSerial.equalsIgnoreCase(validSerial))

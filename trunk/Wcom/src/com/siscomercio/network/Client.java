@@ -30,7 +30,7 @@ public class Client
 
         try
         {
-            kkSocket = new Socket("localhost", Config.CLIENT_PORT);
+//            kkSocket = new Socket("localhost", Config.CLIENT_PORT);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
             System.err.println("conectado");

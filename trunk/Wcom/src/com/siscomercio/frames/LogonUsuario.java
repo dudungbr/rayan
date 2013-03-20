@@ -10,8 +10,6 @@
  */
 package com.siscomercio.frames;
 
-import com.siscomercio.security.Auth;
-
 /**
  * $Revision: 220 $
  * $Author: rayan_rpg@hotmail.com $
@@ -128,12 +126,12 @@ public class LogonUsuario extends javax.swing.JFrame
 
         String pass = new String(campoSenha.getPassword());
 
-        if(Auth.checkMasterKey(campoUsuario.getText(), pass))
+        /*if(Auth.checkMasterKey(campoUsuario.getText(), pass))
         {
             _authed = true;
             new DBConfig().setVisible(true);
             dispose();
-        }
+        }*/
         /* _reAuth = true;
         String senha = new String(campoSenha.getPassword());
         String usuario = new String(campoUsuario.getText());

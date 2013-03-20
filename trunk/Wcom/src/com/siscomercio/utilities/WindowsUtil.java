@@ -49,7 +49,7 @@ public class WindowsUtil
             }
         }*/
 
-       // if(Config.DEBUG)
+       // if(Config.isDebug())
           //  _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);*/
     /**
      * Lista todos os arquivos de um diretorio
@@ -61,7 +61,7 @@ public class WindowsUtil
     public static String listDirFiles(String path, final String extension)
     {
         File pasta = new File(path);
-        List<String> arquivos = new FastList<String>();
+        List<String> arquivos = new FastList<>();
 
         for(File f : pasta.listFiles())
         {
@@ -81,7 +81,7 @@ public class WindowsUtil
     public static int countFiles(String path, final String extension)
     {
         File pasta = new File(path);//  diretório
-        List<File> arquivos = new FastList<File>(); // lista de arquivos a ser criada
+        List<File> arquivos = new FastList<>(); // lista de arquivos a ser criada
 
         for(File arq : pasta.listFiles())
         {
@@ -95,7 +95,7 @@ public class WindowsUtil
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.log(Level.INFO, "Contando Arquivos do Diretorio SQL, Total: {0} Arquivos. \n", arquivos.size());
 
         return arquivos.size();
@@ -192,7 +192,7 @@ public class WindowsUtil
             System.exit(0);
         }
         else
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("processo mysql funcionando! ok \n");
     }
 
@@ -236,20 +236,18 @@ public class WindowsUtil
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe");
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-
-            while((line = input.readLine()) != null)
-            {
-                if(!line.trim().equals(""))
-                    if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processToKill))
-                    {
-                        Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
-                        _log.log(Level.INFO, "Matando Processo: {0}", processToKill);
-                        return true;
-                    }
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                while((line = input.readLine()) != null)
+                {
+                    if(!line.trim().equals(""))
+                        if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processToKill))
+                        {
+                            Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
+                            _log.log(Level.INFO, "Matando Processo: {0}", processToKill);
+                            return true;
+                        }
+                }
             }
-            input.close();
 
         }
         catch(Exception err)
@@ -265,25 +263,23 @@ public class WindowsUtil
      */
     private static List<String> listRunningProcesses()
     {
-        List<String> processes = new ArrayList<String>();
+        List<String> processes = new ArrayList<>();
         try
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe /fo csv /nh");
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-
-            while((line = input.readLine()) != null)
-            {
-                if(!line.trim().equals(""))
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                while((line = input.readLine()) != null)
                 {
-                    // keep only the process name
-                    line = line.substring(1);
-                    processes.add(line.substring(0, line.indexOf("\"", 1)) + "\n");
-                }
+                    if(!line.trim().equals(""))
+                    {
+                        // keep only the process name
+                        line = line.substring(1);
+                        processes.add(line.substring(0, line.indexOf("\"", 1)) + "\n");
+                    }
 
+                }
             }
-            input.close();
 
 
         }
@@ -332,7 +328,7 @@ public class WindowsUtil
             i++;
         }
 
-        if(Config.DEBUG)
+        if(Config.isDebug())
         {
             _log.log(Level.INFO, "Running processes : \n{0}", result);
             _log.log(Level.INFO, "Total de Processos: {0}", processes.size());

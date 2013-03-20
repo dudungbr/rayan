@@ -51,7 +51,7 @@ public class AppManager extends JFrame
      */
     public static void setTema(String requesterClass)
     {
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("Setando Tema Visual para a Classe:  "+requesterClass+".java \n");
         try
         {
@@ -76,20 +76,21 @@ public class AppManager extends JFrame
      */
     public void restartApp()
     {
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.PRE_RESTART_SOUND);
+        
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getPreRestartSound());
 
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("solicitacao de restart.");
 
         int selectedOption = JOptionPane.showConfirmDialog(null, "Iniciar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
 
         if(selectedOption == JOptionPane.OK_OPTION)
         {
-            if(Config.ENABLE_SOUND)
-                SoundManager.playSound(Config.RESTART_SOUND);
+            if(Config.isEnableSound())
+                SoundManager.getInstance().playSound(Config.getRestartSound());
 
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario reiniciou o sistema.");
 
             //retorna o Status de Autenticidade.
@@ -116,28 +117,28 @@ public class AppManager extends JFrame
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.PRE_EXIT_SOUND);
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getPreExitSound());
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "<html><font color =black size=4 face = Times new Roman ><b>Encerrar Sistema ?</b></font></html>", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-        if(Config.DEBUG)
+        if(Config.isDebug())
             _log.info("solicitacao de shutdown...\n");
 
 
         if(selectedOption == JOptionPane.OK_OPTION)
         {
-            if(Config.ENABLE_SOUND)
-                SoundManager.playSound(Config.EXIT_SOUND);
+            if(Config.isEnableSound())
+                SoundManager.getInstance().playSound(Config.getExitSound());
 
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario finalizou o sistema.");
 
             //finaliza a aplicacao
             System.exit(0);
         }
         else
-            if(Config.DEBUG)
+            if(Config.isDebug())
                 _log.info("usuario desiste de fechar o sistema.\n");
     }
 
@@ -146,8 +147,8 @@ public class AppManager extends JFrame
      */
     public static void implementar()
     {
-        if(Config.ENABLE_SOUND)
-            SoundManager.playSound(Config.UNIPLEMENTED_SOUND);
+        if(Config.isEnableSound())
+            SoundManager.getInstance().playSound(Config.getUnimplementedSound());
         SystemUtil.showMsg("Funcao Ainda nao Disponivel", true);
     }
 
