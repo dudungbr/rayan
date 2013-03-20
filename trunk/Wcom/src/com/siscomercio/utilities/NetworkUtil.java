@@ -4,6 +4,9 @@ import java.net.InetAddress;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -16,16 +19,18 @@ import java.util.logging.Logger;
 public final class NetworkUtil
 {
     private static final Logger _log = Logger.getLogger(NetworkUtil.class.getName());
-
-    private static String getMacAddress() throws IOException
+ 
+    private static String selectOs() throws IOException
     {
         String os = System.getProperty("os.name");
 
         try
         {
+            //windowsRunIpConfigCommand(
             if(os.startsWith("Windows"))
             {
-                return windowsParseMacAddress(windowsRunIpConfigCommand());
+                 InetAddress ia = InetAddress.getLocalHost();
+                return getWindowsMacAddress();
             }
             else if(os.startsWith("Linux"))
                 {
@@ -82,7 +87,7 @@ public final class NetworkUtil
             }
 
             String macAddressCandidate = line.substring(macAddressPosition + 6).trim();
-            if(linuxIsMacAddress(macAddressCandidate))
+            if(isValidMacAddress(macAddressCandidate))
             {
                 lastMacAddress = macAddressCandidate;
                 continue;
@@ -94,34 +99,24 @@ public final class NetworkUtil
         throw ex;
     }
 
-    private static boolean linuxIsMacAddress(String macAddressCandidate)
-    {
-      
-        if(macAddressCandidate.length() != 17)
-        {
-            return false;
-        }
-        return true;
-    }
 
     private static String linuxRunIfConfigCommand() throws IOException
     {
         Process p = Runtime.getRuntime().exec("ifconfig");
-        InputStream stdoutStream = new BufferedInputStream(p.getInputStream());
-
-        StringBuilder buffer = new StringBuilder();
-        for(;;)
-        {
-            int c = stdoutStream.read();
-            if(c == -1)
+        String outputText;
+        try (InputStream stdoutStream = new BufferedInputStream(p.getInputStream())) {
+            StringBuilder buffer = new StringBuilder();
+            for(;;)
             {
-                break;
+                int c = stdoutStream.read();
+                if(c == -1)
+                {
+                    break;
+                }
+                buffer.append((char) c);
             }
-            buffer.append((char) c);
+            outputText = buffer.toString();
         }
-        String outputText = buffer.toString();
-
-        stdoutStream.close();
 
         return outputText;
     }
@@ -129,55 +124,52 @@ public final class NetworkUtil
     /*
      * Windows stuff
      */
-    private static String windowsParseMacAddress(String ipConfigResponse) throws ParseException
+    private static String getWindowsMacAddress()
     {
-        String localHost = null;
-        try
-        {
-            localHost = InetAddress.getLocalHost().getHostAddress();
-        }
-        catch(java.net.UnknownHostException ex)
-        {
-                SystemUtil.showErrorMsg(ex.getMessage(),true);
-           // ex.printStackTrace();
-            throw new ParseException(ex.getMessage(), 0);
-        }
+       StringBuilder sb = new StringBuilder("");
+       try {
+         
+            InetAddress address = InetAddress.getLocalHost();
 
-        StringTokenizer tokenizer = new StringTokenizer(ipConfigResponse, "\n");
-        String lastMacAddress = null;
-
-        while(tokenizer.hasMoreTokens())
-        {
-            String line = tokenizer.nextToken().trim();
-
-            // see if line contains IP address
-            if(line.endsWith(localHost) && lastMacAddress != null)
-            {
-                return lastMacAddress;
+            /*
+             * Get NetworkInterface for the current host and then read
+             * the hardware address.
+             */
+            NetworkInterface ni =
+                    NetworkInterface.getByInetAddress(address);
+            if (ni != null) {
+                byte[] mac = ni.getHardwareAddress();
+                if (mac != null) {
+                    /*
+                     * Extract each array of mac address and convert it 
+                     * to hexa with the following format 
+                     * 08-00-27-DC-4A-9E.
+                     */
+                    for (int i = 0; i < mac.length; i++) 
+                    {
+                   
+                 sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : ""));
+                
+                    }
+                } else {
+                    System.out.println("Address doesn't exist or is not "
+                            + "accessible.");
+                }
+            } else {
+                System.out.println("Network Interface for the specified "
+                        + "address is not found.");
             }
-
-            // see if line contains MAC address
-            int macAddressPosition = line.indexOf(":");
-            if(macAddressPosition <= 0)
-            {
-                continue;
-            }
-
-            String macAddressCandidate = line.substring(macAddressPosition + 1).trim();
-            if(windowsIsMacAddress(macAddressCandidate))
-            {
-                lastMacAddress = macAddressCandidate;
-                continue;
-            }
+        } catch (UnknownHostException | SocketException e) {
         }
-
-        ParseException ex = new ParseException("cannot read MAC address from [" + ipConfigResponse + "]", 0);
-            SystemUtil.showErrorMsg(ex.getMessage(),true);
-        //ex.printStackTrace();
-        throw ex;
+      
+       return sb.toString();
     }
-
-    private static boolean windowsIsMacAddress(String macAddressCandidate)
+    public static String[] retornaArrayString(String[] valor){  
+      String[] string = new String[valor.length];  
+      
+      return string;  
+    }  
+    private static boolean isValidMacAddress(String macAddressCandidate)
     {
        
         if(macAddressCandidate.length() != 17)
@@ -196,21 +188,20 @@ public final class NetworkUtil
     public static String windowsRunIpConfigCommand() throws IOException
     {
         Process p = Runtime.getRuntime().exec("ipconfig /all");
-        InputStream stdoutStream = new BufferedInputStream(p.getInputStream());
-
-        StringBuilder buffer = new StringBuilder();
-        for(;;)
-        {
-            int c = stdoutStream.read();
-            if(c == -1)
+        String outputText;
+        try (InputStream stdoutStream = new BufferedInputStream(p.getInputStream())) {
+            StringBuilder buffer = new StringBuilder();
+            for(;;)
             {
-                break;
+                int c = stdoutStream.read();
+                if(c == -1)
+                {
+                    break;
+                }
+                buffer.append((char) c);
             }
-            buffer.append((char) c);
+            outputText = buffer.toString();
         }
-        String outputText = buffer.toString();
-
-        stdoutStream.close();
 
         return outputText;
     }
@@ -230,7 +221,7 @@ public final class NetworkUtil
 
            _log.log(Level.INFO, "  Operating System: {0}", System.getProperty("os.name"));
             _log.log(Level.INFO, "  IP/Localhost: {0}", InetAddress.getLocalHost().getHostAddress());
-           _log.log(Level.INFO, "  MAC Address: {0}", getMacAddress());
+           _log.log(Level.INFO, "  MAC Address: {0}", getWindowsMacAddress());
         }
         catch(Throwable t)
         {
@@ -244,16 +235,10 @@ public final class NetworkUtil
      */
     public static String getMac()
     {
-       String mac = "";
-        try
-        {
-          mac =  getMacAddress();
-        }
-        catch(IOException ex)
-        {
-            SystemUtil.showErrorMsg(ex.getMessage(),true);
-        }
-
+       String  mac;
+        mac = getWindowsMacAddress();
+        
+       
         return mac;
     }
 
