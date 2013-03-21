@@ -5,7 +5,7 @@
 package com.siscomercio;
 
 
-import com.siscomercio.frames.FrameSplashScreen;
+import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.utilities.Utilitarios;

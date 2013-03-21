@@ -4,10 +4,10 @@
  */
 package com.siscomercio;
 
-import com.siscomercio.frames.DBConfig;
+import com.siscomercio.model.view.frames.DBConfig;
 import java.awt.EventQueue;
-import com.siscomercio.frames.FramePrincipal;
-import com.siscomercio.frames.FrameLicenca;
+import com.siscomercio.model.view.frames.FramePrincipal;
+import com.siscomercio.model.view.frames.FrameLicenca;
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.controller.managers.LogMonitor;
