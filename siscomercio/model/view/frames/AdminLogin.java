@@ -12,7 +12,7 @@ package com.siscomercio.model.view.frames;
 
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.utilities.SystemUtil;

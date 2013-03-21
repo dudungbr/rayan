@@ -1,7 +1,7 @@
 package com.siscomercio.controller.managers;
 
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.standards.StringTable;
 import java.io.File;
 import java.io.IOException;

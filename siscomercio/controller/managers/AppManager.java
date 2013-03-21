@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.model.security.Auth;
 
 import com.siscomercio.utilities.SystemUtil;

@@ -6,7 +6,7 @@ package com.siscomercio.model.persistence;
 
 
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.model.entity.Endereco;
 import com.siscomercio.model.entity.Entrada;

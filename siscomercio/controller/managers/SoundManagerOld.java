@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 

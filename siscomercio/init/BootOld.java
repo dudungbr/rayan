@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.siscomercio;
+package com.siscomercio.init;
 
 import com.siscomercio.model.view.frames.DBConfig;
 import java.awt.EventQueue;

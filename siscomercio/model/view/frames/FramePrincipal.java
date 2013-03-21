@@ -23,7 +23,7 @@ import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.DatabaseManager;

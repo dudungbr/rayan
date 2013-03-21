@@ -1,4 +1,4 @@
-package com.siscomercio;
+package com.siscomercio.init;
 
 
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
