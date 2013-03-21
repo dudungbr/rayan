@@ -2,8 +2,8 @@ package com.siscomercio;
 
 
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
-import com.siscomercio.managers.ExceptionManager;
-import com.siscomercio.managers.PropertiesManager;
+import com.siscomercio.controller.managers.ExceptionManager;
+import com.siscomercio.controller.managers.PropertiesManager;
 import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.Utilitarios;
 import java.awt.Color;

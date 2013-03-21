@@ -6,7 +6,8 @@ package com.siscomercio;
 
 
 import com.siscomercio.frames.FrameSplashScreen;
-import com.siscomercio.managers.ExceptionManager;
+import com.siscomercio.controller.managers.ExceptionManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
 import java.lang.management.ManagementFactory;
@@ -27,21 +28,21 @@ import sun.jvmstat.monitor.VmIdentifier;
  *
  * @author William
  */
-public class Boot2 extends JFrame
+public class Boot extends JFrame
 {
 
-    private static final Logger _log = Logger.getLogger(Boot2.class.getName());
+    private static final Logger _log = Logger.getLogger(Boot.class.getName());
     private static final long serialVersionUID = 1L;
     private FrameSplashScreen fss = new FrameSplashScreen();
 
-    private Boot2()
+    private Boot()
     {
         //Carrega as Configuracoes
         fss.getLabelInformacao().setText("Carregando Configurações....");
         Config.load();
 
         fss.setVisible(true);
-        fss.getLabelVersao().setText(String.valueOf(/*Config.getSystemVersion()*/"1.0"));
+        fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
 
         // Inicializa o Log Monitor
         // ---------------
@@ -81,7 +82,7 @@ public class Boot2 extends JFrame
      */
     private void inicializaApp()
     {
-        _log.info("Iniciando aplicacao...");
+        _log.info("Iniciando aplicativo...");
         new Thread()
         {
 
@@ -106,7 +107,7 @@ public class Boot2 extends JFrame
                             String processo = "mysql";
 
 
-                            /*if (!Config.isDeveloper())
+                            if (!Config.isDeveloper())
                             {
                                 if (!Utilitarios.checkIfProcessIsRunning(processo))
                                 {
@@ -117,7 +118,7 @@ public class Boot2 extends JFrame
                             else
                             {
                                 Utilitarios.showPlainMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
-                            }*/
+                            }
 
 
                             break;
@@ -127,15 +128,15 @@ public class Boot2 extends JFrame
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
                             try
                             {
-                              //  Banco bd = Banco.getInstance();
-                                /*if (!Config.isDeveloper())
+                                Banco bd = Banco.getInstance();
+                                if (!Config.isDeveloper())
                                 {
                                     bd.atualizaDatabase(); //atualiza a base de dados 
                                 }
                                 else
                                 {
                                     bd.conectaDatabaseSelecionada();
-                                }*/
+                                }
                             }
                             catch (Exception ex)
                             {

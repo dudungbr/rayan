@@ -6,7 +6,7 @@ package com.siscomercio.utilities;
 
 
 
-import com.siscomercio.managers.ExceptionManager;
+import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.standards.StringTable;
 import java.awt.EventQueue;
 import java.io.*;

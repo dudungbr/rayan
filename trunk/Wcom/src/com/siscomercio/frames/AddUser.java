@@ -12,9 +12,9 @@ package com.siscomercio.frames;
 
 import com.siscomercio.Config;
 import javax.swing.JFrame;
-import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.managers.SoundManager;
-import com.siscomercio.security.Criptografia;
+import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.controller.managers.SoundManager;
+import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;

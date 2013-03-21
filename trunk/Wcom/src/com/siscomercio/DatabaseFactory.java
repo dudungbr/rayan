@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.siscomercio.managers.AppManager;
-import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.controller.managers.AppManager;
+import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 

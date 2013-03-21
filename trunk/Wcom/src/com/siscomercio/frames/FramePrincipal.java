@@ -25,11 +25,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import com.siscomercio.Config;
 
-import com.siscomercio.managers.AppManager;
-import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.managers.SoundManager;
+import com.siscomercio.controller.managers.AppManager;
+import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.controller.managers.SoundManager;
 import com.siscomercio.tables.UserTable;
-import com.siscomercio.security.Auth;
+import com.siscomercio.model.security.Auth;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;

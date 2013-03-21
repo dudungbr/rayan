@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.siscomercio.Config;
 import com.siscomercio.DatabaseFactory;
-import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.tables.StringTable;
 import java.applet.Applet;
 import java.applet.AudioClip;

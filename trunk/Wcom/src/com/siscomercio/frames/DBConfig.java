@@ -13,8 +13,8 @@ package com.siscomercio.frames;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.Config;
-import com.siscomercio.managers.AppManager;
-import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.controller.managers.AppManager;
+import com.siscomercio.controller.managers.DatabaseManager;
 import java.awt.EventQueue;
 
 /**
