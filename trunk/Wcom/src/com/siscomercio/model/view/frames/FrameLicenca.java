@@ -11,8 +11,8 @@ package com.siscomercio.model.view.frames;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import com.siscomercio.Config;
-import com.siscomercio.DatabaseFactory;
+import com.siscomercio.init.Config;
+import com.siscomercio.init.DatabaseFactory;
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.security.Serializer;

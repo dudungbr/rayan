@@ -4,7 +4,7 @@
  */
 package com.siscomercio.tables;
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 
 /**
  * $Revision$

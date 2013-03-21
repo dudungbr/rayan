@@ -2,7 +2,7 @@ package com.siscomercio.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 
 /**
  * 

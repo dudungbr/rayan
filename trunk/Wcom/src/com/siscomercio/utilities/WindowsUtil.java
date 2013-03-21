@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import java.io.File;
 import java.io.FileFilter;
 import java.text.DecimalFormat;

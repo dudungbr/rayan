@@ -1,6 +1,6 @@
 package com.siscomercio.controller.managers;
 
-import com.siscomercio.DatabaseFactory;
+import com.siscomercio.init.DatabaseFactory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.tables.StringTable;
 import com.siscomercio.tables.UserTable;

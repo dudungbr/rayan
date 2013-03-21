@@ -1,4 +1,4 @@
-package com.siscomercio;
+package com.siscomercio.init;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
-import com.siscomercio.Config;
-import com.siscomercio.DatabaseFactory;
+import com.siscomercio.init.Config;
+import com.siscomercio.init.DatabaseFactory;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.tables.StringTable;
 import java.applet.Applet;

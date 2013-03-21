@@ -1,6 +1,6 @@
 package com.siscomercio.model.security;
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.utilities.DiskUtil;
 import com.siscomercio.utilities.MbUtil;
 import com.siscomercio.utilities.NetworkUtil;

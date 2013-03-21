@@ -1,7 +1,7 @@
 package com.siscomercio.utilities;
 
 
-import com.siscomercio.Config;
+import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.SoundManager;
 import java.awt.Component;
