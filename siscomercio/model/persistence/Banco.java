@@ -14,7 +14,6 @@ import com.siscomercio.model.entity.Funcionario;
 import com.siscomercio.model.entity.Usuario;
 import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.standards.StringTable;
-import com.siscomercio.tables.UserTable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
