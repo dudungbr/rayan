@@ -8,10 +8,10 @@ import com.siscomercio.frames.DBConfig;
 import java.awt.EventQueue;
 import com.siscomercio.frames.FramePrincipal;
 import com.siscomercio.frames.FrameLicenca;
-import com.siscomercio.managers.AppManager;
-import com.siscomercio.managers.DatabaseManager;
-import com.siscomercio.managers.LogMonitor;
-import com.siscomercio.security.Auth;
+import com.siscomercio.controller.managers.AppManager;
+import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.controller.managers.LogMonitor;
+import com.siscomercio.model.security.Auth;
 import com.siscomercio.utilities.WindowsUtil;
 import java.util.logging.Logger;
 

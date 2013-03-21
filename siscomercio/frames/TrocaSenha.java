@@ -5,7 +5,7 @@
  */
 package com.siscomercio.frames;
 
-import com.siscomercio.managers.DatabaseManager;
+import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.utilities.SystemUtil;
 
 /**

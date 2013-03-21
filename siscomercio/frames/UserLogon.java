@@ -10,7 +10,7 @@
  */
 package com.siscomercio.frames;
 
-import com.siscomercio.security.Auth;
+import com.siscomercio.model.security.Auth;
 
 /**
  * $Revision$

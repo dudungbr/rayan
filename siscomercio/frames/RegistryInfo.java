@@ -6,7 +6,7 @@
 
 package com.siscomercio.frames;
 
-import com.siscomercio.managers.AppManager;
+import com.siscomercio.controller.managers.AppManager;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
