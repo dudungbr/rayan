@@ -23,7 +23,7 @@ public class StringTable
     /**
      * Pasta de Sons
      */
-    private static String SOUND_PATH = "./sound/";
+    private static String SOUND_PATH = "./sounds/";
     /**
      * Pasta de Imagens
      */

@@ -3,6 +3,7 @@ package com.siscomercio.controller.managers;
 
 import com.siscomercio.init.Config;
 import com.siscomercio.standards.StringTable;
+import com.siscomercio.utilities.Utilitarios;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -38,10 +39,7 @@ public class SoundManager
         instance = aInstance;
     }
 
-    private SoundManager()
-    {
-        loadSounds();
-    }
+
 
     /**
      * Toca um Som em Formato WAV
@@ -85,15 +83,20 @@ public class SoundManager
         return false;
     }
 
-    private void loadSounds()
+    public void loadSounds()
     {
+            if(Config.isDebug())
+        _log.info("Carregando Sons...");
         try
         {
             fileList = new ArrayList();
 
             File pasta = new File(StringTable.getSOUND_PATH());// + soundName);
 
-            if (pasta.exists())
+            if(Config.isDebug())
+            _log.log(Level.INFO, "Path: '{'0'}'{0}", StringTable.getSOUND_PATH());
+            
+            if (pasta.exists() && pasta.isDirectory())
             {
                 File[] arquivosPasta = pasta.listFiles();
 
@@ -101,17 +104,25 @@ public class SoundManager
                 {
                     if (arquivo.getName().endsWith(".wav"))
                     {
-                        //  _log.log(Level.INFO, "Adicionando objeto: {0} A lista.", arquivo.getName());
+                            if(Config.isDebug())
+                          _log.log(Level.INFO, "Adicionando objeto: {'0'}", arquivo.getName());
                         fileList.add(arquivo);
                     }
                 }
-                _log.log(Level.INFO, "Carregados: {0} Arquivos de Som", fileList.size());
+             if(Config.isDebug())
+                _log.log(Level.INFO, "Carregados: {'0'} Arquivos de Som.", fileList.size());
 
+            }
+            else
+            {
+        Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: "+StringTable.getSOUND_PATH());
+            _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {'0'}", StringTable.getSOUND_PATH());
             }
 
         }
         catch (Exception ex)
         {
+            ExceptionManager.ThrowException("Erro : ", ex);
             Logger.getLogger(SoundManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 

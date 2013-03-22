@@ -10,6 +10,7 @@ import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.LogManager;
+import com.siscomercio.controller.managers.SoundManager;
 import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.model.view.frames.DBConfig;
@@ -101,8 +102,9 @@ public class Boot extends JFrame
                         {
                               //Carrega as Configuracoes
         fss.getLabelInformacao().setText("Carregando Configurações....");
+       
         Config.load();
-
+  SoundManager.getInstance().loadSounds();
               if(Config.isEnableLog())
              // Inicializa o Log Monitor
         // ---------------
@@ -112,7 +114,7 @@ public class Boot extends JFrame
         fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
         break;
                         }
-                        case 30:
+                        case 20:
                         {
 
                             getFss().getLabelInformacao().setText("Verificando Servidor de Banco de Dados....");
@@ -135,6 +137,12 @@ public class Boot extends JFrame
 
                             break;
                         }
+                        /*case 40:
+                        {
+                              getFss().getLabelInformacao().setText("Carregando Sons ....");
+                           
+                            break;
+                        }*/
                         case 60:
                         {
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
@@ -186,7 +194,7 @@ public class Boot extends JFrame
         // ------------------------------------------------
         else
         {
-              _log.info("Inicializando Log Monitor...");
+              _log.info("Verificando Licenca...");
             //Le os Dados da Licenca
             // --------------------------
             DatabaseManager.readLicenseData();
