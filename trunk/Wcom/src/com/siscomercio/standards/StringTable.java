@@ -23,7 +23,7 @@ public class StringTable
     /**
      * Pasta de Sons
      */
-    private static String SOUND_PATH = "./som/";
+    private static String SOUND_PATH = "./sound/";
     /**
      * Pasta de Imagens
      */
@@ -31,7 +31,7 @@ public class StringTable
     /**
      * Pasta de Scripts SQL
      */
-    private static String SQL_PATH = "./database/";
+    private static String SQL_PATH = "./sql/";
     /**
      * caminho do arquivo de configuracao
      */
