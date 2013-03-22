@@ -49,4 +49,5 @@ public class ExceptionManager
         String output = msg + "\n" ;
         Utilitarios.showErrorMessage(output + e);
     }
+    
 }

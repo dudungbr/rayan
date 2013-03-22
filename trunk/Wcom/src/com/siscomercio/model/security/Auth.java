@@ -83,6 +83,7 @@ public class Auth extends JFrame
             _log.info("Criando Janela de Autenticacao.... \n");
 
         if(Config.isEnableSound())
+            System.out.println("Som: "+ Config.getPreLoginSound());
             SoundManager.getInstance().playSound(Config.getPreLoginSound());
 
         if(_autenticado)
