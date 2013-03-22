@@ -788,7 +788,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema(FramePrincipal.class.getSimpleName());
+             //   AppManager.setTema(FramePrincipal.class.getSimpleName());
                 new AdminLogin().setVisible(true);
             }
 
@@ -806,7 +806,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema(FramePrincipal.class.getSimpleName());
+              //  AppManager.setTema(FramePrincipal.class.getSimpleName());
                 new FrameLog().setVisible(true);
             }
 
@@ -824,7 +824,7 @@ public class FramePrincipal extends JFrame
             @Override
             public void run()
             {
-                AppManager.setTema(FramePrincipal.class.getSimpleName());
+             //   AppManager.setTema(FramePrincipal.class.getSimpleName());
                 new FramePrincipal().setVisible(true);
             }
 

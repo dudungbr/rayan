@@ -1,7 +1,9 @@
 package com.siscomercio.init;
 
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
+import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.PropertiesManager;
 import com.siscomercio.standards.StringTable;
@@ -127,9 +129,9 @@ public class Config {
         UIManager.put("FileChooser.openButtonAccessibleName", "Abrir");
         UIManager.put("FileChooser.openButtonText", "Abrir");
         UIManager.put("FileChooser.cancelButtonText", "Cancelar");
-         UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela esta Janela");
+        UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela esta Janela");
         UIManager.put("FileChooser.cancelButtonAccessibleName", "Cancelar");
-        setTema();
+      //  setTema();
     }
 
     /**
@@ -139,22 +141,22 @@ public class Config {
     private static void setTema() {
         _log.info("setando Tema Visual");
         try {
+            //AppManager.setTema(Boot.class.getSimpleName());
             //Define O Tema Visual e o Texto do Pop UP
             Properties props = new Properties();
-            props.put("logoString", "Sat");
-            props.put("licenseKey", "Sat");
+            props.put("logoString", "SISCOM");
+            props.put("licenseKey", "SISCOM");
             AeroLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new AcrylLookAndFeel());
+        } 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) 
+        {
             _log.severe(ex.getMessage());
             ExceptionManager.ThrowException("Erro ao Carregar Skin ", ex);
         }
-//            //Define O Tema Visual e o Texto do Pop UP
-//            Properties props = new Properties();
-//            props.put("logoString", "Agenda");
-//            props.put("licenseKey", "Agenda");
-        //     AcrylLookAndFeel.setCurrentTheme(props);
-        //   UIManager.setLookAndFeel(new AcrylLookAndFeel());
+
+        
 
 
     }

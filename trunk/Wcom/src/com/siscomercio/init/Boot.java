@@ -213,7 +213,7 @@ public class Boot extends JFrame
                         public void run()
                         {
                             _log.finest("Fim do Boot.");
-                            AppManager.setTema(BootOld.class.getSimpleName());
+                            //AppManager.setTema(Boot.class.getSimpleName());
                             EventQueue.invokeLater(new Runnable()
                             {
 
@@ -268,7 +268,7 @@ public class Boot extends JFrame
                     @Override
                     public void run()
                     {
-                        AppManager.setTema(BootOld.class.getSimpleName());
+                        
                         new FrameLicenca().setVisible(true);
                     }
 

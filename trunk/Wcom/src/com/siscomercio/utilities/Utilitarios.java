@@ -707,7 +707,7 @@ public class Utilitarios
                 {
                     if (Config.isEnableSound())
                     {
-                        SoundManager.getInstance().playSound("plain.wav");
+                        SoundManager.getInstance().playSound("info.wav");
                     }
                 }
             });
