@@ -11,6 +11,7 @@ import com.siscomercio.model.security.Auth;
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
 import java.util.Properties;
+import java.util.logging.Level;
 import javax.swing.UIManager;
 
 /**
@@ -52,7 +53,7 @@ public class AppManager extends JFrame
     public static void setTema(String requesterClass)
     {
         if(Config.isDebug())
-            _log.info("Setando Tema Visual para a Classe:  "+requesterClass+".java \n");
+            _log.log(Level.INFO, "Setando Tema Visual para a Classe:  {0}.java \n", requesterClass);
         try
         {
             //Define O Tema Visual e o Texto do Pop UP

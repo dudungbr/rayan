@@ -24,9 +24,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author Rayan
  */
-public class SoundManager
+public final class SoundManager
 {
 
+ private SoundManager()
+ {
+     loadSounds();
+ }
     private static final Logger _log = Logger.getLogger(SoundManager.class.getName());
     private static SoundManager instance;
     private static ArrayList<File> fileList;
@@ -94,7 +98,7 @@ public class SoundManager
             File pasta = new File(StringTable.getSOUND_PATH());// + soundName);
 
             if(Config.isDebug())
-            _log.log(Level.INFO, "Path: '{'0'}'{0}", StringTable.getSOUND_PATH());
+            _log.log(Level.INFO, "Caminho: {0}", StringTable.getSOUND_PATH());
             
             if (pasta.exists() && pasta.isDirectory())
             {
@@ -105,18 +109,18 @@ public class SoundManager
                     if (arquivo.getName().endsWith(".wav"))
                     {
                             if(Config.isDebug())
-                          _log.log(Level.INFO, "Adicionando objeto: {'0'}", arquivo.getName());
+                          _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
                         fileList.add(arquivo);
                     }
                 }
              if(Config.isDebug())
-                _log.log(Level.INFO, "Carregados: {'0'} Arquivos de Som.", fileList.size());
+                _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
 
             }
             else
             {
         Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: "+StringTable.getSOUND_PATH());
-            _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {'0'}", StringTable.getSOUND_PATH());
+            _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.getSOUND_PATH());
             }
 
         }
