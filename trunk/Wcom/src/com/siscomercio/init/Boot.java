@@ -5,9 +5,15 @@
 package com.siscomercio.init;
 
 
+import com.siscomercio.controller.managers.AppManager;
+import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.security.Auth;
+import com.siscomercio.model.view.frames.DBConfig;
+import com.siscomercio.model.view.frames.FrameLicenca;
+import com.siscomercio.model.view.frames.FramePrincipal;
 import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
 import java.lang.management.ManagementFactory;
@@ -44,10 +50,7 @@ public class Boot extends JFrame
         fss.setVisible(true);
         fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
 
-        // Inicializa o Log Monitor
-        // ---------------
-       // LogManager.init();
-
+      
         RuntimeMXBean rt = ManagementFactory.getRuntimeMXBean();
         final int runtimePid = Integer.parseInt(rt.getName().substring(0, rt.getName().indexOf("@")));
 
@@ -100,7 +103,7 @@ public class Boot extends JFrame
                     switch (i)
                     {
 
-                        case 5:
+                        case 30:
                         {
 
                             getFss().getLabelInformacao().setText("Verificando Servidor de Banco de Dados....");
@@ -123,11 +126,12 @@ public class Boot extends JFrame
 
                             break;
                         }
-                        case 25:
+                        case 60:
                         {
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
                             try
                             {
+                                
                                 Banco bd = Banco.getInstance();
                                 if (!Config.isDeveloper())
                                 {
@@ -145,21 +149,54 @@ public class Boot extends JFrame
                             }
                             break;
                         }
-                        case 50:
+                        case 90:
                         {
-                            getFss().getLabelInformacao().setText("Carregando Tabelas....");
-                         //   TabelaMarca.getInstance();
-                         //   TabelaEquipamento.getInstance();
-                         ///   TabelaCidade.getInstance();
-                          //  TabelaEstado.getInstance();
-                          //  TabelaTecnicos.getInstance();
-                          //  IdleManager.getInstance().checaTempoOcioso();
-                            //SoundManager.getInstance();
-                            //new FileMonitor(2000);
-                            break;
-                        }
-                        case 100:
+                            getFss().getLabelInformacao().setText("Carregando Verificando Licença...");
+                               // Lê a Tabela de Instalacao da DB
+        //--------------------------------
+          _log.info("Lendo Tabela de Instalacao do Banco ...");
+        DatabaseManager.tryReadInstallData();
+        
+         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
+        // ------------------------
+        if(DatabaseManager._installed == 0)
+        {
+              _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
+            EventQueue.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    AppManager.setTema(DBConfig.class.getSimpleName());
+                      _log.info("Abrindo Instalador da Database...");
+                    DBConfig.getInstance().setVisible(true);
+                }
+
+            });
+        } // Caso a DB Esteja Instalada Prosegue Para a Licenca
+        // ------------------------------------------------
+        else
+        {
+              _log.info("Inicializando Log Monitor...");
+            //Le os Dados da Licenca
+            // --------------------------
+            DatabaseManager.readLicenseData();
+
+            // OK! Podemos Abrir o Sistema.
+            // ------------------------
+            if(DatabaseManager._licensed == 1)
+            {
+                // Chama a Tela de Login
+                // ------------------------
+                if(Config.isDebug())
+                {
+                    EventQueue.invokeLater(new Runnable()
+                    {
+                        @Override
+                        public void run()
                         {
+                            _log.finest("Fim do Boot.");
+                            AppManager.setTema(BootOld.class.getSimpleName());
                             EventQueue.invokeLater(new Runnable()
                             {
 
@@ -177,6 +214,7 @@ public class Boot extends JFrame
                                         {
                                             //fecha a Splash Screen
                                             getFss().dispose();
+                                              Auth.getInstance().setVisible(true);
                                        //     FrameLogin.getInstance().setVisible(true);
                                         }
                                     });
@@ -186,6 +224,46 @@ public class Boot extends JFrame
 
                             //fecha a tela de splash
                             dispose();
+                          
+                        }
+
+                    });
+                }
+                else
+                {
+                    EventQueue.invokeLater(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            new FramePrincipal().setVisible(true);
+                        }
+
+                    });
+                }
+            }
+            //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
+            // -----------------------------------------------------------
+            else
+            {
+                EventQueue.invokeLater(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        AppManager.setTema(BootOld.class.getSimpleName());
+                        new FrameLicenca().setVisible(true);
+                    }
+
+                });
+            }
+        }     
+                         ///   TabelaCidade.getInstance();
+                          //  TabelaEstado.getInstance();
+                         
+                          //  IdleManager.getInstance().checaTempoOcioso();
+                            //SoundManager.getInstance();
+                            //new FileMonitor(2000);
                             break;
                         }
                     }
@@ -276,7 +354,7 @@ public class Boot extends JFrame
      */
     public static void main(String[] args)
     {
-//        Boot boot = new Boot();
+      Boot boot = new Boot();
     }
 
     /**

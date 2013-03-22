@@ -266,6 +266,9 @@ public class Config {
 
         loadPreferencies();
         loadLocalVersion();
+        //if(debug)
+            
+
     }
 
     /**
