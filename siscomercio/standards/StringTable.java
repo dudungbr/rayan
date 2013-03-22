@@ -4,6 +4,8 @@
  */
 package com.siscomercio.standards;
 
+import com.siscomercio.init.Config;
+
 /**
  * $Revision: 237 $ $Author: rayan_rpg@hotmail.com $ $Date: 2011-02-14 11:03:12
  * -0300 (seg, 14 fev 2011) $
@@ -33,7 +35,7 @@ public class StringTable
     /**
      * caminho do arquivo de configuracao
      */
-    private static String CONFIG_FILE = "./config/settings.properties";
+    private static String CONFIG_FILE = "./config/config.properties";
     private static String CONFIG_PATH = "./config/";
     //   public static String LOGO_FILE = "./config/logo.png";
     private static String UPDATE_FILE = "./update/update.properties";
@@ -222,7 +224,8 @@ public class StringTable
      * Atualiza Dados
      */
     public static final String UPDATE_USER = "UPDATE usuarios SET (login,senha)WHERE login=? AND senha=?";
-//    /**
+  public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
+    //    /**
 //     * Registra a App
 //     */
 //    public static final String REGISTRE_APP = "REPLACE INTO install VALUES (?,?,?,?,?,?,?,?,?)";

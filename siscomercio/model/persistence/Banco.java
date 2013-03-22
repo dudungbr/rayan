@@ -67,7 +67,7 @@ public class Banco
     public void criaNovaBase()
     {
         _log.info("verificando existencia da base de dados..");
-        String url2 = null;
+        //String url2 = null;
         try
         {
 
@@ -75,17 +75,18 @@ public class Banco
             Class.forName(Config.getDatabaseDriver()).newInstance();
 
             //conecta ao servidor mysql sem database selecionada
-            url2 = "jdbc:mysql://" + Config.getHost() + "/";
+           // url2 = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword());
+                    // "jdbc:mysql://" + Config.getHost() + "/";
 
-            conexao = DriverManager.getConnection(url2, Config.getDatabaseLogin(), Config.getDatabasePassword());
+            conexao = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword()); //DriverManager.getConnection(url2, Config.getDatabaseLogin(), Config.getDatabasePassword());
             consulta = conexao.createStatement();
-            consulta.executeUpdate("CREATE DATABASE IF NOT EXISTS sat");
+            consulta.executeUpdate(StringTable.CREATE_DB);
             consulta.close();
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex)
         {
             _log.severe(ex.getMessage());
-            ExceptionManager.ThrowException("Erro ao Criar Nova Base de Dados: ", url2, ex);
+            ExceptionManager.ThrowException("Erro ao Criar Nova Base de Dados: ", ex);
         }
     }
 
