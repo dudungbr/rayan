@@ -76,7 +76,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/8437_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/8437_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reiniciar"/>
               </Properties>
@@ -93,7 +93,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/6980_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/6183_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
@@ -117,7 +117,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/1331_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/1031_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Painel de Administra&#xe7;&#xe3;o"/>
               </Properties>
@@ -140,7 +140,7 @@
             <Menu class="javax.swing.JMenu" name="itemHardware">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/10524_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/10524_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Hardware"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -154,7 +154,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/10517_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/10517_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Mem&#xf3;ria"/>
                   </Properties>
@@ -168,7 +168,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/985_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/985_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Processador"/>
                   </Properties>
@@ -181,7 +181,7 @@
             <Menu class="javax.swing.JMenu" name="itemSoftware">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/9719_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/1720_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Software"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -195,7 +195,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/1023_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/1023_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Banco de Dados"/>
                   </Properties>
@@ -209,7 +209,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/9400_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/9400_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Java"/>
                   </Properties>
@@ -223,7 +223,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/1080_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/169_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Sistema Operacional"/>
                   </Properties>
@@ -236,7 +236,7 @@
             <Menu class="javax.swing.JMenu" name="itemSistema">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/6957_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/8270_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sistema"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -253,7 +253,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/8271_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/8271_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Registro"/>
                   </Properties>
@@ -270,7 +270,7 @@
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/siscomercio/icones/8246_16x16.png"/>
+                      <Image iconType="3" name="/com/siscomercio/model/view/icones/8246_16x16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Vers&#xe3;o"/>
                   </Properties>
@@ -299,7 +299,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/1023_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/10692_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Banco de Dados"/>
               </Properties>
@@ -325,7 +325,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="       Habilitar Som"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/10521_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/10521_16x16.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -338,7 +338,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/7724_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/11254_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="      Trocar Senha"/>
               </Properties>
@@ -362,7 +362,7 @@
                   <Font name="Times New Roman" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/siscomercio/icones/8405_16x16.png"/>
+                  <Image iconType="3" name="/com/siscomercio/model/view/icones/8405_16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contato"/>
               </Properties>
