@@ -336,7 +336,7 @@ public class Auth extends JFrame
                         @Override
                         public void run()
                         {
-                            AppManager.setTema(Auth.class.getSimpleName());
+                           // AppManager.setTema(Auth.class.getSimpleName());
                             new FramePrincipal().setVisible(true);
                             //FIXME: ta travando a app...
                           //  if(Config.ENABLE_SOUND)

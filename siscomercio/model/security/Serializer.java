@@ -43,20 +43,24 @@ public class Serializer
       dados.append(serialHD);
       dados.append(serialMB);
       
-       System.out.println("[DADOS]String Atual:" +dados);
-      System.out.println("[DADOS] Quantidade: " +dados.length());
-     System.out.println("------------------------------------------------");
-      System.out.println("Removido os Caracteres: :  - ");
-         
+      if(Config.isDebug())
+      {
+      _log.log(Level.INFO, "[DADOS]String Atual:{0}", dados);
+      _log.log(Level.INFO, "[DADOS] Quantidade: {0}", dados.length());
+     _log.info("------------------------------------------------");
+     _log.info("Removido os Caracteres: :  - ");
+      }
       /* Expressores Regulares
        \\W vai retirar todo e qualquer caracter que não seja número , letra ou underscope
         usamos duas barras invertidas, pois caso contrário ela será reconhecida apenas como caractere de escape */
       StringBuilder temp = new StringBuilder();
       temp.append(dados.toString().replaceAll("\\W",""));
       
-      System.out.println("[Temps]String Atual:" +temp);
-      System.out.println("[Temps]Quantidade: " +temp.length());
-   
+       if(Config.isDebug())
+      {
+      _log.log(Level.INFO, "[Temps]String Atual:{0}", temp);
+     _log.log(Level.INFO, "[Temps]Quantidade: {0}", temp.length());
+      }
            // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
         //-------------------------------
       System.out.println("[Temps] Reduzindo String P/ 30 Caracteres");
