@@ -31,6 +31,7 @@ import com.siscomercio.controller.managers.SoundManager;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.tables.StringTable;
+import com.siscomercio.utilities.FrameLog;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
 import java.io.File;
@@ -237,6 +238,7 @@ public class FramePrincipal extends JFrame
         itemSistema = new javax.swing.JMenu();
         itemRegistro = new javax.swing.JMenuItem();
         itemVersao = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuDb = new javax.swing.JMenu();
         itemBancoDados = new javax.swing.JMenuItem();
         menuOpcoes = new javax.swing.JMenu();
@@ -543,6 +545,15 @@ public class FramePrincipal extends JFrame
         });
         itemSistema.add(itemVersao);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siscomercio/model/view/icones/8163_16x16.png"))); // NOI18N
+        jMenuItem2.setText("Logs");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        itemSistema.add(jMenuItem2);
+
         menuInformacoes.add(itemSistema);
 
         barraDeMenu.add(menuInformacoes);
@@ -789,6 +800,19 @@ public class FramePrincipal extends JFrame
       AppManager.implementar();
     }//GEN-LAST:event_itemSuporteTecnicoActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                AppManager.setTema(FramePrincipal.class.getSimpleName());
+                new FrameLog().setVisible(true);
+            }
+
+        });
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      *
      * @param args
@@ -843,6 +867,7 @@ public class FramePrincipal extends JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;

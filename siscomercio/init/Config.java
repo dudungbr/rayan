@@ -51,6 +51,7 @@ public class Config {
     private static String databaseUrl;
     private static String databasePort;
     private static String logo;
+    private static String logPath;
     /**
      *
      * Sons
@@ -88,7 +89,6 @@ public class Config {
      *
      */
     public static void loadPreferencies() {
-        _log.info("carregando preferencias");
         _log.info("Carregando Preferencias ...");
         
         ///JOption pane
@@ -241,7 +241,7 @@ public class Config {
                 developer = Boolean.valueOf(arquivo.getProperty("developer", "true"));
 //levels
                 adminLevel = Integer.parseInt(arquivo.getProperty("NivelAdmin", "500"));//2 seconds
-
+logPath = arquivo.getProperty("logPath", "com.siscomercio");
                 gerenteLevel = Integer.parseInt(arquivo.getProperty("NivelGerente", "400"));//2 seconds
                 tecnicoLevel = Integer.parseInt(arquivo.getProperty("NivelTecnico", "300"));//2 seconds
                 operadorLevel = Integer.parseInt(arquivo.getProperty("NivelFuncionario", "200"));//2 seconds
@@ -266,8 +266,7 @@ public class Config {
 
         loadPreferencies();
         loadLocalVersion();
-        //if(debug)
-            
+
 
     }
 
@@ -595,5 +594,9 @@ public class Config {
     public static void setTHREAD_DEFAULT_SLEEP(int aTHREAD_DEFAULT_SLEEP)
     {
         THREAD_DEFAULT_SLEEP = aTHREAD_DEFAULT_SLEEP;
+    }
+
+    public static String getLogPath() {
+        return logPath;
     }
 }

@@ -9,6 +9,7 @@ import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
+import com.siscomercio.controller.managers.LogManager;
 import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.model.view.frames.DBConfig;
@@ -43,13 +44,6 @@ public class Boot extends JFrame
 
     private Boot()
     {
-        //Carrega as Configuracoes
-        fss.getLabelInformacao().setText("Carregando Configurações....");
-        Config.load();
-
-        fss.setVisible(true);
-        fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
-
       
         RuntimeMXBean rt = ManagementFactory.getRuntimeMXBean();
         final int runtimePid = Integer.parseInt(rt.getName().substring(0, rt.getName().indexOf("@")));
@@ -103,6 +97,21 @@ public class Boot extends JFrame
                     switch (i)
                     {
 
+                        case 10:
+                        {
+                              //Carrega as Configuracoes
+        fss.getLabelInformacao().setText("Carregando Configurações....");
+        Config.load();
+
+              if(Config.isEnableLog())
+             // Inicializa o Log Monitor
+        // ---------------
+        LogManager.init();
+            
+        fss.setVisible(true);
+        fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
+        break;
+                        }
                         case 30:
                         {
 
