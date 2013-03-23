@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class Entrada
 {
-
     private int id;
     private int numEnt;
     private String data;

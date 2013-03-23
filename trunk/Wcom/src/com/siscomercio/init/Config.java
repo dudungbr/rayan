@@ -1,6 +1,5 @@
 package com.siscomercio.init;
 
-
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
 import com.siscomercio.controller.managers.AppManager;
@@ -28,8 +27,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author William
  */
-public class Config {
-
+public class Config
+{
     private static final Logger _log = Logger.getLogger(Config.class.getName());
     private static Boolean enableLog;
     private static boolean _loaded;
@@ -60,7 +59,12 @@ public class Config {
      */
     private static boolean enableSound;
 
-    public static void setEnableSound(boolean enableSound) {
+    /**
+     *
+     * @param enableSound
+     */
+    public static void setEnableSound(boolean enableSound)
+    {
         Config.enableSound = enableSound;
     }
     private static String loginSound;
@@ -90,9 +94,10 @@ public class Config {
     /**
      *
      */
-    public static void loadPreferencies() {
+    public static void loadPreferencies()
+    {
         _log.info("Carregando Preferencias ...");
-        
+
         ///JOption pane
         UIManager.put("OptionPane.font", new Font("Tahoma", Font.BOLD, 14));
         UIManager.put("OptionPane.foreground", Color.red);
@@ -100,7 +105,7 @@ public class Config {
         UIManager.put("OptionPane.cancelButtonText", "Cancelar");
         UIManager.put("OptionPane.yesButtonText", "Sim");
         UIManager.put("OptionPane.noButtonText", "Não");
-        
+
         //File Chooser
         UIManager.put("OptionPane.titleText", "Selecione um opção");
         UIManager.put("FileChooser.lookInLabelMnemonic", new Integer('E'));
@@ -131,16 +136,18 @@ public class Config {
         UIManager.put("FileChooser.cancelButtonText", "Cancelar");
         UIManager.put("FileChooser.cancelButtonToolTipText", "Cancela esta Janela");
         UIManager.put("FileChooser.cancelButtonAccessibleName", "Cancelar");
-      //  setTema();
+        //  setTema();
     }
 
     /**
      *
      * @param requesterClass
      */
-    private static void setTema() {
+    private static void setTema()
+    {
         _log.info("setando Tema Visual");
-        try {
+        try
+        {
             //AppManager.setTema(Boot.class.getSimpleName());
             //Define O Tema Visual e o Texto do Pop UP
             Properties props = new Properties();
@@ -149,35 +156,42 @@ public class Config {
             AeroLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
             UIManager.setLookAndFeel(new AcrylLookAndFeel());
-        } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) 
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
         {
             _log.severe(ex.getMessage());
             ExceptionManager.ThrowException("Erro ao Carregar Skin ", ex);
         }
 
-        
+
 
 
     }
 
-    private static void loadLocalVersion() {
+    private static void loadLocalVersion()
+    {
         _log.info("carregando arquivo de versao local");
         File localFile = new File("./update/local.properties");//"C:\\Sat\\update\\local.properties");
 
-        if (localFile.exists()) {
+        if (localFile.exists())
+        {
             _log.info("alterando versao local...");
 
 
-            try {
+            try
+            {
                 InputStream is = new FileInputStream(localFile);
                 PropertiesManager arquivo = new PropertiesManager();
                 arquivo.load(is);
                 systemVersion = Double.parseDouble(arquivo.getProperty("version", "0.0"));
-            } catch (IOException ex) {
+            }
+            catch (IOException ex)
+            {
                 Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        }
+        else
+        {
             Utilitarios.showErrorMessage("o Arquivo" + localFile.getPath() + " Nao Existe!");
 
         }
@@ -187,16 +201,21 @@ public class Config {
     /**
      * Carrega Todas as Propriedades do config.properties
      */
-    public static void load() {
+    public static void load()
+    {
 
         _log.info("Config: Carregando o Arquuivo de Configuração...");
-        try {
+        try
+        {
 
             File arquivoConfig = new File(StringTable.getCONFIG_FILE());
-            if (!arquivoConfig.exists()) {
+            if (!arquivoConfig.exists())
+            {
                 Utilitarios.showErrorMessage("o arquivo de configuracao  " + arquivoConfig.getName() + " nao existe!");
                 System.exit(0);//finaliza o sistema.
-            } else {
+            }
+            else
+            {
 
                 InputStream is = new FileInputStream(arquivoConfig);
                 PropertiesManager arquivo = new PropertiesManager();
@@ -243,7 +262,7 @@ public class Config {
                 developer = Boolean.valueOf(arquivo.getProperty("developer", "true"));
 //levels
                 adminLevel = Integer.parseInt(arquivo.getProperty("NivelAdmin", "500"));//2 seconds
-logPath = arquivo.getProperty("logPath", "com.siscomercio");
+                logPath = arquivo.getProperty("logPath", "com.siscomercio");
                 gerenteLevel = Integer.parseInt(arquivo.getProperty("NivelGerente", "400"));//2 seconds
                 tecnicoLevel = Integer.parseInt(arquivo.getProperty("NivelTecnico", "300"));//2 seconds
                 operadorLevel = Integer.parseInt(arquivo.getProperty("NivelFuncionario", "200"));//2 seconds
@@ -252,7 +271,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
                 /**
                  * Port Checks
                  */
-                if (serverPort <= 0 || serverPort > 65535) {
+                if (serverPort <= 0 || serverPort > 65535)
+                {
                     //   Utilitarios u = new Utilitarios();
                     Utilitarios.showErrorMessage("Erro na Configuracao as Portas do Programa.\n");
                     System.exit(0);
@@ -261,7 +281,9 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
                 _loaded = true;
             }
 
-        } catch (IOException | NumberFormatException e) {
+        }
+        catch (IOException | NumberFormatException e)
+        {
             _log.severe(e.getMessage());
             ExceptionManager.ThrowException("Nao Foi Possivel Carregar o Arquivo:  de configuracao: ", e);
         }
@@ -276,7 +298,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getDatabasePassword() {
+    public static String getDatabasePassword()
+    {
         return databasePassword;
     }
 
@@ -284,7 +307,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getDatabaseLogin() {
+    public static String getDatabaseLogin()
+    {
         return databaseLogin;
     }
 
@@ -292,7 +316,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getDatabaseDriver() {
+    public static String getDatabaseDriver()
+    {
         return databaseDriver;
     }
 
@@ -300,7 +325,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getHost() {
+    public static String getHost()
+    {
         return host;
     }
 
@@ -308,7 +334,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getDatabase() {
+    public static String getDatabase()
+    {
         return database;
     }
 
@@ -316,7 +343,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static boolean isEnableSound() {
+    public static boolean isEnableSound()
+    {
         return enableSound;
     }
 
@@ -324,7 +352,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static int getClientPort() {
+    public static int getClientPort()
+    {
         return clientPort;
     }
 
@@ -332,7 +361,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getServerIp() {
+    public static String getServerIp()
+    {
         return serverIp;
     }
 
@@ -340,7 +370,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static Boolean isEnableLog() {
+    public static Boolean isEnableLog()
+    {
         return enableLog;
     }
 
@@ -348,17 +379,17 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static int getServerPort() {
+    public static int getServerPort()
+    {
         return serverPort;
     }
-
-  
 
     /**
      *
      * @return
      */
-    public static boolean isDebug() {
+    public static boolean isDebug()
+    {
         return debug;
     }
 
@@ -370,7 +401,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static boolean isLoaded() {
+    public static boolean isLoaded()
+    {
         return _loaded;
     }
 
@@ -378,7 +410,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static String getSite() {
+    public static String getSite()
+    {
         return site;
     }
 
@@ -386,7 +419,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static double getSystemVersion() {
+    public static double getSystemVersion()
+    {
         return systemVersion;
     }
 
@@ -394,7 +428,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static int getTestPort() {
+    public static int getTestPort()
+    {
         return testPort;
     }
 
@@ -402,7 +437,8 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static int getTestWait() {
+    public static int getTestWait()
+    {
         return testWait;
     }
 
@@ -410,175 +446,197 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
      *
      * @return
      */
-    public static boolean isDeveloper() {
+    public static boolean isDeveloper()
+    {
         return developer;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static int getAdminLevel() {
+    public static int getAdminLevel()
+    {
         return adminLevel;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static int getGerenteLevel() {
+    public static int getGerenteLevel()
+    {
         return gerenteLevel;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static int getOperadorLevel() {
+    public static int getOperadorLevel()
+    {
         return operadorLevel;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static int getTecnicoLevel() {
+    public static int getTecnicoLevel()
+    {
         return tecnicoLevel;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getEmpresa() {
+    public static String getEmpresa()
+    {
         return empresa;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getDatabasePort() {
+    public static String getDatabasePort()
+    {
         return databasePort;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getDatabaseUrl() {
+    public static String getDatabaseUrl()
+    {
         return databaseUrl;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getExitSound() {
+    public static String getExitSound()
+    {
         return exitSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getPreExitSound() {
+    public static String getPreExitSound()
+    {
         return preExitSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getQuestionSound() {
+    public static String getQuestionSound()
+    {
         return questionSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getWelcomeSound() {
+    public static String getWelcomeSound()
+    {
         return welcomeSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getLogo() {
+    public static String getLogo()
+    {
         return logo;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getLoginSound() {
+    public static String getLoginSound()
+    {
         return loginSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getPreLoginSound() {
+    public static String getPreLoginSound()
+    {
         return preLoginSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getPreRestartSound() {
+    public static String getPreRestartSound()
+    {
         return preRestartSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getRestartSound() {
+    public static String getRestartSound()
+    {
         return restartSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getUnimplementedSound() {
+    public static String getUnimplementedSound()
+    {
         return unimplementedSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getInfoSound() {
+    public static String getInfoSound()
+    {
         return infoSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getUpdateServer() {
+    public static String getUpdateServer()
+    {
         return updateServer;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static String getLogoffSound() {
+    public static String getLogoffSound()
+    {
         return logoffSound;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public static int getTempoOcioso() {
+    public static int getTempoOcioso()
+    {
         return tempoOcioso;
     }
 
@@ -598,7 +656,12 @@ logPath = arquivo.getProperty("logPath", "com.siscomercio");
         THREAD_DEFAULT_SLEEP = aTHREAD_DEFAULT_SLEEP;
     }
 
-    public static String getLogPath() {
+    /**
+     *
+     * @return
+     */
+    public static String getLogPath()
+    {
         return logPath;
     }
 }

@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public abstract class Pessoa
 {
-
     private int id;
     private String nome;
     private String dataNascimento;
@@ -22,7 +21,7 @@ public abstract class Pessoa
     private Endereco endereco;
 
     /**
-     * 
+     *
      * @return
      */
     public Endereco getEndereco()
@@ -31,7 +30,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param endereco
      */
     public void setEndereco(Endereco endereco)
@@ -40,7 +39,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getCpf()
@@ -49,7 +48,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param cpf
      */
     public void setCpf(String cpf)
@@ -58,7 +57,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getRg()
@@ -67,7 +66,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param rg
      */
     public void setRg(String rg)
@@ -76,7 +75,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getCnpj()
@@ -85,7 +84,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param cnpj
      */
     public void setCnpj(String cnpj)
@@ -94,7 +93,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getTipo()
@@ -103,7 +102,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param tipo
      */
     public void setTipo(String tipo)
@@ -112,7 +111,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getDataNascimento()
@@ -121,7 +120,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param dataNascimento
      */
     public void setDataNascimento(String dataNascimento)
@@ -130,7 +129,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getNome()
@@ -139,7 +138,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param nome
      */
     public void setNome(String nome)
@@ -148,7 +147,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getSexo()
@@ -157,7 +156,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getId()
@@ -166,7 +165,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param id
      */
     public void setId(int id)
@@ -175,7 +174,7 @@ public abstract class Pessoa
     }
 
     /**
-     * 
+     *
      * @param sexo
      */
     public void setSexo(String sexo)

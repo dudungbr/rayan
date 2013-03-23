@@ -1,6 +1,5 @@
 package com.siscomercio.controller.managers;
 
-
 import com.siscomercio.init.Config;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import java.util.logging.SimpleFormatter;
  */
 public class LogManager
 {
-
     private static final Logger _log = Logger.getLogger(LogManager.class.getName());
 
     /**
@@ -79,8 +77,8 @@ public class LogManager
             //------------------------------------------------
             boolean append = true;
             FileHandler handler = new FileHandler("./log/meulog.log", append);
-            
-            
+
+
             handler.setFormatter(new SimpleFormatter());
 
             // Adicione ao logger desejado

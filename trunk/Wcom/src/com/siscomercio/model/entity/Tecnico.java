@@ -8,52 +8,55 @@ package com.siscomercio.model.entity;
  *
  * @author user
  */
-public class Tecnico {
-
+public class Tecnico
+{
     private int _id;
     private String _nome;
 
     /**
      *
      * @param id
-     * @param nome  
+     * @param nome
      */
-    public Tecnico(int id, String nome) {
+    public Tecnico(int id, String nome)
+    {
         _id = id;
         _nome = nome;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public int getId() {
+    public int getId()
+    {
         return _id;
     }
 
     /**
-     * 
+     *
      * @param _id
      */
-    public void setId(int _id) {
+    public void setId(int _id)
+    {
         this._id = _id;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public String getNome() {
+    public String getNome()
+    {
         return _nome;
     }
 
     /**
-     * 
+     *
      * @param _nome
      */
-    public void setNome(String _nome) {
+    public void setNome(String _nome)
+    {
         this._nome = _nome;
     }
-    
-    
 }

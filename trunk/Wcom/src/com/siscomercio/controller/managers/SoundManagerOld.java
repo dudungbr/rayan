@@ -12,9 +12,9 @@ import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
- * $Revision$
- * $Author$
- * $Date$
+ * $Revision$ $Author$ $Date: 2013-03-21 19:34:43 -0300 (Thu,
+ * 21 Mar 2013) $
+ *
  * @author Rayan
  */
 public class SoundManagerOld
@@ -23,13 +23,14 @@ public class SoundManagerOld
 
     /**
      * Toca um Som em Formato WAV
+     *
      * @param soundName
      */
     public static void playSound(String soundName)
     {
 
         File file = new File(StringTable.SOUND_PATH + soundName);
-        if(file.exists())
+        if (file.exists())
         {
             try
             {
@@ -37,15 +38,16 @@ public class SoundManagerOld
                 AudioClip sound;
                 sound = Applet.newAudioClip(caminho.toURL());
                 sound.play();
-               // if(Config.DEBUG)_log.log(Level.INFO, "playSound() Tocando Arquivo: {0}\n", file);
+                // if(Config.DEBUG)_log.log(Level.INFO, "playSound() Tocando Arquivo: {0}\n", file);
             }
-            catch(MalformedURLException ex)
+            catch (MalformedURLException ex)
             {
-                SystemUtil.showErrorMsg(ex.getMessage(),false);
+                SystemUtil.showErrorMsg(ex.getMessage(), false);
             }
         }
         else
-            SystemUtil.showErrorMsg("Arquivo de Som: " + soundName + " nao foi encontrado !",false);
+        {
+            SystemUtil.showErrorMsg("Arquivo de Som: " + soundName + " nao foi encontrado !", false);
+        }
     }
-
 }

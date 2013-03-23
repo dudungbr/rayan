@@ -5,16 +5,16 @@ import java.net.Socket;
 
 /**
  * @author Rayan
- * 
- **/
+ *
+ *
+ */
 public class NetworkThread extends Thread
 {
     private Socket socket = null;
 
     /**
-     *$Revision$
-     * $Author$
-     * $Date$
+     * $Revision$ $Author$ $Date: 2010-09-22
+     * 14:43:39 -0300 (Qua, 22 Set 2010) $
      * @param socket
      */
     public NetworkThread(Socket socket)
@@ -23,6 +23,9 @@ public class NetworkThread extends Thread
         this.socket = socket;
     }
 
+    /**
+     *
+     */
     @Override
     public void run()
     {
@@ -33,10 +36,9 @@ public class NetworkThread extends Thread
             //socket.close();
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-             SystemUtil.showErrorMsg(e.getMessage(),true);
+            SystemUtil.showErrorMsg(e.getMessage(), true);
         }
     }
-
 }

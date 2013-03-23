@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class Endereco
 {
-
     private String rua;
     private String cidade;
     private String bairro;
@@ -22,7 +21,7 @@ public class Endereco
     private String complemento;
 
     /**
-     * 
+     *
      * @return
      */
     public String getCelular()
@@ -31,7 +30,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param celular
      */
     public void setCelular(String celular)
@@ -40,7 +39,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getEstado()
@@ -49,7 +48,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param estado
      */
     public void setEstado(String estado)
@@ -58,7 +57,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getFixo()
@@ -67,7 +66,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param fixo
      */
     public void setFixo(String fixo)
@@ -76,7 +75,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getComplemento()
@@ -85,7 +84,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param complemento
      */
     public void setComplemento(String complemento)
@@ -94,7 +93,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getEmail()
@@ -103,7 +102,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param email
      */
     public void setEmail(String email)
@@ -113,7 +112,7 @@ public class Endereco
     private String email;
 
     /**
-     * 
+     *
      * @return
      */
     public String getBairro()
@@ -122,7 +121,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param bairro
      */
     public void setBairro(String bairro)
@@ -131,7 +130,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getCep()
@@ -140,7 +139,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param cep
      */
     public void setCep(String cep)
@@ -149,7 +148,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getCidade()
@@ -158,7 +157,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param cidade
      */
     public void setCidade(String cidade)
@@ -167,7 +166,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getNumero()
@@ -176,7 +175,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param numero
      */
     public void setNumero(String numero)
@@ -185,7 +184,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getRua()
@@ -194,7 +193,7 @@ public class Endereco
     }
 
     /**
-     * 
+     *
      * @param rua
      */
     public void setRua(String rua)

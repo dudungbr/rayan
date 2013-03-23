@@ -1,6 +1,5 @@
 package com.siscomercio.controller.managers;
 
-
 import com.siscomercio.init.Config;
 import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.Utilitarios;
@@ -26,11 +25,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public final class SoundManager
 {
-
- private SoundManager()
- {
-     loadSounds();
- }
+    private SoundManager()
+    {
+        loadSounds();
+    }
     private static final Logger _log = Logger.getLogger(SoundManager.class.getName());
     private static SoundManager instance;
     private static ArrayList<File> fileList;
@@ -42,8 +40,6 @@ public final class SoundManager
     {
         instance = aInstance;
     }
-
-
 
     /**
      * Toca um Som em Formato WAV
@@ -87,19 +83,26 @@ public final class SoundManager
         return false;
     }
 
+    /**
+     *
+     */
     public void loadSounds()
     {
-            if(Config.isDebug())
-        _log.info("Carregando Sons...");
+        if (Config.isDebug())
+        {
+            _log.info("Carregando Sons...");
+        }
         try
         {
             fileList = new ArrayList();
 
             File pasta = new File(StringTable.getSOUND_PATH());// + soundName);
 
-            if(Config.isDebug())
-            _log.log(Level.INFO, "Caminho: {0}", StringTable.getSOUND_PATH());
-            
+            if (Config.isDebug())
+            {
+                _log.log(Level.INFO, "Caminho: {0}", StringTable.getSOUND_PATH());
+            }
+
             if (pasta.exists() && pasta.isDirectory())
             {
                 File[] arquivosPasta = pasta.listFiles();
@@ -108,19 +111,23 @@ public final class SoundManager
                 {
                     if (arquivo.getName().endsWith(".wav"))
                     {
-                            if(Config.isDebug())
-                          _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
+                        if (Config.isDebug())
+                        {
+                            _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
+                        }
                         fileList.add(arquivo);
                     }
                 }
-             if(Config.isDebug())
-                _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
+                if (Config.isDebug())
+                {
+                    _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
+                }
 
             }
             else
             {
-        Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: "+StringTable.getSOUND_PATH());
-            _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.getSOUND_PATH());
+                Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: " + StringTable.getSOUND_PATH());
+                _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.getSOUND_PATH());
             }
 
         }

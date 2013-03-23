@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class Cidade
 {
-
     private int _id;
     private int _estado;
     private String _uf;

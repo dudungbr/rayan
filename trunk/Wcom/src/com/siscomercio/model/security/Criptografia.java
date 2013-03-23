@@ -10,6 +10,7 @@ import com.siscomercio.init.Config;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author William Menezes
  *
  */
@@ -19,7 +20,9 @@ public class Criptografia
 
     /**
      * Criptografa a Senha do Usuario P/ Versao MD5 de Criptografia
+     * <p/>
      * @param password
+     * <p/>
      * @return password
      */
     public static String criptografe(String password)
@@ -33,26 +36,30 @@ public class Criptografia
             byte messageDigest[] = algorithm.digest();
 
             StringBuffer hexString = new StringBuffer();
-            for(int i = 0;i < messageDigest.length;i++)
+            for (int i = 0; i < messageDigest.length; i++)
             {
                 hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
             }
-            if(Config.isDebug())
-                _log.log(Level.INFO, "Criptografando Senha:  {0} P / Versao  MD5 : {1}\n", new Object[]{password, hexString.toString()});
+            if (Config.isDebug())
+            {
+                _log.log(Level.INFO, "Criptografando Senha:  {0} P / Versao  MD5 : {1}\n", new Object[]
+                {
+                    password, hexString.toString()
+                });
+            }
             password = hexString + "";
         }
-        catch(NoSuchAlgorithmException nsae)
+        catch (NoSuchAlgorithmException nsae)
         {
             try
             {
                 throw nsae;
             }
-            catch(NoSuchAlgorithmException ex)
+            catch (NoSuchAlgorithmException ex)
             {
                 Logger.getLogger(Criptografia.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return password;
     }
-
 }

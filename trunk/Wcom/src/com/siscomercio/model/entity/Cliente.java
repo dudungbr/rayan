@@ -10,13 +10,11 @@ package com.siscomercio.model.entity;
  */
 public class Cliente extends Pessoa
 {
-
     /**
-     * 
+     *
      */
     public Cliente()
     {
         super();
     }
-    
 }

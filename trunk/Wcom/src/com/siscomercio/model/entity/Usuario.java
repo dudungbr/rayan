@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class Usuario extends Pessoa
 {
-
     private int nivelAcesso;
     private int tempoOcioso;
     private String login = "N/A";
@@ -18,7 +17,7 @@ public class Usuario extends Pessoa
     private String novaSenha;
 
     /**
-     * 
+     *
      * @return
      */
     public String getSenhaAtual()
@@ -27,7 +26,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @param senha
      */
     public void setSenhaAtual(String senha)
@@ -36,7 +35,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getLogin()
@@ -45,7 +44,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @param login
      */
     public void setLogin(String login)
@@ -54,7 +53,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getSenhaNova()
@@ -63,7 +62,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @param senhaNova
      */
     public void setSenhaNova(String senhaNova)
@@ -72,7 +71,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getNivelAcesso()
@@ -81,7 +80,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @param nivelAcesso
      */
     public void setNivelAcesso(int nivelAcesso)
@@ -90,7 +89,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getTempoOcioso()
@@ -99,7 +98,7 @@ public class Usuario extends Pessoa
     }
 
     /**
-     * 
+     *
      * @param tempoOcioso
      */
     public void setTempoOcioso(int tempoOcioso)

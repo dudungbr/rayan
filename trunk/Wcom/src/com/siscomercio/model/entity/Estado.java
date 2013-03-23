@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class Estado
 {
-
     private int _id;
     private String _uf;
     private String _nome;

@@ -5,10 +5,20 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class MacAddress {
-
-    public static void main(String[] args) {
-        try {
+/**
+ *
+ * @author William
+ */
+public class MacAddress
+{
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+        try
+        {
 
             InetAddress address = InetAddress.getLocalHost();
 
@@ -18,28 +28,37 @@ public class MacAddress {
              */
             NetworkInterface ni =
                     NetworkInterface.getByInetAddress(address);
-            if (ni != null) {
+            if (ni != null)
+            {
                 byte[] mac = ni.getHardwareAddress();
-                if (mac != null) {
+                if (mac != null)
+                {
                     /*
-                     * Extract each array of mac address and convert it 
-                     * to hexa with the following format 
+                     * Extract each array of mac address and convert it
+                     * to hexa with the following format
                      * 08-00-27-DC-4A-9E.
                      */
-                    for (int i = 0; i < mac.length; i++) {
+                    for (int i = 0; i < mac.length; i++)
+                    {
 
                         System.out.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : "").toString();
 
                     }
-                } else {
+                }
+                else
+                {
                     System.out.println("Address doesn't exist or is not "
                             + "accessible.");
                 }
-            } else {
+            }
+            else
+            {
                 System.out.println("Network Interface for the specified "
                         + "address is not found.");
             }
-        } catch (UnknownHostException | SocketException e) {
+        }
+        catch (UnknownHostException | SocketException e)
+        {
         }
 
 

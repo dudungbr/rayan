@@ -13,7 +13,7 @@ public class Funcionario extends Usuario
     private String cargo;
 
     /**
-     * 
+     *
      * @return
      */
     public String getCargo()
@@ -22,12 +22,11 @@ public class Funcionario extends Usuario
     }
 
     /**
-     * 
+     *
      * @param cargo
      */
     public void setCargo(String cargo)
     {
         this.cargo = cargo;
     }
-    
 }

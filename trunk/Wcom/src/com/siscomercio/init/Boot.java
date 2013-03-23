@@ -4,7 +4,6 @@
  */
 package com.siscomercio.init;
 
-
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
@@ -31,28 +30,28 @@ import sun.jvmstat.monitor.MonitoredVm;
 import sun.jvmstat.monitor.MonitoredVmUtil;
 import sun.jvmstat.monitor.VmIdentifier;
 
-
 /**
+ * $Revision: 679 $ $Date: 2013-03-21 19:34:43 -0300 (Thu, 21 Mar 2013) $
+ * $Author: rayanrpg $ $HeadURL:
+ * https://rayan.googlecode.com/svn/trunk/Wcom/src/com/siscomercio/init/Boot.java
+ * $
  *
- * @author William
+ * @author Rayan
  */
 public class Boot extends JFrame
 {
-
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
     private static final long serialVersionUID = 1L;
     private FrameSplashScreen fss = new FrameSplashScreen();
 
     private Boot()
     {
-      
         RuntimeMXBean rt = ManagementFactory.getRuntimeMXBean();
         final int runtimePid = Integer.parseInt(rt.getName().substring(0, rt.getName().indexOf("@")));
 
         _log.info("Verificando a Existencia de Outra Instancia da Aplicacao...");
         EventQueue.invokeLater(new Runnable()
         {
-
             @Override
             public void run()
             {
@@ -71,8 +70,6 @@ public class Boot extends JFrame
                 }
             }
         });
-
-
     }
 
     /**
@@ -80,10 +77,12 @@ public class Boot extends JFrame
      */
     private void inicializaApp()
     {
-        _log.info("Iniciando aplicativo...");
+        if (Config.isDebug())
+        {
+            _log.info("Iniciando aplicativo...");
+        }
         new Thread()
         {
-
             @Override
             public void run()
             {
@@ -92,27 +91,26 @@ public class Boot extends JFrame
                 int i = 0;
                 while (i < 101)
                 {
-
                     getFss().getBarraProgresso().setValue(i);
 
                     switch (i)
                     {
-
                         case 10:
                         {
-                              //Carrega as Configuracoes
-        fss.getLabelInformacao().setText("Carregando Configurações....");
-       
-        Config.load();
-  SoundManager.getInstance().loadSounds();
-              if(Config.isEnableLog())
-             // Inicializa o Log Monitor
-        // ---------------
-        LogManager.init();
-            
-        fss.setVisible(true);
-        fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
-        break;
+                            //Carrega as Configuracoes
+                            fss.getLabelInformacao().setText("Carregando Configurações....");
+
+                            Config.load();
+                            SoundManager.getInstance().loadSounds();
+                            if (Config.isEnableLog())
+                            // Inicializa o Log Monitor
+                            // ---------------
+                            {
+                                LogManager.init();
+                            }
+                            fss.setVisible(true);
+                            fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
+                            break;
                         }
                         case 20:
                         {
@@ -133,26 +131,29 @@ public class Boot extends JFrame
                             {
                                 Utilitarios.showPlainMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
                             }
-
-
                             break;
                         }
                         /*case 40:
-                        {
-                              getFss().getLabelInformacao().setText("Carregando Sons ....");
-                           
-                            break;
-                        }*/
+                         {
+                         getFss().getLabelInformacao().setText("Carregando Sons ....");
+
+                         break;
+                         }*/
                         case 60:
                         {
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
+
+                            // Lê a Tabela de Instalacao da DB
+                            //--------------------------------
+                            _log.info("Lendo Tabela de Instalacao do Banco ...");
+                            DatabaseManager.tryReadInstallData();
                             try
                             {
-                                
+
                                 Banco bd = Banco.getInstance();
                                 if (!Config.isDeveloper())
                                 {
-                                    bd.atualizaDatabase(); //atualiza a base de dados 
+                                    bd.atualizaDatabase(); //atualiza a base de dados
                                 }
                                 else
                                 {
@@ -169,116 +170,108 @@ public class Boot extends JFrame
                         case 90:
                         {
                             getFss().getLabelInformacao().setText("Carregando Verificando Licença...");
-                               // Lê a Tabela de Instalacao da DB
-        //--------------------------------
-          _log.info("Lendo Tabela de Instalacao do Banco ...");
-        DatabaseManager.tryReadInstallData();
-        
-         // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
-        // ------------------------
-        if(DatabaseManager._installed == 0)
-        {
-              _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
-            EventQueue.invokeLater(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    AppManager.setTema(DBConfig.class.getSimpleName());
-                      _log.info("Abrindo Instalador da Database...");
-                    DBConfig.getInstance().setVisible(true);
-                }
+                            // Lê a Tabela de Instalacao da DB
+                            //--------------------------------
+                            _log.info("Lendo Tabela de Instalacao do Banco ...");
+                            DatabaseManager.tryReadInstallData();
 
-            });
-        } // Caso a DB Esteja Instalada Prosegue Para a Licenca
-        // ------------------------------------------------
-        else
-        {
-              _log.info("Verificando Licenca...");
-            //Le os Dados da Licenca
-            // --------------------------
-            DatabaseManager.readLicenseData();
-
-            // OK! Podemos Abrir o Sistema.
-            // ------------------------
-            if(DatabaseManager._licensed == 1)
-            {
-                // Chama a Tela de Login
-                // ------------------------
-                if(Config.isDebug())
-                {
-                    EventQueue.invokeLater(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            _log.finest("Fim do Boot.");
-                            //AppManager.setTema(Boot.class.getSimpleName());
-                            EventQueue.invokeLater(new Runnable()
+                            // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
+                            // ------------------------
+                            if (DatabaseManager._installed == 0)
                             {
-
-                                @Override
-                                public void run()
+                                _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
+                                EventQueue.invokeLater(new Runnable()
                                 {
-                                    getFss().getLabelInformacao().setText("Abrindo Aplicativo Principal....");
+                                    @Override
+                                    public void run()
+                                    {
+                                        AppManager.setTema(DBConfig.class.getSimpleName());
+                                        _log.info("Abrindo Instalador da Database...");
+                                        DBConfig.getInstance().setVisible(true);
+                                    }
+                                });
+                            } // Caso a DB Esteja Instalada Prosegue Para a Licenca
+                            // ------------------------------------------------
+                            else
+                            {
+                                _log.info("Verificando Licenca...");
+                                //Le os Dados da Licenca
+                                // --------------------------
+                                DatabaseManager.readLicenseData();
 
-                                    //Chama o frame de Logon
+                                // OK! Podemos Abrir o Sistema.
+                                // ------------------------
+                                if (DatabaseManager._licensed == 1)
+                                {
+                                    // Chama a Tela de Login
+                                    // ------------------------
+                                    if (Config.isDebug())
+                                    {
+                                        EventQueue.invokeLater(new Runnable()
+                                        {
+                                            @Override
+                                            public void run()
+                                            {
+                                                _log.finest("Fim do Boot.");
+                                                //AppManager.setTema(Boot.class.getSimpleName());
+                                                EventQueue.invokeLater(new Runnable()
+                                                {
+                                                    @Override
+                                                    public void run()
+                                                    {
+                                                        getFss().getLabelInformacao().setText("Abrindo Aplicativo Principal....");
+
+                                                        //Chama o frame de Logon
+                                                        EventQueue.invokeLater(new Runnable()
+                                                        {
+                                                            @Override
+                                                            public void run()
+                                                            {
+                                                                //fecha a Splash Screen
+                                                                getFss().dispose();
+                                                                Auth.getInstance().setVisible(true);
+                                                                //     FrameLogin.getInstance().setVisible(true);
+                                                            }
+                                                        });
+
+                                                    }
+                                                });
+
+                                                //fecha a tela de splash
+                                                dispose();
+                                            }
+                                        });
+                                    }
+                                    else
+                                    {
+                                        EventQueue.invokeLater(new Runnable()
+                                        {
+                                            @Override
+                                            public void run()
+                                            {
+                                                new FramePrincipal().setVisible(true);
+                                            }
+                                        });
+                                    }
+                                } //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
+                                // -----------------------------------------------------------
+                                else
+                                {
                                     EventQueue.invokeLater(new Runnable()
                                     {
-
                                         @Override
                                         public void run()
                                         {
-                                            //fecha a Splash Screen
-                                            getFss().dispose();
-                                              Auth.getInstance().setVisible(true);
-                                       //     FrameLogin.getInstance().setVisible(true);
+
+                                            new FrameLicenca().setVisible(true);
                                         }
                                     });
-
                                 }
-                            });
+                            }
+                            ///   TabelaCidade.getInstance();
+                            //  TabelaEstado.getInstance();
 
-                            //fecha a tela de splash
-                            dispose();
-                          
-                        }
-
-                    });
-                }
-                else
-                {
-                    EventQueue.invokeLater(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            new FramePrincipal().setVisible(true);
-                        }
-
-                    });
-                }
-            }
-            //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
-            // -----------------------------------------------------------
-            else
-            {
-                EventQueue.invokeLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        
-                        new FrameLicenca().setVisible(true);
-                    }
-
-                });
-            }
-        }     
-                         ///   TabelaCidade.getInstance();
-                          //  TabelaEstado.getInstance();
-                         
-                          //  IdleManager.getInstance().checaTempoOcioso();
+                            //  IdleManager.getInstance().checaTempoOcioso();
                             //SoundManager.getInstance();
                             //new FileMonitor(2000);
                             break;
@@ -289,8 +282,6 @@ public class Boot extends JFrame
 
             }
         }.start();
-
-
     }
 
     /**
@@ -371,7 +362,7 @@ public class Boot extends JFrame
      */
     public static void main(String[] args)
     {
-      Boot boot = new Boot();
+        Boot boot = new Boot();
     }
 
     /**

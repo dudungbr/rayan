@@ -8,35 +8,38 @@ package com.siscomercio.model.entity;
  *
  * @author William
  */
-public final class Marca {
-
+public final class Marca
+{
     private int _id;
     private String _marca;
     private String _tipo;
 
     /**
-     * 
+     *
      * @return
      */
-    public String getMarca() {
+    public String getMarca()
+    {
         return _marca;
     }
 
     /**
-     * 
+     *
      * @param _tipo
      */
-    public void setTipo(String _tipo) {
+    public void setTipo(String _tipo)
+    {
         this._tipo = _tipo;
     }
 
     /**
-     * 
+     *
      * @param id
      * @param marca
-     * @param tipo 
+     * @param tipo
      */
-    public Marca(int id, String marca, String tipo) {
+    public Marca(int id, String marca, String tipo)
+    {
         _id = id;
         _marca = marca;
 
@@ -44,34 +47,38 @@ public final class Marca {
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public int getId() {
+    public int getId()
+    {
         return _id;
     }
 
     /**
-     * 
+     *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this._id = id;
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public String getTipo() {
+    public String getTipo()
+    {
         return _tipo;
     }
 
     /**
-     * 
+     *
      * @param marca
      */
-    public void setMarca(String marca) {
+    public void setMarca(String marca)
+    {
         this._marca = marca;
     }
 }

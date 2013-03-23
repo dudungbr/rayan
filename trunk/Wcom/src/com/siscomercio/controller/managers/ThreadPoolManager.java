@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,6 +28,7 @@ import java.util.logging.Logger;
  * <p>This class is made to handle all the ThreadPools.</p>
  *
  * everything else that needs to be scheduled.<br>
+ *
  * @author -Wooden-
  *
  */
@@ -42,12 +43,15 @@ public class ThreadPoolManager
     private ThreadPoolExecutor _generalPacketsThreadPool;
     private ThreadPoolExecutor _ioPacketsThreadPool;
     private ThreadPoolExecutor _generalThreadPool;
-    /** temp workaround for VM issue */
+    /**
+     * temp workaround for VM issue
+     */
     private static final long MAX_DELAY = Long.MAX_VALUE / 1000000 / 2;
     private boolean _shutdown;
 
     /**
      * apenas uma instancia dessa classe
+     *
      * @return SingletonHolder._instance
      */
     public static ThreadPoolManager getInstance()
@@ -66,11 +70,14 @@ public class ThreadPoolManager
      */
     public static long validateDelay(long delay)
     {
-        if(delay < 0)
+        if (delay < 0)
+        {
             delay = 0;
-        else
-            if(delay > MAX_DELAY)
-                delay = MAX_DELAY;
+        }
+        else if (delay > MAX_DELAY)
+        {
+            delay = MAX_DELAY;
+        }
         return delay;
     }
 
@@ -78,7 +85,7 @@ public class ThreadPoolManager
      *
      * @param r
      * @param delay
-     * @return  _generalScheduledThreadPool
+     * @return _generalScheduledThreadPool
      */
     public ScheduledFuture<?> scheduleGeneral(Runnable r, long delay)
     {
@@ -87,7 +94,7 @@ public class ThreadPoolManager
             delay = ThreadPoolManager.validateDelay(delay);
             return _generalScheduledThreadPool.schedule(r, delay, TimeUnit.MILLISECONDS);
         }
-        catch(RejectedExecutionException e)
+        catch (RejectedExecutionException e)
         {
             return null; /* shutdown, ignore */
         }
@@ -108,7 +115,7 @@ public class ThreadPoolManager
             initial = ThreadPoolManager.validateDelay(initial);
             return _generalScheduledThreadPool.scheduleAtFixedRate(r, initial, delay, TimeUnit.MILLISECONDS);
         }
-        catch(RejectedExecutionException e)
+        catch (RejectedExecutionException e)
         {
             return null; /* shutdown, ignore */
         }
@@ -135,61 +142,61 @@ public class ThreadPoolManager
 
     /**
      * retorna com relatorio dessa Classe
+     *
      * @return uma String com o Relatrio
      */
     public String[] getStats()
     {
         return new String[]
-                {
-                    "STP:",
-                    " + Effects:",
-                    " | -------",
-                    " + General:",
-                    " |- ActiveThreads:   " + _generalScheduledThreadPool.getActiveCount(),
-                    " |- getCorePoolSize: " + _generalScheduledThreadPool.getCorePoolSize(),
-                    " |- PoolSize:        " + _generalScheduledThreadPool.getPoolSize(),
-                    " |- MaximumPoolSize: " + _generalScheduledThreadPool.getMaximumPoolSize(),
-                    " |- CompletedTasks:  " + _generalScheduledThreadPool.getCompletedTaskCount(),
-                    " |- ScheduledTasks:  " + (_generalScheduledThreadPool.getTaskCount() - _generalScheduledThreadPool.getCompletedTaskCount()),
-                    " | -------",
-                    " + AI:",
-                    " |- ActiveThreads:   " + _aiScheduledThreadPool.getActiveCount(),
-                    " |- getCorePoolSize: " + _aiScheduledThreadPool.getCorePoolSize(),
-                    " |- PoolSize:        " + _aiScheduledThreadPool.getPoolSize(),
-                    " |- MaximumPoolSize: " + _aiScheduledThreadPool.getMaximumPoolSize(),
-                    " |- CompletedTasks:  " + _aiScheduledThreadPool.getCompletedTaskCount(),
-                    " |- ScheduledTasks:  " + (_aiScheduledThreadPool.getTaskCount() - _aiScheduledThreadPool.getCompletedTaskCount()),
-                    "TP:",
-                    " + Packets:",
-                    " |- ActiveThreads:   " + _generalPacketsThreadPool.getActiveCount(),
-                    " |- getCorePoolSize: " + _generalPacketsThreadPool.getCorePoolSize(),
-                    " |- MaximumPoolSize: " + _generalPacketsThreadPool.getMaximumPoolSize(),
-                    " |- LargestPoolSize: " + _generalPacketsThreadPool.getLargestPoolSize(),
-                    " |- PoolSize:        " + _generalPacketsThreadPool.getPoolSize(),
-                    " |- CompletedTasks:  " + _generalPacketsThreadPool.getCompletedTaskCount(),
-                    " |- QueuedTasks:     " + _generalPacketsThreadPool.getQueue().size(),
-                    " | -------",
-                    " + I/O Packets:",
-                    " |- ActiveThreads:   " + _ioPacketsThreadPool.getActiveCount(),
-                    " |- getCorePoolSize: " + _ioPacketsThreadPool.getCorePoolSize(),
-                    " |- MaximumPoolSize: " + _ioPacketsThreadPool.getMaximumPoolSize(),
-                    " |- LargestPoolSize: " + _ioPacketsThreadPool.getLargestPoolSize(),
-                    " |- PoolSize:        " + _ioPacketsThreadPool.getPoolSize(),
-                    " |- CompletedTasks:  " + _ioPacketsThreadPool.getCompletedTaskCount(),
-                    " |- QueuedTasks:     " + _ioPacketsThreadPool.getQueue().size(),
-                    " | -------",
-                    " + General Tasks:",
-                    " |- ActiveThreads:   " + _generalThreadPool.getActiveCount(),
-                    " |- getCorePoolSize: " + _generalThreadPool.getCorePoolSize(),
-                    " |- MaximumPoolSize: " + _generalThreadPool.getMaximumPoolSize(),
-                    " |- LargestPoolSize: " + _generalThreadPool.getLargestPoolSize(),
-                    " |- PoolSize:        " + _generalThreadPool.getPoolSize(),
-                    " |- CompletedTasks:  " + _generalThreadPool.getCompletedTaskCount(),
-                    " |- QueuedTasks:     " + _generalThreadPool.getQueue().size(),
-                    " | -------"
-                };
+        {
+            "STP:",
+            " + Effects:",
+            " | -------",
+            " + General:",
+            " |- ActiveThreads:   " + _generalScheduledThreadPool.getActiveCount(),
+            " |- getCorePoolSize: " + _generalScheduledThreadPool.getCorePoolSize(),
+            " |- PoolSize:        " + _generalScheduledThreadPool.getPoolSize(),
+            " |- MaximumPoolSize: " + _generalScheduledThreadPool.getMaximumPoolSize(),
+            " |- CompletedTasks:  " + _generalScheduledThreadPool.getCompletedTaskCount(),
+            " |- ScheduledTasks:  " + (_generalScheduledThreadPool.getTaskCount() - _generalScheduledThreadPool.getCompletedTaskCount()),
+            " | -------",
+            " + AI:",
+            " |- ActiveThreads:   " + _aiScheduledThreadPool.getActiveCount(),
+            " |- getCorePoolSize: " + _aiScheduledThreadPool.getCorePoolSize(),
+            " |- PoolSize:        " + _aiScheduledThreadPool.getPoolSize(),
+            " |- MaximumPoolSize: " + _aiScheduledThreadPool.getMaximumPoolSize(),
+            " |- CompletedTasks:  " + _aiScheduledThreadPool.getCompletedTaskCount(),
+            " |- ScheduledTasks:  " + (_aiScheduledThreadPool.getTaskCount() - _aiScheduledThreadPool.getCompletedTaskCount()),
+            "TP:",
+            " + Packets:",
+            " |- ActiveThreads:   " + _generalPacketsThreadPool.getActiveCount(),
+            " |- getCorePoolSize: " + _generalPacketsThreadPool.getCorePoolSize(),
+            " |- MaximumPoolSize: " + _generalPacketsThreadPool.getMaximumPoolSize(),
+            " |- LargestPoolSize: " + _generalPacketsThreadPool.getLargestPoolSize(),
+            " |- PoolSize:        " + _generalPacketsThreadPool.getPoolSize(),
+            " |- CompletedTasks:  " + _generalPacketsThreadPool.getCompletedTaskCount(),
+            " |- QueuedTasks:     " + _generalPacketsThreadPool.getQueue().size(),
+            " | -------",
+            " + I/O Packets:",
+            " |- ActiveThreads:   " + _ioPacketsThreadPool.getActiveCount(),
+            " |- getCorePoolSize: " + _ioPacketsThreadPool.getCorePoolSize(),
+            " |- MaximumPoolSize: " + _ioPacketsThreadPool.getMaximumPoolSize(),
+            " |- LargestPoolSize: " + _ioPacketsThreadPool.getLargestPoolSize(),
+            " |- PoolSize:        " + _ioPacketsThreadPool.getPoolSize(),
+            " |- CompletedTasks:  " + _ioPacketsThreadPool.getCompletedTaskCount(),
+            " |- QueuedTasks:     " + _ioPacketsThreadPool.getQueue().size(),
+            " | -------",
+            " + General Tasks:",
+            " |- ActiveThreads:   " + _generalThreadPool.getActiveCount(),
+            " |- getCorePoolSize: " + _generalThreadPool.getCorePoolSize(),
+            " |- MaximumPoolSize: " + _generalThreadPool.getMaximumPoolSize(),
+            " |- LargestPoolSize: " + _generalThreadPool.getLargestPoolSize(),
+            " |- PoolSize:        " + _generalThreadPool.getPoolSize(),
+            " |- CompletedTasks:  " + _generalThreadPool.getCompletedTaskCount(),
+            " |- QueuedTasks:     " + _generalThreadPool.getQueue().size(),
+            " | -------"
+        };
     }
-
     private class PriorityThreadFactory implements ThreadFactory
     {
         private int _prio;
@@ -220,7 +227,6 @@ public class ThreadPoolManager
         {
             return _group;
         }
-
     }
 
     /**
@@ -244,9 +250,9 @@ public class ThreadPoolManager
             _log.info("All ThreadPools are now stopped");
 
         }
-        catch(InterruptedException e)
+        catch (InterruptedException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage(),true);
+            SystemUtil.showErrorMsg(e.getMessage(), true);
         }
     }
 
@@ -270,11 +276,9 @@ public class ThreadPoolManager
         _generalPacketsThreadPool.purge();
         _generalThreadPool.purge();
     }
-
-    @SuppressWarnings("synthetic-access")
+    @SuppressWarnings ("synthetic-access")
     private static class SingletonHolder
     {
         protected static final ThreadPoolManager _instance = new ThreadPoolManager();
     }
-
 }
