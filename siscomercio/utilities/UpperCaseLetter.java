@@ -17,6 +17,7 @@ public class UpperCaseLetter extends PlainDocument
      * @param offs
      * @param str
      * @param a
+     * <p/>
      * @throws BadLocationException
      */
     @Override

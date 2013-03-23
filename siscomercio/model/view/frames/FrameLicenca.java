@@ -34,15 +34,18 @@ import javax.swing.JFrame;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  */
-@SuppressWarnings("serial")
+@SuppressWarnings ("serial")
 public class FrameLicenca extends JFrame
 {
     int numEstacoes = 0;
     private static final Logger _log = Logger.getLogger(FrameLicenca.class.getName());
 
-    /** Creates new form FrameLicenca */
+    /**
+     * Creates new form FrameLicenca
+     */
     public FrameLicenca()
     {
         initComponents();
@@ -60,14 +63,18 @@ public class FrameLicenca extends JFrame
         //Retorna o Tipo de Licenca Selecionado
         // ------------------------------------
         String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             System.out.println("tipo de licenca:" + tipoLicenca);
+        }
 
         //Pega o Valor dao Campo Serial
         // ------------------------------------
         String valorCampoSerial = campoSerial.getText();
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
+        }
 
 
         // Remove os "-" da String
@@ -75,44 +82,51 @@ public class FrameLicenca extends JFrame
         StringBuilder dados = new StringBuilder(dadosCodAtivacao.getText());
         String remover = "-";
 
-        for(int i = 0;i < (dados.length() - remover.length() + 1);i++)
+        for (int i = 0; i < (dados.length() - remover.length() + 1); i++)
         {
             String res = dados.substring(i, (i + remover.length()));
-            if(res.equals(remover))
+            if (res.equals(remover))
             {
-                if(Config.isDebug())
+                if (Config.isDebug())
+                {
                     System.out.println("removendo - do serial");
+                }
                 int pos = dados.indexOf(remover);
                 dados.delete(pos, pos + remover.length());
             }
         }
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             System.out.println("valor variavel dados: " + dados.toString());
+        }
         //--------------------------------------------
 
         // Encripta a Variavel Dados
         //----------------------------------------
         String validSerial = encryptSerial(dados.toString());
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             System.out.println("serial valido: " + validSerial);
+        }
 
-        if(valorCampoSerial.equalsIgnoreCase(validSerial))
+        if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             DatabaseManager._licensed = 1;
             dispose();
             registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
-            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ",true);
+            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ", true);
             AppManager.getInstance().restartApp();
         }
         else
         {
-            SystemUtil.showErrorMsg("Numero de Série Inválido.",true);
+            SystemUtil.showErrorMsg("Numero de Série Inválido.", true);
         }
     }
 
     /**
      *
      * @param st
+     * <p/>
      * @return
      */
     public static String encryptSerial(String st)
@@ -126,9 +140,9 @@ public class FrameLicenca extends JFrame
 
             // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
             //-------------------------------
-            for(int i = 0;i < serial.length();i++)
+            for (int i = 0; i < serial.length(); i++)
             {
-                if(serial.length() > 30)
+                if (serial.length() > 30)
                 {
                     serial.deleteCharAt(serial.length() - 1); // deleta os ultimos caracteres.
                 }
@@ -136,16 +150,17 @@ public class FrameLicenca extends JFrame
             return serial.toString();
 
         }
-        catch(NoSuchAlgorithmException ns)
+        catch (NoSuchAlgorithmException ns)
         {
             return st;
         }
     }
 
     /**
-     * 
+     *
      * @param licenceType
      * @param str
+     * <p/>
      * @return
      */
     public static String createEncriptedString(String licenceType, String str)
@@ -161,46 +176,47 @@ public class FrameLicenca extends JFrame
         //Captura o Nome da Empresa
         // ---------------------
         String nomeEmpresa = campoEmpresa.getText();
-        if(nomeEmpresa.isEmpty())
+        if (nomeEmpresa.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nome da Empresa Inválido.",true);
+            SystemUtil.showErrorMsg("Nome da Empresa Inválido.", true);
             return;
 
         }
         //Captura o Texto do Label
         // ---------------------
         String codAtivacao = dadosCodAtivacao.getText();
-        if(codAtivacao.isEmpty())
+        if (codAtivacao.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.",true);
+            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.", true);
             resetCampos();
             return;
         }
         numEstacoes = Integer.parseInt(String.valueOf(spinnerContadorEstacoes.getModel().getValue()));
 
-        if(numEstacoes <= 0)
+        if (numEstacoes <= 0)
         {
-            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.",true);
+            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.", true);
             resetCampos();
             return;
         }
         //Captura o Texto do cmpoSerial
         // ---------------------
         String serial = campoSerial.getText();
-        if(serial.isEmpty())
+        if (serial.isEmpty())
         {
-            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.",true);
+            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.", true);
             resetCampos();
         }
     }
 
-    /** This method is called from within the constructor to
+    /**
+     * This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
      */
-    @SuppressWarnings(
-    {
+    @SuppressWarnings (
+            {
         "unused"
     })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -382,9 +398,9 @@ public class FrameLicenca extends JFrame
             con.close();
             _log.info("gravando dados do registro no Banco de Dados.");
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage(),true);
+            SystemUtil.showErrorMsg(e.getMessage(), true);
 
         }
     }
@@ -402,10 +418,12 @@ public class FrameLicenca extends JFrame
 
         //gera o codigo de ativacao.
         Serializer serial = Serializer.getInstance();
-        
-        if(!serial.isGenerated())
-           serial.generateActivationCode();
-        
+
+        if (!serial.isGenerated())
+        {
+            serial.generateActivationCode();
+        }
+
         //imprime no frame o codigo gerado pelos seriais
         dadosCodAtivacao.setText(serial.getGeneratedCode());
     }
@@ -422,13 +440,11 @@ public class FrameLicenca extends JFrame
             public void run()
             {
 
-               AppManager.setTema(FrameLicenca.class.getSimpleName());
+                AppManager.setTema(FrameLicenca.class.getSimpleName());
                 new FrameLicenca().setVisible(true);
             }
-
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoRegistrar;
     private javax.swing.JTextField campoEmpresa;

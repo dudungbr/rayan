@@ -5,7 +5,7 @@
 package com.siscomercio.tables;
 
 /**
- *$Revision$
+ * $Revision$
  * $Author$
  * $Date$
  * @author Rayan
@@ -20,13 +20,14 @@ public class ErrorTable
     /**
      *
      * @param errorCode
+     * <p/>
      * @return
      * 1 - MySQL Process Not Found.
      */
     public static String throwError(int errorCode)
     {
         String msg;
-        switch(errorCode)
+        switch (errorCode)
         {
             case 1: // mysql process error
             {
@@ -38,5 +39,4 @@ public class ErrorTable
         }
         return msg;
     }
-
 }

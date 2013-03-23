@@ -12,6 +12,7 @@ import com.siscomercio.init.Config;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  */
 public class Client
@@ -19,6 +20,7 @@ public class Client
     /**
      *
      * @param args
+     * <p/>
      * @throws IOException
      */
     public static void main(String[] args) throws IOException
@@ -35,13 +37,13 @@ public class Client
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
             System.err.println("conectado");
         }
-        catch(UnknownHostException e)
+        catch (UnknownHostException e)
         {
             System.err.println(e);
             System.err.println("Don't know about host");
             System.exit(1);
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             System.err.println(e);
             System.err.println("Couldn't get I/O for the connection to: taranis.");
@@ -52,16 +54,16 @@ public class Client
         String fromServer;
         String fromUser;
 
-        while((fromServer = in.readLine()) != null)
+        while ((fromServer = in.readLine()) != null)
         {
             System.out.println("Server: " + fromServer);
-            if(fromServer.equals("Bye."))
+            if (fromServer.equals("Bye."))
             {
                 break;
             }
 
             fromUser = stdIn.readLine();
-            if(fromUser != null)
+            if (fromUser != null)
             {
                 System.out.println("Client: " + fromUser);
                 out.println(fromUser);
@@ -73,5 +75,4 @@ public class Client
         stdIn.close();
         kkSocket.close();
     }
-
 }

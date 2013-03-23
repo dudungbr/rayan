@@ -9,9 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *$Revision$
+ * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  */
 public class UserTable
@@ -30,14 +31,12 @@ public class UserTable
     {
         return SingletonHolder._instance;
     }
-
     private static final Logger _log = Logger.getLogger(UserTable.class.getName());
 
     private UserTable()
     {
     }
-
-    @SuppressWarnings("synthetic-access")
+    @SuppressWarnings ("synthetic-access")
     private static class SingletonHolder
     {
         protected static final UserTable _instance = new UserTable();
@@ -108,15 +107,17 @@ public class UserTable
      */
     public void setLastUser(String usr)
     {
-        if(Config.isDebug())
-        _log.log(Level.INFO, "setando ultimo usuario como {0}\n", usr);
-            _lastLogin = usr;
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "setando ultimo usuario como {0}\n", usr);
+        }
+        _lastLogin = usr;
 
 
     }
 
     /**
-     * 
+     *
      * @return _lastLogin
      */
     public String getLastUser()
@@ -141,5 +142,4 @@ public class UserTable
     {
         _senha = pwd;
     }
-
 }

@@ -6,23 +6,24 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * 
+ *
  * @author Rayan
  */
 public class MbUtil
 {
-
-    private MbUtil() {
+    private MbUtil()
+    {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public static String getMotherboardSN()
     {
         String result = "";
-        try {
+        try
+        {
             File file = File.createTempFile("realhowto", ".vbs");
             file.deleteOnExit();
             FileWriter fw = new java.io.FileWriter(file);
@@ -42,24 +43,27 @@ public class MbUtil
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
-            while ((line = input.readLine()) != null) {
+            while ((line = input.readLine()) != null)
+            {
                 result += line;
             }
             input.close();
-        } catch (Exception e) {
-             SystemUtil.showErrorMsg(e.getMessage(),true);
+        }
+        catch (Exception e)
+        {
+            SystemUtil.showErrorMsg(e.getMessage(), true);
         }
         return result.trim();
     }
 
     /**
-     * 
+     *
      * @param args
      */
     public static void main(String[] args)
     {
         String cpuId = MbUtil.getMotherboardSN();
         javax.swing.JOptionPane.showConfirmDialog((java.awt.Component) null, cpuId, "Motherboard serial number",
-                javax.swing.JOptionPane.DEFAULT_OPTION);
+                                                  javax.swing.JOptionPane.DEFAULT_OPTION);
     }
 }

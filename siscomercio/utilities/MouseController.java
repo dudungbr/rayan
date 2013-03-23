@@ -16,11 +16,8 @@ import javax.swing.JFrame;
 public class MouseController extends JFrame
 {
     /*
-     Este exemplo mostra como saber se o usuário
-     clicou o botão direito ou esquerdo do mouse.
-     */
-    /**
-     *
+     * Este exemplo mostra como saber se o usuário
+     * clicou o botão direito ou esquerdo do mouse.
      */
     public MouseController()
     {

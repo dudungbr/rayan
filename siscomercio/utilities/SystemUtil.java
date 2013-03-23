@@ -19,8 +19,9 @@ import java.net.URI;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
- * 
+ * <p/>
  */
 public class SystemUtil
 {
@@ -32,12 +33,13 @@ public class SystemUtil
      */
     public static void printVersion()
     {
-       /* SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
-                           + Config.BUILD_NUM.substring(1, 14) + "<br>"
-                           + Config.BUILD_DATE.substring(1, 52) + "<br>"
-                           + Config.BUILD_URL.substring(1, 75) + "<br>"
-                           + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>", true);
-*/
+        /*
+         * SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
+         * + Config.BUILD_NUM.substring(1, 14) + "<br>"
+         * + Config.BUILD_DATE.substring(1, 52) + "<br>"
+         * + Config.BUILD_URL.substring(1, 75) + "<br>"
+         * + "Versao do Sistema " + Config.SYSTEM_VERSION + "<br>", true);
+         */
     }
 
     /**
@@ -56,11 +58,12 @@ public class SystemUtil
     public static String getVersion()
     {
         return null;
-    //    return String.valueOf(Config.SYSTEM_VERSION);
+        //    return String.valueOf(Config.SYSTEM_VERSION);
     }
 
     /**
      * Prints all Database Information
+     * <p/>
      * @throws SQLException
      */
     public static void printDbInfo() throws SQLException
@@ -111,6 +114,7 @@ public class SystemUtil
      * Converte segundos em milisegundos
      *
      * @param secondsToConvert
+     * <p/>
      * @return miliseconds
      */
     public static int convertSecondsToMiliseconds(int secondsToConvert)
@@ -122,6 +126,7 @@ public class SystemUtil
      * converte minutos em Milisegundos
      *
      * @param minutesToConvert
+     * <p/>
      * @return miliseconds
      */
     public static int convertMinutesToMiliseconds(int minutesToConvert)
@@ -133,6 +138,7 @@ public class SystemUtil
      * converte minutos em Segundos
      *
      * @param minutesToConvert
+     * <p/>
      * @return seconds
      */
     public static int convertMinutesToSeconds(int minutesToConvert)
@@ -144,8 +150,9 @@ public class SystemUtil
      * converte uma percentagem por multiplo
      *
      * @param multiplerX100
+     * <p/>
      * @return 100-multiplerX100;
-     * 
+     * <p/>
      */
     public double convertPercentageByMultipler(double multiplerX100)
     {
@@ -157,6 +164,7 @@ public class SystemUtil
      *
      * @param number
      * @param percentage
+     * <p/>
      * @return thepercentage
      */
     public double calculatePercentage(double number, double percentage)
@@ -175,11 +183,11 @@ public class SystemUtil
      */
     public static void showMsg(String msg, Boolean playSound)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
         {
             _log.info("enviando janela de mensagem... \n");
         }
-        if(playSound && Config.isEnableSound())
+        if (playSound && Config.isEnableSound())
         {
             try
             {
@@ -189,7 +197,7 @@ public class SystemUtil
                 sound = Applet.newAudioClip(caminho.toURL());
                 sound.play();
             }
-            catch(MalformedURLException ex)
+            catch (MalformedURLException ex)
             {
                 Logger.getLogger(SystemUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -206,11 +214,11 @@ public class SystemUtil
      */
     public static void showErrorMsg(String msg, Boolean playSound)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
         {
             _log.info("enviando janela de mensagem de erro... \n");
         }
-        if(playSound && Config.isEnableSound())
+        if (playSound && Config.isEnableSound())
         {
             try
             {
@@ -220,12 +228,11 @@ public class SystemUtil
                 sound = Applet.newAudioClip(caminho.toURL());
                 sound.play();
             }
-            catch(MalformedURLException ex)
+            catch (MalformedURLException ex)
             {
                 Logger.getLogger(SystemUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Erro", JOptionPane.ERROR_MESSAGE);
     }
-
 }

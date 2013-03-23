@@ -15,6 +15,7 @@ public class NetworkThread extends Thread
     /**
      * $Revision$ $Author$ $Date: 2010-09-22
      * 14:43:39 -0300 (Qua, 22 Set 2010) $
+     * <p/>
      * @param socket
      */
     public NetworkThread(Socket socket)
