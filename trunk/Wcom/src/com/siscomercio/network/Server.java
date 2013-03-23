@@ -5,16 +5,18 @@ import java.net.ServerSocket;
 import com.siscomercio.init.Config;
 
 /**
- * 
+ *
  * @author Rayan
  */
 public class Server
 {
     /**
-     *$Revision$
+     * $Revision$
      * $Author$
      * $Date$
+     * <p/>
      * @param args
+     * <p/>
      * @throws IOException
      */
     public static void main(String[] args) throws IOException
@@ -27,18 +29,17 @@ public class Server
             Config.load();
             serverSocket = new ServerSocket(Config.getServerPort());
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             System.err.println("Could not listen on port: " + Config.getServerPort());
             System.exit(-1);
         }
 
-        while(listening)
+        while (listening)
         {
             new NetworkThread(serverSocket.accept()).start();
         }
 
         serverSocket.close();
     }
-
 }

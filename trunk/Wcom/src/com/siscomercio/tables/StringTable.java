@@ -10,6 +10,7 @@ import com.siscomercio.init.Config;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  *
  * Comandos SQL
@@ -45,18 +46,14 @@ public class StringTable
      * Pega o Codigo do Usuario.
      */
     public static final String GET_USER_CODE = "SELECT `codigo` from users WHERE login=? AND password=?";
-
     /**
      * Pega o Codigo pelo Login
      */
     public static final String GET_USER_CODE_BY_LOGIN = "SELECT `codigo` from users WHERE login=?";
-
     /**
      * Pega o ultimo codigo cadastrado.
      */
     public static final String GET_LAST_CODE = "SELECT MAX(`codigo`) FROM users";
-
-  
     /**
      * Checa a Senha do Usuario
      */
@@ -73,14 +70,12 @@ public class StringTable
      * Atualiza Dados
      */
     public static final String UPDATE_USER = "UPDATE users SET (codigo,login,password)WHERE codigo=? AND login=?";
-
     /**
      * Registra a App
      */
     public static final String REGISTRE_APP = "REPLACE INTO install VALUES (?,?,?,?,?,?,?,?,?)";
-            // bancoInstalado=?,stationMAC=?,StationMBSerial=?,Empresa=?,stationHDSerial=?,NumEstacoes=?,licenseType=?,registeredFor=?";
-
-        /**
+    // bancoInstalado=?,stationMAC=?,StationMBSerial=?,Empresa=?,stationHDSerial=?,NumEstacoes=?,licenseType=?,registeredFor=?";
+    /**
      * `bancoInstalado` varchar(5) NOT NULL default 'false',
      * `statioMAC` varchar(50) NOT NULL,
      * `StationMBSerial` varchar(50) NOT NULL,
@@ -90,16 +85,10 @@ public class StringTable
      * `licenseType` varchar(10) NOT NULL,
      * `registeredFor` varchar(30) NOT NULL,
      */
-
-
-      /**
+    /**
      * Registra a App
      */
     public static final String READ_APP_LICENSE_DATA = "SELECT `stationMAC`, `StationMBSerial`, `Empresa`, `stationHDSerial`, `NumEstacoes`, `licenseType`, `registeredFor`, `licenciado` FROM install";
-
-    
-
-
     /**
      * Le a tabela de Usuarios
      */
@@ -121,7 +110,7 @@ public class StringTable
      */
     public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
     // *************************** Status da Database **********************/
-    /**                                          
+    /**
      * Status da Database
      */
     public static final String STATUS_CONNECTED = "Conectado";

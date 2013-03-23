@@ -25,9 +25,10 @@ import javax.swing.UIManager;
 import javolution.util.FastList;
 
 /**
- *$Revision$
+ * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  */
 public class WindowsUtil
@@ -35,27 +36,28 @@ public class WindowsUtil
     private static final Logger _log = Logger.getLogger(WindowsUtil.class.getName());
 
     /**
-     * 
-        // Remove os "-" dos Numeros.
-        //-------------------------------
-        /*for(int i = 0; i < (dados.length() - remover.length() + 1); i++)
-        {
-            String res = dados.substring(i, (i + remover.length()));
-            if(res.equals(remover))
-            {
-                int pos = dados.indexOf(remover);
-                dados.delete(pos, pos + remover.length());
-                cont++;
-            }
-        }*/
-
-       // if(Config.isDebug())
-          //  _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);*/
+     *
+     * // Remove os "-" dos Numeros.
+     * //-------------------------------
+     * /*for(int i = 0; i < (dados.length() - remover.length() + 1); i++)
+     * {
+     * String res = dados.substring(i, (i + remover.length()));
+     * if(res.equals(remover))
+     * {
+     * int pos = dados.indexOf(remover);
+     * dados.delete(pos, pos + remover.length());
+     * cont++;
+     * }
+     * }
+     */
+    // if(Config.isDebug())
+    //  _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);*/
     /**
      * Lista todos os arquivos de um diretorio
      *
      * @param path
      * @param extension
+     * <p/>
      * @return o nome de todos os arquivos da pasta e extensao especificada
      */
     public static String listDirFiles(String path, final String extension)
@@ -63,10 +65,12 @@ public class WindowsUtil
         File pasta = new File(path);
         List<String> arquivos = new FastList<>();
 
-        for(File f : pasta.listFiles())
+        for (File f : pasta.listFiles())
         {
-            if(f != null && f.getName().endsWith(extension))
+            if (f != null && f.getName().endsWith(extension))
+            {
                 arquivos.add(f.getName());
+            }
         }
         return arquivos.toString();
     }
@@ -76,6 +80,7 @@ public class WindowsUtil
      *
      * @param path
      * @param extension
+     * <p/>
      * @return files
      */
     public static int countFiles(String path, final String extension)
@@ -83,20 +88,24 @@ public class WindowsUtil
         File pasta = new File(path);//  diretório
         List<File> arquivos = new FastList<>(); // lista de arquivos a ser criada
 
-        for(File arq : pasta.listFiles())
+        for (File arq : pasta.listFiles())
         {
             //condição para pegar só os arquivos, e nao diretórios
-            if(arq.isFile() && arq.getName().endsWith(extension))
+            if (arq.isFile() && arq.getName().endsWith(extension))
             {
-                if(arq != null)
+                if (arq != null)
+                {
                     arquivos.add(arq);
+                }
                 // System.out.println("Arquivo " +
                 // ++i;// + ": " + arq.getName() + "  Última modificação: " + new Date(arq.lastModified()));
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.log(Level.INFO, "Contando Arquivos do Diretorio SQL, Total: {0} Arquivos. \n", arquivos.size());
+        }
 
         return arquivos.size();
     }
@@ -105,6 +114,7 @@ public class WindowsUtil
      * Lista as Pastas
      *
      * @param path
+     * <p/>
      * @return files
      */
     public static File[] listFolders(String path)
@@ -117,7 +127,6 @@ public class WindowsUtil
             {
                 return pathname.getName().toLowerCase().endsWith("");
             }
-
         });
 
         return files;
@@ -140,25 +149,26 @@ public class WindowsUtil
         DecimalFormat df2 = new DecimalFormat("   'KB' ");
 
         SystemUtil.showMsg("Relatorio Gerado as "
-                           + sdf.format(new Date()) + ": <br>" + "<br>"
-                           + "|========= Memoria Livre =========" + "<br>"
-                           + "|    |= Total:" + df2.format(max) + "<br>"
-                           + "|    |= Memoria Total:" + df2.format(allocated)
-                           + df.format(allocated / max * 100) + "<br>"
-                           + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
-                           + df.format(nonAllocated / max * 100) + "<br>" + "<br>"
-                           + " =========  Memoria Alocada ========== <br>"
-                           + "|    |= Total:" + df2.format(allocated) + "<br>"
-                           + "|    |= Memoria Usada:" + df2.format(used)
-                           + df.format(used / max * 100) + "<br>"
-                           + "|    |= Memoria Cacheada:" + df2.format(cached)
-                           + df.format(cached / max * 100) + "<br>"
-                           + "|    |= Memoria Disponivel:" + df2.format(useable)
-                           + df.format(useable / max * 100),true);
+                + sdf.format(new Date()) + ": <br>" + "<br>"
+                + "|========= Memoria Livre =========" + "<br>"
+                + "|    |= Total:" + df2.format(max) + "<br>"
+                + "|    |= Memoria Total:" + df2.format(allocated)
+                + df.format(allocated / max * 100) + "<br>"
+                + "|    |= Memoria Nao Alocada" + df2.format(nonAllocated)
+                + df.format(nonAllocated / max * 100) + "<br>" + "<br>"
+                + " =========  Memoria Alocada ========== <br>"
+                + "|    |= Total:" + df2.format(allocated) + "<br>"
+                + "|    |= Memoria Usada:" + df2.format(used)
+                + df.format(used / max * 100) + "<br>"
+                + "|    |= Memoria Cacheada:" + df2.format(cached)
+                + df.format(cached / max * 100) + "<br>"
+                + "|    |= Memoria Disponivel:" + df2.format(useable)
+                + df.format(useable / max * 100), true);
     }
 
     /**
      * Checa se um Processo esta em Execução.
+     * <p/>
      * @param namePart
      */
     public static void checkProcess(String namePart)
@@ -172,32 +182,34 @@ public class WindowsUtil
 
         int i = 0;
 
-        while(it.hasNext())
+        while (it.hasNext())
         {
             result += it.next();
             i++;
         }
 
-        if(!result.contains(namePart))
+        if (!result.contains(namePart))
         {
             try
             {
                 UIManager.setLookAndFeel(new AcrylLookAndFeel());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(),true);
+                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
             }
-            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport()+"<br><br>",true);
+            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport() + "<br><br>", true);
             System.exit(0);
         }
-        else
-            if(Config.isDebug())
-                _log.info("processo mysql funcionando! ok \n");
+        else if (Config.isDebug())
+        {
+            _log.info("processo mysql funcionando! ok \n");
+        }
     }
 
     /**
      * Nome do Suporte Técnico
+     * <p/>
      * @return "Contacte o Suporte Técnico."
      */
     private static String getSuport()
@@ -207,19 +219,23 @@ public class WindowsUtil
 
     /**
      * Pega um processo
+     * <p/>
      * @param pName
-     * @return  pName
+     * <p/>
+     * @return pName
      */
     private static String getProcess(String pName)
     {
-        if(pName.startsWith("mysql"))
+        if (pName.startsWith("mysql"))
         {
-            pName = "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld.exe<br>" 
-                  + "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld-nt.exe<br>";
+            pName = "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld.exe<br>"
+                    + "&#160 &#160 &#160 &#160 &#160  &#160 &#160 &#160 &#160 mysqld-nt.exe<br>";
 
         }
         else
+        {
             throw new UnsupportedOperationException("valor nao suportado");
+        }
 
         return pName;
     }
@@ -228,6 +244,7 @@ public class WindowsUtil
      * Finaliza um Processo em Execucao na Máquina
      *
      * @param processToKill
+     * <p/>
      * @return false
      */
     public static boolean killProcess(String processToKill)
@@ -236,29 +253,33 @@ public class WindowsUtil
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe");
-            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
-                while((line = input.readLine()) != null)
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())))
+            {
+                while ((line = input.readLine()) != null)
                 {
-                    if(!line.trim().equals(""))
-                        if(line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processToKill))
+                    if (!line.trim().equals(""))
+                    {
+                        if (line.substring(1, line.indexOf("\"", 1)).equalsIgnoreCase(processToKill))
                         {
                             Runtime.getRuntime().exec("taskkill /F /IM " + line.substring(1, line.indexOf("\"", 1)));
                             _log.log(Level.INFO, "Matando Processo: {0}", processToKill);
                             return true;
                         }
+                    }
                 }
             }
 
         }
-        catch(Exception err)
+        catch (Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage(),true);
+            SystemUtil.showErrorMsg(err.getMessage(), true);
         }
         return false;
     }
 
     /**
      * Retorna Todos os Processos em Execucao
+     * <p/>
      * @return processes
      */
     private static List<String> listRunningProcesses()
@@ -268,10 +289,11 @@ public class WindowsUtil
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe /fo csv /nh");
-            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
-                while((line = input.readLine()) != null)
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())))
+            {
+                while ((line = input.readLine()) != null)
                 {
-                    if(!line.trim().equals(""))
+                    if (!line.trim().equals(""))
                     {
                         // keep only the process name
                         line = line.substring(1);
@@ -283,9 +305,9 @@ public class WindowsUtil
 
 
         }
-        catch(Exception err)
+        catch (Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage(),true);
+            SystemUtil.showErrorMsg(err.getMessage(), true);
         }
         return processes;
 
@@ -293,6 +315,7 @@ public class WindowsUtil
 
     /**
      * Pega o Nome dessa Maquina
+     * <p/>
      * @return the name of this Machine
      */
     public static String getPcName()
@@ -303,9 +326,9 @@ public class WindowsUtil
             pcName = InetAddress.getLocalHost().getHostName();
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage(),true);
+            SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage(), true);
         }
 
         return pcName;
@@ -322,17 +345,16 @@ public class WindowsUtil
         // display the result
         Iterator<String> it = processes.iterator();
         int i = 0;
-        while(it.hasNext())
+        while (it.hasNext())
         {
             result += it.next();
             i++;
         }
 
-        if(Config.isDebug())
+        if (Config.isDebug())
         {
             _log.log(Level.INFO, "Running processes : \n{0}", result);
             _log.log(Level.INFO, "Total de Processos: {0}", processes.size());
         }
     }
-
 }

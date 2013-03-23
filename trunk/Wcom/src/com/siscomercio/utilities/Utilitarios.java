@@ -1,6 +1,5 @@
 package com.siscomercio.utilities;
 
-
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.SoundManager;
@@ -52,7 +51,6 @@ import javolution.util.FastList;
  */
 public class Utilitarios
 {
-
     private static final Logger _log = Logger.getLogger(Utilitarios.class.getName());
 
     //previne de instanciar a classe
@@ -62,8 +60,9 @@ public class Utilitarios
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      * @param path
+     * <p/>
      * @return
      */
     public static ImageIcon loadIcon(String path)
@@ -91,9 +90,10 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param image
      * @param url
+     * <p/>
      * @return
      */
     public static ImageIcon loadIcon(ImageIcon image, String url)
@@ -121,7 +121,7 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param tarefa
      * @param intervalo
      */
@@ -149,30 +149,31 @@ public class Utilitarios
      *
      *
      * @param label
+     * <p/>
      * @return
      */
 //    public static void agendaTarefa()
 //    {
-//            //Data do dia corrente  
-//    Calendar dataIni = new GregorianCalendar();  
-//      
-//    //Seta a data inicial para o dia seguinte, ou seja, a próxima 00hs          
-//    dataIni.add(Calendar.DAY_OF_MONTH, 1);//1 dia após a data corrente  
-//      
-//    //Seta a hora = 00:00 (Meia noite)  
-//    dataIni.set(Calendar.HOUR_OF_DAY, 0);  
-//    dataIni.set(Calendar.MINUTE, 0);  
-//    dataIni.set(Calendar.SECOND, 0);  
-//      
-//    //Instancia o timer  
-//    Timer timer= new Timer();  
-//      
-//    //Intervalo para executar a classe novamente  
-//    //86400 = qtd segundos em 24hs  
-//    long periodo = 86400*1000;  
-//      
-//    //Agenda a tarefa  
-//    timer.scheduleAtFixedRate(new MinhaClasseTimerTask(), dataIni, periodo);  
+//            //Data do dia corrente
+//    Calendar dataIni = new GregorianCalendar();
+//
+//    //Seta a data inicial para o dia seguinte, ou seja, a próxima 00hs
+//    dataIni.add(Calendar.DAY_OF_MONTH, 1);//1 dia após a data corrente
+//
+//    //Seta a hora = 00:00 (Meia noite)
+//    dataIni.set(Calendar.HOUR_OF_DAY, 0);
+//    dataIni.set(Calendar.MINUTE, 0);
+//    dataIni.set(Calendar.SECOND, 0);
+//
+//    //Instancia o timer
+//    Timer timer= new Timer();
+//
+//    //Intervalo para executar a classe novamente
+//    //86400 = qtd segundos em 24hs
+//    long periodo = 86400*1000;
+//
+//    //Agenda a tarefa
+//    timer.scheduleAtFixedRate(new MinhaClasseTimerTask(), dataIni, periodo);
 //    }
     public static int createQuestionPopUp(JLabel label)
     {
@@ -183,6 +184,7 @@ public class Utilitarios
     /**
      *
      * @param msg
+     * <p/>
      * @return
      */
     public static int createQuestionPopUp(String msg)
@@ -190,15 +192,16 @@ public class Utilitarios
         _log.info("criando Janela de Confirmacao");
         SoundManager.getInstance().playSound(Config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
-                msg,
-                "Confirmar Solicitção",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                                             msg,
+                                             "Confirmar Solicitção",
+                                             JOptionPane.YES_NO_OPTION,
+                                             JOptionPane.QUESTION_MESSAGE);
     }
 
     /**
      *
      * @param msg
+     * <p/>
      * @return
      */
     public static int createWarningPopUp(
@@ -208,15 +211,16 @@ public class Utilitarios
         _log.info("criando Janela de Aviso");
         SoundManager.getInstance().playSound(Config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
-                msg,
-                "Aviso",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.WARNING_MESSAGE);
+                                             msg,
+                                             "Aviso",
+                                             JOptionPane.OK_CANCEL_OPTION,
+                                             JOptionPane.WARNING_MESSAGE);
     }
 
     /**
      *
-     * @param lb 
+     * @param lb
+     * <p/>
      * @return
      */
     public static int createWarningPopUp(
@@ -226,10 +230,10 @@ public class Utilitarios
         _log.info("criando Janela de Aviso");
         SoundManager.getInstance().playSound(Config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
-                lb,
-                "Aviso",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE);
+                                             lb,
+                                             "Aviso",
+                                             JOptionPane.YES_NO_OPTION,
+                                             JOptionPane.WARNING_MESSAGE);
     }
 
     /**
@@ -241,25 +245,26 @@ public class Utilitarios
      * @param title
      * @param opcoes
      * @param icone
+     * <p/>
      * @return
      */
     public int createQuestionPopUp(Component objetoPai,
-            String msg,
-            String extraString,
-            String posMsg,
-            String title,
-            String[] opcoes,
-            ImageIcon icone)
+                                   String msg,
+                                   String extraString,
+                                   String posMsg,
+                                   String title,
+                                   String[] opcoes,
+                                   ImageIcon icone)
     {
         SoundManager.getInstance().playSound("question.wav");
         int option = JOptionPane.showOptionDialog(objetoPai,
-                msg,
-                title,
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                icone,
-                opcoes,
-                opcoes[1]);
+                                                  msg,
+                                                  title,
+                                                  JOptionPane.OK_CANCEL_OPTION,
+                                                  JOptionPane.QUESTION_MESSAGE,
+                                                  icone,
+                                                  opcoes,
+                                                  opcoes[1]);
 
         return option;
 
@@ -325,6 +330,7 @@ public class Utilitarios
      * Checa se um Processo esta em Execução.
      *
      * @param namePart
+     * <p/>
      * @return
      */
     public static Boolean checkIfProcessIsRunning(String namePart)
@@ -366,7 +372,7 @@ public class Utilitarios
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe /fo csv /nh");
-            try ( BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())) )
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())))
             {
                 while ((line = input.readLine()) != null)
                 {
@@ -440,6 +446,7 @@ public class Utilitarios
      *
      * @param data
      * @param mascara
+     * <p/>
      * @return
      */
     public static String retornaDataComoString(String data, String mascara)
@@ -512,7 +519,8 @@ public class Utilitarios
     /**
      * Converte milisegundos em segundos
      *
-     * @param milisecondsToConvert 
+     * @param milisecondsToConvert
+     * <p/>
      * @return seconds
      */
     public static int convertMilisecondsToSeconds(long milisecondsToConvert)
@@ -524,6 +532,7 @@ public class Utilitarios
      * Converte segundos em milisegundos
      *
      * @param secondsToConvert
+     * <p/>
      * @return miliseconds
      */
     public static int convertSecondsToMiliseconds(int secondsToConvert)
@@ -535,6 +544,7 @@ public class Utilitarios
      * converte minutos em Milisegundos
      *
      * @param minutesToConvert
+     * <p/>
      * @return miliseconds
      */
     public static int convertMinutesToMiliseconds(int minutesToConvert)
@@ -546,6 +556,7 @@ public class Utilitarios
      * converte minutos em Segundos
      *
      * @param minutesToConvert
+     * <p/>
      * @return seconds
      */
     public int convertMinutesToSeconds(int minutesToConvert)
@@ -557,6 +568,7 @@ public class Utilitarios
      * converte uma percentagem por multiplo
      *
      * @param multiplerX100
+     * <p/>
      * @return 100-multiplerX100;
      *
      */
@@ -570,6 +582,7 @@ public class Utilitarios
      *
      * @param number
      * @param percentage
+     * <p/>
      * @return thepercentage
      */
     public static double calculatePercentage(double number, double percentage)
@@ -590,7 +603,6 @@ public class Utilitarios
         {
             Thread t1 = new Thread(new Runnable()
             {
-
                 @Override
                 public void run()
                 {
@@ -623,7 +635,6 @@ public class Utilitarios
         {
             Thread t1 = new Thread(new Runnable()
             {
-
                 @Override
                 public void run()
                 {
@@ -669,7 +680,6 @@ public class Utilitarios
         {
             Thread t1 = new Thread(new Runnable()
             {
-
                 @Override
                 public void run()
                 {
@@ -701,7 +711,6 @@ public class Utilitarios
         {
             Thread t1 = new Thread(new Runnable()
             {
-
                 @Override
                 public void run()
                 {
@@ -728,6 +737,7 @@ public class Utilitarios
      *
      * @param path
      * @param extension
+     * <p/>
      * @return o nome de todos os arquivos da pasta e extensao especificada
      */
     public static String listDirFiles(String path, final String extension)
@@ -746,23 +756,23 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param path
      * @param extension
+     * <p/>
      * @return
      */
     public File[] listFiles(String path, final String extension)
     {
         File dir = new File(path);
 
-        // filtro pela extensão procurada  
+        // filtro pela extensão procurada
         FileFilter filter = null;
 
         if (extension != null)
         {
             filter = new FileFilter()
             {
-
                 @Override
                 public boolean accept(File pathname)
                 {
@@ -771,7 +781,7 @@ public class Utilitarios
             };
         }
 
-        // lista os arquivos que correspondem ao match  
+        // lista os arquivos que correspondem ao match
         return dir.listFiles(filter);
     }
 
@@ -780,6 +790,7 @@ public class Utilitarios
      *
      * @param path
      * @param extension
+     * <p/>
      * @return files
      */
     public static int countFiles(String path, final String extension)
@@ -813,6 +824,7 @@ public class Utilitarios
      * Lista as Pastas
      *
      * @param path
+     * <p/>
      * @return files
      */
     public static File[] listFolders(String path)
@@ -820,7 +832,6 @@ public class Utilitarios
         File F = new File(path);
         File[] files = F.listFiles(new FileFilter()
         {
-
             @Override
             public boolean accept(File pathname)
             {
@@ -845,6 +856,7 @@ public class Utilitarios
      * Pega um processo
      *
      * @param pName
+     * <p/>
      * @return pName
      */
     private static String getProcess(String pName)
@@ -867,6 +879,7 @@ public class Utilitarios
      * Finaliza um Processo em Execucao na Máquina
      *
      * @param processToKill
+     * <p/>
      * @return false
      */
     public static boolean killProcess(String processToKill)
@@ -875,7 +888,7 @@ public class Utilitarios
         {
             String line;
             Process p = Runtime.getRuntime().exec("tasklist.exe");
-            try ( BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())) )
+            try (BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream())))
             {
                 while ((line = input.readLine()) != null)
                 {
@@ -948,7 +961,8 @@ public class Utilitarios
     }
 
     /**
-     * @param HttpAddr 
+     * @param HttpAddr
+     * <p/>
      * @return
      */
     //checks for connection to the internet through dummy request
@@ -1005,7 +1019,7 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param jarPath
      */
     public static void lauchJar(String jarPath)
@@ -1018,7 +1032,7 @@ public class Utilitarios
 
             try
             {
-                Runtime.getRuntime().exec("cmd /c start /B " + jarPath); //depois do parâmetro /B vc deve digitar o caminho do .jar que será executado  
+                Runtime.getRuntime().exec("cmd /c start /B " + jarPath); //depois do parâmetro /B vc deve digitar o caminho do .jar que será executado
             }
             catch (IOException e)
             {
@@ -1036,6 +1050,7 @@ public class Utilitarios
      *
      * @param alturaFrame
      * @param larguraFrame
+     * <p/>
      * @return
      */
     public Point getScreenCenter(int alturaFrame, int larguraFrame)
@@ -1047,8 +1062,9 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param janela
+     * <p/>
      * @return
      */
     public static boolean criaJanelaConfirmacao(JFrame janela)
@@ -1071,7 +1087,7 @@ public class Utilitarios
     }
 
     /**
-     * 
+     *
      * @param f
      */
     public static void zeraArquivo(File f)
@@ -1083,7 +1099,7 @@ public class Utilitarios
         else
         {
             _log.log(Level.INFO, "Zerando Conte\u00fado do Arquivo: {0}", f.getPath());
-            try ( RandomAccessFile raf = new RandomAccessFile(f, "rw") )
+            try (RandomAccessFile raf = new RandomAccessFile(f, "rw"))
             {
                 raf.setLength(0);
             }
