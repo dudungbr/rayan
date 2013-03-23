@@ -37,13 +37,13 @@ import com.siscomercio.utilities.SystemUtil;
  * $Revision$
  * $Author$
  * $Date$
+ * <p/>
  * @author Rayan
  */
 public class Auth extends JFrame
 {
     private static final long serialVersionUID = 1L;
-
-    @SuppressWarnings("synthetic-access")
+    @SuppressWarnings ("synthetic-access")
     private static class SingletonHolder
     {
         protected static final Auth _instance = new Auth();
@@ -51,13 +51,13 @@ public class Auth extends JFrame
 
     /**
      * Apenas uma Instancia dessa Classe
+     * <p/>
      * @return SingletonHolder._instance
      */
     public static Auth getInstance()
     {
         return SingletonHolder._instance;
     }
-
     private static final Logger _log = Logger.getLogger(Auth.class.getName());
     /**
      *
@@ -77,19 +77,27 @@ public class Auth extends JFrame
      */
     public Auth()
     {
-        if(Config.isDebug())
-            _log.info(" inicializando ...\n");
-        if(Config.isDebug())
-            _log.info("Criando Janela de Autenticacao.... \n");
-
-        if(Config.isEnableSound())
-            System.out.println("Som: "+ Config.getPreLoginSound());
-            SoundManager.getInstance().playSound(Config.getPreLoginSound());
-
-        if(_autenticado)
+        if (Config.isDebug())
         {
-            if(Config.isDebug())
+            _log.info(" inicializando ...\n");
+        }
+        if (Config.isDebug())
+        {
+            _log.info("Criando Janela de Autenticacao.... \n");
+        }
+
+        if (Config.isEnableSound())
+        {
+            System.out.println("Som: " + Config.getPreLoginSound());
+        }
+        SoundManager.getInstance().playSound(Config.getPreLoginSound());
+
+        if (_autenticado)
+        {
+            if (Config.isDebug())
+            {
                 _log.info("usuario ja autenticado nao ira criar janela");
+            }
             return;
         }
 
@@ -110,17 +118,21 @@ public class Auth extends JFrame
         botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoConfigurar = new JButton("Configurar...");
         botaoConfigurar.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Auth:  Aguardando Login... \n");
+        }
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if(DatabaseManager._installed == 1)
+        if (DatabaseManager._installed == 1)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);
         }
         else
+        {
             botaoLogin.setEnabled(false);
+        }
 
         // Design
         Container tela = getContentPane();
@@ -157,15 +169,18 @@ public class Auth extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(Config.isDebug())
+                if (Config.isDebug())
+                {
                     _log.info("Auth: Executando acao do botao login \n");
+                }
                 String senha = new String(campoSenha.getPassword());
                 String login = campoUsuario.getText();
 
-                if(isAuthed(login, senha))
+                if (isAuthed(login, senha))
+                {
                     showConfirmWindow();
+                }
             }
-
         });
 
         //adiciona listener ao enter no login
@@ -179,7 +194,6 @@ public class Auth extends JFrame
             {
                 dispose();
             }
-
         });
         // Ação botao Configurar
         botaoConfigurar.addActionListener(new ActionListener()
@@ -198,10 +212,8 @@ public class Auth extends JFrame
                         //Solicita Autenticacao.
                         new LogonUsuario().setVisible(true);
                     }
-
                 });
             }
-
         });
         //===================================================
 
@@ -220,8 +232,10 @@ public class Auth extends JFrame
      */
     private void resetCampos()
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Auth:  resetando campos ...\n");
+        }
         campoUsuario.setText("");
         campoSenha.setText("");
     }
@@ -230,25 +244,30 @@ public class Auth extends JFrame
      *
      * @param login
      * @param senha
+     * <p/>
      * @return boolean
      */
     public boolean isAuthed(String login, String senha)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Auth: Checando Usuario e Senha ...\n");
+        }
 
         Connection con = null;
         boolean ok = false;
         try
         {
-            if(Config.isDebug())
-                //checa se os dados estao ok...
+            if (Config.isDebug())
+            //checa se os dados estao ok...
+            {
                 _log.log(Level.INFO, "Auth: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
-                        {
-                            senha, login + "\n"
-                        });
+                {
+                    senha, login + "\n"
+                });
+            }
 
-            if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
+            if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
             {
                 SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
                 resetCampos();
@@ -274,7 +293,7 @@ public class Auth extends JFrame
             ps.setString(3, senha);
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
+            if (rset.next())
             {
                 // pega os dados
                 logindb = rset.getString("login");
@@ -284,7 +303,7 @@ public class Auth extends JFrame
             DatabaseManager.closeConnections(ps, rset, con);
 
             // Compara as Senhas Digitadas Pelo Usuario com a DB
-            if(login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
+            if (login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
             {
                 ok = true;
                 UserTable.getInstance().setLastUser(login);
@@ -296,12 +315,12 @@ public class Auth extends JFrame
             }
 
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
         }
@@ -313,19 +332,23 @@ public class Auth extends JFrame
      */
     public void showConfirmWindow()
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Auth: Enviando janela de confirmacao...\n");
+        }
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-        if(Config.isEnableSound())
+        if (Config.isEnableSound())
+        {
             SoundManager.getInstance().playSound(Config.getLoginSound());
+        }
 
 
-        if(!LogonUsuario._reAuth)
+        if (!LogonUsuario._reAuth)
         {
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
-            switch(confirm)
+            switch (confirm)
             {
                 // Switch > Case
                 case JOptionPane.YES_OPTION: // Attempt to Login user
@@ -336,13 +359,12 @@ public class Auth extends JFrame
                         @Override
                         public void run()
                         {
-                           // AppManager.setTema(Auth.class.getSimpleName());
+                            // AppManager.setTema(Auth.class.getSimpleName());
                             new FramePrincipal().setVisible(true);
                             //FIXME: ta travando a app...
-                          //  if(Config.ENABLE_SOUND)
+                            //  if(Config.ENABLE_SOUND)
                             //    SoundManager.playSound(Config.WELCOME_SOUND);
                         }
-
                     });
                     break;
 
@@ -363,26 +385,28 @@ public class Auth extends JFrame
             } // End Switch > Case
         }
     }
-
     /**
      * Checa a Masterkey
      *
      * @param user
      * @param pass
+     * <p/>
      * @return result
      */
- /*  public static boolean checkMasterKey(String user, String pass)
-    {
-        boolean result = false;
-        _log.info("Auth: Checando senha mestre... \n");
-        if(user.equalsIgnoreCase(Config.MASTER_USER) && pass.equalsIgnoreCase(Config.MASTER_KEY))
-            result = true;
-        else
-        {
-            SystemUtil.showErrorMsg("usuario invalido.", true);
-            result = false;
-        }
-        return result;
-    }
-*/
+    /*
+     * public static boolean checkMasterKey(String user, String pass)
+     * {
+     * boolean result = false;
+     * _log.info("Auth: Checando senha mestre... \n");
+     * if(user.equalsIgnoreCase(Config.MASTER_USER) &&
+     * pass.equalsIgnoreCase(Config.MASTER_KEY))
+     * result = true;
+     * else
+     * {
+     * SystemUtil.showErrorMsg("usuario invalido.", true);
+     * result = false;
+     * }
+     * return result;
+     * }
+     */
 }

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,15 +27,14 @@ import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
- * $Revision$
- * $Author$
- * $Date$
+ * $Revision$ $Author$ $Date: 2013-03-21 19:34:43 -0300 (Thu,
+ * 21 Mar 2013) $
+ *
  * @author Rayan
  */
 public class DatabaseFactory
 {
     static final Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
-
     /**
      * Tipo do Provedor
      */
@@ -52,7 +51,6 @@ public class DatabaseFactory
     }
     // =========================================================
     // Data Field
-
     private static DatabaseFactory _instance;
     private ProviderType _providerType;
     private ComboPooledDataSource _source;
@@ -67,7 +65,7 @@ public class DatabaseFactory
     {
         try
         {
-             _log.log(Level.INFO, "Inicializando Database Engine C3P0... \n");
+            _log.log(Level.INFO, "Inicializando Database Engine C3P0... \n");
             _source = new ComboPooledDataSource();
             _source.setAutoCommitOnClose(true);
             _source.setInitialPoolSize(10);
@@ -111,24 +109,30 @@ public class DatabaseFactory
             /* Test the connection */
             _source.getConnection().close();
 
-            if(Config.isEnableLog())
+            if (Config.isEnableLog())
+            {
                 _log.fine("Database Connection Working");
+            }
 
-            if(Config.getDatabaseDriver().toLowerCase().contains("microsoft"))
+            if (Config.getDatabaseDriver().toLowerCase().contains("microsoft"))
+            {
                 _providerType = ProviderType.MsSql;
+            }
             else
+            {
                 _providerType = ProviderType.MySql;
+            }
         }
-        catch(SQLException x)
+        catch (SQLException x)
         {
             AppManager.setTema(getClass().getName());
-            SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(),true);
+            SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(), true);
             // re-throw the exception
             throw x;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage(),true);
+            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage(), true);
         }
     }
 
@@ -146,12 +150,16 @@ public class DatabaseFactory
     {
         String msSqlTop1 = "";
         String mySqlTop1 = "";
-        if(returnOnlyTopRecord)
+        if (returnOnlyTopRecord)
         {
-            if(getProviderType() == ProviderType.MsSql)
+            if (getProviderType() == ProviderType.MsSql)
+            {
                 msSqlTop1 = " Top 1 ";
-            if(getProviderType() == ProviderType.MySql)
+            }
+            if (getProviderType() == ProviderType.MySql)
+            {
                 mySqlTop1 = " Limit 1 ";
+            }
         }
         String query = "SELECT " + msSqlTop1 + safetyString(fields) + " FROM " + tableName + " WHERE " + whereClause + mySqlTop1;
         return query;
@@ -166,7 +174,7 @@ public class DatabaseFactory
         {
             _source.close();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _log.log(Level.INFO, "", e);
         }
@@ -174,7 +182,7 @@ public class DatabaseFactory
         {
             _source = null;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _log.log(Level.INFO, "", e);
         }
@@ -191,7 +199,7 @@ public class DatabaseFactory
         final char braceLeft;
         final char braceRight;
 
-        if(getProviderType() == ProviderType.MsSql)
+        if (getProviderType() == ProviderType.MsSql)
         {
             braceLeft = '[';
             braceRight = ']';
@@ -204,17 +212,19 @@ public class DatabaseFactory
 
         int length = 0;
 
-        for(String word : whatToCheck)
+        for (String word : whatToCheck)
         {
             length += word.length() + 4;
         }
 
         final StringBuilder sbResult = new StringBuilder(length);
 
-        for(String word : whatToCheck)
+        for (String word : whatToCheck)
         {
-            if(sbResult.length() > 0)
+            if (sbResult.length() > 0)
+            {
                 sbResult.append(", ");
+            }
 
             sbResult.append(braceLeft);
             sbResult.append(word);
@@ -228,43 +238,45 @@ public class DatabaseFactory
     // Property - Public
     /**
      *
-     * @return  _instance = new DatabaseFactory()
+     * @return _instance = new DatabaseFactory()
      * @throws SQLException
      */
     public static DatabaseFactory getInstance() throws SQLException
     {
-        synchronized(DatabaseFactory.class)
+        synchronized (DatabaseFactory.class)
         {
-            if(_instance == null)
+            if (_instance == null)
+            {
                 _instance = new DatabaseFactory();
+            }
         }
         return _instance;
     }
 
     /**
      * Inicia A Conexao SQL
+     *
      * @return connection (SQL)
      */
     public Connection getConnection() //throws SQLException
     {
         Connection con = null;
 
-        while(con == null)
+        while (con == null)
         {
             try
             {
                 con = _source.getConnection();
                 DatabaseManager.setConStatus(StringTable.STATUS_CONNECTED);
             }
-            catch(SQLException e)
+            catch (SQLException e)
             {
                 DatabaseManager.setConStatus(StringTable.STATUS_DISCONNECTED);
-                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}",true);
+                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}", true);
             }
         }
         return con;
     }
-
     /**
      *
      */
@@ -287,18 +299,17 @@ public class DatabaseFactory
         {
             try
             {
-                if(!c.isClosed())
+                if (!c.isClosed())
                 {
                     _log.warning("Unclosed connection! Trace:");
                 }
             }
-            catch(SQLException e)
+            catch (SQLException e)
             {
-                 SystemUtil.showErrorMsg(e.getMessage(),true);
+                SystemUtil.showErrorMsg(e.getMessage(), true);
             }
 
         }
-
     }
 
     /**
@@ -328,5 +339,4 @@ public class DatabaseFactory
     {
         return _providerType;
     }
-
 }

@@ -10,7 +10,6 @@ package com.siscomercio.model.entity;
  */
 public class TipoEquipamento
 {
-
     private int _id;
     private String _tipo;
 

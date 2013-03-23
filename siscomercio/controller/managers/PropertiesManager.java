@@ -14,9 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *$Revision$
- * $Author$
- * $Date$
+ * $Revision$ $Author$ $Date: 2013-03-21 19:07:16 -0300 (Thu,
+ * 21 Mar 2013) $
+ *
  * @author Rayan
  */
 public final class PropertiesManager extends Properties
@@ -106,6 +106,11 @@ public final class PropertiesManager extends Properties
         load(new FileInputStream(file));
     }
 
+    /**
+     *
+     * @param inStream
+     * @throws IOException
+     */
     @Override
     public void load(InputStream inStream) throws IOException
     {
@@ -119,6 +124,11 @@ public final class PropertiesManager extends Properties
         }
     }
 
+    /**
+     *
+     * @param reader
+     * @throws IOException
+     */
     @Override
     public void load(Reader reader) throws IOException
     {
@@ -133,14 +143,19 @@ public final class PropertiesManager extends Properties
     }
 
     // ===================================================================================
+    /**
+     *
+     * @param key
+     * @return
+     */
     @Override
     public String getProperty(String key)
     {
         String property = super.getProperty(key);
 
-        if(property == null)
+        if (property == null)
         {
-            if(_warn)
+            if (_warn)
             {
                 _log.log(Level.WARNING, "L2Properties: Missing property for key - {0}", key);
             }
@@ -151,14 +166,20 @@ public final class PropertiesManager extends Properties
         return property.trim();
     }
 
+    /**
+     *
+     * @param key
+     * @param defaultValue
+     * @return
+     */
     @Override
     public String getProperty(String key, String defaultValue)
     {
         String property = super.getProperty(key, defaultValue);
 
-        if(property == null)
+        if (property == null)
         {
-            if(_warn)
+            if (_warn)
             {
                 _log.log(Level.WARNING, "L2Properties: Missing defaultValue for key - {0}", key);
             }
@@ -178,11 +199,11 @@ public final class PropertiesManager extends Properties
     public boolean getBool(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Boolean value required, but not specified");
         }
-        if(val instanceof Boolean)
+        if (val instanceof Boolean)
         {
             return (Boolean) val;
         }
@@ -190,7 +211,7 @@ public final class PropertiesManager extends Properties
         {
             return Boolean.parseBoolean((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Boolean value required, but found: " + val);
         }
@@ -205,11 +226,11 @@ public final class PropertiesManager extends Properties
     public boolean getBool(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Boolean)
+        if (val instanceof Boolean)
         {
             return (Boolean) val;
         }
@@ -217,7 +238,7 @@ public final class PropertiesManager extends Properties
         {
             return Boolean.parseBoolean((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Boolean value required, but found: " + val);
         }
@@ -232,11 +253,11 @@ public final class PropertiesManager extends Properties
     public boolean getBool(String name, boolean deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Boolean)
+        if (val instanceof Boolean)
         {
             return (Boolean) val;
         }
@@ -244,7 +265,7 @@ public final class PropertiesManager extends Properties
         {
             return Boolean.parseBoolean((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Boolean value required, but found: " + val);
         }
@@ -258,11 +279,11 @@ public final class PropertiesManager extends Properties
     public byte getByte(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Byte value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).byteValue();
         }
@@ -270,7 +291,7 @@ public final class PropertiesManager extends Properties
         {
             return Byte.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Byte value required, but found: " + val);
         }
@@ -285,11 +306,11 @@ public final class PropertiesManager extends Properties
     public byte getByte(String name, byte deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).byteValue();
         }
@@ -297,14 +318,14 @@ public final class PropertiesManager extends Properties
         {
             return Byte.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Byte value required, but found: " + val);
         }
     }
 
     /**
-     * 
+     *
      * @param name
      * @param deflt
      * @return Byte
@@ -312,11 +333,11 @@ public final class PropertiesManager extends Properties
     public byte getByte(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).byteValue();
         }
@@ -324,7 +345,7 @@ public final class PropertiesManager extends Properties
         {
             return Byte.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Byte value required, but found: " + val);
         }
@@ -338,11 +359,11 @@ public final class PropertiesManager extends Properties
     public short getShort(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Short value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).shortValue();
         }
@@ -350,7 +371,7 @@ public final class PropertiesManager extends Properties
         {
             return Short.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Short value required, but found: " + val);
         }
@@ -365,11 +386,11 @@ public final class PropertiesManager extends Properties
     public short getShort(String name, short deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).shortValue();
         }
@@ -377,7 +398,7 @@ public final class PropertiesManager extends Properties
         {
             return Short.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Short value required, but found: " + val);
         }
@@ -392,11 +413,11 @@ public final class PropertiesManager extends Properties
     public short getShort(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).shortValue();
         }
@@ -404,7 +425,7 @@ public final class PropertiesManager extends Properties
         {
             return Short.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Short value required, but found: " + val);
         }
@@ -418,11 +439,11 @@ public final class PropertiesManager extends Properties
     public int getInteger(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Integer value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).intValue();
         }
@@ -430,7 +451,7 @@ public final class PropertiesManager extends Properties
         {
             return Integer.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -445,11 +466,11 @@ public final class PropertiesManager extends Properties
     public int getInteger(String name, int deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).intValue();
         }
@@ -457,7 +478,7 @@ public final class PropertiesManager extends Properties
         {
             return Integer.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -472,11 +493,11 @@ public final class PropertiesManager extends Properties
     public int getInteger(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).intValue();
         }
@@ -484,7 +505,7 @@ public final class PropertiesManager extends Properties
         {
             return Integer.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -498,11 +519,11 @@ public final class PropertiesManager extends Properties
     public long getLong(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Integer value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).longValue();
         }
@@ -510,7 +531,7 @@ public final class PropertiesManager extends Properties
         {
             return Long.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -525,11 +546,11 @@ public final class PropertiesManager extends Properties
     public long getLong(String name, long deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).longValue();
         }
@@ -537,7 +558,7 @@ public final class PropertiesManager extends Properties
         {
             return Long.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -552,11 +573,11 @@ public final class PropertiesManager extends Properties
     public long getLong(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).longValue();
         }
@@ -564,7 +585,7 @@ public final class PropertiesManager extends Properties
         {
             return Long.decode((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Integer value required, but found: " + val);
         }
@@ -578,11 +599,11 @@ public final class PropertiesManager extends Properties
     public float getFloat(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Float value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).floatValue();
         }
@@ -590,7 +611,7 @@ public final class PropertiesManager extends Properties
         {
             return Float.parseFloat((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -605,11 +626,11 @@ public final class PropertiesManager extends Properties
     public float getFloat(String name, float deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).floatValue();
         }
@@ -617,7 +638,7 @@ public final class PropertiesManager extends Properties
         {
             return Float.parseFloat((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -632,11 +653,11 @@ public final class PropertiesManager extends Properties
     public float getFloat(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).floatValue();
         }
@@ -644,7 +665,7 @@ public final class PropertiesManager extends Properties
         {
             return Float.parseFloat((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -658,11 +679,11 @@ public final class PropertiesManager extends Properties
     public double getDouble(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Float value required, but not specified");
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).doubleValue();
         }
@@ -670,7 +691,7 @@ public final class PropertiesManager extends Properties
         {
             return Double.parseDouble((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -685,11 +706,11 @@ public final class PropertiesManager extends Properties
     public double getDouble(String name, double deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).doubleValue();
         }
@@ -697,7 +718,7 @@ public final class PropertiesManager extends Properties
         {
             return Double.parseDouble((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -712,11 +733,11 @@ public final class PropertiesManager extends Properties
     public double getDouble(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(val instanceof Number)
+        if (val instanceof Number)
         {
             return ((Number) val).doubleValue();
         }
@@ -724,7 +745,7 @@ public final class PropertiesManager extends Properties
         {
             return Double.parseDouble((String) val);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Float value required, but found: " + val);
         }
@@ -738,7 +759,7 @@ public final class PropertiesManager extends Properties
     public String getString(String name)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("String value required, but not specified");
         }
@@ -754,7 +775,7 @@ public final class PropertiesManager extends Properties
     public String getString(String name, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
@@ -768,16 +789,16 @@ public final class PropertiesManager extends Properties
      * @param enumClass
      * @return Enum
      */
-    @SuppressWarnings("unchecked")
-    public <T extends Enum<T>>    T getEnum(String name, Class<T> enumClass)
+    @SuppressWarnings ("unchecked")
+    public <T extends Enum<T>> T getEnum(String name, Class<T> enumClass)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             throw new IllegalArgumentException("Enum value of type " + enumClass.getName()
-                                               + " required, but not specified");
+                    + " required, but not specified");
         }
-        if(enumClass.isInstance(val))
+        if (enumClass.isInstance(val))
         {
             return (T) val;
         }
@@ -785,10 +806,10 @@ public final class PropertiesManager extends Properties
         {
             return Enum.valueOf(enumClass, String.valueOf(val));
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Enum value of type " + enumClass.getName() + "required, but found: "
-                                               + val);
+                    + val);
         }
     }
 
@@ -800,15 +821,15 @@ public final class PropertiesManager extends Properties
      * @param deflt
      * @return Enum
      */
-    @SuppressWarnings("unchecked")
-    public <T extends Enum<T>>    T getEnum(String name, Class<T> enumClass, T deflt)
+    @SuppressWarnings ("unchecked")
+    public <T extends Enum<T>> T getEnum(String name, Class<T> enumClass, T deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             return deflt;
         }
-        if(enumClass.isInstance(val))
+        if (enumClass.isInstance(val))
         {
             return (T) val;
         }
@@ -816,10 +837,10 @@ public final class PropertiesManager extends Properties
         {
             return Enum.valueOf(enumClass, String.valueOf(val));
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Enum value of type " + enumClass.getName() + "required, but found: "
-                                               + val);
+                    + val);
         }
     }
 
@@ -831,15 +852,15 @@ public final class PropertiesManager extends Properties
      * @param deflt
      * @return Enum
      */
-    @SuppressWarnings("unchecked")
-    public <T extends Enum<T>>    T getEnum(String name, Class<T> enumClass, String deflt)
+    @SuppressWarnings ("unchecked")
+    public <T extends Enum<T>> T getEnum(String name, Class<T> enumClass, String deflt)
     {
         Object val = get(name);
-        if(val == null)
+        if (val == null)
         {
             val = deflt;
         }
-        if(enumClass.isInstance(val))
+        if (enumClass.isInstance(val))
         {
             return (T) val;
         }
@@ -847,11 +868,10 @@ public final class PropertiesManager extends Properties
         {
             return Enum.valueOf(enumClass, String.valueOf(val));
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("Enum value of type " + enumClass.getName() + "required, but found: "
-                                               + val);
+                    + val);
         }
     }
-
 }

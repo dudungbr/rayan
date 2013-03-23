@@ -16,7 +16,6 @@ import com.siscomercio.init.Config;
  */
 public class StringTable
 {
-
     private static String NOT_AVAIBLE = "N/A";
     private static String JCOMBO_DEFAULT = "Selecione";
     private static String EMPTY_STRING = "";
@@ -189,19 +188,19 @@ public class StringTable
      */
     private static final String LOAD_CIDADES = "SELECT id,estado,uf,nome FROM cidades order by id";
     /**
-     * 
+     *
      */
     public static final String LOAD_EQUIPAMENTO = "SELECT id,tipo FROM equipamentos ORDER BY id";
     /**
-     * 
+     *
      */
     public static final String LOAD_ESTADOS = "SELECT id,uf,nome FROM estados order by id";
     /**
-     * 
+     *
      */
     public static final String LOAD_MARCA = "SELECT id,marca,tipo FROM marcas order by id";
     /**
-     * 
+     *
      */
     public static final String LOAD_TECNICOS = "SELECT id,nome FROM tecnicos order by id";
     /**
@@ -224,7 +223,10 @@ public class StringTable
      * Atualiza Dados
      */
     public static final String UPDATE_USER = "UPDATE usuarios SET (login,senha)WHERE login=? AND senha=?";
-  public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
+    /**
+     *
+     */
+    public static final String CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
     //    /**
 //     * Registra a App
 //     */
@@ -243,7 +245,7 @@ public class StringTable
 //     */
 //    public static final String READ_APP_LICENSE_DATA = "SELECT `stationMAC`, `StationMBSerial`, `Empresa`, `stationHDSerial`, `NumEstacoes`, `licenseType`, `registeredFor`, `licenciado` FROM install";
 //
-//    
+//
 //
 //
 //    /**

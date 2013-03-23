@@ -13,167 +13,195 @@ import java.util.logging.Logger;
  */
 public class Serializer
 {
-      private static final Logger _log = Logger.getLogger(Serializer.class.getName());
-    
-     private Serializer() 
+    private static final Logger _log = Logger.getLogger(Serializer.class.getName());
+
+    private Serializer()
     {
     }
-    
-    private String code ="";
+    private String code = "";
     private boolean generated = false;
 
-    public boolean isGenerated() {
+    /**
+     *
+     * @return
+     */
+    public boolean isGenerated()
+    {
         return generated;
     }
 
     /**
-     * Captura Seriais HD / Mobo e  MAC da Placa de Rede 
-     * Divide em um Serial de 6 Partes de 5 Caracteres
-     * Fechando um Total de 30.
+     * Captura Seriais HD / Mobo e MAC da Placa de Rede Divide em um Serial de 6
+     * Partes de 5 Caracteres Fechando um Total de 30.
+     *
      * @return
      */
     public String generateActivationCode()
     {
         //Coleta os Dados
-      String serialHD = DiskUtil.getSerialNumber("c");
-      String serialMB = MbUtil.getMotherboardSN();
-      String mac = NetworkUtil.getMac();
-      StringBuilder dados = new StringBuilder();
-      dados.append(mac);
-      dados.append(serialHD);
-      dados.append(serialMB);
-      
-      if(Config.isDebug())
-      {
-      _log.log(Level.INFO, "[DADOS]String Atual:{0}", dados);
-      _log.log(Level.INFO, "[DADOS] Quantidade: {0}", dados.length());
-     _log.info("------------------------------------------------");
-     _log.info("Removido os Caracteres: :  - ");
-      }
-      /* Expressores Regulares
-       \\W vai retirar todo e qualquer caracter que não seja número , letra ou underscope
-        usamos duas barras invertidas, pois caso contrário ela será reconhecida apenas como caractere de escape */
-      StringBuilder temp = new StringBuilder();
-      temp.append(dados.toString().replaceAll("\\W",""));
-      
-       if(Config.isDebug())
-      {
-      _log.log(Level.INFO, "[Temps]String Atual:{0}", temp);
-     _log.log(Level.INFO, "[Temps]Quantidade: {0}", temp.length());
-      }
-           // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
+        String serialHD = DiskUtil.getSerialNumber("c");
+        String serialMB = MbUtil.getMotherboardSN();
+        String mac = NetworkUtil.getMac();
+        StringBuilder dados = new StringBuilder();
+        dados.append(mac);
+        dados.append(serialHD);
+        dados.append(serialMB);
+
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "[DADOS]String Atual:{0}", dados);
+            _log.log(Level.INFO, "[DADOS] Quantidade: {0}", dados.length());
+            _log.info("------------------------------------------------");
+            _log.info("Removido os Caracteres: :  - ");
+        }
+        /*
+         * Expressores Regulares
+         * \\W vai retirar todo e qualquer caracter que não seja número , letra
+         * ou underscope
+         * usamos duas barras invertidas, pois caso contrário ela será
+         * reconhecida apenas como caractere de escape
+         */
+        StringBuilder temp = new StringBuilder();
+        temp.append(dados.toString().replaceAll("\\W", ""));
+
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "[Temps]String Atual:{0}", temp);
+            _log.log(Level.INFO, "[Temps]Quantidade: {0}", temp.length());
+        }
+        // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
         //-------------------------------
-      System.out.println("[Temps] Reduzindo String P/ 30 Caracteres");
-      
-     
-            while(temp.length() > 30)
-            {  if(Config.isDebug())
-                 System.out.println("[Temps] Deletando Index :"+temp.length()+ " , ");
-             
+        System.out.println("[Temps] Reduzindo String P/ 30 Caracteres");
 
-               temp.deleteCharAt(temp.length() - 1); // deleta os ultimos caracteres.
+
+        while (temp.length() > 30)
+        {
+            if (Config.isDebug())
+            {
+                System.out.println("[Temps] Deletando Index :" + temp.length() + " , ");
             }
-         //System.out.println(temp);
 
 
-        
-        if(Config.isDebug())
-            _log.log(Level.INFO, "Nova String Com: {0} Caracteres:  "+ temp, temp.length());
-         
+            temp.deleteCharAt(temp.length() - 1); // deleta os ultimos caracteres.
+        }
+        //System.out.println(temp);
+
+
+
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "Nova String Com: {0} Caracteres:  " + temp, temp.length());
+        }
+
         // Divide a String em 5 Partes e Organiza com "-"
         //----------------------------------------------------
-        String p1 = "", p2 = "", p3 = "", p4 = "", p5 = "",p6 ="";
+        String p1 = "", p2 = "", p3 = "", p4 = "", p5 = "", p6 = "";
 
-        for(int i = 0;i <= temp.length();i++)
+        for (int i = 0; i <= temp.length(); i++)
         {
-            switch(i)
+            switch (i)
             {
                 case 5:
                 {
-                      p1 = temp.substring(0, i);
-                if(Config.isDebug())
-                    _log.info(p1);
+                    p1 = temp.substring(0, i);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p1);
+                    }
                     break;
                 }
                 case 10:
                 {
-                      p2 = temp.substring(5, i);
-                if(Config.isDebug())
-                    _log.info(p2);
+                    p2 = temp.substring(5, i);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p2);
+                    }
                     break;
                 }
                 case 15:
                 {
-                     p3 = temp.substring(10, i);
-                if(Config.isDebug())
-                    _log.info(p3);
-                   break;
+                    p3 = temp.substring(10, i);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p3);
+                    }
+                    break;
                 }
                 case 20:
                 {
-                     p4 = temp.substring(15, i);
-                if(Config.isDebug())
-                    _log.info(p4);
+                    p4 = temp.substring(15, i);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p4);
+                    }
                     break;
                 }
                 case 25:
                 {
                     p5 = temp.substring(20, i);
-                if(Config.isDebug())
-                    _log.info(p5);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p5);
+                    }
                     break;
                 }
                 case 30:
                 {
-                    p6 = temp.substring(25,i);
-                     if(Config.isDebug())
-                    _log.info(p6);
+                    p6 = temp.substring(25, i);
+                    if (Config.isDebug())
+                    {
+                        _log.info(p6);
+                    }
                     break;
                 }
             }
         }
-        code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5).concat("-" +p6);
-         if(Config.isDebug())
-        _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
-         generated = true;
+        code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5).concat("-" + p6);
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
+        }
+        generated = true;
         return code;
 
     }
+
     /**
-     * 
+     *
      * @return
      */
     public String getGeneratedCode()
     {
-        if(code.isEmpty())
+        if (code.isEmpty())
+        {
             return "Erro: nao foi posivel gerar o codigo\n";
+        }
 
         return code;
     }
 
-   /**
+    /**
      * Retorna Apenas 1 Instancia dessa Classe
+     *
      * @return AppManager _instance
      */
     public static Serializer getInstance()
     {
         return SingletonHolder._instance;
     }
-
-    @SuppressWarnings("synthetic-access")
+    @SuppressWarnings ("synthetic-access")
     private static class SingletonHolder
     {
         protected static final Serializer _instance = new Serializer();
     }
-   
+
     /**
      *
      * @param args
      */
     public static void main(String args[])
     {
-           new Serializer().generateActivationCode();
-     }
+        new Serializer().generateActivationCode();
+    }
 }
-
-

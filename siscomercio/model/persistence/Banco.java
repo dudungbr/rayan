@@ -4,8 +4,6 @@
  */
 package com.siscomercio.model.persistence;
 
-
-
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.model.entity.Endereco;
@@ -32,7 +30,6 @@ import java.util.logging.Logger;
  */
 public class Banco
 {
-
     private static final Logger _log = Logger.getLogger(Banco.class.getName());
     private Connection conexao;
     private Statement consulta;
@@ -75,8 +72,8 @@ public class Banco
             Class.forName(Config.getDatabaseDriver()).newInstance();
 
             //conecta ao servidor mysql sem database selecionada
-           // url2 = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword());
-                    // "jdbc:mysql://" + Config.getHost() + "/";
+            // url2 = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword());
+            // "jdbc:mysql://" + Config.getHost() + "/";
 
             conexao = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword()); //DriverManager.getConnection(url2, Config.getDatabaseLogin(), Config.getDatabasePassword());
             consulta = conexao.createStatement();
@@ -285,11 +282,12 @@ public class Banco
         }
         return resultado;
     }
-/**
- * 
- * @param user
- * @return 
- */
+
+    /**
+     *
+     * @param user
+     * @return
+     */
     public boolean validaLogin(Usuario user)
     {
 
@@ -313,7 +311,7 @@ public class Banco
 
             //prepara consulta
             consultaPreparada = conexao.prepareStatement(StringTable.CHECK_USER_PASS);
-            consultaPreparada.setString(1,user.getLogin());
+            consultaPreparada.setString(1, user.getLogin());
             consultaPreparada.setString(2, senhaCrypto);
             consultaPreparada.execute();
             resultado = consultaPreparada.getResultSet();
@@ -450,9 +448,9 @@ public class Banco
     /**
      * Insere Novo Usuario na Base de dados
      *
-     * @param f 
-     * @param e 
-     * @return 
+     * @param f
+     * @param e
+     * @return
      */
     public boolean addUser(Funcionario f, Endereco e)
     {
@@ -483,7 +481,7 @@ public class Banco
      * Deleta Usuario do Banco
      *
      * @param login
-     * @return  
+     * @return
      */
     public boolean delUser(String login)
     {
@@ -532,7 +530,7 @@ public class Banco
     /**
      *
      * @param ent
-     * @return  
+     * @return
      */
     public boolean salvaEntrada(Entrada ent)
     {
@@ -575,7 +573,7 @@ public class Banco
     public boolean changePassword(String newPass)
     {
         // pega o usuario na tabela.
-        String login ="";// UserTable.getInstance().getLastUser().getLogin();
+        String login = "";// UserTable.getInstance().getLastUser().getLogin();
 
         if (Config.isDebug())
         {
@@ -601,7 +599,7 @@ public class Banco
     }
 
     /**
-     * 
+     *
      * @param login
      * @return
      */
@@ -639,10 +637,8 @@ public class Banco
     {
         return SingletonHolder._instance;
     }
-
     private static class SingletonHolder
     {
-
         protected static final Banco _instance = new Banco();
     }
 }

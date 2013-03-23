@@ -15,12 +15,12 @@ import java.util.logging.Level;
 import javax.swing.UIManager;
 
 /**
- * $Revision$
- * $Author$
- * $Date$
+ * $Revision$ $Author$ $Date: 2013-03-22 16:52:13 -0300 (Fri,
+ * 22 Mar 2013) $
+ *
  * @author Rayan
  */
-@SuppressWarnings("serial")
+@SuppressWarnings ("serial")
 public class AppManager extends JFrame
 {
     private static final Logger _log = Logger.getLogger(AppManager.class.getName());
@@ -33,27 +33,31 @@ public class AppManager extends JFrame
     {
         return SingletonHolder._instance;
     }
-
-    @SuppressWarnings("synthetic-access")
+    @SuppressWarnings ("synthetic-access")
     private static class SingletonHolder
     {
         protected static final AppManager _instance = new AppManager();
     }
 
-
+    /**
+     *
+     */
     public static void optimizeRam()
     {
-          _log.info("Chamando Garbage Collector.. \n ");
+        _log.info("Chamando Garbage Collector.. \n ");
         System.gc();
     }
+
     /**
-     * 
+     *
      * @param requesterClass
      */
     public static void setTema(String requesterClass)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.log(Level.INFO, "Setando Tema Visual para a Classe:  {0}.java \n", requesterClass);
+        }
         try
         {
             //Define O Tema Visual e o Texto do Pop UP
@@ -63,7 +67,7 @@ public class AppManager extends JFrame
             AcrylLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel(new AcrylLookAndFeel());
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
         }
@@ -77,22 +81,30 @@ public class AppManager extends JFrame
      */
     public void restartApp()
     {
-        
-        if(Config.isEnableSound())
-            SoundManager.getInstance().playSound(Config.getPreRestartSound());
 
-        if(Config.isDebug())
+        if (Config.isEnableSound())
+        {
+            SoundManager.getInstance().playSound(Config.getPreRestartSound());
+        }
+
+        if (Config.isDebug())
+        {
             _log.info("solicitacao de restart.");
+        }
 
         int selectedOption = JOptionPane.showConfirmDialog(null, "Iniciar Sistema ?", "Pergunta", JOptionPane.OK_CANCEL_OPTION);
 
-        if(selectedOption == JOptionPane.OK_OPTION)
+        if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if(Config.isEnableSound())
+            if (Config.isEnableSound())
+            {
                 SoundManager.getInstance().playSound(Config.getRestartSound());
+            }
 
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.info("usuario reiniciou o sistema.");
+            }
 
             //retorna o Status de Autenticidade.
             Auth._autenticado = false;
@@ -107,40 +119,48 @@ public class AppManager extends JFrame
                 {
                     new Auth().setVisible(true);
                 }
-
             });
         }
     }
 
     /**
      *
-     * @param janelaPai 
+     * @param janelaPai
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
-        if(Config.isEnableSound())
+        if (Config.isEnableSound())
+        {
             SoundManager.getInstance().playSound(Config.getPreExitSound());
+        }
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "<html><font color =black size=4 face = Times new Roman ><b>Encerrar Sistema ?</b></font></html>", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-        if(Config.isDebug())
-            _log.info("solicitacao de shutdown...\n");
-
-
-        if(selectedOption == JOptionPane.OK_OPTION)
+        if (Config.isDebug())
         {
-            if(Config.isEnableSound())
-                SoundManager.getInstance().playSound(Config.getExitSound());
+            _log.info("solicitacao de shutdown...\n");
+        }
 
-            if(Config.isDebug())
+
+        if (selectedOption == JOptionPane.OK_OPTION)
+        {
+            if (Config.isEnableSound())
+            {
+                SoundManager.getInstance().playSound(Config.getExitSound());
+            }
+
+            if (Config.isDebug())
+            {
                 _log.info("usuario finalizou o sistema.");
+            }
 
             //finaliza a aplicacao
             System.exit(0);
         }
-        else
-            if(Config.isDebug())
-                _log.info("usuario desiste de fechar o sistema.\n");
+        else if (Config.isDebug())
+        {
+            _log.info("usuario desiste de fechar o sistema.\n");
+        }
     }
 
     /**
@@ -148,9 +168,10 @@ public class AppManager extends JFrame
      */
     public static void implementar()
     {
-        if(Config.isEnableSound())
+        if (Config.isEnableSound())
+        {
             SoundManager.getInstance().playSound(Config.getUnimplementedSound());
+        }
         SystemUtil.showMsg("Funcao Ainda nao Disponivel", true);
     }
-
 }

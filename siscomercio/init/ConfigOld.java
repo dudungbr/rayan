@@ -10,18 +10,17 @@ import java.io.IOException;
 
 /**
  *
- * $Revision$
- * $Date$
- * $Author$
- * $HeadURL$
- * 
+ * $Revision$ $Date$
+ * $Author$ $HeadURL:
+ * https://rayan.googlecode.com/svn/trunk/Wcom/src/com/siscomercio/init/ConfigOld.java
+ * $
+ *
  * @author William Menezes
  *
  */
 public class ConfigOld
 {
     private static final Logger _log = Logger.getLogger(Config.class.getName());
-
     /**
      * som tocado quando o sistema for finalizado
      */
@@ -39,7 +38,7 @@ public class ConfigOld
      */
     public static String WELCOME_SOUND;
     /**
-     *  som tocado quando for solicitado o solicitado o shutdown
+     * som tocado quando for solicitado o solicitado o shutdown
      */
     public static String PRE_EXIT_SOUND;
     /**
@@ -107,7 +106,7 @@ public class ConfigOld
      */
     public static String DATABASE_PORT;
     /**
-     *  senha Database
+     * senha Database
      */
     public static String DATABASE_PASSWORD;
     /**
@@ -163,7 +162,7 @@ public class ConfigOld
      */
     public static String MASTER_USER = "admin";
     /**
-     *  senha mestre
+     * senha mestre
      */
     public static String MASTER_KEY = "sysdba";
     static boolean DEVELOPER = true;
@@ -174,14 +173,14 @@ public class ConfigOld
     public static void load()
     {
         InputStream is = null;
-            _log.info("Config: Carregando o Arquuivo de Configuração...\n");
+        _log.info("Config: Carregando o Arquuivo de Configuração...\n");
         try
         {
 
             File f = new File(path);
-            if(!f.exists())
+            if (!f.exists())
             {
-                SystemUtil.showErrorMsg("o arquivo: "+f.getName()+" nao existe!",true);
+                SystemUtil.showErrorMsg("o arquivo: " + f.getName() + " nao existe!", true);
                 System.exit(0);//finaliza o sistema.
             }
 
@@ -225,19 +224,18 @@ public class ConfigOld
             /**
              * Port Checks
              */
-            if(SERVER_PORT <= 0 || SERVER_PORT > 65535)
+            if (SERVER_PORT <= 0 || SERVER_PORT > 65535)
             {
-                SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n",true);
+                SystemUtil.showErrorMsg("Erro na Configuracao as Portas do Programa.\n", true);
                 System.exit(0);
             }
 
             _loaded = true;
 
         }
-        catch(IOException | NumberFormatException e)
+        catch (IOException | NumberFormatException e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e.getMessage() + "\n",true);
+            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar o Arquivo:  de configuracao" + e.getMessage() + "\n", true);
         }
     }
-
 }

@@ -8,7 +8,7 @@ package com.siscomercio.model.entity;
  *
  * @author William
  */
-public  class Os
+public class Os
 {
     private String servico;
     private String dataEntrada;
@@ -17,7 +17,7 @@ public  class Os
     private int codigo;
 
     /**
-     * 
+     *
      * @return
      */
     public int getCodigo()
@@ -26,7 +26,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @param codigo
      */
     public void setCodigo(int codigo)
@@ -35,7 +35,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getDataEntrada()
@@ -44,7 +44,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @param dataEntrada
      */
     public void setDataEntrada(String dataEntrada)
@@ -53,7 +53,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getDataEntrega()
@@ -62,7 +62,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @param dataEntrega
      */
     public void setDataEntrega(String dataEntrega)
@@ -71,7 +71,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getServico()
@@ -80,7 +80,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @param servico
      */
     public void setServico(String servico)
@@ -89,7 +89,7 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getValor()
@@ -98,13 +98,11 @@ public  class Os
     }
 
     /**
-     * 
+     *
      * @param valor
      */
     public void setValor(String valor)
     {
         this.valor = valor;
     }
-    
-    
 }

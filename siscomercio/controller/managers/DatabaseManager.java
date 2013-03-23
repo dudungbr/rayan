@@ -20,9 +20,9 @@ import com.siscomercio.utilities.SystemUtil;
 import java.io.File;
 
 /**
- * $Revision$
- * $Author$
- * $Date$
+ * $Revision$ $Author$ $Date: 2013-03-21 19:34:43 -0300 (Thu,
+ * 21 Mar 2013) $
+ *
  * @author William Menezes
  *
  */
@@ -30,7 +30,7 @@ public class DatabaseManager
 {
     private static final Logger _log = Logger.getLogger(DatabaseManager.class.getName());
     /**
-     *  Status Atual do Banco
+     * Status Atual do Banco
      */
     static String _status = StringTable.STATUS_DISCONNECTED;
     /**
@@ -38,11 +38,11 @@ public class DatabaseManager
      */
     public static boolean isDbDeleted;
     /**
-     *se o banco esta instalado
+     * se o banco esta instalado
      */
     public static int _installed;
     /**
-     *se a apliacao esta Licenciada
+     * se a apliacao esta Licenciada
      */
     public static int _licensed;
     /**
@@ -56,7 +56,7 @@ public class DatabaseManager
      *
      */
     /**
-     * 
+     *
      */
     public static String _registeredMac;
     /**
@@ -97,22 +97,24 @@ public class DatabaseManager
 
     // public static boolean _leuTabela;
     /**
-     *  ler eExecuta todos os  Scripts SQL dentro da pasta SQL
+     * ler eExecuta todos os Scripts SQL dentro da pasta SQL
      *
      */
     public static void readAndExecuteDatabaseScripts()
     {
         File pasta = new File(StringTable.SQL_PATH);
-        for(File f : pasta.listFiles())
+        for (File f : pasta.listFiles())
         {
-            if(f != null && f.getName().endsWith(".sql"))
+            if (f != null && f.getName().endsWith(".sql"))
             {
                 try
                 {
 
                     Connection con = null;
-                    if(Config.isDebug())
+                    if (Config.isDebug())
+                    {
                         _log.log(Level.INFO, "\n DatabaseManager: executando script {0} \n", f.getName());
+                    }
                     String thisLine, sqlQuery = null;
 
                     con = DatabaseFactory.getInstance().getConnection();
@@ -122,16 +124,18 @@ public class DatabaseManager
 
 
                     //Now read line by line
-                    while((thisLine = d.readLine()) != null)
+                    while ((thisLine = d.readLine()) != null)
                     {
                         //Skip comments <strong class="highlight">and</strong> empty lines
-                        if(thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
+                        if (thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
+                        {
                             continue;
+                        }
 
                         sqlQuery = sqlQuery + " " + thisLine;
 
                         //If one command complete
-                        if(sqlQuery.charAt(sqlQuery.length() - 1) == ';')
+                        if (sqlQuery.charAt(sqlQuery.length() - 1) == ';')
                         {
                             sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc complains
                             try
@@ -140,7 +144,7 @@ public class DatabaseManager
                                 st.execute(sqlQuery);
 
                             }
-                            catch(SQLException ex)
+                            catch (SQLException ex)
                             {
                                 SystemUtil.showErrorMsg("Erro" + ex, true);
                             }
@@ -153,7 +157,7 @@ public class DatabaseManager
 
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     SystemUtil.showErrorMsg("Falha ao Executar Script SQL:  " + f.getName() + " Erro:  " + e.getMessage(), true);
                 }
@@ -163,6 +167,7 @@ public class DatabaseManager
 
     /**
      * Executa uma query
+     *
      * @param query
      * @return o resultado dessa query como boolean
      */
@@ -170,8 +175,10 @@ public class DatabaseManager
     {
         boolean result = false;
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.log(Level.INFO, "\n Executando Query: {0} \n", query);
+        }
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
@@ -180,7 +187,7 @@ public class DatabaseManager
             closeConnections(st, con);
             result = true;
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             SystemUtil.showErrorMsg("" + e, true);
             result = false;
@@ -195,8 +202,10 @@ public class DatabaseManager
     {
         Connection con = null;
 
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("\n criando novo banco. \n ");
+        }
         try
         {
             Class.forName(Config.getDatabaseDriver()).newInstance();
@@ -206,7 +215,7 @@ public class DatabaseManager
             closeConnections(st, con);
 
         }
-        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex)
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex)
         {
             SystemUtil.showErrorMsg("Erro ao criar nova base de dados: " + ex, true);
         }
@@ -217,8 +226,10 @@ public class DatabaseManager
      */
     public static void instaleBanco()
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("\n tentando Instalar Database...");
+        }
         createNewDatabase();
         readAndExecuteDatabaseScripts();
         executeQuery(StringTable.INSTALL);
@@ -243,10 +254,12 @@ public class DatabaseManager
      * @param showMsg
      * @return
      */
-    public static boolean valorExistente(String value,boolean showMsg)
+    public static boolean valorExistente(String value, boolean showMsg)
     {
-          if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("checando se o login existe na Database...\n");
+        }
         Connection con = null;
         boolean result = false;
         try
@@ -256,10 +269,12 @@ public class DatabaseManager
             PreparedStatement ps = con.prepareStatement(sql);
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
+            if (rset.next())
             {
-                if(showMsg)
-                SystemUtil.showErrorMsg("Login já Cadastrado.",true);
+                if (showMsg)
+                {
+                    SystemUtil.showErrorMsg("Login já Cadastrado.", true);
+                }
                 result = true;
             }
             else
@@ -267,7 +282,7 @@ public class DatabaseManager
                 result = false;
             }
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             ex.printStackTrace();
             SystemUtil.showErrorMsg("ERRO " + ex.getMessage(), true);
@@ -285,8 +300,10 @@ public class DatabaseManager
      */
     public static void addUser(String login, String senha, int nivelAcesso)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Adcionando Usuario: " + login);
+        }
         Connection con = null;
         try
         {
@@ -300,7 +317,7 @@ public class DatabaseManager
             closeConnections(ps, con);
             SystemUtil.showMsg("usuario cadastrado com sucesso!", true);
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             SystemUtil.showErrorMsg(e.toString(), true);
         }
@@ -316,6 +333,7 @@ public class DatabaseManager
 
     /**
      * Deleta Usuario do Banco
+     *
      * @param login
      */
     public static void delUser(String login)
@@ -331,7 +349,7 @@ public class DatabaseManager
             SystemUtil.showMsg("usuário excluido com sucesso!", true);
             closeConnections(ps, con);
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + login + " , " + e, true);
         }
@@ -339,14 +357,17 @@ public class DatabaseManager
 
     /**
      * pega o ultimo codigo usado
+     *
      * @return codigo
      */
     public static int getLastCode()
     {
 
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Procurando ultimo codigo gerado na DB..");
+        }
 
         int codigo = -1;
         try
@@ -358,11 +379,13 @@ public class DatabaseManager
             rset.next();
             codigo = rset.getInt(1);
             closeConnections(ps, con);
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.info("ultimo codigo : " + codigo + "\n");
+            }
 
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             _log.log(Level.WARNING, "Erro ao procurar ultimo codigo gerado na DB: ", ex);
         }
@@ -371,6 +394,7 @@ public class DatabaseManager
 
     /**
      * pega o codigo do usuario do banco
+     *
      * @param login
      * @param senha
      * @return codigo
@@ -378,8 +402,10 @@ public class DatabaseManager
     public static int getUserCode(String login, String senha)
     {
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Procurando codigo do Usuario.. \n");
+        }
         int codigo = -1;
         try
         {
@@ -389,34 +415,41 @@ public class DatabaseManager
             ps.setString(2, senha);
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
+            if (rset.next())
+            {
                 codigo = rset.getInt("codigo");
+            }
 
             closeConnections(ps, con);
 
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.INFO, "O codigo do usuario {0} e {1}\n", new Object[]
-                        {
-                            login, codigo
-                        });
+                {
+                    login, codigo
+                });
+            }
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             _log.log(Level.WARNING, "Erro ao pegar codigo do usuario:  {0}", ex);
         }
         return codigo;
     }
-/**
+
+    /**
      * pega o codigo do usuario do banco
+     *
      * @param login
-     * @param senha
      * @return codigo
      */
     public static int getUserCodeByLogin(String login)
     {
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Procurando codigo do Usuario.. \n");
+        }
         int codigo = -1;
         try
         {
@@ -425,26 +458,31 @@ public class DatabaseManager
             ps.setString(1, login);
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
+            if (rset.next())
+            {
                 codigo = rset.getInt("codigo");
+            }
 
             closeConnections(ps, con);
 
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.INFO, "O codigo do usuario {0} e {1}\n", new Object[]
-                        {
-                            login, codigo
-                        });
+                {
+                    login, codigo
+                });
+            }
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             _log.log(Level.WARNING, "Erro ao pegar codigo do usuario:  {0}", ex);
         }
         return codigo;
     }
+
     /**
      * Troca a Senha de um Usuario na base de dados
-
+     *
      * @param newPass
      */
     public static void changePassword(String newPass)
@@ -468,31 +506,36 @@ public class DatabaseManager
             closeConnections(ps, con);
             ok = true;
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             ok = false;
             SystemUtil.showErrorMsg("Erro ao Trocar Senha do Usuario: " + login + "," + e, true);
 
         }
-        if(ok)
+        if (ok)
         {
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.INFO, "\n trocando senha do usuario: {0}para: {1}\n", new Object[]
-                        {
-                            login, newPass
-                        });
+                {
+                    login, newPass
+                });
+            }
             SystemUtil.showMsg("Senha Trocada com Sucesso!", true);
         }
     }
 
     /**
      * seta o nivel de acesso de um usuario
+     *
      * @param lvl
      */
     public void setAcessLevel(int lvl)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("\n setando nivel de acesso para usuario \n");
+        }
         Connection con = null;
         try
         {
@@ -502,15 +545,18 @@ public class DatabaseManager
             closeConnections(ps, rset, con);
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.SEVERE, "DatabaseManager: Error Updating Users Access Level: " + e.getMessage(), e);
+            }
         }
     }
 
     /**
      * Checa o Nivel e Acesso do Usuario
+     *
      * @param usr
      * @return o nivel de acesso desse usuario
      */
@@ -518,8 +564,10 @@ public class DatabaseManager
     {
 
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
+        }
 
         int level = 0;
         try
@@ -529,17 +577,21 @@ public class DatabaseManager
             ps.setString(1, usr);
             ps.execute();
             ResultSet rset = ps.getResultSet();
-            if(rset.next())
+            if (rset.next())
+            {
                 level = rset.getInt("accesslevel");
+            }
             // Fecha as Conexoes
             closeConnections(ps, rset, con);
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1} \n", new Object[]
-                        {
-                            usr, level
-                        });
+                {
+                    usr, level
+                });
+            }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
         }
@@ -556,8 +608,10 @@ public class DatabaseManager
      */
     public static void closeConnections(PreparedStatement ps, ResultSet rset, Connection con)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             System.out.println();
+        }
         _log.info("Fechando conexoes c/ a database \n");
         try
         {
@@ -566,7 +620,7 @@ public class DatabaseManager
             con.close();
             setConStatus(StringTable.STATUS_DISCONNECTED);
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
         }
@@ -580,15 +634,17 @@ public class DatabaseManager
      */
     private static void closeConnections(Statement s, Connection con)
     {
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Fechando conexoes c/ a database \n");
+        }
         try
         {
             s.close();
             con.close();
             setConStatus(StringTable.STATUS_DISCONNECTED);
         }
-        catch(SQLException ex)
+        catch (SQLException ex)
         {
             SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
         }
@@ -596,6 +652,7 @@ public class DatabaseManager
 
     /**
      * retorna o status atual dessa conexao
+     *
      * @return _status
      */
     public static String getConnectionStatus()
@@ -605,6 +662,7 @@ public class DatabaseManager
 
     /**
      * define o status dessa conexao
+     *
      * @param state
      */
     public static void setConStatus(String state)
@@ -619,44 +677,53 @@ public class DatabaseManager
     public static void tryReadInstallData()
     {
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("lendo tabela de estado da instalacao \n");
+        }
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(StringTable.READ_INSTALL);
             ResultSet rset = ps.executeQuery();
-            while(rset.next())
+            while (rset.next())
             {
                 _installed = rset.getInt("bancoInstalado");
             }
 
             closeConnections(ps, rset, con);
 
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.info("Estado da Instalação: " + _installed + " ok .....\n");
+            }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.severe("DatabaseManager: Error reading Install Table: " + e.getMessage());
+            }
         }
     }
 
     /**
      * Le os dados da tabela e Instalacao
-     **/
+     *
+     */
     public static void readLicenseData()
     {
         Connection con = null;
-        if(Config.isDebug())
+        if (Config.isDebug())
+        {
             _log.info("Lendo dados da Licenca \n");
+        }
         try
         {
             con = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = con.prepareStatement(StringTable.READ_APP_LICENSE_DATA);
             ResultSet rset = ps.executeQuery();
-            while(rset.next())
+            while (rset.next())
             {
                 _registeredMac = rset.getString("stationMAC");
                 _registeredMBSN = rset.getString("stationMBSerial");
@@ -669,14 +736,17 @@ public class DatabaseManager
 
             }
             closeConnections(ps, rset, con);
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.info("Status da Licenca: " + _licensed + "\n");
+            }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            if(Config.isDebug())
+            if (Config.isDebug())
+            {
                 _log.log(Level.SEVERE, "DatabaseManager: Error reading License Data: " + e.getMessage(), e);
+            }
         }
     }
-
 }
