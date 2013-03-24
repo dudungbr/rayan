@@ -5,7 +5,6 @@
 package com.siscomercio.init;
 
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.LogManager;
@@ -98,17 +97,21 @@ public class Boot extends JFrame
                     {
                         case 10:
                         {
+
                             //Carrega as Configuracoes
                             fss.getLabelInformacao().setText("Carregando Configurações....");
-
                             Config.load();
-                            SoundManager.getInstance().loadSounds();
-                            if (Config.isEnableLog())
+
+                            //Carrega os Sons
+                            SoundManager.getInstance();
+
                             // Inicializa o Log Monitor
                             // ---------------
+                            if (Config.isEnableLog())
                             {
                                 LogManager.init();
                             }
+
                             fss.setVisible(true);
                             fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
                             break;
@@ -118,7 +121,6 @@ public class Boot extends JFrame
 
                             getFss().getLabelInformacao().setText("Verificando Servidor de Banco de Dados....");
                             String processo = "mysql";
-
 
                             if (!Config.isDeveloper())
                             {
@@ -134,28 +136,12 @@ public class Boot extends JFrame
                             }
                             break;
                         }
-                        /*
-                         * case 40:
-                         * {
-                         * getFss().getLabelInformacao().setText("Carregando
-                         * Sons ....");
-                         *
-                         * break;
-                         * }
-                         */
                         case 60:
                         {
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
 
-                            // Lê a Tabela de Instalacao da DB
-                            //--------------------------------
-                            _log.info("Lendo Tabela de Instalacao do Banco ...");
-
-                            banco.tryReadInstallData();
                             try
                             {
-
-
                                 if (!Config.isDeveloper())
                                 {
                                     banco.atualizaDatabase(); //atualiza a base de dados
@@ -174,11 +160,12 @@ public class Boot extends JFrame
                         }
                         case 90:
                         {
-                            getFss().getLabelInformacao().setText("Carregando Verificando Licença...");
+                            getFss().getLabelInformacao().setText("Verificando Licença...");
+
                             // Lê a Tabela de Instalacao da DB
                             //--------------------------------
                             _log.info("Lendo Tabela de Instalacao do Banco ...");
-                            //bd.tryReadInstallData();
+                            // banco.readInstallationState();
 
                             // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
                             // ------------------------

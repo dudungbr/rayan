@@ -49,7 +49,7 @@ public class Banco
     /**
      * Status Atual do Banco
      */
-    static String _status = StringTable.STATUS_DISCONNECTED;
+    private String _status = StringTable.STATUS_DISCONNECTED;
     /**
      * se o banco foi deletado
      */
@@ -100,14 +100,8 @@ public class Banco
      */
     public void registreAplicacao(String nomeEmpresa, int numEstacoes, String licenceType)
     {
-        //"INSERT INTO `install`(bancoInstalado,stationMAC,StationMBSerial,Empresa,
-        //stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
-        Connection con = null;
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.REGISTRE_APP))
         {
-            //con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps =
-                    conexao.prepareStatement(StringTable.REGISTRE_APP);
             ps.setInt(1, 1);
             ps.setString(2, NetworkUtil.getMac());
             ps.setString(3, MbUtil.getMotherboardSN());
@@ -118,13 +112,11 @@ public class Banco
             ps.setString(8, nomeEmpresa);
             ps.setInt(9, 1);
             ps.execute();
-            ps.close();
-            con.close();
             _log.info("gravando dados do registro no Banco de Dados.");
         }
         catch (SQLException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage(), true);
+            ExceptionManager.ThrowException(e.getMessage(), e);
 
         }
     }
@@ -820,7 +812,7 @@ public class Banco
      * Le a Tabela de Instalacao Atual
      *
      */
-    public void tryReadInstallData()
+    public void readInstallationState()
     {
         // Connection con = null;
         if (Config.isDebug())
@@ -829,12 +821,12 @@ public class Banco
         }
         try
         {
-            // con = DatabaseFactory.getInstance().getConnection();
+            //conexao = DatabaseFactory.getInstance().getConnection();
             conexao.prepareStatement(StringTable.READ_INSTALL);
             ResultSet rset = consultaPreparada.executeQuery();
             while (rset.next())
             {
-                _installed = rset.getInt("bancoInstalado");
+                this.setInstalled(rset.getInt("bancoInstalado"));
             }
 
             //     closeConnections(consultaPreparada, rset, conexao);
@@ -850,7 +842,7 @@ public class Banco
             {
                 _log.log(Level.SEVERE, "DatabaseManager: Error reading Install Table: {0}", e.getMessage());
             }
-            ExceptionManager.ThrowException("Erro: ", e);
+            ExceptionManager.ThrowException(e.getMessage(), e);
         }
     }
 
@@ -1044,6 +1036,10 @@ public class Banco
 
             url = "jdbc:mysql://" + Config.getHost() + "/" + Config.getDatabase();
 
+            if (Config.isDebug())
+            {
+                _log.info(url);
+            }
             // Este é um dos meios para registrar um driver
             Class.forName(Config.getDatabaseDriver()).newInstance();
             conexao = DriverManager.getConnection(url, Config.getDatabaseLogin(), Config.getDatabasePassword());
