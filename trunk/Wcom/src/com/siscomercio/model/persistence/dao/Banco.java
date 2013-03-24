@@ -133,18 +133,20 @@ public class Banco
 
         try
         {
-            try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS); ResultSet rs = ps.getResultSet();)
+            try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS))
             {
                 ps.setInt(1, userCode);
                 ps.setString(2, login);
                 ps.setString(3, senha);
                 ps.execute();
-
-                if (rs.next())
+                try (ResultSet rs = ps.getResultSet())
                 {
-                    // pega os dados
-                    logindb = rs.getString("login");
-                    senhadb = rs.getString("password");
+                    if (rs.next())
+                    {
+                        // pega os dados
+                        logindb = rs.getString("login");
+                        senhadb = rs.getString("password");
+                    }
                 }
             }
 
@@ -371,15 +373,17 @@ public class Banco
         }
         int codigo = StringTable.DEFAULT_INT;
 
-        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_CODE); ResultSet rset = ps.getResultSet();)
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_CODE))
         {
             ps.setString(1, login);
             ps.setString(2, senha);
             ps.execute();
-
-            if (rset.next())
+            try (ResultSet rset = ps.getResultSet())
             {
-                codigo = rset.getInt("codigo");
+                if (rset.next())
+                {
+                    codigo = rset.getInt("codigo");
+                }
             }
         }
         catch (SQLException ex)
@@ -635,19 +639,22 @@ public class Banco
         {
             _log.info("Lendo dados da Licenca \n");
         }
-        try (PreparedStatement ps = conexao.prepareStatement(StringTable.READ_APP_LICENSE_DATA); ResultSet rset = ps.executeQuery();)
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.READ_APP_LICENSE_DATA))
         {
-            while (rset.next())
+            try (ResultSet rset = ps.executeQuery())
             {
-                _registeredMac = rset.getString("stationMAC");
-                _registeredMBSN = rset.getString("stationMBSerial");
-                _empresa = rset.getString("Empresa");
-                _registeredHDSN = rset.getString("stationHDSerial");
-                _numStacoes = rset.getInt("NumEstacoes");
-                _licenceType = rset.getString("licenseType");
-                _registeredFor = rset.getString("registeredFor");
-                _licensed = rset.getInt("licenciado");
+                while (rset.next())
+                {
+                    _registeredMac = rset.getString("stationMAC");
+                    _registeredMBSN = rset.getString("stationMBSerial");
+                    _empresa = rset.getString("Empresa");
+                    _registeredHDSN = rset.getString("stationHDSerial");
+                    _numStacoes = rset.getInt("NumEstacoes");
+                    _licenceType = rset.getString("licenseType");
+                    _registeredFor = rset.getString("registeredFor");
+                    _licensed = rset.getInt("licenciado");
 
+                }
             }
             setLicensed(_licensed);
             if (Config.isDebug())
@@ -924,19 +931,19 @@ public class Banco
         //--------------------------------------
         String logindb = null;
         String senhadb = null;
-        try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS); ResultSet rset = ps.getResultSet();)
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS))
         {
             ps.setString(1, user.getLogin());
             ps.setString(2, senhaCrypto);
             ps.execute();
-
-            // pega os dados
-            if (rset.next())
+            try (ResultSet rset = ps.getResultSet())
             {
-                logindb = rset.getString("login");
-                senhadb = rset.getString("senha");
+                if (rset.next())
+                {
+                    logindb = rset.getString("login");
+                    senhadb = rset.getString("senha");
+                }
             }
-
             // Compara as Senhas Digitadas Pelo Usuario com a DB
             if (user.getLogin().equalsIgnoreCase(logindb) && (senhaCrypto.equalsIgnoreCase(senhadb)))
             {
@@ -1238,14 +1245,16 @@ public class Banco
     {
         String senhadb = null;
 
-        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_PASS); ResultSet rset = ps.getResultSet();)
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_PASS))
         {
             ps.setString(1, login);
             ps.execute();
-
-            if (rset.next())
+            try (ResultSet rset = ps.getResultSet())
             {
-                senhadb = rset.getString("senha");
+                if (rset.next())
+                {
+                    senhadb = rset.getString("senha");
+                }
             }
         }
         catch (SQLException ex)
