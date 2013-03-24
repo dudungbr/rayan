@@ -9,24 +9,16 @@
  */
 package com.siscomercio.model.view.frames;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import com.siscomercio.init.Config;
-import com.siscomercio.init.DatabaseFactory;
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.model.security.Serializer;
-import com.siscomercio.tables.StringTable;
-import com.siscomercio.utilities.DiskUtil;
-import com.siscomercio.utilities.MbUtil;
-import com.siscomercio.utilities.NetworkUtil;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
 import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
@@ -111,9 +103,9 @@ public class FrameLicenca extends JFrame
 
         if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
-            DatabaseManager._licensed = 1;
+            Banco.getInstance().setLicensed(1);
             dispose();
-            registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
+            Banco.getInstance().registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
             SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ", true);
             AppManager.getInstance().restartApp();
         }
@@ -371,39 +363,6 @@ public class FrameLicenca extends JFrame
         coleteDados();
         verifiqueSerial();
     }//GEN-LAST:event_botaoRegistrarActionPerformed
-
-    /**
-     * Registra a Aplicação Baseada nos Dados Fornecidos.
-     */
-    private void registreAplicacao(String nomeEmpresa, int numEstacoes, String licenceType)
-    {
-        //"INSERT INTO `install`(bancoInstalado,stationMAC,StationMBSerial,Empresa,
-        //stationHDSerial,NumEstacoes,licenseType,registeredFor) VALUES (?,?,?,?,?,?,?,?)";
-        Connection con = null;
-        try
-        {
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(StringTable.REGISTRE_APP);
-            ps.setInt(1, 1);
-            ps.setString(2, NetworkUtil.getMac());
-            ps.setString(3, MbUtil.getMotherboardSN());
-            ps.setString(4, nomeEmpresa);
-            ps.setString(5, DiskUtil.getSerialNumber("C"));
-            ps.setInt(6, numEstacoes);
-            ps.setString(7, licenceType);
-            ps.setString(8, nomeEmpresa);
-            ps.setInt(9, 1);
-            ps.execute();
-            ps.close();
-            con.close();
-            _log.info("gravando dados do registro no Banco de Dados.");
-        }
-        catch (SQLException e)
-        {
-            SystemUtil.showErrorMsg(e.getMessage(), true);
-
-        }
-    }
 
     /**
      *

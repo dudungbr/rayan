@@ -1,14 +1,12 @@
 package com.siscomercio.controller.managers;
 
+import com.siscomercio.standards.StringTable;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.siscomercio.init.Config;
-import com.siscomercio.tables.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**

@@ -13,6 +13,7 @@ package com.siscomercio.model.view.frames;
 import com.siscomercio.init.Config;
 import javax.swing.JFrame;
 import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
 import java.util.logging.Level;
@@ -167,7 +168,7 @@ public class AddUser extends JFrame
         String senha = String.valueOf(campoSenha.getPassword());
         String confirmaSenha = String.valueOf(campoConfirma.getPassword());
 
-        boolean loginExiste = DatabaseManager.valorExistente(login, true);
+        boolean loginExiste = Banco.getInstance().valorExistente(login, true);
 
         if (login.equals(""))
         {
@@ -224,7 +225,7 @@ public class AddUser extends JFrame
                 case JOptionPane.YES_OPTION: // Attempt to Login user
                 {
                     String senhaCripto = Criptografia.criptografe(senha);
-                    DatabaseManager.addUser(login, senhaCripto, nivelAcesso);
+                    Banco.getInstance().addUser(login, senhaCripto, nivelAcesso);
                     dispose();
                     break;
                 }

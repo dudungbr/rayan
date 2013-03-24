@@ -26,11 +26,11 @@ import javax.swing.JOptionPane;
 import com.siscomercio.init.Config;
 
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.controller.managers.SoundManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.model.security.Auth;
-import com.siscomercio.tables.StringTable;
+import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.FrameLog;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.WindowsUtil;
@@ -67,14 +67,14 @@ public class FramePrincipal extends JFrame
     {
         _log.log(Level.INFO, "Carregando Imagem: {0}{1}\n", new Object[]
         {
-            StringTable.IMAGE_PATH, Config.getLogo()
+            StringTable.getIMAGE_PATH(), Config.getLogo()
         });
-        File file = new File(StringTable.IMAGE_PATH + Config.getLogo());
+        File file = new File(StringTable.getIMAGE_PATH() + Config.getLogo());
 
         if (file.exists())
         {
             ImageIcon img = new ImageIcon(file.toString());
-            if (img != null)
+            if (img.getImage().getGraphics() != null)
             {
                 label.setIcon(img);
             }
@@ -140,7 +140,7 @@ public class FramePrincipal extends JFrame
             _log.info("preenchendo frame...\n");
         }
         pcLabel.setText(WindowsUtil.getPcName());
-        statusInfo.setText(DatabaseManager.getConnectionStatus());
+        statusInfo.setText(Banco.getInstance().getConnectionStatus());
         dadosEmpresa.setText(Config.getEmpresa());
         labelNomeEmpresa.setText(Config.getEmpresa());
         dadosOperador.setText(UserTable.getInstance().getLastUser());
@@ -695,7 +695,7 @@ public class FramePrincipal extends JFrame
             }
 
             //retorna o Status de Autenticidade.
-            Auth._autenticado = false;
+            Auth.getInstance().setAutenticado(false);
 
             //Fecha Janela
             dispose();

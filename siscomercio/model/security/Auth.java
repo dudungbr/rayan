@@ -7,11 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -25,11 +20,8 @@ import javax.swing.WindowConstants;
 import com.siscomercio.init.Config;
 import com.siscomercio.model.view.frames.FramePrincipal;
 import com.siscomercio.model.view.frames.LogonUsuario;
-import com.siscomercio.init.DatabaseFactory;
-import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.controller.managers.SoundManager;
-import com.siscomercio.tables.StringTable;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -43,33 +35,23 @@ import com.siscomercio.utilities.SystemUtil;
 public class Auth extends JFrame
 {
     private static final long serialVersionUID = 1L;
-    @SuppressWarnings ("synthetic-access")
-    private static class SingletonHolder
-    {
-        protected static final Auth _instance = new Auth();
-    }
-
-    /**
-     * Apenas uma Instancia dessa Classe
-     * <p/>
-     * @return SingletonHolder._instance
-     */
-    public static Auth getInstance()
-    {
-        return SingletonHolder._instance;
-    }
     private static final Logger _log = Logger.getLogger(Auth.class.getName());
-    /**
-     *
-     */
-    public static boolean _autenticado = false;
-    static int _accessLevel = 0;
-    // Variaveis
+    private boolean _autenticado = false;
     JTextField campoUsuario;
     JPasswordField campoSenha;
     JButton botaoLogin;
     JButton botaoCancelar;
     JButton botaoConfigurar;
+
+    public boolean isAutenticado()
+    {
+        return _autenticado;
+    }
+
+    public void setAutenticado(boolean _autenticado)
+    {
+        this._autenticado = _autenticado;
+    }
 
     /**
      * Monta a Janela Principal da Aplicação
@@ -124,7 +106,7 @@ public class Auth extends JFrame
         }
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if (DatabaseManager._installed == 1)
+        if (Banco.getInstance().getInstalled() == 1)
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);
@@ -169,6 +151,12 @@ public class Auth extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if (campoUsuario.getText().equalsIgnoreCase("") || String.valueOf(campoSenha.getPassword()).equalsIgnoreCase(""))
+                {
+                    SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
+                    resetCampos();
+
+                }
                 if (Config.isDebug())
                 {
                     _log.info("Auth: Executando acao do botao login \n");
@@ -176,7 +164,7 @@ public class Auth extends JFrame
                 String senha = new String(campoSenha.getPassword());
                 String login = campoUsuario.getText();
 
-                if (isAuthed(login, senha))
+                if (Banco.getInstance().isAuthed(login, senha))
                 {
                     showConfirmWindow();
                 }
@@ -241,93 +229,6 @@ public class Auth extends JFrame
     }
 
     /**
-     *
-     * @param login
-     * @param senha
-     * <p/>
-     * @return boolean
-     */
-    public boolean isAuthed(String login, String senha)
-    {
-        if (Config.isDebug())
-        {
-            _log.info("Auth: Checando Usuario e Senha ...\n");
-        }
-
-        Connection con = null;
-        boolean ok = false;
-        try
-        {
-            if (Config.isDebug())
-            //checa se os dados estao ok...
-            {
-                _log.log(Level.INFO, "Auth: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
-                {
-                    senha, login + "\n"
-                });
-            }
-
-            if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase(""))
-            {
-                SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
-                resetCampos();
-                ok = false;
-            }
-            senha = senha.toLowerCase();
-            login = login.toLowerCase();
-
-            // Criptografa a Senha do Usuario
-            senha = Criptografia.criptografe(senha);
-
-            // ---------------------------------
-            // Le a Tabela de Usuarios da Database
-            // ---------------------------------
-            int userCode = DatabaseManager.getUserCode(login, senha);
-            String logindb = null;
-            String senhadb = null;
-
-            con = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(StringTable.CHECK_USER_PASS);
-            ps.setInt(1, userCode);
-            ps.setString(2, login);
-            ps.setString(3, senha);
-            ps.execute();
-            ResultSet rset = ps.getResultSet();
-            if (rset.next())
-            {
-                // pega os dados
-                logindb = rset.getString("login");
-                senhadb = rset.getString("password");
-            }
-            //devemos fecha todas as conxoes assim que terminado o procedimento.
-            DatabaseManager.closeConnections(ps, rset, con);
-
-            // Compara as Senhas Digitadas Pelo Usuario com a DB
-            if (login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
-            {
-                ok = true;
-                UserTable.getInstance().setLastUser(login);
-            }
-            else
-            {
-                SystemUtil.showErrorMsg("usuario ou senha incorretos!", true);
-                ok = false;
-            }
-
-        }
-        catch (SQLException ex)
-        {
-            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
-
-        }
-        catch (Exception e)
-        {
-            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
-        }
-        return ok;
-    }
-
-    /**
      * Cria um Pop Up de Confirmacao do Login.
      */
     public void showConfirmWindow()
@@ -384,6 +285,21 @@ public class Auth extends JFrame
 
             } // End Switch > Case
         }
+    }
+    @SuppressWarnings ("synthetic-access")
+    private static class SingletonHolder
+    {
+        protected static final Auth _instance = new Auth();
+    }
+
+    /**
+     * Apenas uma Instancia dessa Classe
+     * <p/>
+     * @return SingletonHolder._instance
+     */
+    public static Auth getInstance()
+    {
+        return SingletonHolder._instance;
     }
     /**
      * Checa a Masterkey

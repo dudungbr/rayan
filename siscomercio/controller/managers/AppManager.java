@@ -107,7 +107,7 @@ public class AppManager extends JFrame
             }
 
             //retorna o Status de Autenticidade.
-            Auth._autenticado = false;
+            Auth.getInstance().setAutenticado(false);;
 
             //Fecha Janela
             dispose();
