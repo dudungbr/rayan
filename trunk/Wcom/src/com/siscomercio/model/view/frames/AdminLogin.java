@@ -13,8 +13,7 @@ package com.siscomercio.model.view.frames;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.init.Config;
-import com.siscomercio.controller.managers.DatabaseManager;
-import com.siscomercio.model.security.Auth;
+import com.siscomercio.model.persistence.Banco;
 
 /**
  * $Revision: 123 $
@@ -29,7 +28,7 @@ public class AdminLogin extends JFrame
      *
      */
     public static boolean _securityAuth;
-    private Logger _log = Logger.getLogger(AdminLogin.class.getName());
+    private static final Logger _log = Logger.getLogger(AdminLogin.class.getName());
 
     /**
      * Creates new form LogonFrame
@@ -134,9 +133,9 @@ public class AdminLogin extends JFrame
         // Pega a Senha Digitada Pelo Usuario
         String senha = String.valueOf(campoSenha.getPassword());
 
-        boolean autorizado = Auth.getInstance().isAuthed(usuario, senha);
+        boolean autorizado = Banco.getInstance().isAuthed(usuario, senha);
 
-        int accessLevel = DatabaseManager.getAccessLevel(usuario);
+        int accessLevel = Banco.getInstance().getAccessLevel(usuario);
 
         if (autorizado)
         {

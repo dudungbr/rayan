@@ -22,8 +22,8 @@ import java.util.logging.Logger;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
-import com.siscomercio.tables.StringTable;
+import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
@@ -106,7 +106,9 @@ public class DatabaseFactory
             _source.setUser(Config.getDatabaseLogin());
             _source.setPassword(Config.getDatabasePassword());
 
-            /* Test the connection */
+            /*
+             * Test the connection
+             */
             _source.getConnection().close();
 
             if (Config.isEnableLog())
@@ -144,6 +146,7 @@ public class DatabaseFactory
      * @param tableName
      * @param whereClause
      * @param returnOnlyTopRecord
+     * <p/>
      * @return query
      */
     public final String prepQuerySelect(String[] fields, String tableName, String whereClause, boolean returnOnlyTopRecord)
@@ -191,6 +194,7 @@ public class DatabaseFactory
     /**
      *
      * @param whatToCheck
+     * <p/>
      * @return sbResult
      */
     public final String safetyString(String... whatToCheck)
@@ -239,6 +243,7 @@ public class DatabaseFactory
     /**
      *
      * @return _instance = new DatabaseFactory()
+     * <p/>
      * @throws SQLException
      */
     public static DatabaseFactory getInstance() throws SQLException
@@ -267,11 +272,11 @@ public class DatabaseFactory
             try
             {
                 con = _source.getConnection();
-                DatabaseManager.setConStatus(StringTable.STATUS_CONNECTED);
+                Banco.getInstance().setConStatus(StringTable.STATUS_CONNECTED);
             }
             catch (SQLException e)
             {
-                DatabaseManager.setConStatus(StringTable.STATUS_DISCONNECTED);
+                Banco.getInstance().setConStatus(StringTable.STATUS_DISCONNECTED);
                 SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}", true);
             }
         }
@@ -290,7 +295,8 @@ public class DatabaseFactory
             c = con;
             exp = e;
         }
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see java.lang.Runnable#run()
          */
 
@@ -315,6 +321,7 @@ public class DatabaseFactory
     /**
      *
      * @return busy connections count
+     * <p/>
      * @throws SQLException
      */
     public int getBusyConnectionCount() throws SQLException
@@ -325,6 +332,7 @@ public class DatabaseFactory
     /**
      *
      * @return num of iddle connections
+     * <p/>
      * @throws SQLException
      */
     public int getIdleConnectionCount() throws SQLException

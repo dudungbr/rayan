@@ -43,6 +43,7 @@ public class Boot extends JFrame
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
     private static final long serialVersionUID = 1L;
     private FrameSplashScreen fss = new FrameSplashScreen();
+    Banco banco = Banco.getInstance();
 
     private Boot()
     {
@@ -133,12 +134,15 @@ public class Boot extends JFrame
                             }
                             break;
                         }
-                        /*case 40:
-                         {
-                         getFss().getLabelInformacao().setText("Carregando Sons ....");
-
-                         break;
-                         }*/
+                        /*
+                         * case 40:
+                         * {
+                         * getFss().getLabelInformacao().setText("Carregando
+                         * Sons ....");
+                         *
+                         * break;
+                         * }
+                         */
                         case 60:
                         {
                             getFss().getLabelInformacao().setText("Verificando Base de Dados ....");
@@ -146,18 +150,19 @@ public class Boot extends JFrame
                             // Lê a Tabela de Instalacao da DB
                             //--------------------------------
                             _log.info("Lendo Tabela de Instalacao do Banco ...");
-                            DatabaseManager.tryReadInstallData();
+
+                            banco.tryReadInstallData();
                             try
                             {
 
-                                Banco bd = Banco.getInstance();
+
                                 if (!Config.isDeveloper())
                                 {
-                                    bd.atualizaDatabase(); //atualiza a base de dados
+                                    banco.atualizaDatabase(); //atualiza a base de dados
                                 }
                                 else
                                 {
-                                    bd.conectaDatabaseSelecionada();
+                                    banco.conectaDatabaseSelecionada();
                                 }
                             }
                             catch (Exception ex)
@@ -173,11 +178,11 @@ public class Boot extends JFrame
                             // Lê a Tabela de Instalacao da DB
                             //--------------------------------
                             _log.info("Lendo Tabela de Instalacao do Banco ...");
-                            DatabaseManager.tryReadInstallData();
+                            //bd.tryReadInstallData();
 
                             // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
                             // ------------------------
-                            if (DatabaseManager._installed == 0)
+                            if (Banco.getInstance().getInstalled() == 0)
                             {
                                 _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
                                 EventQueue.invokeLater(new Runnable()
@@ -197,11 +202,11 @@ public class Boot extends JFrame
                                 _log.info("Verificando Licenca...");
                                 //Le os Dados da Licenca
                                 // --------------------------
-                                DatabaseManager.readLicenseData();
+                                banco.readLicenseData();
 
                                 // OK! Podemos Abrir o Sistema.
                                 // ------------------------
-                                if (DatabaseManager._licensed == 1)
+                                if (Banco.getInstance().getLicensed() == 1)
                                 {
                                     // Chama a Tela de Login
                                     // ------------------------
@@ -287,6 +292,7 @@ public class Boot extends JFrame
     /**
      *
      * @param processPid
+     * <p/>
      * @return
      */
     private static boolean getMonitoredVMs(int processPid)

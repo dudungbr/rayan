@@ -5,7 +5,7 @@
  */
 package com.siscomercio.model.view.frames;
 
-import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -91,7 +91,7 @@ public class DelUser extends JFrame
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoExcluirActionPerformed
     {//GEN-HEADEREND:event_botaoExcluirActionPerformed
         String login = campoNome.getText();
-        boolean loginExiste = DatabaseManager.valorExistente(login, false);
+        boolean loginExiste = Banco.getInstance().valorExistente(login, false);
 
         if (login.isEmpty())
         {
@@ -106,7 +106,7 @@ public class DelUser extends JFrame
                 return;
             }
             JLabel optionLabel = new JLabel("<html>confirma exclusao do usuario <font color = blue>" + login + "</font> </html>");
-//            SoundManager.getInstance().playSound(Config.QUESTION_SOUND);
+
             int confirm = JOptionPane.showConfirmDialog(null, optionLabel);
 
             switch (confirm)
@@ -114,7 +114,7 @@ public class DelUser extends JFrame
                 // Switch > Case
                 case JOptionPane.YES_OPTION: // Attempt to Login user
                 {
-                    DatabaseManager.delUser(login);
+                    Banco.getInstance().delUser(login);
                     dispose();
                     break;
                 }

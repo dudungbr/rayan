@@ -5,7 +5,7 @@
  */
 package com.siscomercio.model.view.frames;
 
-import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.model.persistence.Banco;
 import com.siscomercio.utilities.SystemUtil;
 
 /**
@@ -154,11 +154,10 @@ public class TrocaSenha extends javax.swing.JFrame
         {
             SystemUtil.showErrorMsg("as senhas digitadas nao confirmam!", true);
             resetCampos();
-            return;
         }
         else
         {
-            DatabaseManager.changePassword(senhaNova);
+            Banco.getInstance().changePassword(senhaNova);
             dispose();
         }
     }//GEN-LAST:event_botaoAlterarSenhaActionPerformed

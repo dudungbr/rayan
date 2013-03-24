@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.siscomercio.init.Config;
 import com.siscomercio.init.DatabaseFactory;
-import com.siscomercio.controller.managers.DatabaseManager;
-import com.siscomercio.tables.StringTable;
+import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.standards.StringTable;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
@@ -69,7 +69,7 @@ public class SystemUtil
     public static void printDbInfo() throws SQLException
     {
         showMsg("<br> Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "<br>"
-                + "Status do Banco: " + DatabaseManager.getConnectionStatus() + "<br>"
+                + "Status do Banco: " + Banco.getInstance().getConnectionStatus() + "<br>"
                 + "Conexoes Ativas: " + String.valueOf(DatabaseFactory.getInstance().getBusyConnectionCount()) + "<br>"
                 + "Conexoes Criadas : " + String.valueOf(DatabaseFactory.getInstance().getIdleConnectionCount() + "<br><br>"), true);
     }

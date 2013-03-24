@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.controller.managers.DatabaseManager;
+import com.siscomercio.model.persistence.Banco;
 import java.awt.EventQueue;
 
 /**
@@ -28,7 +28,7 @@ import java.awt.EventQueue;
 @SuppressWarnings ("serial")
 public class DBConfig extends JFrame
 {
-    private static Logger _log = Logger.getLogger(DBConfig.class.getName());
+    private static final Logger _log = Logger.getLogger(DBConfig.class.getName());
 
     /**
      * Creates new form FrameDatabase
@@ -36,10 +36,10 @@ public class DBConfig extends JFrame
     public DBConfig()
     {
         initComponents();
-        dadosStatus.setText(DatabaseManager.getConnectionStatus());
+        dadosStatus.setText(Banco.getInstance().getConnectionStatus());
 
         //o usuario esta reconfigurando a db.
-        if (DatabaseManager._installed == 1)
+        if (Banco.getInstance().getInstalled() == 1)
         {
             botaoInstalar.setEnabled(false);
         }
@@ -47,7 +47,7 @@ public class DBConfig extends JFrame
         {
             botaoDeletar.setEnabled(false);
         }
-        if (DatabaseManager.isDbDeleted)
+        if (Banco.getInstance().isIsDbDeleted())
         {
             botaoDeletar.setEnabled(false);
         }
@@ -175,10 +175,10 @@ public class DBConfig extends JFrame
             _log.info("chamando funcao de instalacao do banco");
         }
 
-        DatabaseManager.instaleBanco();
+        Banco.getInstance().instaleBanco();
 
-        dadosStatus.setText(DatabaseManager.getConnectionStatus());
-        if (DatabaseManager._installed == 1)
+        dadosStatus.setText(Banco.getInstance().getConnectionStatus());
+        if (Banco.getInstance().getInstalled() == 1)
         {
             //desabilita o botao instalar apos o banco ja ter sido instalado.
             botaoInstalar.setEnabled(false);
@@ -192,11 +192,11 @@ public class DBConfig extends JFrame
 
         //Le os Dados da Licenca
         // --------------------------
-        DatabaseManager.readLicenseData();
+        Banco.getInstance().readLicenseData();
 
         // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
         // ------------------------
-        if (DatabaseManager._licensed == 0)
+        if (Banco.getInstance().getLicensed() == 0)
         {
             EventQueue.invokeLater(new Runnable()
             {
@@ -216,9 +216,9 @@ public class DBConfig extends JFrame
         //    if(!Config.isLoad())
         Config.load();
 
-        DatabaseManager.dropDatabase();
-        dadosStatus.setText(DatabaseManager.getConnectionStatus());
-        if (DatabaseManager._installed == 0)
+        Banco.getInstance().dropDatabase();
+        dadosStatus.setText(Banco.getInstance().getConnectionStatus());
+        if (Banco.getInstance().getInstalled() == 0)
         {
             //Habilita o botao instalar apos o banco ter sido deletado.
             botaoInstalar.setEnabled(true);
