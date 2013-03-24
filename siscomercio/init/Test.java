@@ -1,6 +1,6 @@
 package com.siscomercio.init;
 
-import com.siscomercio.controller.managers.SoundManager;
+import com.siscomercio.model.persistence.Banco;
 
 /**
  *
@@ -14,6 +14,16 @@ public class Test
     public static void main(String[] args)
     {
         Config.load();
-        SoundManager.getInstance().playSound(Config.getLoginSound());
+        Banco.getInstance().conectaDatabaseSelecionada();
+        Banco.getInstance().readInstallationState();
+
+        if (Banco.getInstance().getInstalled() != 0)
+        {
+            System.out.println("ok");
+        }
+        else
+        {
+            System.out.println("errado");
+        }
     }
 }
