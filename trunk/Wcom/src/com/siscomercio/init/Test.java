@@ -1,6 +1,6 @@
 package com.siscomercio.init;
 
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Test
         Banco.getInstance().conectaDatabaseSelecionada();
         Banco.getInstance().readInstallationState();
 
-        if (Banco.getInstance().getInstalled() != 0)
+        if (Banco.getInstance().getInstalled())
         {
             System.out.println("ok");
         }

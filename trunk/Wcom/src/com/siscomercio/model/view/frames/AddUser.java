@@ -13,7 +13,7 @@ package com.siscomercio.model.view.frames;
 import com.siscomercio.init.Config;
 import javax.swing.JFrame;
 import com.siscomercio.controller.managers.DatabaseManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
 import java.util.logging.Level;

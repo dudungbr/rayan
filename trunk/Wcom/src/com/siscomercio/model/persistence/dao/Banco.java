@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.siscomercio.model.persistence;
+package com.siscomercio.model.persistence.dao;
 
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.ExceptionManager;
-import com.siscomercio.init.DatabaseFactory;
 import com.siscomercio.model.entity.Endereco;
 import com.siscomercio.model.entity.Entrada;
 import com.siscomercio.model.entity.Funcionario;
@@ -46,26 +45,9 @@ public class Banco
     private PreparedStatement consultaPreparada;
     private ResultSet resultado;
     private String query;
-    /**
-     * Status Atual do Banco
-     */
     private String _status = StringTable.STATUS_DISCONNECTED;
-    /**
-     * se o banco foi deletado
-     */
     private boolean isDbDeleted;
-
-    public boolean isIsDbDeleted()
-    {
-        return isDbDeleted;
-    }
-    /**
-     * se o banco esta instalado
-     */
     public int _installed;
-    /**
-     * se a apliacao esta Licenciada
-     */
     private int _licensed;
     private String _registeredFor;
     private String _registeredMac;
@@ -75,24 +57,8 @@ public class Banco
     private String _registeredHDSN;
     private int _numStacoes;
 
-    public int getLicensed()
+    private Banco()
     {
-        return _licensed;
-    }
-
-    public void setLicensed(int _licensed)
-    {
-        this._licensed = _licensed;
-    }
-
-    public int getInstalled()
-    {
-        return _installed;
-    }
-
-    public void setInstalled(int installed)
-    {
-        this._installed = installed;
     }
 
     /**
@@ -112,11 +78,18 @@ public class Banco
             ps.setString(8, nomeEmpresa);
             ps.setInt(9, 1);
             ps.execute();
-            _log.info("gravando dados do registro no Banco de Dados.");
+            if (Config.isDebug())
+            {
+                _log.info("gravando dados do registro no Banco de Dados.");
+            }
         }
         catch (SQLException e)
         {
-            ExceptionManager.ThrowException(e.getMessage(), e);
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "Erro ao Registrar Aplica\u00e7\u00e3o...{0}", e);
+                ExceptionManager.ThrowException(e.getMessage(), e);
+            }
 
         }
     }
@@ -135,53 +108,49 @@ public class Banco
             _log.info("Banco: Checando Usuario e Senha ...\n");
         }
 
-        //  Connection con = null;
-        //boolean ok = false;
+        //checa se os dados estao ok...
+        if (Config.isDebug())
+        {
+            _log.log(Level.INFO, "Banco: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
+            {
+                senha, login + "\n"
+            });
+        }
+
+        //reduz para lower case.
+        senha = senha.toLowerCase();
+        login = login.toLowerCase();
+
+        // Criptografa a Senha do Usuario
+        senha = Criptografia.criptografe(senha);
+
+        // ---------------------------------
+        // Le a Tabela de Usuarios da Database
+        // ---------------------------------
+        int userCode = Banco.getInstance().getUserCode(login, senha);
+        String logindb = null;
+        String senhadb = null;
+
         try
         {
-            if (Config.isDebug())
-            //checa se os dados estao ok...
+            try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS); ResultSet rs = ps.getResultSet();)
             {
-                _log.log(Level.INFO, "Banco: Checando dados... \n Senha  = {0} \n User = {1}", new Object[]
+                ps.setInt(1, userCode);
+                ps.setString(2, login);
+                ps.setString(3, senha);
+                ps.execute();
+
+                if (rs.next())
                 {
-                    senha, login + "\n"
-                });
+                    // pega os dados
+                    logindb = rs.getString("login");
+                    senhadb = rs.getString("password");
+                }
             }
-
-
-            senha = senha.toLowerCase();
-            login = login.toLowerCase();
-
-            // Criptografa a Senha do Usuario
-            senha = Criptografia.criptografe(senha);
-
-            // ---------------------------------
-            // Le a Tabela de Usuarios da Database
-            // ---------------------------------
-            int userCode = Banco.getInstance().getUserCode(login, senha);
-            String logindb = null;
-            String senhadb = null;
-
-            conexao = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS);
-            ps.setInt(1, userCode);
-            ps.setString(2, login);
-            ps.setString(3, senha);
-            ps.execute();
-            ResultSet rset = ps.getResultSet();
-            if (rset.next())
-            {
-                // pega os dados
-                logindb = rset.getString("login");
-                senhadb = rset.getString("password");
-            }
-            //devemos fecha todas as conxoes assim que terminado o procedimento.
-//            DatabaseManager.closeConnections(ps, rset, con);
 
             // Compara as Senhas Digitadas Pelo Usuario com a DB
             if (login.equalsIgnoreCase(logindb) && (senha.equalsIgnoreCase(senhadb)))
             {
-
                 UserTable.getInstance().setLastUser(login);
                 return true;
             }
@@ -194,153 +163,28 @@ public class Banco
         }
         catch (SQLException ex)
         {
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "SQLException: {0}\n SQLState: {1}\n VendorError: {2}", new Object[]
+                {
+                    ex.getMessage(), ex.getSQLState(), ex.getErrorCode()
+                });
+            }
             SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
 
         }
         catch (Exception e)
         {
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "SQLException: {0}", e.getMessage());
+            }
             SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
         }
         return true;
     }
 
     /**
-     * ler eExecuta todos os Scripts SQL dentro da pasta SQL
-     *
-     */
-    /*
-     * public static void readAndExecuteDatabaseScripts()
-     * {
-     * File pasta = new File(com.siscomercio.tables.StringTable.SQL_PATH);
-     * for (File f : pasta.listFiles())
-     * {
-     * if (f != null && f.getName().endsWith(".sql"))
-     * {
-     * try
-     * {
-     *
-     * Connection con = null;
-     * if (Config.isDebug())
-     * {
-     * _log.log(Level.INFO, "\n DatabaseManager: executando script {0} \n",
-     * f.getName());
-     * }
-     * String thisLine, sqlQuery = null;
-     *
-     * con = DatabaseFactory.getInstance().getConnection();
-     * BufferedReader d = new BufferedReader(new
-     * FileReader(com.siscomercio.tables.StringTable.SQL_PATH + f.getName()));
-     * sqlQuery = "";
-     * Statement st = null;
-     */
-    //Now read line by line
-    // while ((thisLine = d.readLine()) != null)
-    // {
-    //   //Skip comments <strong class="highlight">and</strong> empty lines
-//                        if (thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
-    //   {
-    //       continue;
-    //    }
-
-    /*
-     * sqlQuery = sqlQuery + " " + thisLine;
-     *
-     * //If one command complete
-     * if (sqlQuery.charAt(sqlQuery.length() - 1) == ';')
-     * {
-     * sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc
-     * complains
-     * try
-     * {
-     * st = con.createStatement();
-     * st.execute(sqlQuery);
-     *
-     * }
-     * catch (SQLException ex)
-     * {
-     * SystemUtil.showErrorMsg("Erro" + ex, true);
-     * }
-     *
-     * sqlQuery = "";
-     * }
-     *
-     * }
-     * closeConnections(st, con);
-     *
-     *
-     * }
-     * catch (Exception e)
-     * {
-     * SystemUtil.showErrorMsg("Falha ao Executar Script SQL: " + f.getName() +
-     * " Erro: " + e.getMessage(), true);
-     * }
-     * }
-     * }
-     * }
-     */
-    /**
-     * Executa uma query
-     *
-     * @param query
-     * <p/>
-     * @return o resultado dessa query como boolean
-     */
-    /*
-     * public static boolean executeQuery(String query)
-     * {
-     * boolean result = false;
-     * Connection con = null;
-     * if (Config.isDebug())
-     * {
-     * _log.log(Level.INFO, "\n Executando Query: {0} \n", query);
-     * }
-     * try
-     * {
-     * con = DatabaseFactory.getInstance().getConnection();
-     * Statement st = con.createStatement();
-     * st.execute(query);
-     * closeConnections(st, con);
-     * result = true;
-     * }
-     * catch (SQLException e)
-     * {
-     * SystemUtil.showErrorMsg("" + e, true);
-     * result = false;
-     * }
-     * return result;
-     * }
-     */
-    /**
-     * Cria Nova Database
-     */
-    /*
-     * public static void createNewDatabase()
-     * {
-     * Connection con = null;
-     *
-     * if (Config.isDebug())
-     * {
-     * _log.info("\n criando novo banco. \n ");
-     * }
-     * try
-     * {
-     * Class.forName(Config.getDatabaseDriver()).newInstance();
-     * con = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() +
-     * ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(),
-     * Config.getDatabasePassword());
-     * Statement st = con.createStatement();
-     * st.executeUpdate(com.siscomercio.tables.StringTable.CREATE_DB);
-     * closeConnections(st, con);
-     *
-     * }
-     * catch (ClassNotFoundException | InstantiationException |
-     * IllegalAccessException | SQLException ex)
-     * {
-     * SystemUtil.showErrorMsg("Erro ao criar nova base de dados: " + ex, true);
-     * }
-     * }
-     *
-     * /**
      * Instala Novo Banco
      */
     public void instaleBanco()
@@ -349,10 +193,10 @@ public class Banco
         {
             _log.info("\n tentando Instalar Database...");
         }
-        //createNewDatabase();
-        //readAndExecuteDatabaseScripts();
-        //   executeQuery(StringTable.INSTALL);
-        _installed = 1;
+        criaNovaBase();
+        executaTabelasMySQL();
+        executeQuery(StringTable.INSTALL);
+        setInstalled(true);
         SystemUtil.showMsg("Banco de Dados Instalado com Sucesso!", true);
     }
 
@@ -363,8 +207,8 @@ public class Banco
     {
         executeQuery(StringTable.DELETE_DB);
         SystemUtil.showMsg("Banco de Dados Deletado!", true);
-        _installed = 0;
-        isDbDeleted = true;
+        setInstalled(false);
+        setIsDbDeleted(true);
     }
 
     /**
@@ -380,11 +224,9 @@ public class Banco
         {
             _log.info("checando se o login existe na Database...\n");
         }
-        boolean result = false;
         try
         {
-            String sql = "select `login` from users where `login` like '" + value
-                    + "';";
+            String sql = "select `login` from users where `login` like '" + value + "';";
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.execute();
@@ -395,18 +237,18 @@ public class Banco
                 {
                     SystemUtil.showErrorMsg("Login já Cadastrado.", true);
                 }
-                result = true;
-            }
-            else
-            {
-                result = false;
+                return true;
             }
         }
         catch (SQLException ex)
         {
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "Erro:  {0}", ex);
+            }
             ExceptionManager.ThrowException("Erro: ", ex);
         }
-        return result;
+        return false;
 
     }
 
@@ -423,23 +265,20 @@ public class Banco
         {
             _log.log(Level.INFO, "Adcionando Usuario: {0}", login);
         }
-
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.INSERT_USER))
         {
-            //     conexao = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = conexao.prepareStatement(""/*
-                     * StringTable.INSERT_USER
-                     */);
-//      ps.setInt(1, getLastCode() + 1);
-            ps.setString(2, login);
-            ps.setString(3, senha);
-            ps.setInt(4, nivelAcesso);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ps.setInt(3, nivelAcesso);
             ps.execute();
-            // closeConnections(ps, con);
-            SystemUtil.showMsg("usuario cadastrado com sucesso!", true);
+            //  SystemUtil.showMsg("usuario cadastrado com sucesso!", true);
         }
         catch (SQLException e)
         {
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "erro {0}", e);
+            }
             SystemUtil.showErrorMsg(e.toString(), true);
         }
     }
@@ -526,38 +365,30 @@ public class Banco
      */
     public int getUserCode(String login, String senha)
     {
-        //  Connection con = null;
         if (Config.isDebug())
         {
             _log.info("Procurando codigo do Usuario.. \n");
         }
-        int codigo = -1;
-        try
+        int codigo = StringTable.DEFAULT_INT;
+
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_CODE); ResultSet rset = ps.getResultSet();)
         {
-            //  conexao = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_CODE);
             ps.setString(1, login);
             ps.setString(2, senha);
             ps.execute();
-            ResultSet rset = ps.getResultSet();
+
             if (rset.next())
             {
                 codigo = rset.getInt("codigo");
             }
-
-            //  closeConnections(ps, con);
-
-            if (Config.isDebug())
-            {
-                _log.log(Level.INFO, "O codigo do usuario {0} e {1}\n", new Object[]
-                {
-                    login, codigo
-                });
-            }
         }
         catch (SQLException ex)
         {
-            _log.log(Level.WARNING, "Erro ao pegar codigo do usuario: {0}", ex);
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.WARNING, "Erro ao pegar codigo do usuario: {0}", ex);
+            }
+            ExceptionManager.ThrowException("Erro ao pegar codigo do usuario:", ex);
         }
         return codigo;
     }
@@ -697,17 +528,14 @@ public class Banco
      */
     public int getAccessLevel(String usr)
     {
-
-        //Connection con = null;
         if (Config.isDebug())
         {
             _log.log(Level.INFO, "checando o nivel de acesso do usuario {0}\n", usr);
         }
 
-        int level = 0;
+        int level = StringTable.DEFAULT_INT;
         try
         {
-            // conex = DatabaseFactory.getInstance().getConnection();
             PreparedStatement ps = conexao.prepareStatement(StringTable.GET_ACC_LVL);
             ps.setString(1, usr);
             ps.execute();
@@ -716,8 +544,6 @@ public class Banco
             {
                 level = rset.getInt("accesslevel");
             }
-            // Fecha as Conexoes
-            //   closeConnections(ps, rset, con);
             if (Config.isDebug())
             {
                 _log.log(Level.INFO, "nivel de acesso do usuario {0} e {1} \n", new Object[]
@@ -728,64 +554,12 @@ public class Banco
         }
         catch (Exception e)
         {
-            _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "DatabaseManager: Error getting access level: " + e.getMessage(), e);
+            }
         }
-        _log.log(Level.INFO, "nivel de accesso: {0}\n", level);
         return level;
-    }
-
-    /**
-     * Close Connections
-     *
-     * @param ps
-     * @param rset
-     * @param con
-     */
-    /*
-     * public static void closeConnections(PreparedStatement ps, ResultSet rset,
-     * Connection con)
-     * {
-     * if (Config.isDebug())
-     * {
-     * System.out.println();
-     * }
-     * _log.info("Fechando conexoes c/ a database \n");
-     * try
-     * {
-     * ps.close();
-     * rset.close();
-     * con.close();
-     * setConStatus(com.siscomercio.tables.StringTable.STATUS_DISCONNECTED);
-     * }
-     * catch (SQLException ex)
-     * {
-     * SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" +
-     * ex, true);
-     * }
-     * }
-     *
-     * /**
-     * Close Connections
-     *
-     * @param s
-     * @param con
-     */
-    private void closeConnections(Statement s, Connection con)
-    {
-        if (Config.isDebug())
-        {
-            _log.info("Fechando conexoes c/ a database \n");
-        }
-        try
-        {
-            s.close();
-            con.close();
-            setConStatus(StringTable.STATUS_DISCONNECTED);
-        }
-        catch (SQLException ex)
-        {
-            SystemUtil.showErrorMsg("Erro ao fechar conexoes com o banco de dados!" + ex, true);
-        }
     }
 
     /**
@@ -814,22 +588,26 @@ public class Banco
      */
     public void readInstallationState()
     {
-        // Connection con = null;
         if (Config.isDebug())
         {
             _log.info("lendo tabela de estado da instalacao \n");
         }
         try
         {
-            //conexao = DatabaseFactory.getInstance().getConnection();
-            conexao.prepareStatement(StringTable.READ_INSTALL);
+            if (conexao == null)
+            {
+                if (Config.isDebug())
+                {
+                    _log.info("conexao nula");
+                }
+                return;
+            }
+            consultaPreparada = conexao.prepareStatement(StringTable.READ_INSTALL);
             ResultSet rset = consultaPreparada.executeQuery();
             while (rset.next())
             {
-                this.setInstalled(rset.getInt("bancoInstalado"));
+                this.setInstalled(rset.getInt("bancoInstalado") == 1 ? true : false);
             }
-
-            //     closeConnections(consultaPreparada, rset, conexao);
 
             if (Config.isDebug())
             {
@@ -838,7 +616,7 @@ public class Banco
         }
         catch (Exception e)
         {
-            if (Config.isDebug())
+            if (Config.isDebug() || Config.isEnableLog())
             {
                 _log.log(Level.SEVERE, "DatabaseManager: Error reading Install Table: {0}", e.getMessage());
             }
@@ -857,11 +635,8 @@ public class Banco
         {
             _log.info("Lendo dados da Licenca \n");
         }
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.READ_APP_LICENSE_DATA); ResultSet rset = ps.executeQuery();)
         {
-            //conexao = DatabaseFactory.getInstance().getConnection();
-            PreparedStatement ps = conexao.prepareStatement(StringTable.READ_APP_LICENSE_DATA);
-            ResultSet rset = ps.executeQuery();
             while (rset.next())
             {
                 _registeredMac = rset.getString("stationMAC");
@@ -874,7 +649,7 @@ public class Banco
                 _licensed = rset.getInt("licenciado");
 
             }
-            //closeConnections(ps, rset, con);
+            setLicensed(_licensed);
             if (Config.isDebug())
             {
                 _log.log(Level.INFO, "Status da Licenca: {0}\n", _licensed);
@@ -882,16 +657,13 @@ public class Banco
         }
         catch (Exception e)
         {
-            if (Config.isDebug())
+            if (Config.isDebug() || Config.isEnableLog())
             {
                 _log.log(Level.SEVERE, "DatabaseManager: Error reading License Data: "
                         + e.getMessage(), e);
             }
+            ExceptionManager.ThrowException("Erro: ", e);
         }
-    }
-
-    private Banco()
-    {
     }
 
     /**
@@ -916,7 +688,10 @@ public class Banco
      */
     public void criaNovaBase()
     {
-        _log.info("verificando existencia da base de dados..");
+        if (Config.isDebug())
+        {
+            _log.info("verificando existencia da base de dados..");
+        }
         //String url2 = null;
         try
         {
@@ -929,13 +704,17 @@ public class Banco
             // "jdbc:mysql://" + Config.getHost() + "/";
 
             conexao = DriverManager.getConnection("jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/", Config.getDatabaseLogin(), Config.getDatabasePassword()); //DriverManager.getConnection(url2, Config.getDatabaseLogin(), Config.getDatabasePassword());
-            consulta = conexao.createStatement();
-            consulta.executeUpdate(StringTable.CREATE_DB);
-            consulta.close();
+            try (Statement st = conexao.createStatement())
+            {
+                st.executeUpdate(StringTable.CREATE_DB);
+            }
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isDebug() || Config.isEnableLog())
+            {
+                _log.log(Level.SEVERE, "Erro: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Criar Nova Base de Dados: ", ex);
         }
     }
@@ -946,31 +725,30 @@ public class Banco
      */
     public void executaTabelasMySQL()
     {
-        _log.info("carregando tabelas do banco...");
+        if (Config.isDebug())
+        {
+            _log.info("carregando tabelas do banco...");
+        }
 
         File pasta = new File(StringTable.getSQL_PATH());
         for (File f : pasta.listFiles())
         {
             if (f != null && f.getName().endsWith(".sql"))
             {
-                try
+
+                String thisLine, sqlQuery;
+                try (BufferedReader br = new BufferedReader(new FileReader(StringTable.getSQL_PATH() + f.getName())))
                 {
-
-
-                    String thisLine, sqlQuery;
-
-                    BufferedReader d = new BufferedReader(new FileReader(StringTable.getSQL_PATH() + f.getName()));
                     sqlQuery = "";
 
-
-
                     //Now read line by line
-                    while ((thisLine = d.readLine()) != null)
+                    while ((thisLine = br.readLine()) != null)
                     {
                         //Skip comments <strong class="highlight">and</strong> empty lines
                         if (thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
                         {
                             continue;
+
                         }
 
                         sqlQuery = sqlQuery + " " + thisLine;
@@ -987,8 +765,10 @@ public class Banco
                             }
                             catch (SQLException ex)
                             {
-
-                                _log.severe(ex.getMessage());
+                                if (Config.isEnableLog() || Config.isDebug())
+                                {
+                                    _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
+                                }
                                 ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
                             }
 
@@ -996,12 +776,13 @@ public class Banco
                         }
 
                     }
-
                 }
                 catch (Exception ex)
                 {
-
-                    _log.severe(ex.getMessage());
+                    if (Config.isEnableLog() || Config.isDebug())
+                    {
+                        _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
+                    }
                     ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
 
                 }
@@ -1014,14 +795,15 @@ public class Banco
                     }
                     catch (SQLException ex)
                     {
-                        _log.severe(ex.getMessage());
+                        if (Config.isEnableLog() || Config.isDebug())
+                        {
+                            _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
+                        }
                         ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
                     }
                 }
             }
         }
-
-
     }
 
     /**
@@ -1034,7 +816,7 @@ public class Banco
         try//A captura de exceções SQLException em Java é obrigatória para usarmos JDBC.
         {
 
-            url = "jdbc:mysql://" + Config.getHost() + "/" + Config.getDatabase();
+            url = "jdbc:mysql://" + Config.getHost() + ":" + Config.getDatabasePort() + "/" + Config.getDatabase();
 
             if (Config.isDebug())
             {
@@ -1042,50 +824,22 @@ public class Banco
             }
             // Este é um dos meios para registrar um driver
             Class.forName(Config.getDatabaseDriver()).newInstance();
-            conexao = DriverManager.getConnection(url, Config.getDatabaseLogin(), Config.getDatabasePassword());
+            conexao = DatabaseFactory.getInstance().getConnection();// DriverManager.getConnection(url, Config.getDatabaseLogin(), Config.getDatabasePassword());
+            if (Config.isDebug())
+            {
+                _log.info("Conectado com Sucesso!!");
+            }
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Conectar na Base de Dados {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Conectar na Base de Dados ", url, ex);
         }
 
 
-    }
-
-    /**
-     *
-     * @return
-     */
-    public boolean fechaConexoes()
-    {
-        _log.info("Fechando Conexoes com o Banco..");
-        try
-        {
-            if (conexao != null)
-            {
-                conexao.close();
-            }
-            if (consulta != null)
-            {
-                consulta.close();
-            }
-            if (consultaPreparada != null)
-            {
-                consultaPreparada.close();
-            }
-            if (resultado != null)
-            {
-                resultado.close();
-            }
-            return true;
-        }
-        catch (SQLException ex)
-        {
-            _log.severe(ex.getMessage());
-            ExceptionManager.ThrowException("Erro ao Fechar Conexoes", "", ex);
-        }
-        return false;
     }
 
     /**
@@ -1108,12 +862,17 @@ public class Banco
     {
         try
         {
-            consulta = conexao.createStatement();
-            consulta.executeQuery(query);
+            try (Statement st = conexao.createStatement())
+            {
+                st.executeQuery(query);
+            }
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Nao Foi Possivel Executar a Query: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Nao Foi Possivel Executar a Query: ", query, ex);
         }
 
@@ -1127,15 +886,18 @@ public class Banco
      */
     public ResultSet getResultSet(String query)
     {
-        try
-        {
-            consulta = conexao.createStatement();
-            resultado = consulta.executeQuery(query);
 
+
+        try (Statement st = conexao.createStatement())
+        {
+            resultado = st.executeQuery(query);
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Retornar ResultSet: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Retornar ResultSet: ", query, ex);
         }
         return resultado;
@@ -1154,32 +916,25 @@ public class Banco
         {
             _log.info("Checando Usuario e Senha ...\n");
         }
+        // Criptografa a Senha do Usuario
+        String senhaCrypto = Criptografia.criptografe(user.getSenhaAtual());
 
-
-        try
+        // ---------------------------------
+        // Le a Tabela de Usuarios da Database
+        //--------------------------------------
+        String logindb = null;
+        String senhadb = null;
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHECK_USER_PASS); ResultSet rset = ps.getResultSet();)
         {
-
-            // Criptografa a Senha do Usuario
-            String senhaCrypto = Criptografia.criptografe(user.getSenhaAtual());
-
-            // ---------------------------------
-            // Le a Tabela de Usuarios da Database
-            //--------------------------------------
-            String logindb = null;
-            String senhadb = null;
-
-            //prepara consulta
-            consultaPreparada = conexao.prepareStatement(StringTable.CHECK_USER_PASS);
-            consultaPreparada.setString(1, user.getLogin());
-            consultaPreparada.setString(2, senhaCrypto);
-            consultaPreparada.execute();
-            resultado = consultaPreparada.getResultSet();
+            ps.setString(1, user.getLogin());
+            ps.setString(2, senhaCrypto);
+            ps.execute();
 
             // pega os dados
-            if (resultado.next())
+            if (rset.next())
             {
-                logindb = resultado.getString("login");
-                senhadb = resultado.getString("senha");
+                logindb = rset.getString("login");
+                senhadb = rset.getString("senha");
             }
 
             // Compara as Senhas Digitadas Pelo Usuario com a DB
@@ -1188,11 +943,13 @@ public class Banco
                 return true;
             }
 
-
         }
         catch (Exception ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Validar Senha Usuario: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Validar Senha Usuario: " + user.getLogin(), ex);
 
         }
@@ -1238,34 +995,21 @@ public class Banco
      */
     public boolean cadastraTecnico(String nome, String sobrenome)
     {
-        query = StringTable.getINSERT_TECNICO();
-
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.getINSERT_TECNICO()))
         {
-            consultaPreparada = conexao.prepareStatement(query);
-            consultaPreparada.setString(1, nome);
-            consultaPreparada.setString(2, sobrenome);
-            consultaPreparada.execute();
-
+            ps.setString(1, nome);
+            ps.setString(2, sobrenome);
+            ps.execute();
             return true;
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Inserir Tecnico: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Inserir Tecnico: ", query, ex);
-        }
-        finally
-        {
-            try
-            {
-                consultaPreparada.close();
 
-            }
-            catch (SQLException ex)
-            {
-                _log.severe(ex.getMessage());
-                ExceptionManager.ThrowException("Erro ao Fechar Conexao: ", ex);
-            }
         }
 
         return false;
@@ -1316,24 +1060,36 @@ public class Banco
      */
     public boolean addUser(Funcionario f, Endereco e)
     {
-        _log.log(Level.INFO, "Adcionando Usuario: {0}", f.getNome() + f.getSenhaAtual());
-        try
+        if (Config.isDebug())
         {
-            String senhaCripto = Criptografia.criptografe(f.getSenhaAtual());
+            _log.log(Level.INFO, "Adcionando Usuario: {0}", f.getNome() + f.getSenhaAtual());
+        }
+
+        String senhaCripto = Criptografia.criptografe(f.getSenhaAtual());
+
+        if (Config.isDebug())
+        {
             _log.log(Level.INFO, "Senha Cripto: {0}", senhaCripto);
-            consultaPreparada = conexao.prepareStatement(StringTable.getINSERT_USER());
-            consultaPreparada.setString(1, f.getLogin());
-            consultaPreparada.setString(2, senhaCripto);
-            consultaPreparada.setInt(3, f.getNivelAcesso());
-            consultaPreparada.setString(4, f.getNome());
-            consultaPreparada.setString(5, e.getRua());
-            consultaPreparada.setString(6, f.getCargo());
-            consultaPreparada.execute();
+        }
+
+
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.getINSERT_USER()))
+        {
+            ps.setString(1, f.getLogin());
+            ps.setString(2, senhaCripto);
+            ps.setInt(3, f.getNivelAcesso());
+            ps.setString(4, f.getNome());
+            ps.setString(5, e.getRua());
+            ps.setString(6, f.getCargo());
+            ps.execute();
             return true;
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Adcionar Usu\u00e1rio: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Adcionar Usuário: ", ex);
         }
         return false;
@@ -1348,17 +1104,18 @@ public class Banco
      */
     public boolean delUser(String login)
     {
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.DELETE_USER))
         {
-            consultaPreparada = conexao.prepareStatement(StringTable.DELETE_USER);
-            consultaPreparada.setString(1, login);
-            consultaPreparada.execute();
+            ps.setString(1, login);
+            ps.execute();
             return true;
-
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Deletar Usu\u00e1rio: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Deletar Usuário: ", ex);
         }
         return false;
@@ -1369,27 +1126,30 @@ public class Banco
      *
      * @return codigo
      */
-    public int buscaUltimoId()
-    {
-        _log.info("Procurando ultimo codigo gerado na DB..");
-        int codigo = -1;
-        try
-        {
-            consultaPreparada = conexao.prepareStatement(StringTable.getGET_LAST_ENTRADA_ID());
-            consultaPreparada.execute();
-            resultado = consultaPreparada.getResultSet();
-            resultado.next();
-            codigo = resultado.getInt(1);
-
-        }
-        catch (SQLException ex)
-        {
-            _log.severe(ex.getMessage());
-            ExceptionManager.ThrowException("Erro ao Procurar Ultimno Registro: ", ex);
-        }
-        return codigo;
-    }
-
+    /*
+     * public int buscaUltimoId()
+     * {
+     * _log.info("Procurando ultimo codigo gerado na DB..");
+     * int codigo = -1;
+     * try
+     * {
+     * consultaPreparada =
+     * conexao.prepareStatement(StringTable.getGET_LAST_ENTRADA_ID());
+     * consultaPreparada.execute();
+     * resultado = consultaPreparada.getResultSet();
+     * resultado.next();
+     * codigo = resultado.getInt(1);
+     *
+     * }
+     * catch (SQLException ex)
+     * {
+     * _log.severe(ex.getMessage());
+     * ExceptionManager.ThrowException("Erro ao Procurar Ultimno Registro: ",
+     * ex);
+     * }
+     * return codigo;
+     * }
+     */
     /**
      *
      * @param ent
@@ -1402,27 +1162,29 @@ public class Banco
         {
             _log.info("salvando entrada para o banco...");
         }
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.getINSERT_ENTRADA()))
         {
-            consultaPreparada = conexao.prepareStatement(StringTable.getINSERT_ENTRADA());
-            consultaPreparada.setInt(1, ent.getNumEnt());
-            consultaPreparada.setString(2, ent.getData());
-            consultaPreparada.setString(3, ent.getUsuario());
-            consultaPreparada.setString(4, ent.getStatus());
-            consultaPreparada.setString(5, ent.getPerifericos());
-            consultaPreparada.setString(6, ent.getDescricao());
-            consultaPreparada.setString(7, ent.getMarca());
-            consultaPreparada.setString(8, ent.getModelo());
-            consultaPreparada.setString(9, ent.getQuantidade());
-            consultaPreparada.setString(10, ent.getResponsavel());
-            consultaPreparada.setString(11, ent.getDefeitos());
-            consultaPreparada.setString(12, ent.getHora());
-            consultaPreparada.execute();
+            ps.setInt(1, ent.getNumEnt());
+            ps.setString(2, ent.getData());
+            ps.setString(3, ent.getUsuario());
+            ps.setString(4, ent.getStatus());
+            ps.setString(5, ent.getPerifericos());
+            ps.setString(6, ent.getDescricao());
+            ps.setString(7, ent.getMarca());
+            ps.setString(8, ent.getModelo());
+            ps.setString(9, ent.getQuantidade());
+            ps.setString(10, ent.getResponsavel());
+            ps.setString(11, ent.getDefeitos());
+            ps.setString(12, ent.getHora());
+            ps.execute();
             return true;
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Salvar Entrada: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Salvar Entrada: ", ex);
         }
         return false;
@@ -1438,7 +1200,7 @@ public class Banco
     public boolean changePassword(String newPass)
     {
         // pega o usuario na tabela.
-        String login = "";// UserTable.getInstance().getLastUser().getLogin();
+        String login = UserTable.getInstance().getLastUser();
 
         if (Config.isDebug())
         {
@@ -1447,20 +1209,23 @@ public class Banco
         //converte p versao criptografada
         String passCrypto = Criptografia.criptografe(newPass);
 
-        try
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.CHANGE_USER_PASS))
         {
-            consultaPreparada = conexao.prepareStatement(StringTable.CHANGE_USER_PASS);
-            consultaPreparada.setString(1, passCrypto);
-            consultaPreparada.setString(2, login);
-            consultaPreparada.execute();
+            ps.setString(1, passCrypto);
+            ps.setString(2, login);
+            ps.execute();
             return true;
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Trocar Senha do Usuario: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Trocar Senha do Usuario: ", ex);
-            return false;
+
         }
+        return false;
     }
 
     /**
@@ -1471,28 +1236,141 @@ public class Banco
      */
     public String buscaSenha(String login)
     {
-        String senhadb = "";
-        try
+        String senhadb = null;
+
+        try (PreparedStatement ps = conexao.prepareStatement(StringTable.GET_USER_PASS); ResultSet rset = ps.getResultSet();)
         {
+            ps.setString(1, login);
+            ps.execute();
 
-            consultaPreparada = conexao.prepareStatement(StringTable.GET_USER_PASS);
-            consultaPreparada.setString(1, login);
-            consultaPreparada.execute();
-
-            resultado = consultaPreparada.getResultSet();
-
-            // pega os dados
-            if (resultado.next())
+            if (rset.next())
             {
-                senhadb = resultado.getString("senha");
+                senhadb = rset.getString("senha");
             }
         }
         catch (SQLException ex)
         {
-            _log.severe(ex.getMessage());
+            if (Config.isEnableLog() || Config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Erro ao Buscar Senha: {0}", ex.getMessage());
+            }
             ExceptionManager.ThrowException("Erro ao Buscar senha do Usuario: " + login, ex);
         }
         return senhadb;
+    }
+
+    public String getRegisteredFor()
+    {
+        return _registeredFor;
+    }
+
+    public void setRegisteredFor(String _registeredFor)
+    {
+        this._registeredFor = _registeredFor;
+    }
+
+    public String getRegisteredMac()
+    {
+        return _registeredMac;
+    }
+
+    public void setRegisteredMac(String _registeredMac)
+    {
+        this._registeredMac = _registeredMac;
+    }
+
+    public String getRegisteredMBSN()
+    {
+        return _registeredMBSN;
+    }
+
+    public void setRegisteredMBSN(String _registeredMBSN)
+    {
+        this._registeredMBSN = _registeredMBSN;
+    }
+
+    public String getEmpresa()
+    {
+        return _empresa;
+    }
+
+    public void setEmpresa(String _empresa)
+    {
+        this._empresa = _empresa;
+    }
+
+    public String getLicenceType()
+    {
+        return _licenceType;
+    }
+
+    public void setLicenceType(String _licenceType)
+    {
+        this._licenceType = _licenceType;
+    }
+
+    public String getRegisteredHDSN()
+    {
+        return _registeredHDSN;
+    }
+
+    public void setRegisteredHDSN(String _registeredHDSN)
+    {
+        this._registeredHDSN = _registeredHDSN;
+    }
+
+    public int getNumStacoes()
+    {
+        return _numStacoes;
+    }
+
+    public void setNumStacoes(int _numStacoes)
+    {
+        this._numStacoes = _numStacoes;
+    }
+
+    public int getLicensed()
+    {
+        return _licensed;
+    }
+
+    public void setLicensed(int _licensed)
+    {
+        this._licensed = _licensed;
+    }
+
+    public boolean getInstalled()
+    {
+        if (_installed == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void setInstalled(boolean installed)
+    {
+        if (!installed)
+        {
+            this._installed = 0;
+        }
+        else
+        {
+            this._installed = 1;
+        }
+    }
+
+    public boolean isIsDbDeleted()
+    {
+        return isDbDeleted;
+    }
+
+    public void setIsDbDeleted(boolean isDbDeleted)
+    {
+        this.isDbDeleted = isDbDeleted;
     }
 
     /**

@@ -21,7 +21,7 @@ import com.siscomercio.init.Config;
 import com.siscomercio.model.view.frames.FramePrincipal;
 import com.siscomercio.model.view.frames.LogonUsuario;
 import com.siscomercio.controller.managers.SoundManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -106,7 +106,7 @@ public class Auth extends JFrame
         }
 
         // Desabilita o Botao Configurar caso a DB Ja tenha Sido Instalada Previamente.
-        if (Banco.getInstance().getInstalled() == 1)
+        if (Banco.getInstance().getInstalled())
         {
             botaoConfigurar.setEnabled(false);
             botaoLogin.setEnabled(true);

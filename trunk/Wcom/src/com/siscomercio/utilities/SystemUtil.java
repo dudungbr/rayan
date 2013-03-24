@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import com.siscomercio.init.Config;
-import com.siscomercio.init.DatabaseFactory;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.DatabaseFactory;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.standards.StringTable;
 import java.applet.Applet;
 import java.applet.AudioClip;
