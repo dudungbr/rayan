@@ -27,7 +27,7 @@ import com.siscomercio.init.Config;
 
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.SoundManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.standards.StringTable;
@@ -74,13 +74,13 @@ public class FramePrincipal extends JFrame
         if (file.exists())
         {
             ImageIcon img = new ImageIcon(file.toString());
-            if (img.getImage().getGraphics() != null)
+            if (img.getImage() == null)
             {
-                label.setIcon(img);
+                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo() + "\n", true);
             }
             else
             {
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo() + "\n", true);
+                label.setIcon(img);
             }
         }
         else

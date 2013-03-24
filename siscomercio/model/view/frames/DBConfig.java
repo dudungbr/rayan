@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import java.awt.EventQueue;
 
 /**
@@ -39,7 +39,7 @@ public class DBConfig extends JFrame
         dadosStatus.setText(Banco.getInstance().getConnectionStatus());
 
         //o usuario esta reconfigurando a db.
-        if (Banco.getInstance().getInstalled() == 1)
+        if (Banco.getInstance().getInstalled())
         {
             botaoInstalar.setEnabled(false);
         }
@@ -178,7 +178,7 @@ public class DBConfig extends JFrame
         Banco.getInstance().instaleBanco();
 
         dadosStatus.setText(Banco.getInstance().getConnectionStatus());
-        if (Banco.getInstance().getInstalled() == 1)
+        if (Banco.getInstance().getInstalled())
         {
             //desabilita o botao instalar apos o banco ja ter sido instalado.
             botaoInstalar.setEnabled(false);
@@ -218,7 +218,7 @@ public class DBConfig extends JFrame
 
         Banco.getInstance().dropDatabase();
         dadosStatus.setText(Banco.getInstance().getConnectionStatus());
-        if (Banco.getInstance().getInstalled() == 0)
+        if (!Banco.getInstance().getInstalled())
         {
             //Habilita o botao instalar apos o banco ter sido deletado.
             botaoInstalar.setEnabled(true);

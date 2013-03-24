@@ -4,22 +4,21 @@
  */
 package com.siscomercio.init;
 
-import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.model.view.frames.FrameSplashScreen;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.LogManager;
 import com.siscomercio.controller.managers.SoundManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.model.security.Auth;
 import com.siscomercio.model.view.frames.DBConfig;
 import com.siscomercio.model.view.frames.FrameLicenca;
-import com.siscomercio.model.view.frames.FramePrincipal;
 import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.URISyntaxException;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import sun.jvmstat.monitor.HostIdentifier;
@@ -153,7 +152,7 @@ public class Boot extends JFrame
                             }
                             catch (Exception ex)
                             {
-                                _log.severe(ex.getMessage());
+                                _log.log(Level.SEVERE, "Erro ao Conectar Banco: {0}", ex.getMessage());
                                 ExceptionManager.ThrowException("Erro Chamar DAO do Banco de Dados", ex);
                             }
                             break;
@@ -165,11 +164,11 @@ public class Boot extends JFrame
                             // Lê a Tabela de Instalacao da DB
                             //--------------------------------
                             _log.info("Lendo Tabela de Instalacao do Banco ...");
-                            // banco.readInstallationState();
+                            banco.readInstallationState();
 
                             // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
                             // ------------------------
-                            if (Banco.getInstance().getInstalled() == 0)
+                            if (!Banco.getInstance().getInstalled())
                             {
                                 _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
                                 EventQueue.invokeLater(new Runnable()
@@ -177,8 +176,6 @@ public class Boot extends JFrame
                                     @Override
                                     public void run()
                                     {
-                                        AppManager.setTema(DBConfig.class.getSimpleName());
-                                        _log.info("Abrindo Instalador da Database...");
                                         DBConfig.getInstance().setVisible(true);
                                     }
                                 });
@@ -234,17 +231,7 @@ public class Boot extends JFrame
                                             }
                                         });
                                     }
-                                    else
-                                    {
-                                        EventQueue.invokeLater(new Runnable()
-                                        {
-                                            @Override
-                                            public void run()
-                                            {
-                                                new FramePrincipal().setVisible(true);
-                                            }
-                                        });
-                                    }
+
                                 } //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
                                 // -----------------------------------------------------------
                                 else
@@ -254,7 +241,6 @@ public class Boot extends JFrame
                                         @Override
                                         public void run()
                                         {
-
                                             new FrameLicenca().setVisible(true);
                                         }
                                     });

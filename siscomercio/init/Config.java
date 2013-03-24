@@ -2,7 +2,6 @@ package com.siscomercio.init;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
-import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.controller.managers.PropertiesManager;
 import com.siscomercio.standards.StringTable;

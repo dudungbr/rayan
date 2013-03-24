@@ -5,7 +5,7 @@
  */
 package com.siscomercio.model.view.frames;
 
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.utilities.SystemUtil;
 import java.awt.EventQueue;
 import javax.swing.JFrame;

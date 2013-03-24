@@ -16,6 +16,7 @@ import com.siscomercio.init.Config;
  */
 public class StringTable
 {
+    public static int DEFAULT_INT = -1;
     /**
      * Pasta de Sons
      */
@@ -39,7 +40,7 @@ public class StringTable
     /**
      * Insere Novo Usuario na DB
      */
-    public static final String INSERT_USER = "INSERT INTO `users`(codigo,login,password,accesslevel) VALUES (?,?,?,?)";
+    public static final String INSERT_USER = "INSERT INTO `users`(login,password,accesslevel) VALUES (?,?,?)";
     /**
      * Pega o Codigo do Usuario.
      */

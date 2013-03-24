@@ -13,7 +13,7 @@ package com.siscomercio.model.view.frames;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.siscomercio.init.Config;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.model.persistence.dao.Banco;
 
 /**
  * $Revision: 123 $

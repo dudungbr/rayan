@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.siscomercio.init;
+package com.siscomercio.model.persistence.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,7 +22,8 @@ import java.util.logging.Logger;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.siscomercio.controller.managers.AppManager;
-import com.siscomercio.model.persistence.Banco;
+import com.siscomercio.init.Config;
+import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -82,7 +83,7 @@ public class DatabaseFactory
 
             // this "connection_test_table" is automatically created if not already there
             _source.setAutomaticTestTable("connection_test_table");
-            _source.setTestConnectionOnCheckin(false);
+            _source.setTestConnectionOnCheckin(true);
 
             // testing OnCheckin used with IdleConnectionTestPeriod is faster than  testing on checkout
 
