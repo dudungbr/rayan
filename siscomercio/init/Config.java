@@ -30,6 +30,8 @@ public class Config
 {
     private static final Logger _log = Logger.getLogger(Config.class.getName());
     private static Boolean enableLog;
+    private static boolean developer;
+    private static boolean debug;
     private static boolean _loaded;
     /**
      * Database
@@ -77,9 +79,6 @@ public class Config
     private static String restartSound;
     private static String infoSound;
     private static String logoffSound;
-    //developer
-    private static boolean debug;
-    private static boolean developer;
     //rede
     private static int serverPort;
     private static int clientPort;
@@ -257,9 +256,8 @@ public class Config
                 //-------------------------------------------------------------------
                 debug = Boolean.valueOf(arquivo.getProperty("debug", "true"));
                 enableLog = Boolean.valueOf(arquivo.getProperty("log", "false"));
-
                 developer = Boolean.valueOf(arquivo.getProperty("developer", "true"));
-//levels
+                //levels
                 adminLevel = Integer.parseInt(arquivo.getProperty("NivelAdmin", "500"));//2 seconds
                 logPath = arquivo.getProperty("logPath", "com.siscomercio");
                 gerenteLevel = Integer.parseInt(arquivo.getProperty("NivelGerente", "400"));//2 seconds
@@ -392,10 +390,11 @@ public class Config
         return debug;
     }
 
-//    public static String getUpdateServer()
-//    {
-//        return updateServer;
-//    }
+    public static String getUpdateServer()
+    {
+        return updateServer;
+    }
+
     /**
      *
      * @return
@@ -610,15 +609,6 @@ public class Config
     public static String getInfoSound()
     {
         return infoSound;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public static String getUpdateServer()
-    {
-        return updateServer;
     }
 
     /**

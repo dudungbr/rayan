@@ -45,6 +45,7 @@ public final class SoundManager
      * Toca um Som em Formato WAV
      *
      * @param soundName
+     * <p/>
      * @return
      */
     public boolean playSound(String soundName)
@@ -88,7 +89,7 @@ public final class SoundManager
      */
     public void loadSounds()
     {
-        if (Config.isDebug())
+        if (Config.isDeveloper())
         {
             _log.info("Carregando Sons...");
         }
@@ -98,7 +99,7 @@ public final class SoundManager
 
             File pasta = new File(StringTable.getSOUND_PATH());// + soundName);
 
-            if (Config.isDebug())
+            if (Config.isDeveloper())
             {
                 _log.log(Level.INFO, "Caminho: {0}", StringTable.getSOUND_PATH());
             }
@@ -111,14 +112,14 @@ public final class SoundManager
                 {
                     if (arquivo.getName().endsWith(".wav"))
                     {
-                        if (Config.isDebug())
+                        if (Config.isDeveloper())
                         {
                             _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
                         }
                         fileList.add(arquivo);
                     }
                 }
-                if (Config.isDebug())
+                if (Config.isEnableLog())
                 {
                     _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
                 }

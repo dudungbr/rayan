@@ -28,7 +28,7 @@ public class LogManager
             return;
         }
 
-        if (Config.isDebug())
+        if (Config.isDeveloper())
         {
             _log.info("Inicializando o Log Manager..;");
         }

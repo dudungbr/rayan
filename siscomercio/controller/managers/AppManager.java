@@ -44,7 +44,10 @@ public class AppManager extends JFrame
      */
     public static void optimizeRam()
     {
-        _log.info("Chamando Garbage Collector.. \n ");
+        if (Config.isDeveloper())
+        {
+            _log.info("Chamando Garbage Collector.. \n ");
+        }
         System.gc();
     }
 
@@ -54,7 +57,7 @@ public class AppManager extends JFrame
      */
     public static void setTema(String requesterClass)
     {
-        if (Config.isDebug())
+        if (Config.isDeveloper())
         {
             _log.log(Level.INFO, "Setando Tema Visual para a Classe:  {0}.java \n", requesterClass);
         }
@@ -87,7 +90,7 @@ public class AppManager extends JFrame
             SoundManager.getInstance().playSound(Config.getPreRestartSound());
         }
 
-        if (Config.isDebug())
+        if (Config.isDeveloper())
         {
             _log.info("solicitacao de restart.");
         }
@@ -101,7 +104,7 @@ public class AppManager extends JFrame
                 SoundManager.getInstance().playSound(Config.getRestartSound());
             }
 
-            if (Config.isDebug())
+            if (Config.isDeveloper())
             {
                 _log.info("usuario reiniciou o sistema.");
             }
@@ -136,7 +139,7 @@ public class AppManager extends JFrame
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "<html><font color =black size=4 face = Times new Roman ><b>Encerrar Sistema ?</b></font></html>", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-        if (Config.isDebug())
+        if (Config.isDeveloper())
         {
             _log.info("solicitacao de shutdown...\n");
         }
@@ -149,7 +152,7 @@ public class AppManager extends JFrame
                 SoundManager.getInstance().playSound(Config.getExitSound());
             }
 
-            if (Config.isDebug())
+            if (Config.isDeveloper())
             {
                 _log.info("usuario finalizou o sistema.");
             }
@@ -157,7 +160,7 @@ public class AppManager extends JFrame
             //finaliza a aplicacao
             System.exit(0);
         }
-        else if (Config.isDebug())
+        else if (Config.isDeveloper())
         {
             _log.info("usuario desiste de fechar o sistema.\n");
         }
