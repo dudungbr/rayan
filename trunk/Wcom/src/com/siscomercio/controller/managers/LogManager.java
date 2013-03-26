@@ -92,4 +92,17 @@ public class LogManager
             Logger.getLogger(LogManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    public static LogManager getInstance()
+    {
+        return SingletonHolder._instance;
+    }
+    private static class SingletonHolder
+    {
+        protected static final LogManager _instance = new LogManager();
+    }
 }

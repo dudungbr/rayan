@@ -34,6 +34,7 @@ import javolution.util.FastList;
 public class WindowsUtil
 {
     private static final Logger _log = Logger.getLogger(WindowsUtil.class.getName());
+    Config config = Config.getInstance();
 
     /**
      *
@@ -50,7 +51,7 @@ public class WindowsUtil
      * }
      * }
      */
-    // if(Config.isDebug())
+    // if(config.isDebug())
     //  _log.log(Level.INFO, "A frase contem {0} ocorrencias de - ", cont);*/
     /**
      * Lista todos os arquivos de um diretorio
@@ -83,7 +84,7 @@ public class WindowsUtil
      * <p/>
      * @return files
      */
-    public static int countFiles(String path, final String extension)
+    public int countFiles(String path, final String extension)
     {
         File pasta = new File(path);//  diretório
         List<File> arquivos = new FastList<>(); // lista de arquivos a ser criada
@@ -102,7 +103,7 @@ public class WindowsUtil
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Contando Arquivos do Diretorio SQL, Total: {0} Arquivos. \n", arquivos.size());
         }
@@ -148,7 +149,7 @@ public class WindowsUtil
         DecimalFormat df = new DecimalFormat(" (0.0000' %')");
         DecimalFormat df2 = new DecimalFormat("   'KB' ");
 
-        SystemUtil.showMsg("Relatorio Gerado as "
+        SystemUtil.getInstance().showMsg("Relatorio Gerado as "
                 + sdf.format(new Date()) + ": <br>" + "<br>"
                 + "|========= Memoria Livre =========" + "<br>"
                 + "|    |= Total:" + df2.format(max) + "<br>"
@@ -171,7 +172,7 @@ public class WindowsUtil
      * <p/>
      * @param namePart
      */
-    public static void checkProcess(String namePart)
+    public void checkProcess(String namePart)
     {
         _log.info("Checando Existencia do Servidor MySQL...\n");
         List<String> processes = listRunningProcesses();
@@ -196,12 +197,12 @@ public class WindowsUtil
             }
             catch (Exception e)
             {
-                SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
+                SystemUtil.getInstance().showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
             }
-            SystemUtil.showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport() + "<br><br>", true);
+            SystemUtil.getInstance().showErrorMsg(ErrorTable.throwError(1) + "<br><br> Processos: <br>" + getProcess(namePart) + "<br>" + getSuport() + "<br><br>", true);
             System.exit(0);
         }
-        else if (Config.isDebug())
+        else if (config.isDebug())
         {
             _log.info("processo mysql funcionando! ok \n");
         }
@@ -272,7 +273,7 @@ public class WindowsUtil
         }
         catch (Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(err.getMessage(), true);
         }
         return false;
     }
@@ -307,7 +308,7 @@ public class WindowsUtil
         }
         catch (Exception err)
         {
-            SystemUtil.showErrorMsg(err.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(err.getMessage(), true);
         }
         return processes;
 
@@ -328,7 +329,7 @@ public class WindowsUtil
         }
         catch (Exception e)
         {
-            SystemUtil.showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg("Error While Trying to get Pc Name =" + e.getMessage(), true);
         }
 
         return pcName;
@@ -337,7 +338,7 @@ public class WindowsUtil
     /**
      * Mostra Todos os Processos Em Execucao na Máquina
      */
-    public static void showRunningProcesses()
+    public void showRunningProcesses()
     {
         List<String> processes = listRunningProcesses();
         String result = "";
@@ -351,7 +352,7 @@ public class WindowsUtil
             i++;
         }
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Running processes : \n{0}", result);
             _log.log(Level.INFO, "Total de Processos: {0}", processes.size());

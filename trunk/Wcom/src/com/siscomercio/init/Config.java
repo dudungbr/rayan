@@ -191,7 +191,7 @@ public class Config
         }
         else
         {
-            Utilitarios.showErrorMessage("o Arquivo" + localFile.getPath() + " Nao Existe!");
+            Utilitarios.getInstance().showErrorMessage("o Arquivo" + localFile.getPath() + " Nao Existe!");
 
         }
 
@@ -210,7 +210,7 @@ public class Config
             File arquivoConfig = new File(StringTable.CONFIG_FILE);
             if (!arquivoConfig.exists())
             {
-                Utilitarios.showErrorMessage("o arquivo de configuracao  " + arquivoConfig.getName() + " nao existe!");
+                Utilitarios.getInstance().showErrorMessage("o arquivo de configuracao  " + arquivoConfig.getName() + " nao existe!");
                 System.exit(0);//finaliza o sistema.
             }
             else
@@ -272,7 +272,7 @@ public class Config
                 if (serverPort <= 0 || serverPort > 65535)
                 {
                     //   Utilitarios u = new Utilitarios();
-                    Utilitarios.showErrorMessage("Erro na Configuracao as Portas do Programa.\n");
+                    Utilitarios.getInstance().showErrorMessage("Erro na Configuracao as Portas do Programa.\n");
                     System.exit(0);
                 }
 
@@ -377,7 +377,7 @@ public class Config
      *
      * @return
      */
-    private int getServerPort()
+    public int getServerPort()
     {
         return serverPort;
     }

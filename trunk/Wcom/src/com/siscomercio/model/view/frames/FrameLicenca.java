@@ -34,6 +34,7 @@ public class FrameLicenca extends JFrame
 {
     int numEstacoes = 0;
     private static final Logger _log = Logger.getLogger(FrameLicenca.class.getName());
+    Config config = Config.getInstance();
 
     /**
      * Creates new form FrameLicenca
@@ -55,7 +56,7 @@ public class FrameLicenca extends JFrame
         //Retorna o Tipo de Licenca Selecionado
         // ------------------------------------
         String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             System.out.println("tipo de licenca:" + tipoLicenca);
         }
@@ -63,7 +64,7 @@ public class FrameLicenca extends JFrame
         //Pega o Valor dao Campo Serial
         // ------------------------------------
         String valorCampoSerial = campoSerial.getText();
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
         }
@@ -79,7 +80,7 @@ public class FrameLicenca extends JFrame
             String res = dados.substring(i, (i + remover.length()));
             if (res.equals(remover))
             {
-                if (Config.isDebug())
+                if (config.isDebug())
                 {
                     System.out.println("removendo - do serial");
                 }
@@ -87,7 +88,7 @@ public class FrameLicenca extends JFrame
                 dados.delete(pos, pos + remover.length());
             }
         }
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             System.out.println("valor variavel dados: " + dados.toString());
         }
@@ -96,7 +97,7 @@ public class FrameLicenca extends JFrame
         // Encripta a Variavel Dados
         //----------------------------------------
         String validSerial = encryptSerial(dados.toString());
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             System.out.println("serial valido: " + validSerial);
         }
@@ -106,12 +107,12 @@ public class FrameLicenca extends JFrame
             Banco.getInstance().setLicensed(1);
             dispose();
             Banco.getInstance().registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
-            SystemUtil.showMsg("Obrigado por Registrar o Aplicativo ! ", true);
+            SystemUtil.getInstance().showMsg("Obrigado por Registrar o Aplicativo ! ", true);
             AppManager.getInstance().restartApp();
         }
         else
         {
-            SystemUtil.showErrorMsg("Numero de Série Inválido.", true);
+            SystemUtil.getInstance().showErrorMsg("Numero de Série Inválido.", true);
         }
     }
 
@@ -170,7 +171,7 @@ public class FrameLicenca extends JFrame
         String nomeEmpresa = campoEmpresa.getText();
         if (nomeEmpresa.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nome da Empresa Inválido.", true);
+            SystemUtil.getInstance().showErrorMsg("Nome da Empresa Inválido.", true);
             return;
 
         }
@@ -179,7 +180,7 @@ public class FrameLicenca extends JFrame
         String codAtivacao = dadosCodAtivacao.getText();
         if (codAtivacao.isEmpty())
         {
-            SystemUtil.showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.", true);
+            SystemUtil.getInstance().showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.", true);
             resetCampos();
             return;
         }
@@ -187,7 +188,7 @@ public class FrameLicenca extends JFrame
 
         if (numEstacoes <= 0)
         {
-            SystemUtil.showErrorMsg("o Numero de Estações Deve Ser Maior que 0.", true);
+            SystemUtil.getInstance().showErrorMsg("o Numero de Estações Deve Ser Maior que 0.", true);
             resetCampos();
             return;
         }
@@ -196,7 +197,7 @@ public class FrameLicenca extends JFrame
         String serial = campoSerial.getText();
         if (serial.isEmpty())
         {
-            SystemUtil.showErrorMsg("Por Favor Digite o Numero de Serie.", true);
+            SystemUtil.getInstance().showErrorMsg("Por Favor Digite o Numero de Serie.", true);
             resetCampos();
         }
     }
@@ -399,7 +400,7 @@ public class FrameLicenca extends JFrame
             public void run()
             {
 
-                AppManager.setTema(FrameLicenca.class.getSimpleName());
+
                 new FrameLicenca().setVisible(true);
             }
         });

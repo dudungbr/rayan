@@ -28,7 +28,7 @@ public class StringTable
     /**
      * Querys
      */
-    private String DELETE_DB = "DROP DATABASE " + Config.getDatabase();
+    private String DELETE_DB = "DROP DATABASE " + Config.getInstance().getDatabase();
     private String GET_ACC_LVL = "SELECT accesslevel FROM users WHERE login =?";
     private String INSERT_USER = "INSERT INTO `users`(login,password,accesslevel) VALUES (?,?,?)";
     private String GET_USER_CODE = "SELECT `codigo` from users WHERE login=? AND password=?";
@@ -44,7 +44,7 @@ public class StringTable
     private String INSTALL = "UPDATE install SET bancoInstalado = '1'";
     private String READ_INSTALL = "SELECT * FROM install";
     private String UPDATE_USER_ACCESS_LVL = "UPDATE users SET accesslvl=?  WHERE login=?";
-    private String createDB = "CREATE DATABASE IF NOT EXISTS " + Config.getDatabase();
+    private String createDB = "CREATE DATABASE IF NOT EXISTS " + Config.getInstance().getDatabase();
     public String GET_ACC_LVL2 = "SELECT accesslevel FROM users WHERE login =?";
     private String INSERT_USER2 = "INSERT INTO `usuarios`(login,senha,nivelAcesso,nomeCompleto,endereco,cargo) VALUES (?,?,?,?,?,?)";
     private String INSERT_ENTRADA = "INSERT INTO `entradaequip`(numentrada,data,usuario,status,perifericos,descricao,marca,tipo,quantidade,responsavel,defeito,hora) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";

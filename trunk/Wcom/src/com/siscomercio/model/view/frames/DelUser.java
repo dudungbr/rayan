@@ -95,13 +95,13 @@ public class DelUser extends JFrame
 
         if (login.isEmpty())
         {
-            SystemUtil.showErrorMsg("o login deve ser informado", true);
+            SystemUtil.getInstance().showErrorMsg("o login deve ser informado", true);
         }
         else
         {
             if (!loginExiste)
             {
-                SystemUtil.showErrorMsg("o login informado nao esta cadastrado", true);
+                SystemUtil.getInstance().showErrorMsg("o login informado nao esta cadastrado", true);
                 campoNome.setText("");
                 return;
             }

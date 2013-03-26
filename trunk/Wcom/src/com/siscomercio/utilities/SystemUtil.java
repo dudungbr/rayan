@@ -27,14 +27,15 @@ public class SystemUtil
 {
     private static final long serialVersionUID = 1L;
     private static final Logger _log = Logger.getLogger(SystemUtil.class.getName());
+    Config config = Config.getInstance();
 
     /**
      * Imprimve a Versoa e a Build do Sistema
      */
-    public static void printVersion()
+    public void printVersion()
     {
         /*
-         * SystemUtil.showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
+         * SystemUtil.getInstance().showMsg(Config.BUILD_AUTHOR.substring(1, 30) + "<br>"
          * + Config.BUILD_NUM.substring(1, 14) + "<br>"
          * + Config.BUILD_DATE.substring(1, 52) + "<br>"
          * + Config.BUILD_URL.substring(1, 75) + "<br>"
@@ -46,9 +47,9 @@ public class SystemUtil
      *
      * @return the Site of Config File
      */
-    public static String getSite()
+    public String getSite()
     {
-        return Config.getSite();
+        return config.getSite();
     }
 
     /**
@@ -66,7 +67,7 @@ public class SystemUtil
      * <p/>
      * @throws SQLException
      */
-    public static void printDbInfo() throws SQLException
+    public void printDbInfo() throws SQLException
     {
         showMsg("<br> Provedor do Banco: " + DatabaseFactory.getInstance().getProviderType() + "<br>"
                 + "Status do Banco: " + Banco.getInstance().getConnectionStatus() + "<br>"
@@ -77,7 +78,7 @@ public class SystemUtil
     /**
      * Print Processor Info
      */
-    public static void printCpuInfo()
+    public void printCpuInfo()
     {
         showMsg("Processadores: " + Runtime.getRuntime().availableProcessors() + "<br>"
                 + "Arquitetura " + System.getenv("PROCESSOR_IDENTIFIER"), true);
@@ -86,7 +87,7 @@ public class SystemUtil
     /**
      * Print O.S Info
      */
-    public static void printOSInfo()
+    public void printOSInfo()
     {
         showMsg("Sistema Operacional: " + System.getProperty("os.name") + "<br>"
                 + "Build: " + System.getProperty("os.version") + "<br>"
@@ -96,7 +97,7 @@ public class SystemUtil
     /**
      * Printi all java info
      */
-    public static void printJvmInfo()
+    public void printJvmInfo()
     {
         showMsg("<br> == Virtual Machine Information (JVM) == <br>"
                 + "Name: " + System.getProperty("java.vm.name") + "<br>"
@@ -181,13 +182,13 @@ public class SystemUtil
      * @param msg
      * @param playSound
      */
-    public static void showMsg(String msg, Boolean playSound)
+    public void showMsg(String msg, Boolean playSound)
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("enviando janela de mensagem... \n");
         }
-        if (playSound && Config.isEnableSound())
+        if (playSound && config.isEnableSound())
         {
             try
             {
@@ -212,13 +213,13 @@ public class SystemUtil
      * @param msg
      * @param playSound
      */
-    public static void showErrorMsg(String msg, Boolean playSound)
+    public void showErrorMsg(String msg, Boolean playSound)
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("enviando janela de mensagem de erro... \n");
         }
-        if (playSound && Config.isEnableSound())
+        if (playSound && config.isEnableSound())
         {
             try
             {
@@ -234,5 +235,18 @@ public class SystemUtil
             }
         }
         JOptionPane.showMessageDialog(null, "<html><font color =black size=4 face = Times new Roman ><b> " + msg + "</b></font></html>", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static SystemUtil getInstance()
+    {
+        return SingletonHolder._instance;
+    }
+    private static class SingletonHolder
+    {
+        protected static final SystemUtil _instance = new SystemUtil();
     }
 }

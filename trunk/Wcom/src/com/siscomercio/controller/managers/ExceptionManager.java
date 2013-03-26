@@ -22,7 +22,7 @@ public class ExceptionManager
     {
 
         String output = msg + "\n" + command + "\n";
-        Utilitarios.showErrorMessage(output + e);
+        Utilitarios.getInstance().showErrorMessage(output + e);
     }
 
     /**
@@ -34,7 +34,7 @@ public class ExceptionManager
     {
 
         String output = msg + "\n";
-        Utilitarios.showErrorMessage(output + e);
+        Utilitarios.getInstance().showErrorMessage(output + e);
     }
 
     /**
@@ -46,6 +46,6 @@ public class ExceptionManager
     {
 
         String output = msg + "\n";
-        Utilitarios.showErrorMessage(output + e);
+        Utilitarios.getInstance().showErrorMessage(output + e);
     }
 }

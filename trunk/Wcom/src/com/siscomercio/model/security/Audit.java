@@ -25,7 +25,7 @@ public class Audit
      *
      * // generates String that will get the formater info with values
      * String dayInfo = df.format(dateInfo);
-     * SystemUtil.showMsg("Horario: "+dayInfo);
+     * SystemUtil.getInstance().showMsg("Horario: "+dayInfo);
      * }
      */
 }

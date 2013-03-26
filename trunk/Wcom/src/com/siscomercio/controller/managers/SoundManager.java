@@ -128,7 +128,7 @@ public final class SoundManager
             }
             else
             {
-                Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: " + StringTable.SOUND_PATH);
+                Utilitarios.getInstance().showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: " + StringTable.SOUND_PATH);
                 _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.SOUND_PATH);
             }
 

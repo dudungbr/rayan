@@ -12,7 +12,6 @@ package com.siscomercio.model.view.frames;
 
 import com.siscomercio.init.Config;
 import javax.swing.JFrame;
-import com.siscomercio.controller.managers.DatabaseManager;
 import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.model.security.Criptografia;
 import com.siscomercio.utilities.SystemUtil;
@@ -32,6 +31,7 @@ public class AddUser extends JFrame
 {
     private static final Logger _log = Logger.getLogger(AddUser.class.getName());
     private static final long serialVersionUID = 1L;
+    Config config = Config.getInstance();
 
     /**
      * Creates new form AddUser
@@ -172,7 +172,7 @@ public class AddUser extends JFrame
 
         if (login.equals(""))
         {
-            SystemUtil.showErrorMsg("o login nao deve ser em branco", true);
+            SystemUtil.getInstance().showErrorMsg("o login nao deve ser em branco", true);
             return;
         }
         if (senha.equalsIgnoreCase(confirmaSenha))
@@ -186,13 +186,13 @@ public class AddUser extends JFrame
             String tipoAcesso = caixaCombinacao.getSelectedItem().toString();
             int nivelAcesso = 0;
 
-            if (Config.isDebug())
+            if (config.isDebug())
             {
                 _log.log(Level.INFO, "tipo acesso = {0}\n", tipoAcesso);
             }
             if (tipoAcesso.startsWith("Fun"))
             {
-                if (Config.isDebug())
+                if (config.isDebug())
                 {
                     _log.info("0");
                 }
@@ -200,7 +200,7 @@ public class AddUser extends JFrame
             }
             else if (tipoAcesso.startsWith("Ger"))
             {
-                if (Config.isDebug())
+                if (config.isDebug())
                 {
                     _log.info("1");
                 }
@@ -208,7 +208,7 @@ public class AddUser extends JFrame
             }
             else
             {
-                if (Config.isDebug())
+                if (config.isDebug())
                 {
                     _log.info("2");
                 }
@@ -244,7 +244,7 @@ public class AddUser extends JFrame
         }
         else
         {
-            SystemUtil.showErrorMsg("os campos de senha devem coincidir", true);
+            SystemUtil.getInstance().showErrorMsg("os campos de senha devem coincidir", true);
             campoSenha.setText("");
             campoConfirma.setText("");
         }
