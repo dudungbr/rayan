@@ -62,10 +62,11 @@ public class Banco
 
     private Banco()
     {
+
         this.stringTable = StringTable.getInstance();
         this._status = stringTable.getSTATUS_DISCONNECTED();
         this.config = Config.getInstance();
-        this.util = SystemUtil.getInstance().getInstance();
+        this.util = SystemUtil.getInstance();
     }
 
     /**
@@ -583,6 +584,8 @@ public class Banco
      */
     public void readInstallationState()
     {
+        int code = stringTable.getDEFAULT_INT();
+
         if (config.isDebug())
         {
             _log.info("lendo tabela de estado da instalacao \n");
@@ -601,9 +604,13 @@ public class Banco
             ResultSet rset = consultaPreparada.executeQuery();
             while (rset.next())
             {
-                this.setInstalled(rset.getInt("bancoInstalado") == 1 ? true : false);
+                code = rset.getInt("bancoInstalado");
+
+
             }
 
+            _log.log(Level.INFO, "Banco Instalado = {0}", String.valueOf(code));
+            this.setInstalled(code == 1 ? true : false);
             if (config.isDebug())
             {
                 _log.log(Level.INFO, "Estado da Instala\u00e7\u00e3o: {0} ok .....\n", _installed);
@@ -715,7 +722,7 @@ public class Banco
             conexao = DriverManager.getConnection(url, config.getDatabaseLogin(), config.getDatabasePassword());
             Statement st = conexao.createStatement();
             st.executeUpdate(stringTable.getCreateDB());
-
+            setConStatus(stringTable.getSTATUS_CONNECTED());
             return true;
 
         }
@@ -846,6 +853,7 @@ public class Banco
             {
                 _log.info("Conectado com Sucesso!!");
             }
+            setConStatus(stringTable.getSTATUS_CONNECTED());
             return true;
         }
         catch (IllegalAccessException | InstantiationException | ClassNotFoundException | SQLException ex)
@@ -883,6 +891,32 @@ public class Banco
             try (Statement st = conexao.createStatement())
             {
                 st.executeQuery(query);
+            }
+        }
+        catch (SQLException ex)
+        {
+            if (config.isEnableLog() || config.isDebug())
+            {
+                _log.log(Level.SEVERE, "Nao Foi Possivel Executar a Query: {0}", ex.getMessage());
+            }
+            ExceptionManager.ThrowException("Nao Foi Possivel Executar a Query: ", query, ex);
+        }
+
+    }
+
+    /**
+     * Executa uma query
+     *
+     * <p/>
+     * @param query
+     */
+    private void executeUpdateQuery(String query)
+    {
+        try
+        {
+            try (Statement st = conexao.createStatement())
+            {
+                st.executeUpdate(query);
             }
         }
         catch (SQLException ex)
@@ -1387,6 +1421,7 @@ public class Banco
         }
         else
         {
+            executeUpdateQuery(stringTable.getInstallQuery());
             this._installed = 1;
         }
     }
