@@ -32,6 +32,7 @@ public final class SoundManager
     private static final Logger _log = Logger.getLogger(SoundManager.class.getName());
     private static SoundManager instance;
     private static ArrayList<File> fileList;
+    Config config = Config.getInstance();
 
     /**
      * @param aInstance the instance to set
@@ -50,7 +51,7 @@ public final class SoundManager
      */
     public boolean playSound(String soundName)
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
             _log.log(Level.INFO, "tocando arquivo: {0}", soundName);
 
@@ -89,7 +90,7 @@ public final class SoundManager
      */
     public void loadSounds()
     {
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.info("Carregando Sons...");
         }
@@ -97,11 +98,11 @@ public final class SoundManager
         {
             fileList = new ArrayList();
 
-            File pasta = new File(StringTable.getSOUND_PATH());// + soundName);
+            File pasta = new File(StringTable.SOUND_PATH);// + soundName);
 
-            if (Config.isDeveloper())
+            if (config.isDeveloper())
             {
-                _log.log(Level.INFO, "Caminho: {0}", StringTable.getSOUND_PATH());
+                _log.log(Level.INFO, "Caminho: {0}", StringTable.SOUND_PATH);
             }
 
             if (pasta.exists() && pasta.isDirectory())
@@ -112,14 +113,14 @@ public final class SoundManager
                 {
                     if (arquivo.getName().endsWith(".wav"))
                     {
-                        if (Config.isDeveloper())
+                        if (config.isDeveloper())
                         {
                             _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
                         }
                         fileList.add(arquivo);
                     }
                 }
-                if (Config.isEnableLog())
+                if (config.isEnableLog())
                 {
                     _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
                 }
@@ -127,8 +128,8 @@ public final class SoundManager
             }
             else
             {
-                Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: " + StringTable.getSOUND_PATH());
-                _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.getSOUND_PATH());
+                Utilitarios.showErrorMessage("Nao Foi Possivel Localizar os Arquivos de Som em: " + StringTable.SOUND_PATH);
+                _log.log(Level.SEVERE, "Nao Foi Possivel Localizar os Arquivos de Som em: {0}", StringTable.SOUND_PATH);
             }
 
         }

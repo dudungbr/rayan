@@ -29,6 +29,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Config
 {
     private static final Logger _log = Logger.getLogger(Config.class.getName());
+    StringTable strings = StringTable.getInstance();
     private static Boolean enableLog;
     private static boolean developer;
     private static boolean debug;
@@ -36,24 +37,24 @@ public class Config
     /**
      * Database
      */
-    private static String databaseLogin;
-    private static String databasePassword;
-    private static String database;
-    private static String host;
-    private static String databaseDriver;
+    private String databaseLogin;
+    private String databasePassword;
+    private String database;
+    private String host;
+    private String databaseDriver;
     //levels
     private static int adminLevel;
     private static int operadorLevel;
     private static int gerenteLevel;
     private static int tecnicoLevel;
     //personalizacao
-    private static String site;
+    private String site;
     private static double systemVersion;
-    private static String empresa;
-    private static String databaseUrl;
-    private static String databasePort;
-    private static String logo;
-    private static String logPath;
+    private String empresa;
+    private String databaseUrl;
+    private String databasePort;
+    private String logo;
+    private String logPath;
     /**
      *
      * Sons
@@ -64,35 +65,35 @@ public class Config
      *
      * @param enableSound
      */
-    public static void setEnableSound(boolean enableSound)
+    public void setEnableSound(boolean enableSound)
     {
         Config.enableSound = enableSound;
     }
-    private static String loginSound;
-    private static String questionSound;
-    private static String welcomeSound;
-    private static String exitSound;
-    private static String preExitSound;
-    private static String preLoginSound;
-    private static String unimplementedSound;
-    private static String preRestartSound;
-    private static String restartSound;
-    private static String infoSound;
-    private static String logoffSound;
+    private String loginSound;
+    private String questionSound;
+    private String welcomeSound;
+    private String exitSound;
+    private String preExitSound;
+    private String preLoginSound;
+    private String unimplementedSound;
+    private String preRestartSound;
+    private String restartSound;
+    private String infoSound;
+    private String logoffSound;
     //rede
     private static int serverPort;
     private static int clientPort;
-    private static String serverIp;
+    private String serverIp;
     private static int testPort;
     private static int testWait;
-    private static String updateServer;
+    private String updateServer;
     private static int tempoOcioso;
     private static int THREAD_DEFAULT_SLEEP = 1000;
 
     /**
      *
      */
-    public static void loadPreferencies()
+    public void loadPreferencies()
     {
         _log.info("Carregando Preferencias ...");
 
@@ -199,14 +200,14 @@ public class Config
     /**
      * Carrega Todas as Propriedades do config.properties
      */
-    public static void load()
+    private void load()
     {
 
         _log.info("Config: Carregando o Arquuivo de Configuração...");
         try
         {
 
-            File arquivoConfig = new File(StringTable.getCONFIG_FILE());
+            File arquivoConfig = new File(StringTable.CONFIG_FILE);
             if (!arquivoConfig.exists())
             {
                 Utilitarios.showErrorMessage("o arquivo de configuracao  " + arquivoConfig.getName() + " nao existe!");
@@ -295,7 +296,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabasePassword()
+    public String getDatabasePassword()
     {
         return databasePassword;
     }
@@ -304,7 +305,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabaseLogin()
+    public String getDatabaseLogin()
     {
         return databaseLogin;
     }
@@ -313,7 +314,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabaseDriver()
+    public String getDatabaseDriver()
     {
         return databaseDriver;
     }
@@ -322,7 +323,7 @@ public class Config
      *
      * @return
      */
-    public static String getHost()
+    public String getHost()
     {
         return host;
     }
@@ -331,7 +332,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabase()
+    public String getDatabase()
     {
         return database;
     }
@@ -340,7 +341,7 @@ public class Config
      *
      * @return
      */
-    public static boolean isEnableSound()
+    public boolean isEnableSound()
     {
         return enableSound;
     }
@@ -349,7 +350,7 @@ public class Config
      *
      * @return
      */
-    public static int getClientPort()
+    private int getClientPort()
     {
         return clientPort;
     }
@@ -358,7 +359,7 @@ public class Config
      *
      * @return
      */
-    public static String getServerIp()
+    public String getServerIp()
     {
         return serverIp;
     }
@@ -367,7 +368,7 @@ public class Config
      *
      * @return
      */
-    public static Boolean isEnableLog()
+    public boolean isEnableLog()
     {
         return enableLog;
     }
@@ -376,7 +377,7 @@ public class Config
      *
      * @return
      */
-    public static int getServerPort()
+    private int getServerPort()
     {
         return serverPort;
     }
@@ -385,12 +386,12 @@ public class Config
      *
      * @return
      */
-    public static boolean isDebug()
+    public boolean isDebug()
     {
         return debug;
     }
 
-    public static String getUpdateServer()
+    public String getUpdateServer()
     {
         return updateServer;
     }
@@ -399,7 +400,7 @@ public class Config
      *
      * @return
      */
-    public static boolean isLoaded()
+    public boolean isLoaded()
     {
         return _loaded;
     }
@@ -408,7 +409,7 @@ public class Config
      *
      * @return
      */
-    public static String getSite()
+    public String getSite()
     {
         return site;
     }
@@ -426,7 +427,7 @@ public class Config
      *
      * @return
      */
-    public static int getTestPort()
+    private int getTestPort()
     {
         return testPort;
     }
@@ -435,7 +436,7 @@ public class Config
      *
      * @return
      */
-    public static int getTestWait()
+    private int getTestWait()
     {
         return testWait;
     }
@@ -444,7 +445,7 @@ public class Config
      *
      * @return
      */
-    public static boolean isDeveloper()
+    public boolean isDeveloper()
     {
         return developer;
     }
@@ -453,7 +454,7 @@ public class Config
      *
      * @return
      */
-    public static int getAdminLevel()
+    private int getAdminLevel()
     {
         return adminLevel;
     }
@@ -462,7 +463,7 @@ public class Config
      *
      * @return
      */
-    public static int getGerenteLevel()
+    private int getGerenteLevel()
     {
         return gerenteLevel;
     }
@@ -471,7 +472,7 @@ public class Config
      *
      * @return
      */
-    public static int getOperadorLevel()
+    private int getOperadorLevel()
     {
         return operadorLevel;
     }
@@ -480,7 +481,7 @@ public class Config
      *
      * @return
      */
-    public static int getTecnicoLevel()
+    private int getTecnicoLevel()
     {
         return tecnicoLevel;
     }
@@ -489,7 +490,7 @@ public class Config
      *
      * @return
      */
-    public static String getEmpresa()
+    public String getEmpresa()
     {
         return empresa;
     }
@@ -498,7 +499,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabasePort()
+    public String getDatabasePort()
     {
         return databasePort;
     }
@@ -507,7 +508,7 @@ public class Config
      *
      * @return
      */
-    public static String getDatabaseUrl()
+    public String getDatabaseUrl()
     {
         return databaseUrl;
     }
@@ -516,7 +517,7 @@ public class Config
      *
      * @return
      */
-    public static String getExitSound()
+    public String getExitSound()
     {
         return exitSound;
     }
@@ -525,7 +526,7 @@ public class Config
      *
      * @return
      */
-    public static String getPreExitSound()
+    public String getPreExitSound()
     {
         return preExitSound;
     }
@@ -534,7 +535,7 @@ public class Config
      *
      * @return
      */
-    public static String getQuestionSound()
+    public String getQuestionSound()
     {
         return questionSound;
     }
@@ -543,7 +544,7 @@ public class Config
      *
      * @return
      */
-    public static String getWelcomeSound()
+    public String getWelcomeSound()
     {
         return welcomeSound;
     }
@@ -552,7 +553,7 @@ public class Config
      *
      * @return
      */
-    public static String getLogo()
+    public String getLogo()
     {
         return logo;
     }
@@ -561,7 +562,7 @@ public class Config
      *
      * @return
      */
-    public static String getLoginSound()
+    public String getLoginSound()
     {
         return loginSound;
     }
@@ -570,7 +571,7 @@ public class Config
      *
      * @return
      */
-    public static String getPreLoginSound()
+    public String getPreLoginSound()
     {
         return preLoginSound;
     }
@@ -579,7 +580,7 @@ public class Config
      *
      * @return
      */
-    public static String getPreRestartSound()
+    public String getPreRestartSound()
     {
         return preRestartSound;
     }
@@ -588,7 +589,7 @@ public class Config
      *
      * @return
      */
-    public static String getRestartSound()
+    public String getRestartSound()
     {
         return restartSound;
     }
@@ -597,7 +598,7 @@ public class Config
      *
      * @return
      */
-    public static String getUnimplementedSound()
+    public String getUnimplementedSound()
     {
         return unimplementedSound;
     }
@@ -606,7 +607,7 @@ public class Config
      *
      * @return
      */
-    public static String getInfoSound()
+    public String getInfoSound()
     {
         return infoSound;
     }
@@ -615,7 +616,7 @@ public class Config
      *
      * @return
      */
-    public static String getLogoffSound()
+    public String getLogoffSound()
     {
         return logoffSound;
     }
@@ -624,7 +625,7 @@ public class Config
      *
      * @return
      */
-    public static int getTempoOcioso()
+    private int getTempoOcioso()
     {
         return tempoOcioso;
     }
@@ -632,7 +633,7 @@ public class Config
     /**
      * @return the THREAD_DEFAULT_SLEEP
      */
-    public static int getTHREAD_DEFAULT_SLEEP()
+    private int getTHREAD_DEFAULT_SLEEP()
     {
         return THREAD_DEFAULT_SLEEP;
     }
@@ -640,7 +641,7 @@ public class Config
     /**
      * @param aTHREAD_DEFAULT_SLEEP the THREAD_DEFAULT_SLEEP to set
      */
-    public static void setTHREAD_DEFAULT_SLEEP(int aTHREAD_DEFAULT_SLEEP)
+    public void setTHREAD_DEFAULT_SLEEP(int aTHREAD_DEFAULT_SLEEP)
     {
         THREAD_DEFAULT_SLEEP = aTHREAD_DEFAULT_SLEEP;
     }
@@ -649,8 +650,26 @@ public class Config
      *
      * @return
      */
-    public static String getLogPath()
+    public String getLogPath()
     {
         return logPath;
+    }
+
+    private Config()
+    {
+        load();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Config getInstance()
+    {
+        return SingletonHolder._instance;
+    }
+    private static class SingletonHolder
+    {
+        protected static final Config _instance = new Config();
     }
 }

@@ -16,19 +16,20 @@ import java.util.logging.SimpleFormatter;
 public class LogManager
 {
     private static final Logger _log = Logger.getLogger(LogManager.class.getName());
+    Config config = Config.getInstance();
 
     /**
      *
      */
-    public static void init()
+    public void init()
     {
 
-        if (!Config.isEnableLog())
+        if (!config.isEnableLog())
         {
             return;
         }
 
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.info("Inicializando o Log Manager..;");
         }
@@ -36,7 +37,7 @@ public class LogManager
 
     }
 
-    private static void configureLogger()
+    private void configureLogger()
     {
         _log.info("Configurando Logger...");
         try
@@ -83,7 +84,7 @@ public class LogManager
 
             // Adicione ao logger desejado
             //------------------------------------------------
-            Logger logger = Logger.getLogger(Config.getLogPath());
+            Logger logger = Logger.getLogger(config.getLogPath());
             logger.addHandler(handler);
         }
         catch (IOException | SecurityException ex)

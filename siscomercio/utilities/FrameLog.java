@@ -22,7 +22,8 @@ import javax.swing.JFrame;
  */
 public class FrameLog extends JFrame
 {
-    File f = new File(StringTable.getLOG_FILE());
+    StringTable defaults = StringTable.getInstance();
+    File f = new File(defaults.getLOG_FILE());
 
     private void le()
     {
@@ -30,7 +31,7 @@ public class FrameLog extends JFrame
         //limpa a area de log para que tenha apenas uma leitura do arquivo na tela
         if (!areaLog.getText().isEmpty())
         {
-            areaLog.setText(StringTable.getEMPTY_STRING());
+            areaLog.setText(defaults.getEMPTY_STRING());
         }
 
         //verifica a existencia do arquivo de log..
@@ -173,7 +174,7 @@ public class FrameLog extends JFrame
 
     private void limpa()
     {
-        areaLog.setText(StringTable.getEMPTY_STRING());
+        areaLog.setText(defaults.getEMPTY_STRING());
         Utilitarios.zeraArquivo(f);
         le();
     }
