@@ -52,8 +52,9 @@ import javolution.util.FastList;
 public class Utilitarios
 {
     private static final Logger _log = Logger.getLogger(Utilitarios.class.getName());
-
+    Config config = Config.getInstance();
     //previne de instanciar a classe
+
     private Utilitarios()
     {
     }
@@ -65,7 +66,7 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public static ImageIcon loadIcon(String path)
+    public ImageIcon loadIcon(String path)
     {
         _log.log(Level.INFO, "Carregando Icone: {0}", path);
         File f = new File(path);
@@ -125,7 +126,7 @@ public class Utilitarios
      * @param tarefa
      * @param intervalo
      */
-    public static void agendaTarefa(TimerTask tarefa, int intervalo)
+    public void agendaTarefa(TimerTask tarefa, int intervalo)
     {
         _log.info("agendando tarefa...");
 
@@ -140,7 +141,7 @@ public class Utilitarios
      * // File file = new File(StringTable.SOUND_PATH + soundName); // if
      * (file.exists()) // { // try // { // URI caminho = file.toURI(); //
      * AudioClip som; // som = Applet.newAudioClip(caminho.toURL()); //
-     * som.play(); // if (Config.isDebug()) // { // _log.log(Level.INFO,
+     * som.play(); // if (config.isDebug()) // { // _log.log(Level.INFO,
      * "Tocando Arquivo: {0}\n", file); // } // return true; // } // catch
      * (MalformedURLException ex) // { // _log.severe(ex.getMessage()); //
      * ExceptionManager.ThrowException("Erro ", ex); // } // } // else // { //
@@ -152,7 +153,7 @@ public class Utilitarios
      * <p/>
      * @return
      */
-//    public static void agendaTarefa()
+//    public void agendaTarefa()
 //    {
 //            //Data do dia corrente
 //    Calendar dataIni = new GregorianCalendar();
@@ -175,9 +176,9 @@ public class Utilitarios
 //    //Agenda a tarefa
 //    timer.scheduleAtFixedRate(new MinhaClasseTimerTask(), dataIni, periodo);
 //    }
-    public static int createQuestionPopUp(JLabel label)
+    public int createQuestionPopUp(JLabel label)
     {
-        SoundManager.getInstance().playSound(Config.getQuestionSound());
+        SoundManager.getInstance().playSound(config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null, label, "Confirmar Requisicao", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
 
@@ -187,10 +188,10 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public static int createQuestionPopUp(String msg)
+    public int createQuestionPopUp(String msg)
     {
         _log.info("criando Janela de Confirmacao");
-        SoundManager.getInstance().playSound(Config.getQuestionSound());
+        SoundManager.getInstance().playSound(config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
                                              msg,
                                              "Confirmar Solicitção",
@@ -204,12 +205,12 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public static int createWarningPopUp(
+    public int createWarningPopUp(
             String msg)
     {
 
         _log.info("criando Janela de Aviso");
-        SoundManager.getInstance().playSound(Config.getQuestionSound());
+        SoundManager.getInstance().playSound(config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
                                              msg,
                                              "Aviso",
@@ -223,12 +224,12 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public static int createWarningPopUp(
+    public int createWarningPopUp(
             JLabel lb)
     {
 
         _log.info("criando Janela de Aviso");
-        SoundManager.getInstance().playSound(Config.getQuestionSound());
+        SoundManager.getInstance().playSound(config.getQuestionSound());
         return JOptionPane.showConfirmDialog(null,
                                              lb,
                                              "Aviso",
@@ -274,7 +275,7 @@ public class Utilitarios
      *
      * @param p
      */
-    public static void resetarFrame(JPanel p)
+    public void resetarFrame(JPanel p)
     {
         for (Component componente : p.getComponents())
         {
@@ -302,7 +303,7 @@ public class Utilitarios
      *
      * @param p
      */
-    public static void resetarFrame(Container p)
+    public void resetarFrame(Container p)
     {
         for (Component componente : p.getComponents())
         {
@@ -400,7 +401,7 @@ public class Utilitarios
     /**
      * Imprime o Uso de Memória
      */
-    public static void printMemUsage()
+    public void printMemUsage()
     {
         double max = Runtime.getRuntime().maxMemory() / 1024; // maxMemory ismthe upper limit the jvm can use
         double allocated = Runtime.getRuntime().totalMemory() / 1024; // totalMemory: the size of current allocation pool
@@ -483,7 +484,7 @@ public class Utilitarios
     /**
      * Print Processor Info
      */
-    public static void printCpuInfo()
+    public void printCpuInfo()
     {
         showInfoMessage("Processadores: " + Runtime.getRuntime().availableProcessors() + "\n"
                 + "Arquitetura " + System.getenv("PROCESSOR_IDENTIFIER"));
@@ -492,7 +493,7 @@ public class Utilitarios
     /**
      * Print O.S Info
      */
-    public static void printOSInfo()
+    public void printOSInfo()
     {
         showInfoMessage("Sistema Operacional: " + System.getProperty("os.name") + "\n"
                 + "Build: " + System.getProperty("os.version") + "\n"
@@ -502,7 +503,7 @@ public class Utilitarios
     /**
      * Printi all java info
      */
-    public static void printJvmInfo()
+    public void printJvmInfo()
     {
         showInfoMessage(" == Virtual Machine Information (JVM) == " + "\n"
                 + "Name: " + System.getProperty("java.vm.name") + "\n"
@@ -597,7 +598,7 @@ public class Utilitarios
      *
      * @param msg
      */
-    public static void showInfoMessage(String msg)
+    public void showInfoMessage(String msg)
     {
         try
         {
@@ -606,7 +607,7 @@ public class Utilitarios
                 @Override
                 public void run()
                 {
-                    if (Config.isEnableSound())
+                    if (config.isEnableSound())
                     {
                         SoundManager.getInstance().playSound("info.wav");
                     }
@@ -629,7 +630,7 @@ public class Utilitarios
      *
      * @param msg
      */
-    public static void showErrorMessage(String msg)
+    public void showErrorMessage(String msg)
     {
         try
         {
@@ -638,7 +639,7 @@ public class Utilitarios
                 @Override
                 public void run()
                 {
-                    if (Config.isEnableSound())
+                    if (config.isEnableSound())
                     {
                         SoundManager.getInstance().playSound("error.wav");
                     }
@@ -664,7 +665,7 @@ public class Utilitarios
      *
      * @param msg
      */
-    public static void showWarningMessage(String msg)
+    public void showWarningMessage(String msg)
     {
         SoundManager.getInstance().playSound("warning.wav");
         JOptionPane.showMessageDialog(null, msg, "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -674,7 +675,7 @@ public class Utilitarios
      *
      * @param msg
      */
-    public static void showQuestionMessage(String msg)
+    public void showQuestionMessage(String msg)
     {
         try
         {
@@ -683,7 +684,7 @@ public class Utilitarios
                 @Override
                 public void run()
                 {
-                    if (Config.isEnableSound())
+                    if (config.isEnableSound())
                     {
                         SoundManager.getInstance().playSound("question.wav");
                     }
@@ -705,7 +706,7 @@ public class Utilitarios
      *
      * @param msg
      */
-    public static void showPlainMessage(String msg)
+    public void showPlainMessage(String msg)
     {
         try
         {
@@ -714,7 +715,7 @@ public class Utilitarios
                 @Override
                 public void run()
                 {
-                    if (Config.isEnableSound())
+                    if (config.isEnableSound())
                     {
                         SoundManager.getInstance().playSound("info.wav");
                     }
@@ -793,7 +794,7 @@ public class Utilitarios
      * <p/>
      * @return files
      */
-    public static int countFiles(String path, final String extension)
+    public int countFiles(String path, final String extension)
     {
         File pasta = new File(path);//  diretório
         List<File> arquivos = new FastList<>(); // lista de arquivos a ser criada
@@ -812,7 +813,7 @@ public class Utilitarios
                 //aqui vc poderia formar uma lista com os arquivos
             }
         }
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Contando Arquivos do Diretorio SQL, Total: {0} Arquivos. \n", arquivos.size());
         }
@@ -939,7 +940,7 @@ public class Utilitarios
     /**
      * Mostra Todos os Processos Em Execucao na Máquina
      */
-    public static void showRunningProcesses()
+    public void showRunningProcesses()
     {
         List<String> processes = listRunningProcesses();
         String result = "";
@@ -953,7 +954,7 @@ public class Utilitarios
             i++;
         }
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Running processes : \n{0}", result);
             _log.log(Level.INFO, "Total de Processos: {0}", processes.size());
@@ -1022,7 +1023,7 @@ public class Utilitarios
      *
      * @param jarPath
      */
-    public static void lauchJar(String jarPath)
+    public void lauchJar(String jarPath)
     {
         _log.log(Level.INFO, "executando jar: {0}", jarPath);
         File jar = new File(jarPath);
@@ -1067,9 +1068,10 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public static boolean criaJanelaConfirmacao(JFrame janela)
+    public boolean criaJanelaConfirmacao(JFrame janela)
     {
-        int option = Utilitarios.createQuestionPopUp("Deseja Realmente Cancelar?");
+        int option;
+        option = createQuestionPopUp("Deseja Realmente Cancelar?");
 
         switch (option)
         {
@@ -1090,7 +1092,7 @@ public class Utilitarios
      *
      * @param f
      */
-    public static void zeraArquivo(File f)
+    public void zeraArquivo(File f)
     {
         if (!f.exists())
         {
@@ -1108,5 +1110,18 @@ public class Utilitarios
                 Logger.getLogger(FrameLog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Utilitarios getInstance()
+    {
+        return SingletonHolder._instance;
+    }
+    private static class SingletonHolder
+    {
+        protected static final Utilitarios _instance = new Utilitarios();
     }
 }

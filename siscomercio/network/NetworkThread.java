@@ -39,7 +39,7 @@ public class NetworkThread extends Thread
         }
         catch (Exception e)
         {
-            SystemUtil.showErrorMsg(e.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(e.getMessage(), true);
         }
     }
 }

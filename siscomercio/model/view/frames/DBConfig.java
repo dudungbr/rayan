@@ -29,6 +29,7 @@ import java.awt.EventQueue;
 public class DBConfig extends JFrame
 {
     private static final Logger _log = Logger.getLogger(DBConfig.class.getName());
+    Config config = Config.getInstance();
 
     /**
      * Creates new form FrameDatabase
@@ -51,7 +52,7 @@ public class DBConfig extends JFrame
         {
             botaoDeletar.setEnabled(false);
         }
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("montando janela de configuracao de database \n");
         }
@@ -170,7 +171,7 @@ public class DBConfig extends JFrame
 
     private void botaoInstalarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoInstalarActionPerformed
     {//GEN-HEADEREND:event_botaoInstalarActionPerformed
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("chamando funcao de instalacao do banco");
         }
@@ -202,7 +203,7 @@ public class DBConfig extends JFrame
                 @Override
                 public void run()
                 {
-                    AppManager.setTema(DBConfig.class.getSimpleName());
+                    AppManager.getInstance().setTema(DBConfig.class.getSimpleName());
                     new FrameLicenca().setVisible(true);
                 }
             });
@@ -212,8 +213,6 @@ public class DBConfig extends JFrame
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoDeletarActionPerformed
     {//GEN-HEADEREND:event_botaoDeletarActionPerformed
-
-        Config.load();
 
         Banco.getInstance().dropDatabase();
         dadosStatus.setText(Banco.getInstance().getConnectionStatus());

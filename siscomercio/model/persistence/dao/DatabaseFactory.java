@@ -129,13 +129,13 @@ public class DatabaseFactory
         catch (SQLException x)
         {
             //   AppManager.setTema(getClass().getName());
-            SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(), true);
+            SystemUtil.getInstance().showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(), true);
             // re-throw the exception
             throw x;
         }
         catch (Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg("Nao Foi Possivel Conectar ao Banco de Dados: " + e.getMessage(), true);
         }
     }
 
@@ -278,7 +278,7 @@ public class DatabaseFactory
             catch (SQLException e)
             {
                 Banco.getInstance().setConStatus(defaults.getSTATUS_DISCONNECTED());
-                SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}", true);
+                SystemUtil.getInstance().showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}", true);
             }
         }
         return con;
@@ -313,7 +313,7 @@ public class DatabaseFactory
             }
             catch (SQLException e)
             {
-                SystemUtil.showErrorMsg(e.getMessage(), true);
+                SystemUtil.getInstance().showErrorMsg(e.getMessage(), true);
             }
 
         }

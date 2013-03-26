@@ -54,6 +54,7 @@ public class FramePrincipal extends JFrame
     private static final Logger _log = Logger.getLogger(FramePrincipal.class.getName());
     Date date = new Date();
     StringTable tabela = StringTable.getInstance();
+    Config config = Config.getInstance();
     /**
      * if this frame was created of not.
      */
@@ -68,16 +69,16 @@ public class FramePrincipal extends JFrame
     {
         _log.log(Level.INFO, "Carregando Imagem: {0}{1}\n", new Object[]
         {
-            tabela.getIMAGE_PATH(), Config.getLogo()
+            tabela.getIMAGE_PATH(), config.getLogo()
         });
-        File file = new File(tabela.getIMAGE_PATH() + Config.getLogo());
+        File file = new File(tabela.getIMAGE_PATH() + config.getLogo());
 
         if (file.exists())
         {
             ImageIcon img = new ImageIcon(file.toString());
             if (img.getImage() == null)
             {
-                SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo() + "\n", true);
+                SystemUtil.getInstance().showErrorMsg("nao foi posivel localizar a imagem: " + config.getLogo() + "\n", true);
             }
             else
             {
@@ -86,7 +87,7 @@ public class FramePrincipal extends JFrame
         }
         else
         {
-            SystemUtil.showErrorMsg("nao foi posivel localizar a imagem: " + Config.getLogo() + "\n", true);
+            SystemUtil.getInstance().showErrorMsg("nao foi posivel localizar a imagem: " + config.getLogo() + "\n", true);
         }
     }
 
@@ -95,9 +96,8 @@ public class FramePrincipal extends JFrame
      */
     public FramePrincipal()
     {
-        //  if(!Config._loaded)
-        Config.load();
-        if (Config.isDebug())
+
+        if (config.isDebug())
         {
             _log.info("Montando janela principal do aplicativo. \n");
         }
@@ -106,12 +106,12 @@ public class FramePrincipal extends JFrame
         setSoundProperties();
         preenchaFrame();
         setDesktop(desktop1);
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Frame Principal Criado, Aguardando Comandos... \n");
         }
         created = true;
-        AppManager.optimizeRam();
+        AppManager.getInstance().optimizeRam();
     }
 
     /**
@@ -119,9 +119,9 @@ public class FramePrincipal extends JFrame
      */
     private void setSoundProperties()
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getWelcomeSound());
+            SoundManager.getInstance().playSound(config.getWelcomeSound());
             // Habilita ou Desabilita o Som de Acordo com a Config.
             itemHabilitarSom.setSelected(true);
         }
@@ -136,16 +136,16 @@ public class FramePrincipal extends JFrame
      */
     private void preenchaFrame()
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
             _log.info("preenchendo frame...\n");
         }
         pcLabel.setText(WindowsUtil.getPcName());
         statusInfo.setText(Banco.getInstance().getConnectionStatus());
-        dadosEmpresa.setText(Config.getEmpresa());
-        labelNomeEmpresa.setText(Config.getEmpresa());
+        dadosEmpresa.setText(config.getEmpresa());
+        labelNomeEmpresa.setText(config.getEmpresa());
         dadosOperador.setText(UserTable.getInstance().getLastUser());
-        siteInfo.setText(Config.getSite());
+        siteInfo.setText(config.getSite());
         versionInfo.setText(SystemUtil.getVersion());
     }
 
@@ -154,7 +154,7 @@ public class FramePrincipal extends JFrame
      */
     private void disparaRelogio()
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
             _log.info("inicializando relogio ...\n");
         }
@@ -671,12 +671,12 @@ public class FramePrincipal extends JFrame
 
     private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemReiniciarActionPerformed
     {//GEN-HEADEREND:event_itemReiniciarActionPerformed
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getPreRestartSound());
+            SoundManager.getInstance().playSound(config.getPreRestartSound());
         }
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("solicitacao de restart.");
         }
@@ -685,12 +685,12 @@ public class FramePrincipal extends JFrame
 
         if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.isEnableSound())
+            if (config.isEnableSound())
             {
-                SoundManager.getInstance().playSound(Config.getRestartSound());
+                SoundManager.getInstance().playSound(config.getRestartSound());
             }
 
-            if (Config.isDebug())
+            if (config.isDebug())
             {
                 _log.info("usuario reiniciou o sistema.");
             }
@@ -712,7 +712,7 @@ public class FramePrincipal extends JFrame
         }
         else
         {
-            if (Config.isDebug())
+            if (config.isDebug())
             {
                 _log.info("usuario desiste de reiniciar o sistema.");
             }
@@ -721,7 +721,7 @@ public class FramePrincipal extends JFrame
 
     private void itemProcessadorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemProcessadorActionPerformed
     {//GEN-HEADEREND:event_itemProcessadorActionPerformed
-        SystemUtil.printCpuInfo();
+        SystemUtil.getInstance().printCpuInfo();
     }//GEN-LAST:event_itemProcessadorActionPerformed
 
     private void itemMemoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemMemoriaActionPerformed
@@ -731,17 +731,17 @@ public class FramePrincipal extends JFrame
 
     private void itemSistemaOperacionalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSistemaOperacionalActionPerformed
     {//GEN-HEADEREND:event_itemSistemaOperacionalActionPerformed
-        SystemUtil.printOSInfo();
+        SystemUtil.getInstance().printOSInfo();
     }//GEN-LAST:event_itemSistemaOperacionalActionPerformed
 
     private void itemJavaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemJavaActionPerformed
     {//GEN-HEADEREND:event_itemJavaActionPerformed
-        SystemUtil.printJvmInfo();
+        SystemUtil.getInstance().printJvmInfo();
     }//GEN-LAST:event_itemJavaActionPerformed
 
     private void itemVersaoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemVersaoActionPerformed
     {//GEN-HEADEREND:event_itemVersaoActionPerformed
-        SystemUtil.printVersion();
+        SystemUtil.getInstance().printVersion();
 
     }//GEN-LAST:event_itemVersaoActionPerformed
 
@@ -774,7 +774,7 @@ public class FramePrincipal extends JFrame
     {//GEN-HEADEREND:event_itemDbActionPerformed
         try
         {
-            SystemUtil.printDbInfo();
+            SystemUtil.getInstance().printDbInfo();
         }
         catch (SQLException ex)
         {
@@ -787,11 +787,11 @@ public class FramePrincipal extends JFrame
 
         if (itemHabilitarSom.isSelected())
         {
-            Config.setEnableSound(true);
+            config.setEnableSound(true);
         }
         else
         {
-            Config.setEnableSound(false);
+            config.setEnableSound(false);
         }
     }//GEN-LAST:event_itemHabilitarSomActionPerformed
 
@@ -827,7 +827,7 @@ public class FramePrincipal extends JFrame
 
     private void itemSuporteTecnicoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSuporteTecnicoActionPerformed
     {//GEN-HEADEREND:event_itemSuporteTecnicoActionPerformed
-        AppManager.implementar();
+        AppManager.getInstance().implementar();
     }//GEN-LAST:event_itemSuporteTecnicoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

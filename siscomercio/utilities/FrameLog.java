@@ -37,7 +37,7 @@ public class FrameLog extends JFrame
         //verifica a existencia do arquivo de log..
         if (!f.exists())
         {
-            Utilitarios.showErrorMessage("O Arquivo : " + f.getPath() + " Nao Existe!");
+            Utilitarios.getInstance().showErrorMessage("O Arquivo : " + f.getPath() + " Nao Existe!");
         }
         else
         {
@@ -48,7 +48,7 @@ public class FrameLog extends JFrame
                 //verifica se a dados a serem mostrados
                 if (raf.length() == 0)
                 {
-                    Utilitarios.showInfoMessage("Arquivo de Log Vazio!");
+                    Utilitarios.getInstance().showInfoMessage("Arquivo de Log Vazio!");
                     raf.close();
                 }
                 else
@@ -175,7 +175,7 @@ public class FrameLog extends JFrame
     private void limpa()
     {
         areaLog.setText(defaults.getEMPTY_STRING());
-        Utilitarios.zeraArquivo(f);
+        Utilitarios.getInstance().zeraArquivo(f);
         le();
     }
 

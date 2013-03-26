@@ -20,6 +20,7 @@ public class Serializer
     }
     private String code = "";
     private boolean generated = false;
+    Config config = Config.getInstance();
 
     /**
      *
@@ -47,7 +48,7 @@ public class Serializer
         dados.append(serialHD);
         dados.append(serialMB);
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "[DADOS]String Atual:{0}", dados);
             _log.log(Level.INFO, "[DADOS] Quantidade: {0}", dados.length());
@@ -64,7 +65,7 @@ public class Serializer
         StringBuilder temp = new StringBuilder();
         temp.append(dados.toString().replaceAll("\\W", ""));
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "[Temps]String Atual:{0}", temp);
             _log.log(Level.INFO, "[Temps]Quantidade: {0}", temp.length());
@@ -76,7 +77,7 @@ public class Serializer
 
         while (temp.length() > 30)
         {
-            if (Config.isDebug())
+            if (config.isDebug())
             {
                 System.out.println("[Temps] Deletando Index :" + temp.length() + " , ");
             }
@@ -88,7 +89,7 @@ public class Serializer
 
 
 
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Nova String Com: {0} Caracteres:  " + temp, temp.length());
         }
@@ -104,7 +105,7 @@ public class Serializer
                 case 5:
                 {
                     p1 = temp.substring(0, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p1);
                     }
@@ -113,7 +114,7 @@ public class Serializer
                 case 10:
                 {
                     p2 = temp.substring(5, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p2);
                     }
@@ -122,7 +123,7 @@ public class Serializer
                 case 15:
                 {
                     p3 = temp.substring(10, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p3);
                     }
@@ -131,7 +132,7 @@ public class Serializer
                 case 20:
                 {
                     p4 = temp.substring(15, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p4);
                     }
@@ -140,7 +141,7 @@ public class Serializer
                 case 25:
                 {
                     p5 = temp.substring(20, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p5);
                     }
@@ -149,7 +150,7 @@ public class Serializer
                 case 30:
                 {
                     p6 = temp.substring(25, i);
-                    if (Config.isDebug())
+                    if (config.isDebug())
                     {
                         _log.info(p6);
                     }
@@ -158,7 +159,7 @@ public class Serializer
             }
         }
         code = p1.concat("-" + p2).concat("-" + p3).concat("-" + p4).concat("-" + p5).concat("-" + p6);
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.log(Level.INFO, "Codigo de Ativacao: {0}", code);
         }

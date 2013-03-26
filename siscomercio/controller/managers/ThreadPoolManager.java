@@ -66,6 +66,7 @@ public class ThreadPoolManager
     /**
      *
      * @param delay
+     * <p/>
      * @return delay
      */
     public static long validateDelay(long delay)
@@ -85,6 +86,7 @@ public class ThreadPoolManager
      *
      * @param r
      * @param delay
+     * <p/>
      * @return _generalScheduledThreadPool
      */
     public ScheduledFuture<?> scheduleGeneral(Runnable r, long delay)
@@ -96,7 +98,9 @@ public class ThreadPoolManager
         }
         catch (RejectedExecutionException e)
         {
-            return null; /* shutdown, ignore */
+            return null; /*
+             * shutdown, ignore
+             */
         }
     }
 
@@ -105,6 +109,7 @@ public class ThreadPoolManager
      * @param r
      * @param initial
      * @param delay
+     * <p/>
      * @return _generalScheduledThreadPool
      */
     public ScheduledFuture<?> scheduleGeneralAtFixedRate(Runnable r, long initial, long delay)
@@ -117,13 +122,16 @@ public class ThreadPoolManager
         }
         catch (RejectedExecutionException e)
         {
-            return null; /* shutdown, ignore */
+            return null; /*
+             * shutdown, ignore
+             */
         }
     }
 
     /**
      *
      * @param r
+     * <p/>
      * @return _generalScheduledThreadPool
      */
     public boolean removeGeneral(Runnable r)
@@ -211,7 +219,8 @@ public class ThreadPoolManager
             _group = new ThreadGroup(_name);
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see java.util.concurrent.ThreadFactory#newThread(java.lang.Runnable)
          */
         @Override
@@ -252,7 +261,7 @@ public class ThreadPoolManager
         }
         catch (InterruptedException e)
         {
-            SystemUtil.showErrorMsg(e.getMessage(), true);
+            SystemUtil.getInstance().getInstance().showErrorMsg(e.getMessage(), true);
         }
     }
 

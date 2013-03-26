@@ -43,7 +43,7 @@ public final class NetworkUtil
         }
         catch (ParseException ex)
         {
-            SystemUtil.showErrorMsg(ex.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(ex.getMessage(), true);
             throw new IOException(ex.getMessage());
         }
     }
@@ -61,7 +61,7 @@ public final class NetworkUtil
         }
         catch (java.net.UnknownHostException ex)
         {
-            SystemUtil.showErrorMsg(ex.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(ex.getMessage(), true);
             throw new ParseException(ex.getMessage(), 0);
         }
 
@@ -95,7 +95,7 @@ public final class NetworkUtil
         }
 
         ParseException ex = new ParseException("cannot read MAC address for " + localHost + " from [" + ipConfigResponse + "]", 0);
-        SystemUtil.showErrorMsg(ex.getMessage(), true);
+        SystemUtil.getInstance().showErrorMsg(ex.getMessage(), true);
         throw ex;
     }
 
@@ -244,7 +244,7 @@ public final class NetworkUtil
         }
         catch (Throwable t)
         {
-            SystemUtil.showErrorMsg(t.getMessage(), true);
+            SystemUtil.getInstance().showErrorMsg(t.getMessage(), true);
             //  t.printStackTrace();
         }
     }

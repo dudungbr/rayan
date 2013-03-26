@@ -53,7 +53,7 @@ public class Boot extends JFrame
         // ---------------
         if (config.isEnableLog())
         {
-            LogManager.init();
+            LogManager.getInstance().init();
         }
         // Carrega Sons
         SoundManager.getInstance();
@@ -81,7 +81,7 @@ public class Boot extends JFrame
                 {
                     String msg = "Impossivel Iniciar Novamente!";
                     _log.warning(msg);
-                    Utilitarios.showWarningMessage(msg);
+                    Utilitarios.getInstance().showWarningMessage(msg);
                     System.exit(0);
                 }
             }
@@ -130,13 +130,13 @@ public class Boot extends JFrame
                             {
                                 if (!Utilitarios.checkIfProcessIsRunning(processo))
                                 {
-                                    Utilitarios.showErrorMessage("<br>O Servidor de Banco de Dados nao está em Execução!<br> O Sistema Foi Finalizado!");
+                                    Utilitarios.getInstance().showErrorMessage("<br>O Servidor de Banco de Dados nao está em Execução!<br> O Sistema Foi Finalizado!");
                                     System.exit(0);
                                 }
                             }
                             else
                             {
-                                Utilitarios.showWarningMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
+                                Utilitarios.getInstance().showWarningMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
                             }
                             break;
                         }
@@ -178,7 +178,7 @@ public class Boot extends JFrame
                                 }
                                 else
                                 {
-                                    Utilitarios.showErrorMessage("Nao Foi Possivel Atualizar a Base de Dados.");
+                                    Utilitarios.getInstance().showErrorMessage("Nao Foi Possivel Atualizar a Base de Dados.");
                                     System.exit(0);
                                 }
                             }
@@ -224,7 +224,7 @@ public class Boot extends JFrame
                             // -------------------------------------------
                             else
                             {
-                                Utilitarios.showPlainMessage("Aplicação Não Licenciada, por Favor Insira seu Numero de Registro");
+                                Utilitarios.getInstance().showWarningMessage("Aplicação Não Licenciada, por Favor Insira seu Numero de Registro");
                                 EventQueue.invokeLater(new Runnable()
                                 {
                                     @Override

@@ -73,7 +73,7 @@ public class AppManager extends JFrame
         }
         catch (Exception e)
         {
-            SystemUtil.showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
+            SystemUtil.getInstance().getInstance().showErrorMsg("Nao Foi Possivel Carregar a Skin" + e.getMessage(), true);
         }
     }
 
@@ -176,6 +176,6 @@ public class AppManager extends JFrame
         {
             SoundManager.getInstance().playSound(config.getUnimplementedSound());
         }
-        SystemUtil.showMsg("Funcao Ainda nao Disponivel", true);
+        SystemUtil.getInstance().getInstance().showMsg("Funcao Ainda nao Disponivel", true);
     }
 }

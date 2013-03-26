@@ -42,6 +42,7 @@ public class Auth extends JFrame
     JButton botaoLogin;
     JButton botaoCancelar;
     JButton botaoConfigurar;
+    Config config = Config.getInstance();
 
     public boolean isAutenticado()
     {
@@ -59,24 +60,24 @@ public class Auth extends JFrame
      */
     public Auth()
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info(" inicializando ...\n");
         }
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Criando Janela de Autenticacao.... \n");
         }
 
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            System.out.println("Som: " + Config.getPreLoginSound());
+            System.out.println("Som: " + config.getPreLoginSound());
         }
-        SoundManager.getInstance().playSound(Config.getPreLoginSound());
+        SoundManager.getInstance().playSound(config.getPreLoginSound());
 
         if (_autenticado)
         {
-            if (Config.isDebug())
+            if (config.isDebug())
             {
                 _log.info("usuario ja autenticado nao ira criar janela");
             }
@@ -100,7 +101,7 @@ public class Auth extends JFrame
         botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
         botaoConfigurar = new JButton("Configurar...");
         botaoConfigurar.setFont(new java.awt.Font("Times New Roman", 1, 14));
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Auth:  Aguardando Login... \n");
         }
@@ -153,11 +154,11 @@ public class Auth extends JFrame
             {
                 if (campoUsuario.getText().equalsIgnoreCase("") || String.valueOf(campoSenha.getPassword()).equalsIgnoreCase(""))
                 {
-                    SystemUtil.showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
+                    SystemUtil.getInstance().showErrorMsg("<html><font color = black >Digite o nome do Usuario e a Senha.</font></html>", true);
                     resetCampos();
 
                 }
-                if (Config.isDebug())
+                if (config.isDebug())
                 {
                     _log.info("Auth: Executando acao do botao login \n");
                 }
@@ -220,7 +221,7 @@ public class Auth extends JFrame
      */
     private void resetCampos()
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Auth:  resetando campos ...\n");
         }
@@ -233,15 +234,15 @@ public class Auth extends JFrame
      */
     public void showConfirmWindow()
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Auth: Enviando janela de confirmacao...\n");
         }
         JLabel optionLabel = new JLabel("<html>Voce logou como <font color = red>" + UserTable.getInstance().getLastUser() + "</font> proceder ?</html>");
 
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getLoginSound());
+            SoundManager.getInstance().playSound(config.getLoginSound());
         }
 
 
@@ -319,7 +320,7 @@ public class Auth extends JFrame
      * result = true;
      * else
      * {
-     * SystemUtil.showErrorMsg("usuario invalido.", true);
+     * SystemUtil.getInstance().showErrorMsg("usuario invalido.", true);
      * result = false;
      * }
      * return result;

@@ -47,6 +47,7 @@ public class Banco
     private String query;
     StringTable stringTable;
     Config config;
+    SystemUtil util;
     private String _status;
     private boolean isDbDeleted;
     public int _installed;
@@ -64,6 +65,7 @@ public class Banco
         this.stringTable = StringTable.getInstance();
         this._status = stringTable.getSTATUS_DISCONNECTED();
         this.config = Config.getInstance();
+        this.util = SystemUtil.getInstance().getInstance();
     }
 
     /**
@@ -163,7 +165,7 @@ public class Banco
             }
             else
             {
-                SystemUtil.showErrorMsg("usuario ou senha incorretos!", true);
+                util.showErrorMsg("usuario ou senha incorretos!", true);
                 return false;
             }
 
@@ -177,7 +179,7 @@ public class Banco
                     ex.getMessage(), ex.getSQLState(), ex.getErrorCode()
                 });
             }
-            SystemUtil.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
+            util.showErrorMsg("SQLException: " + ex.getMessage() + "\n SQLState: " + ex.getSQLState() + "\n VendorError: " + ex.getErrorCode(), true);
 
         }
         catch (Exception e)
@@ -186,7 +188,7 @@ public class Banco
             {
                 _log.log(Level.SEVERE, "SQLException: {0}", e.getMessage());
             }
-            SystemUtil.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
+            util.showErrorMsg("Problemas ao tentar conectar com o banco de dados" + e, true);
         }
         return true;
     }
@@ -197,7 +199,7 @@ public class Banco
     public void dropDatabase()
     {
         executeQuery(stringTable.getDELETE_DB());
-        SystemUtil.showMsg("Banco de Dados Deletado!", true);
+        util.showMsg("Banco de Dados Deletado!", true);
         setInstalled(false);
         setIsDbDeleted(true);
     }
@@ -226,7 +228,7 @@ public class Banco
             {
                 if (showMsg)
                 {
-                    SystemUtil.showErrorMsg("Login já Cadastrado.", true);
+                    util.showErrorMsg("Login já Cadastrado.", true);
                 }
                 return true;
             }
@@ -262,7 +264,7 @@ public class Banco
             ps.setString(2, senha);
             ps.setInt(3, nivelAcesso);
             ps.execute();
-            //  SystemUtil.showMsg("usuario cadastrado com sucesso!", true);
+            // util.showMsg("usuario cadastrado com sucesso!", true);
         }
         catch (SQLException e)
         {
@@ -270,7 +272,7 @@ public class Banco
             {
                 _log.log(Level.SEVERE, "erro {0}", e);
             }
-            SystemUtil.showErrorMsg(e.toString(), true);
+            util.showErrorMsg(e.toString(), true);
         }
     }
 
@@ -279,7 +281,7 @@ public class Banco
      */
     public static void editUser()
     {
-        AppManager.implementar();
+        AppManager.getInstance().implementar();
     }
 
 //    /**
@@ -298,12 +300,12 @@ public class Banco
 //            //  ps.setInt(1, getUserCodeByLogin(login));
 //            ps.setString(2, login);
 //            ps.execute();
-//            SystemUtil.showMsg("usuário excluido com sucesso!", true);
+//           util.showMsg("usuário excluido com sucesso!", true);
 //            // closeConnections(ps, con);
 //        }
 //        catch (SQLException e)
 //        {
-//            SystemUtil.showErrorMsg("Erro ao Deletar Usuario: " + login + " , " + e,
+//           util.showErrorMsg("Erro ao Deletar Usuario: " + login + " , " + e,
 //                                    true);
 //        }
 //    }
@@ -463,7 +465,7 @@ public class Banco
      * catch (SQLException e)
      * {
      * ok = false;
-     * SystemUtil.showErrorMsg("Erro ao Trocar Senha do Usuario: " + login + ","
+     * util.showErrorMsg("Erro ao Trocar Senha do Usuario: " + login + ","
      * + e, true);
      *
      * }
@@ -477,7 +479,7 @@ public class Banco
      * login, newPass
      * });
      * }
-     * SystemUtil.showMsg("Senha Trocada com Sucesso!", true);
+     * util.showMsg("Senha Trocada com Sucesso!", true);
      * }
      * }
      *
