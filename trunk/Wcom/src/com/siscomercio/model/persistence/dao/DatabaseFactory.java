@@ -21,9 +21,7 @@ import java.util.logging.Logger;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.init.Config;
-import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.standards.StringTable;
 import com.siscomercio.utilities.SystemUtil;
 
@@ -35,7 +33,8 @@ import com.siscomercio.utilities.SystemUtil;
  */
 public class DatabaseFactory
 {
-    static final Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
+    private static final Logger _log = Logger.getLogger(DatabaseFactory.class.getName());
+    StringTable defaults = StringTable.getInstance();
     /**
      * Tipo do Provedor
      */
@@ -55,9 +54,10 @@ public class DatabaseFactory
     private static DatabaseFactory _instance;
     private ProviderType _providerType;
     private ComboPooledDataSource _source;
-
+    Config config = Config.getInstance();
     // =========================================================
     // Constructor
+
     /**
      *
      * @throws SQLException
@@ -83,7 +83,7 @@ public class DatabaseFactory
 
             // this "connection_test_table" is automatically created if not already there
             _source.setAutomaticTestTable("connection_test_table");
-            _source.setTestConnectionOnCheckin(true);
+            _source.setTestConnectionOnCheckin(false);
 
             // testing OnCheckin used with IdleConnectionTestPeriod is faster than  testing on checkout
 
@@ -102,22 +102,22 @@ public class DatabaseFactory
             // till restart thus making acquire
             // errors "FATAL" ... we don't want that
             // it should be possible to recover
-            _source.setDriverClass(Config.getDatabaseDriver());
-            _source.setJdbcUrl(Config.getDatabaseUrl());
-            _source.setUser(Config.getDatabaseLogin());
-            _source.setPassword(Config.getDatabasePassword());
+            _source.setDriverClass(config.getDatabaseDriver());
+            _source.setJdbcUrl(config.getDatabaseUrl());
+            _source.setUser(config.getDatabaseLogin());
+            _source.setPassword(config.getDatabasePassword());
 
             /*
              * Test the connection
              */
             _source.getConnection().close();
 
-            if (Config.isEnableLog())
+            if (config.isEnableLog())
             {
                 _log.fine("Database Connection Working");
             }
 
-            if (Config.getDatabaseDriver().toLowerCase().contains("microsoft"))
+            if (config.getDatabaseDriver().toLowerCase().contains("microsoft"))
             {
                 _providerType = ProviderType.MsSql;
             }
@@ -128,7 +128,7 @@ public class DatabaseFactory
         }
         catch (SQLException x)
         {
-            AppManager.setTema(getClass().getName());
+            //   AppManager.setTema(getClass().getName());
             SystemUtil.showErrorMsg("Impossível Conectar ao Banco de Dados! <br> detalhes do erro: " + x.getLocalizedMessage(), true);
             // re-throw the exception
             throw x;
@@ -273,11 +273,11 @@ public class DatabaseFactory
             try
             {
                 con = _source.getConnection();
-                Banco.getInstance().setConStatus(StringTable.STATUS_CONNECTED);
+                Banco.getInstance().setConStatus(defaults.getSTATUS_CONNECTED());
             }
             catch (SQLException e)
             {
-                Banco.getInstance().setConStatus(StringTable.STATUS_DISCONNECTED);
+                Banco.getInstance().setConStatus(defaults.getSTATUS_DISCONNECTED());
                 SystemUtil.showErrorMsg("DatabaseFactory: getConnection() failed, trying again {0}", true);
             }
         }

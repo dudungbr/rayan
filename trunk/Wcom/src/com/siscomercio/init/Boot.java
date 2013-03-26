@@ -18,7 +18,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.URISyntaxException;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import sun.jvmstat.monitor.HostIdentifier;
@@ -41,17 +40,18 @@ public class Boot extends JFrame
     private static final Logger _log = Logger.getLogger(Boot.class.getName());
     private static final long serialVersionUID = 1L;
     private FrameSplashScreen fss = new FrameSplashScreen();
-    Banco banco = Banco.getInstance();
+    Banco banco;
+    Config config;
 
     private Boot()
     {
+        this.banco = Banco.getInstance();
+        this.config = Config.getInstance();
 
-        //Carrega Configs
-        Config.load();
 
         // Inicializa o Log Monitor
         // ---------------
-        if (Config.isEnableLog())
+        if (config.isEnableLog())
         {
             LogManager.init();
         }
@@ -61,7 +61,7 @@ public class Boot extends JFrame
         RuntimeMXBean rt = ManagementFactory.getRuntimeMXBean();
         final int runtimePid = Integer.parseInt(rt.getName().substring(0, rt.getName().indexOf("@")));
 
-        if (Config.isEnableLog())
+        if (config.isEnableLog())
         {
             _log.info("Verificando a Existencia de Outra Instancia da Aplicacao...");
         }
@@ -81,7 +81,7 @@ public class Boot extends JFrame
                 {
                     String msg = "Impossivel Iniciar Novamente!";
                     _log.warning(msg);
-                    Utilitarios.showInfoMessage(msg);
+                    Utilitarios.showWarningMessage(msg);
                     System.exit(0);
                 }
             }
@@ -93,7 +93,7 @@ public class Boot extends JFrame
      */
     private void inicializaApp()
     {
-        if (Config.isDebug())
+        if (config.isDebug())
         {
             _log.info("Iniciando aplicativo...");
         }
@@ -105,7 +105,7 @@ public class Boot extends JFrame
                 //mostra a percentagem de progresso no carregamento.
                 //   getBarra().setStringPainted(true);
                 int i = 0;
-                while (i <= 100)
+                while (i <= 30)
                 {
                     fss.getBarraProgresso().setValue(i);
 
@@ -113,18 +113,20 @@ public class Boot extends JFrame
                     {
                         case 10:
                         {
+                            //Abre Splash Screen e Seta o Valor da Versão do Sistema.
                             fss.getLabelInformacao().setText("Inicializando Aplicação...");
                             fss.setVisible(true);
                             fss.getLabelVersao().setText(String.valueOf(Config.getSystemVersion()));
+
                             break;
                         }
                         case 20:
                         {
-
+                            //Verifica o Processo MySQL Rodando na Maquina Local
                             fss.getLabelInformacao().setText("Verificando Servidor de Banco de Dados....");
                             String processo = "mysql";
 
-                            if (!Config.isDeveloper())
+                            if (!config.isDeveloper())
                             {
                                 if (!Utilitarios.checkIfProcessIsRunning(processo))
                                 {
@@ -134,47 +136,26 @@ public class Boot extends JFrame
                             }
                             else
                             {
-                                Utilitarios.showPlainMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
+                                Utilitarios.showWarningMessage("Voce Iniciou o Sistema em Modo Developer! \n caso nao seja desenvolvedor desabilite essa configuração.!");
                             }
                             break;
                         }
                         case 30:
                         {
-                            fss.getLabelInformacao().setText("Verificando Base de Dados ....");
 
-                            try
+                            fss.getLabelInformacao().setText("Verificando Database...");
+                            if (config.isDeveloper())
                             {
-                                if (!Config.isDeveloper())
-                                {
-                                    banco.atualizaDatabase(); //atualiza a base de dados
-                                }
-                                else
-                                {
-                                    banco.conectaDatabaseSelecionada();
-                                }
+                                _log.info("Lendo Tabela de Instalacao do Banco ...");
                             }
-                            catch (Exception ex)
-                            {
-                                if (Config.isDeveloper() || Config.isEnableLog())
-                                {
-                                    _log.log(Level.SEVERE, "Erro ao Conectar Banco: {0}", ex.getMessage());
-                                }
-                                ExceptionManager.ThrowException("Erro Chamar DAO do Banco de Dados", ex);
-                            }
-                            break;
-                        }
-                        case 40:
-                        {
-                            fss.getLabelInformacao().setText("Verificando Licença...");
 
                             // Lê a Tabela de Instalacao da DB
                             //--------------------------------
-                            _log.info("Lendo Tabela de Instalacao do Banco ...");
                             banco.readInstallationState();
 
                             // Abre o Frame de instalacao da DB caso nao a db nao esteja instalada.
-                            // ------------------------
-                            if (!Banco.getInstance().getInstalled())
+                            // --------------------------------------
+                            if (!banco.getInstalled())
                             {
                                 _log.info("Database nao Instalada, Abrindo Instalador Banco Dados...");
                                 EventQueue.invokeLater(new Runnable()
@@ -185,70 +166,85 @@ public class Boot extends JFrame
                                         DBConfig.getInstance().setVisible(true);
                                     }
                                 });
-                            } // Caso a DB Esteja Instalada Prosegue Para a Licenca
-                            // ------------------------------------------------
+                            }
                             else
                             {
-                                _log.info("Verificando Licenca...");
-                                //Le os Dados da Licenca
-                                // --------------------------
-                                banco.readLicenseData();
-
-                                // OK! Podemos Abrir o Sistema.
-                                // ------------------------
-                                if (Banco.getInstance().getLicensed() == 1)
+                                // Caso a DB Esteja Instalada Verifica Tabelas
+                                // ------------------------------------------------
+                                fss.getLabelInformacao().setText("Verificando Database...");
+                                if (banco.atualizaDatabase())//-> Caso Passe o Banco Estara Instalado.
                                 {
-                                    // Chama a Tela de Login
-                                    // ------------------------
-                                    EventQueue.invokeLater(new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            fss.getLabelInformacao().setText("Abrindo Aplicativo Principal....");
-                                            if (Config.isDeveloper())
-                                            {
-                                                _log.finest("Fim do Boot.");
-                                            }
-                                            //fecha a Splash Screen
-                                            fss.dispose();
-                                            Auth.getInstance().setVisible(true);
-                                            // FrameLogin.getInstance().setVisible(true);
-                                        }
-                                    });
-
-
-
-                                    //fecha a tela de splash
-                                    dispose();
+                                    //
                                 }
-                                //Caso a Aplicacao nao Tenha Sido Licenciada.. Abre o Frame de Licenca.
-                                // -----------------------------------------------------------
                                 else
                                 {
-                                    Utilitarios.showPlainMessage("Aplicação Não Licenciada, por Favor Insira seu Numero de Registro");
-                                    EventQueue.invokeLater(new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            new FrameLicenca().setVisible(true);
-                                        }
-                                    });
+                                    Utilitarios.showErrorMessage("Nao Foi Possivel Atualizar a Base de Dados.");
+                                    System.exit(0);
                                 }
                             }
-                            ///   TabelaCidade.getInstance();
-                            //  TabelaEstado.getInstance();
-
-                            //  IdleManager.getInstance().checaTempoOcioso();
-                            //SoundManager.getInstance();
-                            //new FileMonitor(2000);
                             break;
                         }
+                        case 40:
+                        {
+                            fss.getLabelInformacao().setText("Verificando Licenca...");
+                            if (config.isDeveloper())
+                            {
+                                _log.info("Verificando Licenca...");
+                            }
+                            //Le os Dados da Licenca
+                            // --------------------------
+                            banco.readLicenseData();
+
+
+                            if (Banco.getInstance().getLicensed())
+                            {
+                                // OK! Podemos Abrir o Sistema.
+                                // ------------------------
+                                EventQueue.invokeLater(new Runnable()
+                                {
+                                    @Override
+                                    public void run()
+                                    {
+                                        fss.getLabelInformacao().setText("Abrindo Aplicativo Principal....");
+                                        if (config.isDeveloper())
+                                        {
+                                            _log.finest("Fim do Boot.");
+                                        }
+                                        //fecha a Splash Screen
+                                        fss.dispose();
+                                        Auth.getInstance().setVisible(true);
+                                        // FrameLogin.getInstance().setVisible(true);
+                                    }
+                                });
+
+                                //fecha a tela de splash
+                                dispose();
+                            }
+                            //App Nao Licenciada, Abre o Frame de Licenca.
+                            // -------------------------------------------
+                            else
+                            {
+                                Utilitarios.showPlainMessage("Aplicação Não Licenciada, por Favor Insira seu Numero de Registro");
+                                EventQueue.invokeLater(new Runnable()
+                                {
+                                    @Override
+                                    public void run()
+                                    {
+                                        new FrameLicenca().setVisible(true);
+                                    }
+                                });
+                            }
+                        }
+                        ///   TabelaCidade.getInstance();
+                        //  TabelaEstado.getInstance();
+
+                        //  IdleManager.getInstance().checaTempoOcioso();
+                        //SoundManager.getInstance();
+                        //new FileMonitor(2000);
+                        break;
                     }
                     i++;
                 }
-
             }
         }.start();
     }

@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 public class AppManager extends JFrame
 {
     private static final Logger _log = Logger.getLogger(AppManager.class.getName());
+    Config config = Config.getInstance();
 
     /**
      *
@@ -42,9 +43,9 @@ public class AppManager extends JFrame
     /**
      *
      */
-    public static void optimizeRam()
+    public void optimizeRam()
     {
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.info("Chamando Garbage Collector.. \n ");
         }
@@ -55,9 +56,9 @@ public class AppManager extends JFrame
      *
      * @param requesterClass
      */
-    public static void setTema(String requesterClass)
+    public void setTema(String requesterClass)
     {
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.log(Level.INFO, "Setando Tema Visual para a Classe:  {0}.java \n", requesterClass);
         }
@@ -85,12 +86,12 @@ public class AppManager extends JFrame
     public void restartApp()
     {
 
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getPreRestartSound());
+            SoundManager.getInstance().playSound(config.getPreRestartSound());
         }
 
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.info("solicitacao de restart.");
         }
@@ -99,12 +100,12 @@ public class AppManager extends JFrame
 
         if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.isEnableSound())
+            if (config.isEnableSound())
             {
-                SoundManager.getInstance().playSound(Config.getRestartSound());
+                SoundManager.getInstance().playSound(config.getRestartSound());
             }
 
-            if (Config.isDeveloper())
+            if (config.isDeveloper())
             {
                 _log.info("usuario reiniciou o sistema.");
             }
@@ -132,14 +133,14 @@ public class AppManager extends JFrame
      */
     public void requestAppShutdown(JFrame janelaPai)
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getPreExitSound());
+            SoundManager.getInstance().playSound(config.getPreExitSound());
         }
 
 
         int selectedOption = JOptionPane.showConfirmDialog(janelaPai, "<html><font color =black size=4 face = Times new Roman ><b>Encerrar Sistema ?</b></font></html>", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-        if (Config.isDeveloper())
+        if (config.isDeveloper())
         {
             _log.info("solicitacao de shutdown...\n");
         }
@@ -147,12 +148,12 @@ public class AppManager extends JFrame
 
         if (selectedOption == JOptionPane.OK_OPTION)
         {
-            if (Config.isEnableSound())
+            if (config.isEnableSound())
             {
-                SoundManager.getInstance().playSound(Config.getExitSound());
+                SoundManager.getInstance().playSound(config.getExitSound());
             }
 
-            if (Config.isDeveloper())
+            if (config.isDeveloper())
             {
                 _log.info("usuario finalizou o sistema.");
             }
@@ -160,7 +161,7 @@ public class AppManager extends JFrame
             //finaliza a aplicacao
             System.exit(0);
         }
-        else if (Config.isDeveloper())
+        else if (config.isDeveloper())
         {
             _log.info("usuario desiste de fechar o sistema.\n");
         }
@@ -169,11 +170,11 @@ public class AppManager extends JFrame
     /**
      * Metodo para funcoes em desenvolvimento ainda.
      */
-    public static void implementar()
+    public void implementar()
     {
-        if (Config.isEnableSound())
+        if (config.isEnableSound())
         {
-            SoundManager.getInstance().playSound(Config.getUnimplementedSound());
+            SoundManager.getInstance().playSound(config.getUnimplementedSound());
         }
         SystemUtil.showMsg("Funcao Ainda nao Disponivel", true);
     }

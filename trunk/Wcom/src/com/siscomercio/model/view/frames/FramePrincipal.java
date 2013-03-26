@@ -53,6 +53,7 @@ public class FramePrincipal extends JFrame
      */
     private static final Logger _log = Logger.getLogger(FramePrincipal.class.getName());
     Date date = new Date();
+    StringTable tabela = StringTable.getInstance();
     /**
      * if this frame was created of not.
      */
@@ -67,9 +68,9 @@ public class FramePrincipal extends JFrame
     {
         _log.log(Level.INFO, "Carregando Imagem: {0}{1}\n", new Object[]
         {
-            StringTable.getIMAGE_PATH(), Config.getLogo()
+            tabela.getIMAGE_PATH(), Config.getLogo()
         });
-        File file = new File(StringTable.getIMAGE_PATH() + Config.getLogo());
+        File file = new File(tabela.getIMAGE_PATH() + Config.getLogo());
 
         if (file.exists())
         {

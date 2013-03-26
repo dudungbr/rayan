@@ -174,8 +174,7 @@ public class DBConfig extends JFrame
         {
             _log.info("chamando funcao de instalacao do banco");
         }
-
-        Banco.getInstance().instaleBanco();
+        Banco.getInstance().atualizaDatabase();
 
         dadosStatus.setText(Banco.getInstance().getConnectionStatus());
         if (Banco.getInstance().getInstalled())
@@ -196,7 +195,7 @@ public class DBConfig extends JFrame
 
         // Abre o Frame de Licenca caso a aplicacao nao esteja licenciada.
         // ------------------------
-        if (Banco.getInstance().getLicensed() == 0)
+        if (Banco.getInstance().getLicensed())
         {
             EventQueue.invokeLater(new Runnable()
             {
@@ -213,7 +212,7 @@ public class DBConfig extends JFrame
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoDeletarActionPerformed
     {//GEN-HEADEREND:event_botaoDeletarActionPerformed
-        //    if(!Config.isLoad())
+
         Config.load();
 
         Banco.getInstance().dropDatabase();

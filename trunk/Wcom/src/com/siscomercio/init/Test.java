@@ -13,17 +13,21 @@ public class Test
      */
     public static void main(String[] args)
     {
-        Config.load();
-        Banco.getInstance().conectaDatabaseSelecionada();
-        Banco.getInstance().readInstallationState();
+        if (Banco.getInstance().criaNovaBase())
+        {
+            System.out.println("Base Criada Com Sucesso!");
+        }
+        // Thread.sleep(1000);
+        // Banco.getInstance().conectaDatabaseSelecionada();
+        // Banco.getInstance().readInstallationState();
 
-        if (Banco.getInstance().getInstalled())
-        {
-            System.out.println("ok");
-        }
-        else
-        {
-            System.out.println("errado");
-        }
+//        if (Banco.getInstance().getInstalled())
+//        {
+//            System.out.println("ok");
+//        }
+//        else
+//        {
+//            System.out.println("errado");
+//        }
     }
 }
