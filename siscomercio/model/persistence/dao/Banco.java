@@ -742,6 +742,10 @@ public class Banco
         }
 
         File pasta = new File(stringTable.getSQL_PATH());
+        if (config.isDebug())
+        {
+            _log.log(Level.INFO, "Caminho: {0}", stringTable.getSQL_PATH());
+        }
         for (File f : pasta.listFiles())
         {
             if (f != null && f.getName().endsWith(".sql"))
@@ -813,10 +817,10 @@ public class Banco
                         ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
                     }
                 }
-                return true;
+
             }
         }
-        return false;
+        return true;
     }
 
     /**
