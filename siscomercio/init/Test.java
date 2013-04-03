@@ -13,21 +13,29 @@ public class Test
      */
     public static void main(String[] args)
     {
-        if (Banco.getInstance().criaNovaBase())
-        {
-            System.out.println("Base Criada Com Sucesso!");
-        }
-        // Thread.sleep(1000);
-        // Banco.getInstance().conectaDatabaseSelecionada();
-        // Banco.getInstance().readInstallationState();
-
-//        if (Banco.getInstance().getInstalled())
+//       // Banco.getInstance().criaNovaBase();
+//        Banco.getInstance().conectaDatabaseSelecionada();
+//        if (Banco.getInstance().executaTabelasMySQL())
 //        {
-//            System.out.println("ok");
+//            System.out.println("Base Criada Com Sucesso!");
 //        }
 //        else
 //        {
 //            System.out.println("errado");
 //        }
+        // Thread.sleep(1000);
+        // Banco.getInstance().conectaDatabaseSelecionada();
+        boolean cond = Banco.getInstance().verificaExistencia();
+
+        if (cond)
+        {
+            System.out.println("ok");
+            System.out.println(Banco.getInstance().getConnectionStatus());
+        }
+        else
+        {
+            System.out.println("errado");
+            System.out.println(Banco.getInstance().getConnectionStatus());
+        }
     }
 }

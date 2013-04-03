@@ -15,6 +15,7 @@ import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.model.security.Serializer;
 import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
+import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -213,7 +214,8 @@ public class FrameLicenca extends JFrame
         "unused"
     })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         painel = new javax.swing.JPanel();
         labelCodAtivacao = new javax.swing.JLabel();
@@ -229,9 +231,16 @@ public class FrameLicenca extends JFrame
         labelInformacaoSuporte = new javax.swing.JLabel();
         campoSerial = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registro da Aplicação");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Registro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
         painel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -248,8 +257,10 @@ public class FrameLicenca extends JFrame
 
         botaoRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoRegistrar.setText("Registrar Sistema");
-        botaoRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        botaoRegistrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 botaoRegistrarActionPerformed(evt);
             }
         });
@@ -364,6 +375,22 @@ public class FrameLicenca extends JFrame
         coleteDados();
         verifiqueSerial();
     }//GEN-LAST:event_botaoRegistrarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        boolean reply = Utilitarios.getInstance().criaJanelaConfirmacao(this, false);
+
+        if (reply)
+        {
+            System.out.println("ok");
+            System.exit(0);
+        }
+        else
+        {
+            System.out.println("no");
+        }
+
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      *

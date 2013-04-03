@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.model.persistence.dao.Banco;
+import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
 
 /**
@@ -81,7 +82,8 @@ public class DBConfig extends JFrame
      */
     @SuppressWarnings ("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -105,52 +107,65 @@ public class DBConfig extends JFrame
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Banco de Dados");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(204, 204, 255));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
         painel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banco de Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Franklin Gothic Medium Cond", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
         painel.setForeground(new java.awt.Color(204, 204, 204));
-        painel.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        painel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         painel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botaoDeletar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoDeletar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoDeletar.setText("Deletar Database");
-        botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        botaoDeletar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 botaoDeletarActionPerformed(evt);
             }
         });
         painel.add(botaoDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        botaoInstalar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoInstalar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoInstalar.setText("Instalar Database");
         botaoInstalar.setToolTipText("Clique para Instalar a Base de Dados.");
-        botaoInstalar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        botaoInstalar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 botaoInstalarActionPerformed(evt);
             }
         });
         painel.add(botaoInstalar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
-        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        botaoCancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         botaoCancelar.setText("Cancelar");
-        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 botaoCancelarActionPerformed(evt);
             }
         });
         painel.add(botaoCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
-        labelStatus.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        labelStatus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         labelStatus.setText("Status do Banco: ");
         painel.add(labelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        dadosStatus.setFont(new java.awt.Font("Times New Roman", 1, 14));
+        dadosStatus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dadosStatus.setText("statusDb");
         painel.add(dadosStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
 
@@ -158,15 +173,17 @@ public class DBConfig extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-270)/2, (screenSize.height-269)/2, 270, 269);
+        setSize(new java.awt.Dimension(270, 269));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoInstalarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoInstalarActionPerformed
@@ -228,6 +245,21 @@ public class DBConfig extends JFrame
     {//GEN-HEADEREND:event_botaoCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        boolean reply = Utilitarios.getInstance().criaJanelaConfirmacao(this, false);
+
+        if (reply)
+        {
+            System.out.println("ok");
+            System.exit(0);
+        }
+        else
+        {
+            System.out.println("no");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

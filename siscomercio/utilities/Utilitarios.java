@@ -1068,7 +1068,7 @@ public class Utilitarios
      * <p/>
      * @return
      */
-    public boolean criaJanelaConfirmacao(JFrame janela)
+    public boolean criaJanelaConfirmacao(JFrame janela, boolean dispose)
     {
         int option;
         option = createQuestionPopUp("Deseja Realmente Cancelar?");
@@ -1077,11 +1077,15 @@ public class Utilitarios
         {
             case JOptionPane.OK_OPTION:
             {
-                janela.dispose();
+                if (dispose)
+                {
+                    janela.dispose();
+                }
                 return true;
             }
             default:
             {
+
                 break;
             }
         }
