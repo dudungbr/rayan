@@ -59,6 +59,12 @@ public class StringTable
     // public final String DELETE_USER = "DELETE FROM usuarios WHERE id=? AND login =?";
     /// public final String CHANGE_USER_PASS = "UPDATE usuarios SET senha=? WHERE login=?";
     public final String GET_USER_PASS = "SELECT `senha` FROM usuarios WHERE login=?";
+    private String SELECT_DB = "SHOW DATABASES LIKE " + "'" + Config.getInstance().getDatabase() + "'";
+
+    public String getSELECT_DB()
+    {
+        return SELECT_DB;
+    }
     /**
      * Defaults
      */
@@ -133,7 +139,7 @@ public class StringTable
         return READ_USERS;
     }
 
-    public String getINSTALL()
+    public String getInstallQuery()
     {
         return INSTALL;
     }

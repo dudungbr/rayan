@@ -53,7 +53,7 @@ public final class SoundManager
     {
         if (config.isEnableSound())
         {
-            _log.log(Level.INFO, "tocando arquivo: {0}", soundName);
+            //    _log.log(Level.INFO, "tocando arquivo: {0}", soundName);
 
             File arquivo;
             List sounds = getSoundList();
@@ -102,7 +102,7 @@ public final class SoundManager
 
             if (config.isDeveloper())
             {
-                _log.log(Level.INFO, "Caminho: {0}", StringTable.SOUND_PATH);
+                //     _log.log(Level.INFO, "Caminho: {0}", StringTable.SOUND_PATH);
             }
 
             if (pasta.exists() && pasta.isDirectory())
@@ -115,14 +115,14 @@ public final class SoundManager
                     {
                         if (config.isDeveloper())
                         {
-                            _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
+                            //       _log.log(Level.INFO, "Adicionando objeto: {0}", arquivo.getName());
                         }
                         fileList.add(arquivo);
                     }
                 }
                 if (config.isEnableLog())
                 {
-                    _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
+                    //    _log.log(Level.INFO, "Carregados: {0} Arquivos de Som.", fileList.size());
                 }
 
             }

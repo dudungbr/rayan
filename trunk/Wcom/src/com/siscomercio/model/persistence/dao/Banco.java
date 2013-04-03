@@ -18,6 +18,7 @@ import com.siscomercio.utilities.DiskUtil;
 import com.siscomercio.utilities.MbUtil;
 import com.siscomercio.utilities.NetworkUtil;
 import com.siscomercio.utilities.SystemUtil;
+import com.siscomercio.utilities.Utilitarios;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -48,7 +49,7 @@ public class Banco
     StringTable stringTable;
     Config config;
     SystemUtil util;
-    private String _status;
+    private String _status = "N/A";
     private boolean isDbDeleted;
     public int _installed;
     private int _licensed;
@@ -62,11 +63,20 @@ public class Banco
 
     private Banco()
     {
-
         this.stringTable = StringTable.getInstance();
-        this._status = stringTable.getSTATUS_DISCONNECTED();
         this.config = Config.getInstance();
         this.util = SystemUtil.getInstance();
+    }
+
+    private boolean isConnected()
+    {
+        if (conexao != null)
+        {
+            this._status = stringTable.getSTATUS_CONNECTED();
+            return true;
+        }
+        this._status = stringTable.getSTATUS_DISCONNECTED();
+        return false;
     }
 
     /**
@@ -582,32 +592,32 @@ public class Banco
      * Le a Tabela de Instalacao Atual
      *
      */
-    public void readInstallationState()
+    public boolean readInstallationState()
     {
         int code = stringTable.getDEFAULT_INT();
 
+//        if (_status.equalsIgnoreCase(stringTable.getSTATUS_DISCONNECTED()))
+//        {
+//            conectaBanco();
+//        }
         if (config.isDebug())
         {
             _log.info("lendo tabela de estado da instalacao \n");
+            _log.log(Level.INFO, "parametro code = {0}", code);
         }
         try
         {
-            if (conexao == null)
-            {
-                if (config.isDebug())
-                {
-                    _log.info("conexao nula");
-                }
-                return;
-            }
             consultaPreparada = conexao.prepareStatement(stringTable.getREAD_INSTALL());
             ResultSet rset = consultaPreparada.executeQuery();
             while (rset.next())
             {
                 code = rset.getInt("bancoInstalado");
-
-
             }
+//            else
+//            {
+//                _log.log(Level.INFO, "parametro nao encontrado! Install  = {0}", code);
+//
+//            }
 
             _log.log(Level.INFO, "Banco Instalado = {0}", String.valueOf(code));
             this.setInstalled(code == 1 ? true : false);
@@ -615,6 +625,7 @@ public class Banco
             {
                 _log.log(Level.INFO, "Estado da Instala\u00e7\u00e3o: {0} ok .....\n", _installed);
             }
+            return true;
         }
         catch (Exception e)
         {
@@ -624,6 +635,7 @@ public class Banco
             }
             ExceptionManager.ThrowException(e.getMessage(), e);
         }
+        return false;
     }
 
     /**
@@ -675,29 +687,91 @@ public class Banco
      */
     public boolean atualizaDatabase()
     {
+        if (!isConnected())
+        {
+            conectaBanco();
+        }
         //tenta criar nova base Dados caso nao exista
         if (criaNovaBase())
         {
-            //conecta na base de dados Selecionada.
-            if (conectaDatabaseSelecionada())
+            //le e executa todas as tabelas.
+            if (executaTabelasMySQL())
             {
-                //le e executa todas as tabelas.
-                if (executaTabelasMySQL())
-                {
-                    //se todas as operacoes foram concluidas com exito, seta o banco como Instalado.
-                    setInstalled(true);
-                    return true;
+                //se todas as operacoes foram concluidas com exito, seta o banco como Instalado.
+                setInstalled(true);
+                executeUpdateQuery(stringTable.getInstallQuery());
+                return true;
 
-                }
             }
+
         }
         return false;
     }
 
     /**
+     * Conexao Idependente do Objeto Global
+     * <p/>
+     * @return
+     */
+    public boolean verificaExistencia()
+    {
+        Connection con = conectaMySQL();
+
+        try
+        {
+            PreparedStatement ps = con.prepareStatement(stringTable.getSELECT_DB());
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if (rset.next())
+            {
+                return true;
+            }
+            con.close();
+        }
+        catch (Exception e)
+        {
+        }
+
+        return false;
+    }
+
+    /**
+     * Conexao Idependente do Objeto Global
+     * <p/>
+     * @return
+     */
+    private Connection conectaMySQL()
+    {
+        Connection con = null;
+        try
+        {
+            //conecta ao servidor mysql sem database selecionada
+            String url = "jdbc:mysql://" + config.getHost() + ":" + config.getDatabasePort() + "/";
+
+            //regstra o driver
+            Class.forName(config.getDatabaseDriver()).newInstance();
+
+            System.out.println("URL = " + url);
+            System.out.println("Query = " + stringTable.getSELECT_DB());
+
+            //Captura a Conexão.
+            con = DriverManager.getConnection(url, config.getDatabaseLogin(), config.getDatabasePassword());
+
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex)
+        {
+            Utilitarios.getInstance().showErrorMessage("Erro ao Conectar Banco: " + ex.getCause());
+            _log.log(Level.INFO, "Erro {0}", ex.getMessage());
+            Logger.getLogger(Banco.class.getName()).log(Level.SEVERE, null, ex.getCause());
+        }
+        return con;
+
+    }
+
+    /**
      * Cria Nova Database
      * <p/>
-     * C3P0 NAo Aceita o Seu Uso sem Selecao, Devemos Usar o DriverManager.
+     * C3P0 Não Aceita o Seu Uso sem Selecao, Devemos Usar o DriverManager.
      *
      */
     public boolean criaNovaBase()
@@ -709,30 +783,19 @@ public class Banco
 
         try
         {
-
-            //conecta ao servidor mysql sem database selecionada
-            String url = "jdbc:mysql://" + config.getHost() + ":" + config.getDatabasePort() + "/";
-
-            //regstra o driver
-            Class.forName(config.getDatabaseDriver()).newInstance();
-
-            System.out.println("URL = " + url);
-            System.out.println("Query = " + stringTable.getCreateDB());
-            //Captura a Conexão.
-            conexao = DriverManager.getConnection(url, config.getDatabaseLogin(), config.getDatabasePassword());
             Statement st = conexao.createStatement();
             st.executeUpdate(stringTable.getCreateDB());
             setConStatus(stringTable.getSTATUS_CONNECTED());
             return true;
 
         }
-        catch (IllegalAccessException | InstantiationException | ClassNotFoundException | SQLException ex)
+        catch (SQLException ex)
         {
             if (config.isDebug() || config.isEnableLog())
             {
-                _log.log(Level.SEVERE, "Erro: {0}", ex.getMessage());
+                _log.log(Level.SEVERE, "Erro ao Criar Nova Base de Dados: {0}", ex.getMessage());
             }
-            ExceptionManager.ThrowException("Erro ao Criar Nova Base de Dados: ", ex);
+            ExceptionManager.ThrowException("Erro ao Criar Nova Base de Dados: ", ex.getCause());
         }
         return false;
     }
@@ -834,7 +897,7 @@ public class Banco
      * Conecta ao Banco
      *
      */
-    public boolean conectaDatabaseSelecionada()
+    public boolean conectaBanco()
     {
         String url = null;
         try//A captura de exceções SQLException em Java é obrigatória para usarmos JDBC.
@@ -1421,7 +1484,6 @@ public class Banco
         }
         else
         {
-            executeUpdateQuery(stringTable.getInstallQuery());
             this._installed = 1;
         }
     }

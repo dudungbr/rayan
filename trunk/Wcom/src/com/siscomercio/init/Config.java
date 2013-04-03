@@ -95,7 +95,10 @@ public class Config
      */
     public void loadPreferencies()
     {
-        _log.info("Carregando Preferencias ...");
+        if (debug)
+        {
+            _log.info("Carregando Preferencias ...");
+        }
 
         ///JOption pane
         UIManager.put("OptionPane.font", new Font("Tahoma", Font.BOLD, 14));
@@ -144,7 +147,10 @@ public class Config
      */
     private static void setTema()
     {
-        _log.info("setando Tema Visual");
+        if (debug)
+        {
+            _log.info("setando Tema Visual");
+        }
         try
         {
             //AppManager.setTema(Boot.class.getSimpleName());
@@ -169,12 +175,18 @@ public class Config
 
     private static void loadLocalVersion()
     {
-        _log.info("carregando arquivo de versao local");
+        if (debug)
+        {
+            _log.info("carregando arquivo de versao local");
+        }
         File localFile = new File("./update/local.properties");//"C:\\Sat\\update\\local.properties");
 
         if (localFile.exists())
         {
-            _log.info("alterando versao local...");
+            if (debug)
+            {
+                _log.info("alterando versao local...");
+            }
 
 
             try
@@ -203,7 +215,10 @@ public class Config
     private void load()
     {
 
-        _log.info("Config: Carregando o Arquuivo de Configuração...");
+        if (debug)
+        {
+            _log.info("Config: Carregando o Arquuivo de Configuração...");
+        }
         try
         {
 
