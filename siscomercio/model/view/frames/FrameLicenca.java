@@ -12,10 +12,11 @@ package com.siscomercio.model.view.frames;
 import com.siscomercio.init.Config;
 import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.model.persistence.dao.Banco;
-import com.siscomercio.model.security.Serializer;
+import com.siscomercio.crypt.Serializer;
 import com.siscomercio.utilities.SystemUtil;
-import com.siscomercio.utilities.UpperCaseLetter;
+import com.siscomercio.utilities.document.UpperCaseLetter;
 import com.siscomercio.utilities.Utilitarios;
+import com.siscomercio.utilities.document.MaxLengthUpperCaseDocument;
 import java.awt.EventQueue;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -66,11 +67,6 @@ public class FrameLicenca extends JFrame
             System.out.println("valor variavel dados: " + dados);
             System.out.println("serial valido: " + validSerial);
         }
-        else if (valorCampoSerial.length() < 30)
-        {
-            SystemUtil.getInstance().showErrorMsg("Numero de Série Incompleto.", true);
-            campoSerial.setText("");
-        }
         else if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             Banco.getInstance().setLicensed(1);
@@ -99,7 +95,7 @@ public class FrameLicenca extends JFrame
 //        tmp = Serializer.getInstance().encryptSerial(str);
 //        return (licenceType.toUpperCase().concat(tmp));
 //    }
-    private boolean coletaDados()
+    private boolean validaFrame()
     {
         String nomeEmpresa = campoEmpresa.getText();
         String codAtivacao = codigoDeAtivacao.getText();
@@ -110,6 +106,11 @@ public class FrameLicenca extends JFrame
         {
             SystemUtil.getInstance().showErrorMsg("Preencha o Nome da Empresa.", true);
             return false;
+        }
+        else if (serial.length() < 30)
+        {
+            SystemUtil.getInstance().showErrorMsg("Numero de Série Incompleto.", true);
+            campoSerial.setText("");
         }
         else if (codAtivacao.isEmpty())
         {
@@ -205,6 +206,8 @@ public class FrameLicenca extends JFrame
         labelInformacaoSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         labelInformacaoSuporte.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
 
+        campoSerial.setDocument(new MaxLengthUpperCaseDocument(30));
+
         codigoDeAtivacao.setEditable(false);
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
@@ -246,7 +249,7 @@ public class FrameLicenca extends JFrame
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addComponent(dropDownTipoLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {campoEmpresa, campoSerial, codigoDeAtivacao});
@@ -304,7 +307,7 @@ public class FrameLicenca extends JFrame
 
     private void botaoRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoRegistrarActionPerformed
     {//GEN-HEADEREND:event_botaoRegistrarActionPerformed
-        if (coletaDados())
+        if (validaFrame())
         {
             validaSerial();
         }

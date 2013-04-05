@@ -1,4 +1,4 @@
-package com.siscomercio.utilities;
+package com.siscomercio.utilities.document;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

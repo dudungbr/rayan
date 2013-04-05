@@ -1,4 +1,4 @@
-package com.siscomercio.model.security;
+package com.siscomercio.crypt;
 
 import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.init.Config;

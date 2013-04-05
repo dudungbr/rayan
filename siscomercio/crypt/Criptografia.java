@@ -1,4 +1,4 @@
-package com.siscomercio.model.security;
+package com.siscomercio.crypt;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

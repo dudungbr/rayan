@@ -11,7 +11,7 @@ import com.siscomercio.model.entity.Endereco;
 import com.siscomercio.model.entity.Entrada;
 import com.siscomercio.model.entity.Funcionario;
 import com.siscomercio.model.entity.Usuario;
-import com.siscomercio.model.security.Criptografia;
+import com.siscomercio.crypt.Criptografia;
 import com.siscomercio.standards.StringTable;
 import com.siscomercio.tables.UserTable;
 import com.siscomercio.utilities.DiskUtil;
