@@ -1,9 +1,13 @@
 package com.siscomercio.model.security;
 
+import com.siscomercio.controller.managers.ExceptionManager;
 import com.siscomercio.init.Config;
 import com.siscomercio.utilities.DiskUtil;
 import com.siscomercio.utilities.MbUtil;
 import com.siscomercio.utilities.NetworkUtil;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,13 +18,13 @@ import java.util.logging.Logger;
 public class Serializer
 {
     private static final Logger _log = Logger.getLogger(Serializer.class.getName());
+    private String code = "";
+    private boolean generated = false;
+    Config config = Config.getInstance();
 
     private Serializer()
     {
     }
-    private String code = "";
-    private boolean generated = false;
-    Config config = Config.getInstance();
 
     /**
      *
@@ -81,13 +85,8 @@ public class Serializer
             {
                 System.out.println("[Temps] Deletando Index :" + temp.length() + " , ");
             }
-
-
             temp.deleteCharAt(temp.length() - 1); // deleta os ultimos caracteres.
         }
-        //System.out.println(temp);
-
-
 
         if (config.isDebug())
         {
@@ -195,6 +194,40 @@ public class Serializer
     private static class SingletonHolder
     {
         protected static final Serializer _instance = new Serializer();
+    }
+
+    /**
+     *
+     * @param st
+     * <p/>
+     * @return
+     */
+    public String encryptSerial(String st)
+    {
+        try
+        {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            digest.update(st.getBytes());
+            BigInteger hash = new BigInteger(1, digest.digest());
+            StringBuilder serial = new StringBuilder(hash.toString());
+
+            // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
+            //-------------------------------
+            for (int i = 0; i < serial.length(); i++)
+            {
+                if (serial.length() > 30)
+                {
+                    serial.deleteCharAt(serial.length() - 1); // deleta os ultimos caracteres.
+                }
+            }
+            return serial.toString();
+
+        }
+        catch (NoSuchAlgorithmException ns)
+        {
+            ExceptionManager.ThrowException("Erro ao Verificar Serial:", ns);
+            return st;
+        }
     }
 
     /**

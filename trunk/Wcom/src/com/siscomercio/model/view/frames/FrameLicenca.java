@@ -17,9 +17,6 @@ import com.siscomercio.utilities.SystemUtil;
 import com.siscomercio.utilities.UpperCaseLetter;
 import com.siscomercio.utilities.Utilitarios;
 import java.awt.EventQueue;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
@@ -52,58 +49,29 @@ public class FrameLicenca extends JFrame
         campoSerial.setText("");
     }
 
-    private void verifiqueSerial()
+    private void validaSerial()
     {
         //Retorna o Tipo de Licenca Selecionado
         // ------------------------------------
         String tipoLicenca = dropDownTipoLicenca.getModel().getSelectedItem().toString();
-        if (config.isDebug())
-        {
-            System.out.println("tipo de licenca:" + tipoLicenca);
-        }
-
-        //Pega o Valor dao Campo Serial
-        // ------------------------------------
         String valorCampoSerial = campoSerial.getText();
-        if (config.isDebug())
-        {
-            System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
-        }
-
-
         // Remove os "-" da String
-        //-------------------------------
-        StringBuilder dados = new StringBuilder(codigoDeAtivacao.getText());
-        String remover = "-";
-
-        for (int i = 0; i < (dados.length() - remover.length() + 1); i++)
-        {
-            String res = dados.substring(i, (i + remover.length()));
-            if (res.equals(remover))
-            {
-                if (config.isDebug())
-                {
-                    System.out.println("removendo - do serial");
-                }
-                int pos = dados.indexOf(remover);
-                dados.delete(pos, pos + remover.length());
-            }
-        }
-        if (config.isDebug())
-        {
-            System.out.println("valor variavel dados: " + dados.toString());
-        }
-        //--------------------------------------------
-
+        String dados = codigoDeAtivacao.getText().replaceAll("-", "");
         // Encripta a Variavel Dados
-        //----------------------------------------
-        String validSerial = encryptSerial(dados.toString());
+        String validSerial = Serializer.getInstance().encryptSerial(dados);
         if (config.isDebug())
         {
+            System.out.println("Tipo de licenca:" + tipoLicenca);
+            System.out.println("valor digitado no campo Serial: " + valorCampoSerial);
+            System.out.println("valor variavel dados: " + dados);
             System.out.println("serial valido: " + validSerial);
         }
-
-        if (valorCampoSerial.equalsIgnoreCase(validSerial))
+        else if (valorCampoSerial.length() < 30)
+        {
+            SystemUtil.getInstance().showErrorMsg("Numero de Série Incompleto.", true);
+            campoSerial.setText("");
+        }
+        else if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             Banco.getInstance().setLicensed(1);
             dispose();
@@ -114,93 +82,54 @@ public class FrameLicenca extends JFrame
         else
         {
             SystemUtil.getInstance().showErrorMsg("Numero de Série Inválido.", true);
+            campoSerial.setText("");
         }
     }
 
-    /**
-     *
-     * @param st
-     * <p/>
-     * @return
-     */
-    public static String encryptSerial(String st)
+//    /**
+//     *
+//     * @param licenceType
+//     * @param str
+//     * <p/>
+//     * @return
+//     */
+//    public static String createEncriptedString(String licenceType, String str)
+//    {
+//        String tmp;
+//        tmp = Serializer.getInstance().encryptSerial(str);
+//        return (licenceType.toUpperCase().concat(tmp));
+//    }
+    private boolean coletaDados()
     {
-        try
-        {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(st.getBytes());
-            BigInteger hash = new BigInteger(1, digest.digest());
-            StringBuilder serial = new StringBuilder(hash.toString());
-
-            // Reduz a String p/ 30 Caracteres. deletando os caracteres apos o index 30...
-            //-------------------------------
-            for (int i = 0; i < serial.length(); i++)
-            {
-                if (serial.length() > 30)
-                {
-                    serial.deleteCharAt(serial.length() - 1); // deleta os ultimos caracteres.
-                }
-            }
-            return serial.toString();
-
-        }
-        catch (NoSuchAlgorithmException ns)
-        {
-            return st;
-        }
-    }
-
-    /**
-     *
-     * @param licenceType
-     * @param str
-     * <p/>
-     * @return
-     */
-    public static String createEncriptedString(String licenceType, String str)
-    {
-        String tmp;
-        tmp = encryptSerial(str);
-        return (licenceType.toUpperCase().concat(tmp));
-    }
-
-    private void coleteDados()
-    {
-
-        //Captura o Nome da Empresa
-        // ---------------------
         String nomeEmpresa = campoEmpresa.getText();
+        String codAtivacao = codigoDeAtivacao.getText();
+        numEstacoes = Integer.parseInt(String.valueOf(spinnerContadorEstacoes.getModel().getValue()));
+        String serial = campoSerial.getText();
+
         if (nomeEmpresa.isEmpty())
         {
-            SystemUtil.getInstance().showErrorMsg("Nome da Empresa Inválido.", true);
-            return;
-
+            SystemUtil.getInstance().showErrorMsg("Preencha o Nome da Empresa.", true);
+            return false;
         }
-        //Captura o Texto do TextField
-        // ---------------------
-        String codAtivacao = codigoDeAtivacao.getText();
-        if (codAtivacao.isEmpty())
+        else if (codAtivacao.isEmpty())
         {
             SystemUtil.getInstance().showErrorMsg("Nao foi Possivel Gerar o Codigo de Ativação, Contacte o Suporte Tecnico.", true);
             resetCampos();
-            return;
+            return false;
         }
-        numEstacoes = Integer.parseInt(String.valueOf(spinnerContadorEstacoes.getModel().getValue()));
-
-        if (numEstacoes <= 0)
+        else if (numEstacoes <= 0)
         {
             SystemUtil.getInstance().showErrorMsg("o Numero de Estações Deve Ser Maior que 0.", true);
             resetCampos();
-            return;
+            return false;
         }
-        //Captura o Texto do cmpoSerial
-        // ---------------------
-        String serial = campoSerial.getText();
-        if (serial.isEmpty())
+        else if (serial.isEmpty())
         {
-            SystemUtil.getInstance().showErrorMsg("Por Favor Digite o Numero de Serie.", true);
+            SystemUtil.getInstance().showErrorMsg("Insira o Numero de Serie.", true);
             resetCampos();
+            return false;
         }
+        return true;
     }
 
     /**
@@ -375,8 +304,10 @@ public class FrameLicenca extends JFrame
 
     private void botaoRegistrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botaoRegistrarActionPerformed
     {//GEN-HEADEREND:event_botaoRegistrarActionPerformed
-        coleteDados();
-        verifiqueSerial();
+        if (coletaDados())
+        {
+            validaSerial();
+        }
     }//GEN-LAST:event_botaoRegistrarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
@@ -413,7 +344,6 @@ public class FrameLicenca extends JFrame
         {
             serial.generateActivationCode();
         }
-
         //imprime no frame o codigo gerado pelos seriais
         codigoDeAtivacao.setText(serial.getGeneratedCode());
     }
@@ -429,8 +359,6 @@ public class FrameLicenca extends JFrame
             @Override
             public void run()
             {
-
-
                 new FrameLicenca().setVisible(true);
             }
         });
