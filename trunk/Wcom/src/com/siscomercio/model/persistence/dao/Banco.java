@@ -41,14 +41,15 @@ import java.util.logging.Logger;
 public class Banco
 {
     private static final Logger _log = Logger.getLogger(Banco.class.getName());
-    private Connection conexao;
+    private Connection conexaoBanco;
+    private Connection conexaoMySQL;
     private Statement consulta;
     private PreparedStatement consultaPreparada;
     private ResultSet resultado;
     private String query;
-    StringTable stringTable;
-    Config config;
-    SystemUtil util;
+    private StringTable stringTable;
+    private Config config;
+    private SystemUtil util;
     private String _status = "N/A";
     private boolean isDbDeleted;
     public int _installed;
@@ -70,7 +71,7 @@ public class Banco
 
     private boolean isConnected()
     {
-        if (conexao != null)
+        if (conexaoBanco != null)
         {
             this._status = stringTable.getSTATUS_CONNECTED();
             return true;
@@ -84,7 +85,7 @@ public class Banco
      */
     public void registreAplicacao(String nomeEmpresa, int numEstacoes, String licenceType)
     {
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getREGISTRE_APP()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getREGISTRE_APP()))
         {
             ps.setInt(1, 1);
             ps.setString(2, NetworkUtil.getMac());
@@ -151,7 +152,7 @@ public class Banco
 
         try
         {
-            try (PreparedStatement ps = conexao.prepareStatement(stringTable.getCHECK_USER_PASS()))
+            try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getCHECK_USER_PASS()))
             {
                 ps.setInt(1, userCode);
                 ps.setString(2, login);
@@ -232,7 +233,7 @@ public class Banco
         {
             String sql = "select `login` from users where `login` like '" + value + "';";
 
-            PreparedStatement ps = conexao.prepareStatement(sql);
+            PreparedStatement ps = conexaoBanco.prepareStatement(sql);
             ps.execute();
             ResultSet rset = ps.getResultSet();
             if (rset.next())
@@ -269,7 +270,7 @@ public class Banco
         {
             _log.log(Level.INFO, "Adcionando Usuario: {0}", login);
         }
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getINSERT_USER()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getINSERT_USER()))
         {
             ps.setString(1, login);
             ps.setString(2, senha);
@@ -375,7 +376,7 @@ public class Banco
         }
         int codigo = stringTable.getDEFAULT_INT();
 
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getGET_USER_CODE()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getGET_USER_CODE()))
         {
             ps.setString(1, login);
             ps.setString(2, senha);
@@ -542,7 +543,7 @@ public class Banco
         int level = stringTable.getDEFAULT_INT();
         try
         {
-            PreparedStatement ps = conexao.prepareStatement(stringTable.getGET_ACC_LVL());
+            PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getGET_ACC_LVL());
             ps.setString(1, usr);
             ps.execute();
             ResultSet rset = ps.getResultSet();
@@ -607,7 +608,7 @@ public class Banco
         }
         try
         {
-            consultaPreparada = conexao.prepareStatement(stringTable.getREAD_INSTALL());
+            consultaPreparada = conexaoBanco.prepareStatement(stringTable.getREAD_INSTALL());
             ResultSet rset = consultaPreparada.executeQuery();
             while (rset.next())
             {
@@ -642,14 +643,14 @@ public class Banco
      * Le os dados da tabela e Instalacao
      *
      */
-    public void readLicenseData()
+    public int readLicenseData()
     {
 
         if (config.isDebug())
         {
             _log.info("Lendo dados da Licenca \n");
         }
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getREAD_APP_LICENSE_DATA()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getREAD_APP_LICENSE_DATA()))
         {
             try (ResultSet rset = ps.executeQuery())
             {
@@ -680,6 +681,7 @@ public class Banco
             }
             ExceptionManager.ThrowException("Erro: ", e);
         }
+        return _licensed;
     }
 
     /**
@@ -695,7 +697,7 @@ public class Banco
         if (criaNovaBase())
         {
             //le e executa todas as tabelas.
-            if (executaTabelasMySQL())
+            if (executaTabelasMySQL(true))
             {
                 //se todas as operacoes foram concluidas com exito, seta o banco como Instalado.
                 setInstalled(true);
@@ -715,18 +717,50 @@ public class Banco
      */
     public boolean verificaExistencia()
     {
-        Connection con = conectaMySQL();
+
+        conexaoMySQL = conectaMySQL();
 
         try
         {
-            PreparedStatement ps = con.prepareStatement(stringTable.getSELECT_DB());
+            PreparedStatement ps = conexaoMySQL.prepareStatement(stringTable.getSELECT_DB());
             ps.execute();
             ResultSet rset = ps.getResultSet();
             if (rset.next())
             {
                 return true;
             }
-            con.close();
+        }
+        catch (Exception e)
+        {
+        }
+
+        return false;
+    }
+
+    /**
+     * Conexao Idependente do Objeto Global
+     * <p/>
+     * @return
+     */
+    public boolean tabelaExiste(String tabela)
+    {
+        System.out.println("Verificando Tabela : " + tabela);
+        String table = tabela.replace(".sql", "");
+
+        try
+        {
+            PreparedStatement ps = conexaoBanco.prepareStatement("SHOW TABLES LIKE '" + table + "'");
+            ps.execute();
+            ResultSet rset = ps.getResultSet();
+            if (rset.next())
+            {
+                System.out.println("tabela existe");
+                return true;
+            }
+            else
+            {
+                System.out.println("tabela Nao existe");
+            }
         }
         catch (Exception e)
         {
@@ -783,7 +817,7 @@ public class Banco
 
         try
         {
-            Statement st = conexao.createStatement();
+            Statement st = conexaoBanco.createStatement();
             st.executeUpdate(stringTable.getCreateDB());
             setConStatus(stringTable.getSTATUS_CONNECTED());
             return true;
@@ -804,7 +838,7 @@ public class Banco
      * ler eExecuta todos os Scripts SQL dentro da pasta SQL
      *
      */
-    public boolean executaTabelasMySQL()
+    public boolean executaTabelasMySQL(boolean update)
     {
         if (config.isDebug())
         {
@@ -820,74 +854,81 @@ public class Banco
         {
             if (f != null && f.getName().endsWith(".sql"))
             {
-
-                String thisLine, sqlQuery;
-                try (BufferedReader br = new BufferedReader(new FileReader(stringTable.getSQL_PATH() + f.getName())))
+                System.out.println("Executando Arquivo: " + f.getName());
+                if (update && !tabelaExiste(f.getName()))
                 {
-                    sqlQuery = "";
-
-                    //Now read line by line
-                    while ((thisLine = br.readLine()) != null)
+                    String thisLine, sqlQuery;
+                    try (BufferedReader br = new BufferedReader(new FileReader(stringTable.getSQL_PATH() + f.getName())))
                     {
-                        //Skip comments <strong class="highlight">and</strong> empty lines
-                        if (thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
+                        sqlQuery = "";
+
+                        //Now read line by line
+                        while ((thisLine = br.readLine()) != null)
                         {
-                            continue;
-
-                        }
-
-                        sqlQuery = sqlQuery + " " + thisLine;
-
-                        //If one command complete
-                        if (sqlQuery.charAt(sqlQuery.length() - 1) == ';')
-                        {
-                            sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc complains
-                            try
+                            //Skip comments <strong class="highlight">and</strong> empty lines
+                            if (thisLine.length() > 0 && thisLine.charAt(0) == '-' || thisLine.length() == 0 || thisLine.startsWith("/*") || thisLine.endsWith("*/"))
                             {
-                                consulta = conexao.createStatement();
-                                consulta.execute(sqlQuery);
+                                continue;
 
                             }
-                            catch (SQLException ex)
+
+                            sqlQuery = sqlQuery + " " + thisLine;
+
+                            //If one command complete
+                            if (sqlQuery.charAt(sqlQuery.length() - 1) == ';')
                             {
-                                if (config.isEnableLog() || config.isDebug())
+                                sqlQuery = sqlQuery.replace(';', ' '); //Remove the ; since jdbc complains
+                                try
                                 {
-                                    _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
+                                    consulta = conexaoBanco.createStatement();
+                                    consulta.execute(sqlQuery);
+
                                 }
-                                ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
+                                catch (SQLException ex)
+                                {
+                                    if (config.isEnableLog() || config.isDebug())
+                                    {
+                                        _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", "Arquivo: " + f.getName() + "Exception: " + ex.getMessage());
+                                    }
+                                    ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", "Arquivo: " + f.getName(), ex);
+                                }
+
+                                sqlQuery = "";
                             }
 
-                            sqlQuery = "";
                         }
-
                     }
-                }
-                catch (Exception ex)
-                {
-                    if (config.isEnableLog() || config.isDebug())
-                    {
-                        _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
-                    }
-                    ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
-
-                }
-                finally
-                {
-                    try
-                    {
-                        consulta.close();
-
-                    }
-                    catch (SQLException ex)
+                    catch (Exception ex)
                     {
                         if (config.isEnableLog() || config.isDebug())
                         {
                             _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
                         }
                         ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
-                    }
-                }
 
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            consulta.close();
+
+                        }
+                        catch (SQLException ex)
+                        {
+                            if (config.isEnableLog() || config.isDebug())
+                            {
+                                _log.log(Level.SEVERE, "Falha ao Executar Script SQL:  {0}", ex.getMessage());
+                            }
+                            ExceptionManager.ThrowException("Falha ao Executar Script SQL:  ", f.getName(), ex);
+                        }
+                    }
+
+                }
+                else
+                {
+                    System.out.println("Tabela: " + f.getName() + "Será Mantida.");
+                }
             }
         }
         return true;
@@ -911,7 +952,7 @@ public class Banco
             }
             // Este é um dos meios para registrar um driver
             Class.forName(config.getDatabaseDriver()).newInstance();
-            conexao = DatabaseFactory.getInstance().getConnection();// DriverManager.getConnection(url, config.getDatabaseLogin(), config.getDatabasePassword());
+            conexaoBanco = DatabaseFactory.getInstance().getConnection();// DriverManager.getConnection(url, config.getDatabaseLogin(), config.getDatabasePassword());
             if (config.isDebug())
             {
                 _log.info("Conectado com Sucesso!!");
@@ -939,7 +980,7 @@ public class Banco
     {
         _log.info("Retornando conexao com o Banco De Dados...");
 
-        return conexao;
+        return conexaoBanco;
     }
 
     /**
@@ -951,7 +992,7 @@ public class Banco
     {
         try
         {
-            try (Statement st = conexao.createStatement())
+            try (Statement st = conexaoBanco.createStatement())
             {
                 st.executeQuery(query);
             }
@@ -977,7 +1018,7 @@ public class Banco
     {
         try
         {
-            try (Statement st = conexao.createStatement())
+            try (Statement st = conexaoBanco.createStatement())
             {
                 st.executeUpdate(query);
             }
@@ -1003,7 +1044,7 @@ public class Banco
     {
 
 
-        try (Statement st = conexao.createStatement())
+        try (Statement st = conexaoBanco.createStatement())
         {
             resultado = st.executeQuery(query);
         }
@@ -1039,7 +1080,7 @@ public class Banco
         //--------------------------------------
         String logindb = null;
         String senhadb = null;
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getCHECK_USER_PASS()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getCHECK_USER_PASS()))
         {
             ps.setString(1, user.getLogin());
             ps.setString(2, senhaCrypto);
@@ -1110,7 +1151,7 @@ public class Banco
      */
     public boolean cadastraTecnico(String nome, String sobrenome)
     {
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getINSERT_TECNICO()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getINSERT_TECNICO()))
         {
             ps.setString(1, nome);
             ps.setString(2, sobrenome);
@@ -1188,7 +1229,7 @@ public class Banco
         }
 
 
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getINSERT_USER()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getINSERT_USER()))
         {
             ps.setString(1, f.getLogin());
             ps.setString(2, senhaCripto);
@@ -1219,7 +1260,7 @@ public class Banco
      */
     public boolean delUser(String login)
     {
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getDELETE_USER()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getDELETE_USER()))
         {
             ps.setString(1, login);
             ps.execute();
@@ -1277,7 +1318,7 @@ public class Banco
         {
             _log.info("salvando entrada para o banco...");
         }
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getINSERT_ENTRADA()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getINSERT_ENTRADA()))
         {
             ps.setInt(1, ent.getNumEnt());
             ps.setString(2, ent.getData());
@@ -1324,7 +1365,7 @@ public class Banco
         //converte p versao criptografada
         String passCrypto = Criptografia.criptografe(newPass);
 
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getCHANGE_USER_PASS()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getCHANGE_USER_PASS()))
         {
             ps.setString(1, passCrypto);
             ps.setString(2, login);
@@ -1353,7 +1394,7 @@ public class Banco
     {
         String senhadb = null;
 
-        try (PreparedStatement ps = conexao.prepareStatement(stringTable.getGET_USER_PASS()))
+        try (PreparedStatement ps = conexaoBanco.prepareStatement(stringTable.getGET_USER_PASS()))
         {
             ps.setString(1, login);
             ps.execute();

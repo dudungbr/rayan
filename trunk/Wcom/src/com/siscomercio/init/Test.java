@@ -24,18 +24,22 @@ public class Test
 //            System.out.println("errado");
 //        }
         // Thread.sleep(1000);
-        // Banco.getInstance().conectaDatabaseSelecionada();
-        boolean cond = Banco.getInstance().verificaExistencia();
+        //Banco.getInstance().conectaBanco();
+        //   Banco.getInstance().c
+        boolean cond = Banco.getInstance().conectaBanco();
+        //  Banco.getInstance().exe
+        Banco.getInstance().executaTabelasMySQL(true);
+
 
         if (cond)
         {
             System.out.println("ok");
-            System.out.println(Banco.getInstance().getConnectionStatus());
+            //  System.out.println(Banco.getInstance().getConnectionStatus());
         }
         else
         {
             System.out.println("errado");
-            System.out.println(Banco.getInstance().getConnectionStatus());
+            //    System.out.println(Banco.getInstance().getConnectionStatus());
         }
     }
 }
