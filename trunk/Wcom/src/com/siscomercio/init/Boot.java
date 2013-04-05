@@ -258,6 +258,8 @@ public class Boot extends JFrame
                 }
             }
         }.start();
+        //fecha a splash screen
+        dispose();
     }
 
     /**
