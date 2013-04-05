@@ -68,10 +68,9 @@ public class FrameLicenca extends JFrame
         }
         if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
-            Banco.getInstance().setLicensed(1);
-            dispose();
             Banco.getInstance().registreAplicacao(campoEmpresa.getText(), numEstacoes, tipoLicenca);
             SystemUtil.getInstance().showMsg("Obrigado por Registrar o Aplicativo ! ", true);
+            dispose();
             AppManager.getInstance().restartApp();
         }
         else
@@ -340,9 +339,6 @@ public class FrameLicenca extends JFrame
      */
     private void prepareFrame()
     {
-        //Monitora o Campo e sempre insere caracteres em caixa alta
-        ///campoSerial.setDocument(new UpperCaseLetter());
-
         //Seta o Valor 1 no Contador de estacoes
         spinnerContadorEstacoes.getModel().setValue(1);
 

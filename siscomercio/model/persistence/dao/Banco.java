@@ -111,6 +111,7 @@ public class Banco
             }
 
         }
+        setLicensed(1);
     }
 
     /**
