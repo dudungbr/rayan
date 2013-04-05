@@ -66,7 +66,7 @@ public class FrameLicenca extends JFrame
             System.out.println("valor variavel dados: " + dados);
             System.out.println("serial valido: " + validSerial);
         }
-        else if (valorCampoSerial.equalsIgnoreCase(validSerial))
+        if (valorCampoSerial.equalsIgnoreCase(validSerial))
         {
             Banco.getInstance().setLicensed(1);
             dispose();
@@ -106,10 +106,17 @@ public class FrameLicenca extends JFrame
             SystemUtil.getInstance().showErrorMsg("Preencha o Nome da Empresa.", true);
             return false;
         }
-        else if (serial.length() < 30)
+        else if (serial.isEmpty())
+        {
+            SystemUtil.getInstance().showErrorMsg("Digite o Numero de Série!.", true);
+            campoSerial.setText("");
+            return false;
+        }
+        else if (serial.length() >= 1 && serial.length() < 30)
         {
             SystemUtil.getInstance().showErrorMsg("Numero de Série Incompleto.", true);
             campoSerial.setText("");
+            return false;
         }
         else if (codAtivacao.isEmpty())
         {
