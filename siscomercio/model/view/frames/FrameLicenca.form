@@ -66,43 +66,33 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                                      <Component id="labelNumSerie" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelNumEstacoes" min="-2" pref="80" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelTipoLicenca" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                                  <Component id="labelNumSerie" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dropDownTipoLicenca" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="spinnerContadorEstacoes" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="campoSerial" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelNumEstacoes" min="-2" pref="80" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelTipoLicenca" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labelEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelCodAtivacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="labelEmpresa" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                      <Component id="campoEmpresa" min="-2" pref="300" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="labelCodAtivacao" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="dadosCodAtivacao" min="-2" pref="300" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="2" attributes="0">
+                              <Component id="codigoDeAtivacao" linkSize="1" alignment="2" max="32767" attributes="0"/>
+                              <Component id="campoEmpresa" linkSize="1" alignment="2" min="-2" pref="300" max="-2" attributes="0"/>
+                              <Component id="campoSerial" linkSize="1" alignment="2" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -113,8 +103,16 @@
                           <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                           <Component id="botaoRegistrar" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="142" pref="142" max="-2" attributes="0"/>
+                          <Component id="spinnerContadorEstacoes" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="142" pref="142" max="-2" attributes="0"/>
+                          <Component id="dropDownTipoLicenca" min="-2" pref="80" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -124,17 +122,17 @@
                   <EmptySpace min="41" pref="41" max="41" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelEmpresa" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoEmpresa" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoEmpresa" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelCodAtivacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dadosCodAtivacao" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="codigoDeAtivacao" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelNumSerie" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="campoSerial" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoSerial" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -172,14 +170,6 @@
               <Font name="Times New Roman" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Empresa :"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="dadosCodAtivacao">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="              dadosDaAtivacao"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="botaoRegistrar">
@@ -242,6 +232,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="campoSerial">
+        </Component>
+        <Component class="javax.swing.JTextField" name="codigoDeAtivacao">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
