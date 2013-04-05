@@ -14,7 +14,6 @@ import com.siscomercio.controller.managers.AppManager;
 import com.siscomercio.model.persistence.dao.Banco;
 import com.siscomercio.crypt.Serializer;
 import com.siscomercio.utilities.SystemUtil;
-import com.siscomercio.utilities.document.UpperCaseLetter;
 import com.siscomercio.utilities.Utilitarios;
 import com.siscomercio.utilities.document.MaxLengthUpperCaseDocument;
 import java.awt.EventQueue;
@@ -158,8 +157,8 @@ public class FrameLicenca extends JFrame
         spinnerContadorEstacoes = new javax.swing.JSpinner();
         labelNumSerie = new javax.swing.JLabel();
         labelInformacaoSuporte = new javax.swing.JLabel();
-        campoSerial = new javax.swing.JTextField();
         codigoDeAtivacao = new javax.swing.JTextField();
+        campoSerial = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registro da Aplicação");
@@ -206,9 +205,9 @@ public class FrameLicenca extends JFrame
         labelInformacaoSuporte.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         labelInformacaoSuporte.setText("Contacte o Suporte Tècnico Informando o Código de Ativação ");
 
-        campoSerial.setDocument(new MaxLengthUpperCaseDocument(30));
-
         codigoDeAtivacao.setEditable(false);
+
+        campoSerial.setDocument(new MaxLengthUpperCaseDocument(30));
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -234,9 +233,9 @@ public class FrameLicenca extends JFrame
                                     .addComponent(labelCodAtivacao))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(codigoDeAtivacao)
+                            .addComponent(codigoDeAtivacao, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoSerial)))
+                            .addComponent(campoSerial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(labelInformacaoSuporte))
@@ -335,7 +334,7 @@ public class FrameLicenca extends JFrame
     private void prepareFrame()
     {
         //Monitora o Campo e sempre insere caracteres em caixa alta
-        campoSerial.setDocument(new UpperCaseLetter());
+        ///campoSerial.setDocument(new UpperCaseLetter());
 
         //Seta o Valor 1 no Contador de estacoes
         spinnerContadorEstacoes.getModel().setValue(1);
@@ -369,7 +368,7 @@ public class FrameLicenca extends JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoRegistrar;
     private javax.swing.JTextField campoEmpresa;
-    private javax.swing.JTextField campoSerial;
+    private javax.swing.JFormattedTextField campoSerial;
     private javax.swing.JTextField codigoDeAtivacao;
     private javax.swing.JComboBox dropDownTipoLicenca;
     private javax.swing.JLabel labelCodAtivacao;
