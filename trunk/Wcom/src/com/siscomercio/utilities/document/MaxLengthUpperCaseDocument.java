@@ -41,14 +41,14 @@ public class MaxLengthUpperCaseDocument extends PlainDocument
             return;
         }
 
-        int totalLen = (getLength() + str.toUpperCase().length());
+        int totalLen = (getLength() + str.length());
         if (totalLen <= maxLength)
         {
-            super.insertString(offset, str, attr);
+            super.insertString(offset, str.toUpperCase(), attr);
             return;
         }
 
         String newStr = str.substring(0, (maxLength - getLength()));
-        super.insertString(offset, newStr, attr);
+        super.insertString(offset, newStr.toUpperCase(), attr);
     }
 }
